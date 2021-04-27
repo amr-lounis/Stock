@@ -44,10 +44,15 @@ namespace Stock.Views
         //-------------------------------------------------------------------------------
         public void v_btn_Customer_Click(object sender, RoutedEventArgs e)
         {
-            TableUsers_UC tu = new TableUsers_UC();
-            AddTabItem(tu, "Customer:"+cpt);
+            TableUsers_UC o = new TableUsers_UC();
+            AddTabItem(o, "Customer:"+cpt);
         }
-
+        //-------------------------------------------------------------------------------
+        public void v_btn_Stock_Click(object sender, RoutedEventArgs e)
+        {
+            TableProduct_UC o = new TableProduct_UC();
+            AddTabItem(o, "Stock:" + cpt);
+        }
         //-------------------------------------------------------------------------------
         private void tabDynamic_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
