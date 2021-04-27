@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="Stock.Views.TableProduct_UC"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Stock.Views"
+             mc:Ignorable="d"
+             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBox x:Name="vTextSearch" materialDesign:HintAssist.Hint="search..." FontSize="25" Width="200" Height="40" Margin="5" />
+                <Button Style="{DynamicResource ButtonNull}" Click="event_backward"  Width="30" Height="30" Margin="10,0,10,0">
+                    <Image Source="../assets/images/buttonLeft.png"/>
+                </Button>
+                <TextBlock x:Name="vPageNumber" Foreground="Red" VerticalAlignment="Center" FontSize="20">
+                </TextBlock>
+                <Button Style="{DynamicResource ButtonNull}" Click="event_forward"  Width="30" Height="30" Margin="10,0,10,0">
+                    <Image Source="../assets/images/buttonRight.png"/>
+                </Button>
+                <Button Style="{DynamicResource ButtonNull}" Click="event_add" Width="30" Height="30" Margin="10,0,10,0">
+                    <Image Source="../assets/images/Add.png"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- *************************************************** Begin DataGrid *************************************************** -->
+
+        <DataGrid x:Name="myDataGrid"
+                  Style="{StaticResource AzureDataGrid}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  Grid.Row="1"
+                  MouseDoubleClick="event_MouseDoubleClick">
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Action" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" >
+                                <Button Style="{DynamicResource ButtonNull}" Click="event_edit" Width="30" Height="30" Margin="10,0,10,0">
+                                    <Image Source="../assets/images/editProperty.png"/>
+                                </Button>
+                                <Button Style="{DynamicResource ButtonNull}" Click="event_delete"  Width="30" Height="30" Margin="10,0,10,0">
+                                    <Image Source="../assets/images/delete.png"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding NAME}" IsReadOnly="True" MaxWidth="150"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding DESCRIPTION}" IsReadOnly="True" MaxWidth="150"/>
+                <DataGridTextColumn Header="Code" Binding="{Binding CODE}" IsReadOnly="True" MaxWidth="150" />
+                <DataGridTextColumn Header="Type" Binding="{Binding TYPE}" IsReadOnly="True"  MaxWidth="150"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding QUANTITY}" IsReadOnly="True"  MaxWidth="150"/>
+                <DataGridTextColumn Header="Quantity min" Binding="{Binding QUANTITY_MIN}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="% tax" Binding="{Binding TAX_PERCE}" IsReadOnly="True"  MaxWidth="150"/>
+                <DataGridTextColumn Header="purchasing" Binding="{Binding MONEY_PURCHASE}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="selling" Binding="{Binding MONEY_SELLING_1}" IsReadOnly="True"  MaxWidth="150"/>
+                <DataGridTextColumn Header="selling min" Binding="{Binding MONEY_SELLING_MIN}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="Date production" Binding="{Binding DATE_PRODUCTION}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="Date purchase" Binding="{Binding DATE_PURCHASE}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="Date expiration" Binding="{Binding DATE_EXPIRATION}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- *************************************************** End DataGrid *************************************************** -->
+    </Grid>
+</UserControl>

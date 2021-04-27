@@ -1,0 +1,86 @@
+﻿<RibbonWindow  x:Class="Stock.Views.MainMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:RibbonWin="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Ribbon"
+        
+        Title="Main menu" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Ribbon x:Name="RibbonWin"  SelectedIndex="0" SelectionChanged="RibbonWin_SelectionChanged">
+            <!-- Quick Access Toolbar - located at the upper-left corner -->
+            <Ribbon.QuickAccessToolBar>
+                <RibbonQuickAccessToolBar>
+                    <!--<RibbonButton x:Name ="Save" SmallImageSource="a..\assets\images\save.png" />
+                    <RibbonSplitButton x:Name ="Undo" SmallImageSource="a..\assets\images\undo.png" >
+                        <RibbonSplitMenuItem Header="Undo 1" />
+                        <RibbonSplitMenuItem Header="Undo 2" />
+                    </RibbonSplitButton>-->
+                    <RibbonButton x:Name ="Save" SmallImageSource="..\assets\images\save.png" />
+                </RibbonQuickAccessToolBar>
+            </Ribbon.QuickAccessToolBar>
+            <!-- Application Menu, located at the left-hand side (down arrow) -->
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu KeyTip="F">
+                    <RibbonApplicationMenuItem Header="Options" ImageSource="..\assets\images\settings.png" />
+                    <RibbonApplicationMenuItem Header="Save" ImageSource="..\assets\images\Save.png" />
+                    <RibbonApplicationMenuItem Header="Exit" ImageSource="..\assets\images\quit.png" />
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+            <!-- Help Pane, located at the right-hand side -->
+            <Ribbon.HelpPaneContent>
+                <RibbonButton SmallImageSource="..\assets\images\Help.png" />
+            </Ribbon.HelpPaneContent>
+            <!-- Ribbon Tab #1: Home -->
+            <RibbonTab Header="Home" KeyTip="H" >
+                <!-- Home  group-->
+                <RibbonGroup x:Name="Home" Header="Home">
+                    <!--<RibbonMenuButton LargeImageSource="a..\assets\images\paste.png" Label="Paste" KeyTip="V">
+                        <RibbonMenuItem ImageSource="a..\assets\images\paste.png" Header="Keep Text Only" KeyTip="T"/>
+                        <RibbonMenuItem ImageSource="a..\assets\images\paste.png" Header="Paste Special..." KeyTip="S"/>
+                    </RibbonMenuButton>
+                    <RibbonButton SmallImageSource="a..\assets\images\cut.png" Label="Cut" KeyTip="X" />-->
+
+                    <RibbonButton LargeImageSource="..\assets\images\cashRegister.png" Label="Cash Register" KeyTip="CR"/>
+                </RibbonGroup>
+            </RibbonTab>
+            
+            <!-- Ribbon Tab #2: Launch -->
+            <RibbonTab Header="Customer" KeyTip="C">
+                <!-- Customer  group-->
+                <RibbonGroup x:Name="Customer" Header="Customer">
+                    <RibbonButton LargeImageSource="..\assets\images\customer.png" Label="Customer" KeyTip="C" />
+                </RibbonGroup>
+            </RibbonTab>
+            <!-- Ribbon Tab #3: Launch -->
+            <RibbonTab Header="Provider" KeyTip="P">
+                <!-- Provider  group-->
+                <RibbonGroup x:Name="Provider" Header="Provider">
+                    <RibbonButton LargeImageSource="..\assets\images\supplier.png" Label="Provider" KeyTip="P" />
+                </RibbonGroup>
+            </RibbonTab>
+            <!-- Ribbon Tab #4: Launch -->
+            <RibbonTab Header="Stock" KeyTip="S">
+                <!-- Stock  group-->
+                <RibbonGroup x:Name="Stock" Header="Stock">
+                    <RibbonButton LargeImageSource="..\assets\images\cardboard.png" Label="Stock" KeyTip="S" />
+                </RibbonGroup>
+            </RibbonTab>
+            <!-- Ribbon Tab #5: Launch -->
+            <RibbonTab Header="tools" KeyTip="T">
+                <!-- tools  group-->
+                <RibbonGroup x:Name="tools" Header="tools">
+                    <RibbonButton LargeImageSource="..\assets\images\databaSesave.png" Label="Save" KeyTip="P" />
+                    <RibbonButton LargeImageSource="..\assets\images\databaseRestor.png" Label="Restor" KeyTip="P" />
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+        <DockPanel Name="UIPanel" Grid.Row="1">
+            
+        </DockPanel>
+    </Grid>
+
+</RibbonWindow >
