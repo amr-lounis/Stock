@@ -14,19 +14,19 @@
             <!-- Quick Access Toolbar - located at the upper-left corner -->
             <Ribbon.QuickAccessToolBar>
                 <RibbonQuickAccessToolBar>
-                    <!--<RibbonButton x:Name ="Save" SmallImageSource="a..\assets\images\save.png" />
-                    <RibbonSplitButton x:Name ="Undo" SmallImageSource="a..\assets\images\undo.png" >
+                    <RibbonButton x:Name ="Save2" SmallImageSource="..\assets\images\save.png" />
+                    <RibbonSplitButton x:Name ="Undo" SmallImageSource="..\assets\images\save.png" >
                         <RibbonSplitMenuItem Header="Undo 1" />
                         <RibbonSplitMenuItem Header="Undo 2" />
-                    </RibbonSplitButton>-->
-                    <RibbonButton x:Name ="Save" SmallImageSource="..\assets\images\save.png" />
+                    </RibbonSplitButton>
+                    <RibbonButton x:Name ="Save" SmallImageSource="..\assets\images\delete.png" />
                 </RibbonQuickAccessToolBar>
             </Ribbon.QuickAccessToolBar>
             <!-- Application Menu, located at the left-hand side (down arrow) -->
             <Ribbon.ApplicationMenu>
                 <RibbonApplicationMenu KeyTip="F">
                     <RibbonApplicationMenuItem Header="Options" ImageSource="..\assets\images\settings.png" />
-                    <RibbonApplicationMenuItem Header="Save" ImageSource="..\assets\images\Save.png" />
+                    <RibbonApplicationMenuItem Header="Save3" ImageSource="..\assets\images\Save.png" />
                     <RibbonApplicationMenuItem Header="Exit" ImageSource="..\assets\images\quit.png" />
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
@@ -38,11 +38,11 @@
             <RibbonTab Header="Home" KeyTip="H" >
                 <!-- Home  group-->
                 <RibbonGroup x:Name="Home" Header="Home">
-                    <!--<RibbonMenuButton LargeImageSource="a..\assets\images\paste.png" Label="Paste" KeyTip="V">
-                        <RibbonMenuItem ImageSource="a..\assets\images\paste.png" Header="Keep Text Only" KeyTip="T"/>
-                        <RibbonMenuItem ImageSource="a..\assets\images\paste.png" Header="Paste Special..." KeyTip="S"/>
+                    <RibbonMenuButton LargeImageSource="..\assets\images\delete.png" Label="Paste" KeyTip="V">
+                        <RibbonMenuItem ImageSource="..\assets\images\delete.png" Header="Keep Text Only" KeyTip="T"/>
+                        <RibbonMenuItem ImageSource="..\assets\images\delete.png" Header="Paste Special..." KeyTip="S"/>
                     </RibbonMenuButton>
-                    <RibbonButton SmallImageSource="a..\assets\images\cut.png" Label="Cut" KeyTip="X" />-->
+                    <RibbonButton SmallImageSource="..\assets\images\delete.png" Label="Cut" KeyTip="X" />
 
                     <RibbonButton LargeImageSource="..\assets\images\cashRegister.png" Label="Cash Register" KeyTip="CR"/>
                 </RibbonGroup>
@@ -52,7 +52,7 @@
             <RibbonTab Header="Customer" KeyTip="C">
                 <!-- Customer  group-->
                 <RibbonGroup x:Name="Customer" Header="Customer">
-                    <RibbonButton LargeImageSource="..\assets\images\customer.png" Label="Customer" KeyTip="C" />
+                    <RibbonButton LargeImageSource="..\assets\images\customer.png" Label="Customer" KeyTip="C" Click="v_btn_Customer_Click"/>
                 </RibbonGroup>
             </RibbonTab>
             <!-- Ribbon Tab #3: Launch -->
@@ -78,9 +78,23 @@
                 </RibbonGroup>
             </RibbonTab>
         </Ribbon>
-        <DockPanel Name="UIPanel" Grid.Row="1">
-            
-        </DockPanel>
+        
+        <TabControl Name="tabDynamic" ItemsSource="{Binding}" SelectionChanged="tabDynamic_SelectionChanged" Grid.Row="1">
+            <TabControl.Resources>
+                <DataTemplate x:Key="TabHeader" DataType="TabItem">
+                    <DockPanel>
+                        <Button Name="btnDelete"  DockPanel.Dock="Right" Margin="1" Padding="0" Height="20" Click="v_btn_delete_Click" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Name}">
+                            <Image Source="..\assets\images\delete.png" Height="15" Width="15"></Image>
+                        </Button>
+                        <TextBlock FontSize="15" Text="{Binding RelativeSource={RelativeSource AncestorType=TabItem }, Path=Header}" />
+                    </DockPanel>
+                </DataTemplate>
+            </TabControl.Resources>
+        </TabControl>
+
+        <!--<DockPanel Name="UIPanel" Grid.Row="1"/>-->
+
+
     </Grid>
 
 </RibbonWindow >
