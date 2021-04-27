@@ -36,15 +36,17 @@
             </Ribbon.HelpPaneContent>
             <!-- Ribbon Tab #1: Home -->
             <RibbonTab Header="Home" KeyTip="H" >
-                <!-- Home  group-->
                 <RibbonGroup x:Name="Home" Header="Home">
-                    <RibbonMenuButton LargeImageSource="..\assets\images\delete.png" Label="Paste" KeyTip="V">
+                    <RibbonButton LargeImageSource="..\assets\images\cashRegister.png" Label="Cash Register" KeyTip="CR"/>
+
+                    <RibbonButton SmallImageSource="..\assets\images\delete.png" Label="Cut" KeyTip="X" />
+                    <RibbonButton SmallImageSource="..\assets\images\delete.png" Label="Csut" KeyTip="+" />
+                    
+                    <!--<RibbonMenuButton LargeImageSource="..\assets\images\delete.png" Label="Paste" KeyTip="V">
                         <RibbonMenuItem ImageSource="..\assets\images\delete.png" Header="Keep Text Only" KeyTip="T"/>
                         <RibbonMenuItem ImageSource="..\assets\images\delete.png" Header="Paste Special..." KeyTip="S"/>
-                    </RibbonMenuButton>
-                    <RibbonButton SmallImageSource="..\assets\images\delete.png" Label="Cut" KeyTip="X" />
+                    </RibbonMenuButton>-->
 
-                    <RibbonButton LargeImageSource="..\assets\images\cashRegister.png" Label="Cash Register" KeyTip="CR"/>
                 </RibbonGroup>
             </RibbonTab>
             

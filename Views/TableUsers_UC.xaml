@@ -56,21 +56,21 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="NAME" Binding="{Binding NAME}" IsReadOnly="True" MaxWidth="150"/>
-                <DataGridTextColumn Header="PASSWORD" Binding="{Binding PASSWORD}" IsReadOnly="True" MaxWidth="150"/>
+                <DataGridTextColumn Header="PASSWORD" Binding="{Binding PASSWORD}" IsReadOnly="True" MaxWidth="150"  Visibility="Collapsed"/>
                 <DataGridTextColumn Header="CATEGORY" Binding="{Binding CATEGORY}" IsReadOnly="True" MaxWidth="150" />
-                <DataGridTextColumn Header="ACTIVITY" Binding="{Binding ACTIVITY}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="MONEY_ACCOUNT" Binding="{Binding MONEY_ACCOUNT}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="DESCRIPTION" Binding="{Binding DESCRIPTION}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="NRC" Binding="{Binding NRC}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="NIF" Binding="{Binding NIF}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="ADDRESS" Binding="{Binding ADDRESS}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="CITY" Binding="{Binding CITY}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="COUNTRY" Binding="{Binding COUNTRY}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="PHONE" Binding="{Binding PHONE}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="FAX" Binding="{Binding FAX}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="WEBSITE" Binding="{Binding WEBSITE}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="EMAIL" Binding="{Binding EMAIL}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="ID" Binding="{Binding ID}" IsReadOnly="True"  MaxWidth="150"/>
+                <DataGridTextColumn Header="ACTIVITY" Binding="{Binding ACTIVITY}" IsReadOnly="True"  MaxWidth="150"  Visibility="Collapsed"/>
+                <DataGridTextColumn Header="MONEY_ACCOUNT" Binding="{Binding MONEY_ACCOUNT}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="DESCRIPTION" Binding="{Binding DESCRIPTION}" IsReadOnly="True"  MaxWidth="150" />
+                <DataGridTextColumn Header="NRC" Binding="{Binding NRC}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="NIF" Binding="{Binding NIF}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="ADDRESS" Binding="{Binding ADDRESS}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="CITY" Binding="{Binding CITY}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="COUNTRY" Binding="{Binding COUNTRY}" IsReadOnly="True"  MaxWidth="150"  Visibility="Collapsed"/>
+                <DataGridTextColumn Header="PHONE" Binding="{Binding PHONE}" IsReadOnly="True"  MaxWidth="150" />
+                <DataGridTextColumn Header="FAX" Binding="{Binding FAX}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="WEBSITE" Binding="{Binding WEBSITE}" IsReadOnly="True"  MaxWidth="150"  Visibility="Collapsed"/>
+                <DataGridTextColumn Header="EMAIL" Binding="{Binding EMAIL}" IsReadOnly="True"  MaxWidth="150"  Visibility="Collapsed"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" IsReadOnly="True"  MaxWidth="150"  Visibility="Collapsed"/>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -13,6 +13,6 @@ namespace Stock.Interfaces
         List<Product> forward_page(int this_page);
         Product add(Product product);
         Product edit(Product product);
-        int delete(int ID);
+        int delete(String ID);
     }
 }

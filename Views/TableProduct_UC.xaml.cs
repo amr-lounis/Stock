@@ -71,17 +71,12 @@ namespace Stock.Views
             if (myDataGrid.SelectedItem != null)
             {
                 Product m = myDataGrid.SelectedItem as Product;
-                int id = 0;
-                if (Int32.TryParse(m.ID, out id))
+                if (ointerface.delete(m.ID) == 1)
                 {
-                    if (ointerface.delete(id) == 1)
-                    {
-                        lproducts.RemoveAt(lproducts.FindIndex(o => o.ID == m.ID));
-                        myDataGrid.ItemsSource = null;
-                        myDataGrid.ItemsSource = lproducts;
-                    }
+                    lproducts.RemoveAt(lproducts.FindIndex(o => o.ID == m.ID));
+                    myDataGrid.ItemsSource = null;
+                    myDataGrid.ItemsSource = lproducts;
                 }
-
             }
             if (myDataGrid.SelectedItem != null)
             {

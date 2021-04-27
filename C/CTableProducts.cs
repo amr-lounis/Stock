@@ -63,7 +63,7 @@ namespace Stock.C
             return lo;
         }
 
-        public int delete(int ID)
+        public int delete(string ID)
         {
             Console.WriteLine("delete");
             return 1;
@@ -89,7 +89,8 @@ namespace Stock.C
                 MONEY_SELLING_MIN = string.Format("{0}", r.Next(a, b)),
                 DATE_PRODUCTION = string.Format("{0}", r.Next(a, b)),
                 DATE_PURCHASE = string.Format("{0}", r.Next(a, b)),
-                DATE_EXPIRATION = string.Format("{0}", r.Next(a, b)),
+                DATE_EXPIRATION = string.Format("{0}", r.Next(a, b))
+                
             };
             return o;
         }

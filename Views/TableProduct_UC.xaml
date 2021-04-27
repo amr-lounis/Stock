@@ -56,14 +56,16 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Name" Binding="{Binding NAME}" IsReadOnly="True" MaxWidth="150"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding CATEGORY}" IsReadOnly="True"  MaxWidth="150"/>
+                <DataGridTextColumn Header="Unite" Binding="{Binding UNITE}" IsReadOnly="True"  MaxWidth="150" />
                 <DataGridTextColumn Header="Description" Binding="{Binding DESCRIPTION}" IsReadOnly="True" MaxWidth="150"/>
                 <DataGridTextColumn Header="Code" Binding="{Binding CODE}" IsReadOnly="True" MaxWidth="150" />
-                <DataGridTextColumn Header="Type" Binding="{Binding TYPE}" IsReadOnly="True"  MaxWidth="150"/>
+                <DataGridTextColumn Header="Importance" Binding="{Binding IMPORTANCE}" IsReadOnly="True" MaxWidth="150" Visibility="Collapsed"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding QUANTITY}" IsReadOnly="True"  MaxWidth="150"/>
                 <DataGridTextColumn Header="Quantity min" Binding="{Binding QUANTITY_MIN}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
                 <DataGridTextColumn Header="% tax" Binding="{Binding TAX_PERCE}" IsReadOnly="True"  MaxWidth="150"/>
                 <DataGridTextColumn Header="purchasing" Binding="{Binding MONEY_PURCHASE}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
-                <DataGridTextColumn Header="selling" Binding="{Binding MONEY_SELLING_1}" IsReadOnly="True"  MaxWidth="150"/>
+                <DataGridTextColumn Header="selling" Binding="{Binding MONEY_SELLING}" IsReadOnly="True"  MaxWidth="150"/>
                 <DataGridTextColumn Header="selling min" Binding="{Binding MONEY_SELLING_MIN}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
                 <DataGridTextColumn Header="Date production" Binding="{Binding DATE_PRODUCTION}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
                 <DataGridTextColumn Header="Date purchase" Binding="{Binding DATE_PURCHASE}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>

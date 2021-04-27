@@ -13,6 +13,6 @@ namespace Stock.Interfaces
         List<User> forward_page(int this_page);
         User add(User user);
         User edit(User user);
-        int delete(int ID);
+        int delete(string ID);
     }
 }

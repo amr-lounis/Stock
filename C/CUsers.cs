@@ -63,7 +63,7 @@ namespace Stock.C
             return lo;
         }
 
-        public int delete(int ID)
+        public int delete(String ID)
         {
             Console.WriteLine("delete:"+ID);
             return 1;
