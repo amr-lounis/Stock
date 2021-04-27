@@ -71,11 +71,18 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                User u = myDataGrid.SelectedItem as User;
-                lusers.RemoveAt(lusers.FindIndex(o => o.ID == u.ID));
-
-                myDataGrid.ItemsSource = null;
-                myDataGrid.ItemsSource = lusers;
+                User m = myDataGrid.SelectedItem as User;
+                int id = 0;
+                if (Int32.TryParse(m.ID, out id))
+                {
+                    if (ointerface.delete(id) == 1)
+                    {
+                        lusers.RemoveAt(lusers.FindIndex(o => o.ID == m.ID));
+                        myDataGrid.ItemsSource = null;
+                        myDataGrid.ItemsSource = lusers;
+                    }
+                }
+                
             }
         }
         private void event_MouseDoubleClick(object sender, MouseButtonEventArgs e)

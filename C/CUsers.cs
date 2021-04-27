@@ -14,7 +14,7 @@ namespace Stock.C
         Random r = new Random();
         public User add(User user)
         {
-            Console.WriteLine("add_user");
+            Console.WriteLine("add");
             User o = new User
             {
                 ID = "" + r.Next(a, b),
@@ -65,13 +65,13 @@ namespace Stock.C
 
         public int delete(int ID)
         {
-            Console.WriteLine("delete_user");
+            Console.WriteLine("delete:"+ID);
             return 1;
         }
 
         public User edit(User user)
         {
-            Console.WriteLine("edit_user");
+            Console.WriteLine("edit");
             User o = new User
             {
                 ID = "" + r.Next(a, b),

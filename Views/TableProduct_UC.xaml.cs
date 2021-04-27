@@ -20,7 +20,7 @@ namespace Stock.Views
 {
     public partial class TableProduct_UC
     {
-        ITableProduct iproduct = new CTableProducts();
+        ITableProduct ointerface = new CTableProducts();
         List<Product> lproducts { get; set; }
         public static int page = 0;
         public TableProduct_UC()
@@ -32,7 +32,7 @@ namespace Stock.Views
         }
         private void event_backward(object sender, RoutedEventArgs e)
         {
-            lproducts = iproduct.backward_page(0);
+            lproducts = ointerface.backward_page(0);
 
             page = Int32.Parse(vPageNumber.Text);
             vPageNumber.Text = "" + --page;
@@ -41,7 +41,7 @@ namespace Stock.Views
         }
         private void event_forward(object sender, RoutedEventArgs e)
         {
-            lproducts = iproduct.backward_page(0);
+            lproducts = ointerface.backward_page(0);
 
             page = Int32.Parse(vPageNumber.Text);
             vPageNumber.Text = "" + ++page;
@@ -50,7 +50,7 @@ namespace Stock.Views
         }
         private void event_add(object sender, RoutedEventArgs e)
         {
-            lproducts.Add(iproduct.add(new Product()));
+            lproducts.Add(ointerface.add(new Product()));
 
             myDataGrid.ItemsSource = null;
             myDataGrid.ItemsSource = lproducts;
@@ -59,8 +59,8 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                Product u = myDataGrid.SelectedItem as Product;
-                lproducts[lproducts.FindIndex(o => o.ID == u.ID)] = iproduct.edit(u);
+                Product m = myDataGrid.SelectedItem as Product;
+                lproducts[lproducts.FindIndex(o => o.ID == m.ID)] = ointerface.edit(m);
 
                 myDataGrid.ItemsSource = null;
                 myDataGrid.ItemsSource = lproducts;
@@ -70,8 +70,23 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                Product u = myDataGrid.SelectedItem as Product;
-                lproducts.RemoveAt(lproducts.FindIndex(o => o.ID == u.ID));
+                Product m = myDataGrid.SelectedItem as Product;
+                int id = 0;
+                if (Int32.TryParse(m.ID, out id))
+                {
+                    if (ointerface.delete(id) == 1)
+                    {
+                        lproducts.RemoveAt(lproducts.FindIndex(o => o.ID == m.ID));
+                        myDataGrid.ItemsSource = null;
+                        myDataGrid.ItemsSource = lproducts;
+                    }
+                }
+
+            }
+            if (myDataGrid.SelectedItem != null)
+            {
+                Product m = myDataGrid.SelectedItem as Product;
+                lproducts.RemoveAt(lproducts.FindIndex(o => o.ID == m.ID));
 
                 myDataGrid.ItemsSource = null;
                 myDataGrid.ItemsSource = lproducts;
