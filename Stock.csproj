@@ -96,6 +96,9 @@
     <Compile Include="Views\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\TabDynamic_UC.xaml.cs">
+      <DependentUpon>TabDynamic_UC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TableProduct_UC.xaml.cs">
       <DependentUpon>TableProduct_UC.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
     <Page Include="Resources\IconsNonShared.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TabDynamic_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TableProduct_UC.xaml">
       <SubType>Designer</SubType>

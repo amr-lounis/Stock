@@ -20,13 +20,13 @@ namespace Stock.Views
     public partial class MainMenu : RibbonWindow
     {
         TableProduct_UC v_TableProducrs = new TableProduct_UC();
-        TableUsers_UC v_TableUsers = new TableUsers_UC();
+        TabDynamic_UC v_TabDynamic_UC = new TabDynamic_UC();
 
         public MainMenu()
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            UIPanel.Children.Add(v_TableUsers);
+            UIPanel.Children.Add(v_TabDynamic_UC);
         }
 
         private void RibbonWin_SelectionChanged(object sender, SelectionChangedEventArgs e)
