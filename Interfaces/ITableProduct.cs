@@ -9,8 +9,7 @@ namespace Stock.Interfaces
 {
     public interface ITableProduct
     {
-        List<Product> backward_page(int this_page);
-        List<Product> forward_page(int this_page);
+        List<Product> page(ref int this_page);
         Product add(Product product);
         Product edit(Product product);
         int delete(String ID);

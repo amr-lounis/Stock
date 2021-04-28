@@ -1,4 +1,4 @@
-﻿using Stock.C;
+﻿using Stock.Controllers;
 using Stock.Interfaces;
 using Stock.Models;
 using System;
@@ -21,7 +21,7 @@ namespace Stock.Views
 {
     public partial class TableUsers_UC : UserControl
     {
-        ITableUsers ointerface = new CUsers();
+        ITableUsers ointerface = new CTableUsers();
         List<User> lusers { get; set; }
         public static int page = 0;
         public TableUsers_UC()
@@ -31,24 +31,23 @@ namespace Stock.Views
             lusers = new List<User>();
             myDataGrid.ItemsSource = lusers;
         }
-        private void event_backward(object sender, RoutedEventArgs e)
-        {
-            lusers = ointerface.backward_page(0);
-
-            page = Int32.Parse(vPageNumber.Text);
-            vPageNumber.Text = "" + --page;
-            myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = lusers;
-        }
         private void event_forward(object sender, RoutedEventArgs e)
         {
-            lusers = ointerface.backward_page(0);
-
-            page = Int32.Parse(vPageNumber.Text);
-            vPageNumber.Text = "" + ++page;
+            page++;
+            lusers = ointerface.page(ref page);
+            vPageNumber.Text = string.Format("{0}", page);
             myDataGrid.ItemsSource = null;
             myDataGrid.ItemsSource = lusers;
         }
+        private void event_backward(object sender, RoutedEventArgs e)
+        {
+            page--;
+            lusers = ointerface.page(ref page);
+            vPageNumber.Text = string.Format("{0}", page);
+            myDataGrid.ItemsSource = null;
+            myDataGrid.ItemsSource = lusers;
+        }
+       
         private void event_add(object sender, RoutedEventArgs e)
         {
             lusers.Add(ointerface.add(new User()));
@@ -72,7 +71,7 @@ namespace Stock.Views
             if (myDataGrid.SelectedItem != null)
             {
                 User m = myDataGrid.SelectedItem as User;
-                if (ointerface.delete(m.ID) == 1)
+                if (ointerface.delete(m.ID) >= 1)
                 {
                     lusers.RemoveAt(lusers.FindIndex(o => o.ID == m.ID));
                     myDataGrid.ItemsSource = null;

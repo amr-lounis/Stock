@@ -11,7 +11,7 @@ namespace Stock.Models
         public string ID { get; set; }
         public string NAME { get; set; }
         public string PASSWORD { get; set; }
-        public string CATEGORY { get; set; }
+        public string ROLE { get; set; }
         public string ACTIVITY { get; set; }
         public string MONEY_ACCOUNT { get; set; }
         public string DESCRIPTION { get; set; }

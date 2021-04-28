@@ -1,5 +1,5 @@
 ﻿using MahApps.Metro.Controls;
-using Stock.C;
+using Stock.Controllers;
 using Stock.Interfaces;
 using System;
 using System.Collections.Generic;

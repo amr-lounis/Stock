@@ -85,8 +85,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="C\CLogine.cs" />
-    <Compile Include="C\CTableProducts.cs" />
+    <Compile Include="Controllers\CLogine.cs" />
+    <Compile Include="Controllers\CTableProducts.cs" />
     <Compile Include="Interfaces\ILogin.cs" />
     <Compile Include="Interfaces\ITableProduct.cs" />
     <Compile Include="Models\Product.cs" />
@@ -116,7 +116,7 @@
     </Compile>
     <Compile Include="Interfaces\ITableUsers.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="C\CUsers.cs" />
+    <Compile Include="Controllers\CTableUsers.cs" />
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

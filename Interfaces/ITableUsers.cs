@@ -9,8 +9,7 @@ namespace Stock.Interfaces
 {
     interface ITableUsers
     {
-        List<User> backward_page(int this_page);
-        List<User> forward_page(int this_page);
+        List<User> page(ref int this_page);
         User add(User user);
         User edit(User user);
         int delete(string ID);

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stock.C
+namespace Stock.Controllers
 {
     public class CLogin : ILogin
     {
