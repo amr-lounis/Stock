@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Windows.Threading;
 
 namespace Stock.Views
 {
@@ -27,11 +28,30 @@ namespace Stock.Views
             {
                 InitializeComponent();
                 tabDynamic.DataContext = _tabItems;
+                loop();
+                v_text_user.Text = "user";
+                
+                v_image_user.Source = new BitmapImage(new Uri("/assets/images/user.png", UriKind.Relative));
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            
+        }
+        //-------------------------------------------------------------------------------
+        DispatcherTimer timer = new DispatcherTimer();
+        void loop()
+        {
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Tick += new EventHandler(InvalidateSampleData);
+            timer.Start();
+        }
+        private void InvalidateSampleData(object state, EventArgs e)
+        {
+            var t = DateTime.Now;
+            DigitalTimer.Text = t.ToString("yyyy-MM-dd-HH-mm-ss", CultureInfo.InvariantCulture);
         }
         //-------------------------------------------------------------------------------
         private void RibbonWin_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -40,6 +60,7 @@ namespace Stock.Views
             {
 
             }
+       
         }
         //-------------------------------------------------------------------------------
         public void v_btn_Customer_Click(object sender, RoutedEventArgs e)

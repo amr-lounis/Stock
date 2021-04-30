@@ -7,40 +7,52 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Ribbon x:Name="RibbonWin"  SelectedIndex="0" SelectionChanged="RibbonWin_SelectionChanged">
+        <Ribbon x:Name="RibbonWin"  SelectedIndex="0" SelectionChanged="RibbonWin_SelectionChanged" Grid.Row="0">
             <!-- Quick Access Toolbar - located at the upper-left corner -->
             <Ribbon.QuickAccessToolBar>
                 <RibbonQuickAccessToolBar>
-                    <RibbonButton x:Name ="Save2" SmallImageSource="..\assets\images\save.png" />
-                    <RibbonSplitButton x:Name ="Undo" SmallImageSource="..\assets\images\save.png" >
-                        <RibbonSplitMenuItem Header="Undo 1" />
-                        <RibbonSplitMenuItem Header="Undo 2" />
+                    <RibbonButton x:Name ="Save0" SmallImageSource="{StaticResource image_save}" />
+                    <RibbonSplitButton x:Name ="Save1" SmallImageSource="{StaticResource image_save}" >
+                        <RibbonSplitMenuItem x:Name ="Undo1" Header="Undo 1" />
+                        <RibbonSplitMenuItem x:Name ="Undo2" Header="Undo 2" />
                     </RibbonSplitButton>
-                    <RibbonButton x:Name ="Save" SmallImageSource="..\assets\images\delete.png" />
+                    <RibbonButton x:Name ="delte0" SmallImageSource="{StaticResource image_delete}" />
                 </RibbonQuickAccessToolBar>
             </Ribbon.QuickAccessToolBar>
             <!-- Application Menu, located at the left-hand side (down arrow) -->
             <Ribbon.ApplicationMenu>
                 <RibbonApplicationMenu KeyTip="F">
-                    <RibbonApplicationMenuItem Header="Options" ImageSource="..\assets\images\settings.png" />
-                    <RibbonApplicationMenuItem Header="Save3" ImageSource="..\assets\images\Save.png" />
-                    <RibbonApplicationMenuItem Header="Exit" ImageSource="..\assets\images\quit.png" />
+                    <RibbonApplicationMenuItem Header="Options" ImageSource="{StaticResource image_settings}"/>
+                    <RibbonApplicationMenuItem Header="Save3" ImageSource="{StaticResource image_save}" />
+                    <RibbonApplicationMenuItem Header="Exit" ImageSource="{StaticResource image_exitSign}" />
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
             <!-- Help Pane, located at the right-hand side -->
-            <Ribbon.HelpPaneContent>
+            <!--<Ribbon.HelpPaneContent>
                 <RibbonButton SmallImageSource="..\assets\images\Help.png" />
+            </Ribbon.HelpPaneContent>-->
+            <Ribbon.HelpPaneContent >
+                <Button Style="{DynamicResource ButtonNull}" x:Name="v_b">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="v_text_user" Style="{DynamicResource TextBlocBlackNull}" FontSize="15" MinWidth="50"/>
+                        <Image x:Name="v_image_user" Height="20" Width="20"/>
+                        <Image Source="{StaticResource image_user}" Height="20" Width="20"/>
+                    </StackPanel>
+                </Button>
             </Ribbon.HelpPaneContent>
+
+
             <!-- Ribbon Tab #1: Home -->
             <RibbonTab Header="Home" KeyTip="H" >
                 <RibbonGroup x:Name="Home" Header="Home">
-                    <RibbonButton LargeImageSource="..\assets\images\cashRegister.png" Label="Cash Register" KeyTip="CR"/>
+                    <RibbonButton LargeImageSource="{StaticResource image_cashRegister}" Label="Cash Register" KeyTip="CR"/>
 
-                    <RibbonButton SmallImageSource="..\assets\images\delete.png" Label="Cut" KeyTip="X" />
-                    <RibbonButton SmallImageSource="..\assets\images\delete.png" Label="Csut" KeyTip="+" />
+                    <RibbonButton SmallImageSource="{StaticResource image_delete}" Label="Cut" KeyTip="X" />
+                    <RibbonButton SmallImageSource="{StaticResource image_delete}" Label="Csut" KeyTip="+" />
                     
                     <!--<RibbonMenuButton LargeImageSource="..\assets\images\delete.png" Label="Paste" KeyTip="V">
                         <RibbonMenuItem ImageSource="..\assets\images\delete.png" Header="Keep Text Only" KeyTip="T"/>
@@ -54,29 +66,29 @@
             <RibbonTab Header="Customer" KeyTip="C">
                 <!-- Customer  group-->
                 <RibbonGroup x:Name="Customer" Header="Customer">
-                    <RibbonButton LargeImageSource="..\assets\images\customer.png" Label="Customer" KeyTip="C" Click="v_btn_Customer_Click"/>
+                    <RibbonButton LargeImageSource="{StaticResource image_customer}" Label="Customer" KeyTip="C" Click="v_btn_Customer_Click"/>
                 </RibbonGroup>
             </RibbonTab>
             <!-- Ribbon Tab #3: Launch -->
             <RibbonTab Header="Provider" KeyTip="P">
                 <!-- Provider  group-->
                 <RibbonGroup x:Name="Provider" Header="Provider">
-                    <RibbonButton LargeImageSource="..\assets\images\supplier.png" Label="Provider" KeyTip="P" />
+                    <RibbonButton LargeImageSource="{StaticResource image_supplier}" Label="Provider" KeyTip="P" />
                 </RibbonGroup>
             </RibbonTab>
             <!-- Ribbon Tab #4: Launch -->
             <RibbonTab Header="Stock" KeyTip="S">
                 <!-- Stock  group-->
                 <RibbonGroup x:Name="Stock" Header="Stock">
-                    <RibbonButton LargeImageSource="..\assets\images\cardboard.png" Label="Stock" KeyTip="S" Click="v_btn_Stock_Click"/>
+                    <RibbonButton LargeImageSource="{StaticResource image_cardboard}" Label="Stock" KeyTip="S" Click="v_btn_Stock_Click"/>
                 </RibbonGroup>
             </RibbonTab>
             <!-- Ribbon Tab #5: Launch -->
             <RibbonTab Header="tools" KeyTip="T">
                 <!-- tools  group-->
                 <RibbonGroup x:Name="tools" Header="tools">
-                    <RibbonButton LargeImageSource="..\assets\images\databaSesave.png" Label="Save" KeyTip="P" />
-                    <RibbonButton LargeImageSource="..\assets\images\databaseRestor.png" Label="Restor" KeyTip="P" />
+                    <RibbonButton LargeImageSource="{StaticResource image_databaseSave}" Label="Save" KeyTip="P" />
+                    <RibbonButton LargeImageSource="{StaticResource image_databaseRestor}" Label="Restor" KeyTip="P" />
                 </RibbonGroup>
             </RibbonTab>
         </Ribbon>
@@ -86,7 +98,7 @@
                 <DataTemplate x:Key="TabHeader" DataType="TabItem">
                     <DockPanel>
                         <Button Name="btnDelete"  DockPanel.Dock="Right" Margin="1" Padding="0" Height="20" Click="v_btn_delete_Click" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Name}">
-                            <Image Source="..\assets\images\delete.png" Height="15" Width="15"></Image>
+                            <Image Source="{StaticResource image_delete}" Height="15" Width="15"/>
                         </Button>
                         <TextBlock FontSize="15" Text="{Binding RelativeSource={RelativeSource AncestorType=TabItem }, Path=Header}" />
                     </DockPanel>
@@ -94,9 +106,11 @@
             </TabControl.Resources>
         </TabControl>
 
-        <!--<DockPanel Name="UIPanel" Grid.Row="1"/>-->
-
-
+        <DockPanel Name="Footer" Background="Blue" Grid.Row="2">
+            <StackPanel  Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock x:Name="DigitalTimer" Style="{DynamicResource TextBlocRedkNull}" FontSize="15" MinWidth="100" FontFamily="{DynamicResource font_digital-7}"/>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 
 </RibbonWindow >

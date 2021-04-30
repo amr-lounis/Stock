@@ -60,6 +60,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Controls.Ribbon" />
@@ -85,6 +86,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\ActivationSoftware.cs" />
+    <Compile Include="Classes\DialogAlert.cs" />
+    <Compile Include="Classes\DialogError.cs" />
+    <Compile Include="Classes\DialogInformation.cs" />
+    <Compile Include="Classes\F_File.cs" />
+    <Compile Include="Classes\F_NumberToWord.cs" />
+    <Compile Include="Classes\F_Run.cs" />
+    <Compile Include="Classes\F_Time.cs" />
+    <Compile Include="Classes\F_Window.cs" />
+    <Compile Include="Classes\HASH.cs" />
+    <Compile Include="Classes\RSA.cs" />
     <Compile Include="Controllers\CLogine.cs" />
     <Compile Include="Controllers\CTableProducts.cs" />
     <Compile Include="Interfaces\ILogin.cs" />
@@ -194,6 +206,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\images\enterKey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dataset\" />
+    <Folder Include="Reports\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
