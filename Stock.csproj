@@ -102,6 +102,9 @@
     <Compile Include="Interfaces\ILogin.cs" />
     <Compile Include="Interfaces\ITableProduct.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Views\CashRegister_UC.xaml.cs">
+      <DependentUpon>CashRegister_UC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -114,6 +117,10 @@
     <Compile Include="Views\TableUsers_UC.xaml.cs">
       <DependentUpon>TableUsers_UC.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\CashRegister_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -210,6 +217,9 @@
   <ItemGroup>
     <Folder Include="Dataset\" />
     <Folder Include="Reports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\images\company.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

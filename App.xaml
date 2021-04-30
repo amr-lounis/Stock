@@ -61,6 +61,7 @@
             <BitmapImage  x:Key="image_buttonRight" UriSource="/assets/images/buttonRight.png"></BitmapImage>
             <BitmapImage  x:Key="image_cardboard" UriSource="/assets/images/cardboard.png"></BitmapImage>
             <BitmapImage  x:Key="image_cashRegister" UriSource="/assets/images/cashRegister.png"></BitmapImage>
+            <BitmapImage  x:Key="image_company" UriSource="/assets/images/company.png"></BitmapImage>
             <BitmapImage  x:Key="image_customer" UriSource="/assets/images/customer.png"></BitmapImage>
             <BitmapImage  x:Key="image_databaseRestor" UriSource="/assets/images/databaseRestor.png"></BitmapImage>
             <BitmapImage  x:Key="image_databaseSave" UriSource="/assets/images/databaseSave.png"></BitmapImage>

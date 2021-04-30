@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Stock.Views.CashRegister_UC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Stock.Views"
+             mc:Ignorable="d" 
+             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--  **************************************** Grid input ****************************************   -->
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                    <Controls:NumericUpDown x:Name="v_text_NumericUpDown" HideUpDownButtons="True" IsReadOnly="True" FontFamily="{DynamicResource font_digital-7}" Background="Black" FontWeight="Bold"  Foreground="Red" FontSize="40" StringFormat="{}{0:N2}" MinWidth="500"/>
+                    <Button Style="{DynamicResource ButtonNull}" Click="v_btn_ValidateInvoice">
+                        <materialDesign:PackIcon Kind="CheckBox" Height="30" Width="30" Foreground="Blue"/>
+                    </Button>
+                    <Button Style="{DynamicResource ButtonNull}" Click="v_btn_AddNewInvoice">
+                        <materialDesign:PackIcon Kind="AddShoppingCart" Height="30" Width="30" Foreground="Blue"/>
+                    </Button>
+                    <Button Style="{DynamicResource ButtonNull}" Click="v_btn_EditInvoice" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Table" Height="30" Width="30" Foreground="Blue"/>
+                            <TextBlock x:Name="v_text_InvoiceID" Style="{DynamicResource TextBlocBlackNull}"/>
+                            <TextBlock Text=" / " Style="{DynamicResource TextBlocBlackNull}"/>
+                            <TextBlock x:Name="v_text_InvoiceALL" Style="{DynamicResource TextBlocBlackNull}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{DynamicResource ButtonNull}" Click="v_btn_EditCustomer">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="v_image_customer" Width="30" Height="30"/>
+                            <TextBlock x:Name="v_text_customer" Style="{DynamicResource TextBlocBlackNull}"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                    <TextBox x:Name="v_text_search" GotFocus="v_text_search_gotFocus" LostFocus="v_text_search_lostFocus" FontSize="20" FontWeight="Bold" Foreground="Blue" Width="200"  materialDesign:HintAssist.Hint="search..." />
+                    <TextBox  FontSize="20" FontWeight="Bold" Foreground="Blue" Width="200"  materialDesign:HintAssist.Hint="code..."   Text="{Binding ValueCodeSearchProduct,UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

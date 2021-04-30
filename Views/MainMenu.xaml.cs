@@ -29,9 +29,10 @@ namespace Stock.Views
                 InitializeComponent();
                 tabDynamic.DataContext = _tabItems;
                 loop();
+
                 v_text_user.Text = "user";
-                
                 v_image_user.Source = new BitmapImage(new Uri("/assets/images/user.png", UriKind.Relative));
+                v_image_company.SmallImageSource = new BitmapImage(new Uri("/assets/images/user.png", UriKind.Relative));
             }
             catch (Exception ex)
             {
@@ -51,7 +52,7 @@ namespace Stock.Views
         private void InvalidateSampleData(object state, EventArgs e)
         {
             var t = DateTime.Now;
-            DigitalTimer.Text = t.ToString("yyyy-MM-dd-HH-mm-ss", CultureInfo.InvariantCulture);
+            DigitalTimer.Text = t.ToString("yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture);
         }
         //-------------------------------------------------------------------------------
         private void RibbonWin_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -62,25 +63,14 @@ namespace Stock.Views
             }
        
         }
-        //-------------------------------------------------------------------------------
-        public void v_btn_Customer_Click(object sender, RoutedEventArgs e)
-        {
-            TableUsers_UC o = new TableUsers_UC();
-            AddTabItem(o, "Customer:"+cpt);
-        }
-        //-------------------------------------------------------------------------------
-        public void v_btn_Stock_Click(object sender, RoutedEventArgs e)
-        {
-            TableProduct_UC o = new TableProduct_UC();
-            AddTabItem(o, "Stock:" + cpt);
-        }
+        
         //-------------------------------------------------------------------------------
         private void tabDynamic_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TabItem tab = tabDynamic.SelectedItem as TabItem;
             if (tab == null) return;
 
-            Console.WriteLine(tab.Name);
+            Console.WriteLine("tabDynamic_SelectionChanged : "+tab.Name);
         }
         //-------------------------------------------------------------------------------
         private void AddTabItem(object _content, string _name)
@@ -98,8 +88,27 @@ namespace Stock.Views
             tabDynamic.DataContext = _tabItems;
             tabDynamic.SelectedItem = tab;
         }
+        //******************************************************************************* Buttons 
         //-------------------------------------------------------------------------------
-        private void v_btn_delete_Click(object sender, RoutedEventArgs e)
+        public void v_btn_cashRegister(object sender, RoutedEventArgs e)
+        {
+            CashRegister_UC o = new CashRegister_UC();
+            AddTabItem(o, "CashRegister:" + cpt);
+        }
+        //-------------------------------------------------------------------------------
+        public void v_btn_customer(object sender, RoutedEventArgs e)
+        {
+            TableUsers_UC o = new TableUsers_UC();
+            AddTabItem(o, "Customer:" + cpt);
+        }
+        //-------------------------------------------------------------------------------
+        public void v_btn_stock(object sender, RoutedEventArgs e)
+        {
+            TableProduct_UC o = new TableProduct_UC();
+            AddTabItem(o, "Stock:" + cpt);
+        }
+        //-------------------------------------------------------------------------------
+        private void v_btn_delete(object sender, RoutedEventArgs e)
         {
             string tabName = (sender as Button).CommandParameter.ToString();
             Console.WriteLine(tabName);
