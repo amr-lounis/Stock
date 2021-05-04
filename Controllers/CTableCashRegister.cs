@@ -10,8 +10,6 @@ namespace Stock.Controllers
 {
     public class CTableCashRegister : ITableCashRegister
     {
-        int a = 0, b = 999;
-        Random r = new Random();
         List<CashRegister> list = new List<CashRegister>();
         //-------------------------------------------------------------------------------------
         public int add(CashRegister _CashRegister)

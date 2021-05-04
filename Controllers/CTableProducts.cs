@@ -10,8 +10,6 @@ namespace Stock.Controllers
 {
     public class CTableProducts : ITableProduct
     {
-        int a = 0, b = 999;
-        Random r = new Random();
         List<Product> list = new List<Product>();
         //-------------------------------------------------------------------------------------
         public int add(Product _Product)

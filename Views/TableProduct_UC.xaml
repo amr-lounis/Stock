@@ -10,70 +10,92 @@
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              >
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" >
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <TextBox x:Name="vTextSearch" materialDesign:HintAssist.Hint="search..." FontSize="25" Width="200" Height="40" Margin="5" />
-                <Button Style="{DynamicResource ButtonNull}" Click="event_backward"  Width="30" Height="30" Margin="10,0,10,0">
-                    <Image Source="../assets/images/buttonLeft.png"/>
-                </Button>
-                <TextBlock x:Name="vPageNumber" Foreground="Red" VerticalAlignment="Center" FontSize="20">
-                </TextBlock>
-                <Button Style="{DynamicResource ButtonNull}" Click="event_forward"  Width="30" Height="30" Margin="10,0,10,0">
-                    <Image Source="../assets/images/buttonRight.png"/>
-                </Button>
-                <Button Style="{DynamicResource ButtonNull}" Click="event_add" Width="30" Height="30" Margin="10,0,10,0">
-                    <Image Source="../assets/images/Add.png"/>
-                </Button>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBox x:Name="vTextSearch" materialDesign:HintAssist.Hint="search..." FontSize="25" Width="200" Height="40" Margin="5" />
+                    <Button Click="event_backward" Style="{DynamicResource ButtonNull}" Width="30" Height="30" Margin="10,0,10,0">
+                        <Image Source="../assets/images/buttonLeft.png"/>
+                    </Button>
+                    <TextBlock x:Name="vPageNumber" Foreground="Red" VerticalAlignment="Center" FontSize="20">
+                    </TextBlock>
+                    <Button Style="{DynamicResource ButtonNull}" Click="event_forward"  Width="30" Height="30" Margin="10,0,10,0">
+                        <Image Source="../assets/images/buttonRight.png"/>
+                    </Button>
+                    <Button Style="{DynamicResource ButtonNull}" Click="event_add" Width="30" Height="30" Margin="10,0,10,0">
+                        <Image Source="../assets/images/Add.png"/>
+                    </Button>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
 
-        <!-- *************************************************** Begin DataGrid *************************************************** -->
+            <!-- *************************************************** Begin DataGrid *************************************************** -->
 
-        <DataGrid x:Name="myDataGrid"
+            <DataGrid x:Name="myDataGrid"
                   Style="{StaticResource AzureDataGrid}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   Grid.Row="1"
                   MouseDoubleClick="event_MouseDoubleClick">
 
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Action" IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" >
-                                <Button Style="{DynamicResource ButtonNull}" Click="event_edit" Width="30" Height="30" Margin="10,0,10,0">
-                                    <Image Source="../assets/images/editProperty.png"/>
-                                </Button>
-                                <Button Style="{DynamicResource ButtonNull}" Click="event_delete"  Width="30" Height="30" Margin="10,0,10,0">
-                                    <Image Source="../assets/images/delete.png"/>
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding NAME}" IsReadOnly="True" MaxWidth="150"/>
-                <DataGridTextColumn Header="Category" Binding="{Binding CATEGORY}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="Unite" Binding="{Binding UNITE}" IsReadOnly="True"  MaxWidth="150" />
-                <DataGridTextColumn Header="Description" Binding="{Binding DESCRIPTION}" IsReadOnly="True" MaxWidth="150"/>
-                <DataGridTextColumn Header="Code" Binding="{Binding CODE}" IsReadOnly="True" MaxWidth="150" />
-                <DataGridTextColumn Header="Importance" Binding="{Binding IMPORTANCE}" IsReadOnly="True" MaxWidth="150" Visibility="Collapsed"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding QUANTITY}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="Quantity min" Binding="{Binding QUANTITY_MIN}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
-                <DataGridTextColumn Header="% tax" Binding="{Binding TAX_PERCE}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="purchasing" Binding="{Binding MONEY_PURCHASE}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
-                <DataGridTextColumn Header="selling" Binding="{Binding MONEY_SELLING}" IsReadOnly="True"  MaxWidth="150"/>
-                <DataGridTextColumn Header="selling min" Binding="{Binding MONEY_SELLING_MIN}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
-                <DataGridTextColumn Header="Date production" Binding="{Binding DATE_PRODUCTION}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
-                <DataGridTextColumn Header="Date purchase" Binding="{Binding DATE_PURCHASE}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
-                <DataGridTextColumn Header="Date expiration" Binding="{Binding DATE_EXPIRATION}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
-                <DataGridTextColumn Header="ID" Binding="{Binding ID}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <!-- *************************************************** End DataGrid *************************************************** -->
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Action" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" >
+                                    <Button Style="{DynamicResource ButtonNull}" Click="event_edit" Width="30" Height="30" Margin="10,0,10,0">
+                                        <Image Source="../assets/images/editProperty.png"/>
+                                    </Button>
+                                    <Button Style="{DynamicResource ButtonNull}" Click="event_delete"  Width="30" Height="30" Margin="10,0,10,0">
+                                        <Image Source="../assets/images/delete.png"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Name" Binding="{Binding NAME}" IsReadOnly="True" MaxWidth="150"/>
+                    <DataGridTextColumn Header="Category" Binding="{Binding CATEGORY}" IsReadOnly="True"  MaxWidth="150"/>
+                    <DataGridTextColumn Header="Unite" Binding="{Binding UNITE}" IsReadOnly="True"  MaxWidth="150" />
+                    <DataGridTextColumn Header="Description" Binding="{Binding DESCRIPTION}" IsReadOnly="True" MaxWidth="150"/>
+                    <DataGridTextColumn Header="Code" Binding="{Binding CODE}" IsReadOnly="True" MaxWidth="150" />
+                    <DataGridTextColumn Header="Importance" Binding="{Binding IMPORTANCE}" IsReadOnly="True" MaxWidth="150" Visibility="Collapsed"/>
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding QUANTITY}" IsReadOnly="True"  MaxWidth="150"/>
+                    <DataGridTextColumn Header="Quantity min" Binding="{Binding QUANTITY_MIN}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                    <DataGridTextColumn Header="% tax" Binding="{Binding TAX_PERCE}" IsReadOnly="True"  MaxWidth="150"/>
+                    <DataGridTextColumn Header="purchasing" Binding="{Binding MONEY_PURCHASE}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                    <DataGridTextColumn Header="selling" Binding="{Binding MONEY_SELLING}" IsReadOnly="True"  MaxWidth="150"/>
+                    <DataGridTextColumn Header="selling min" Binding="{Binding MONEY_SELLING_MIN}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                    <DataGridTextColumn Header="Date production" Binding="{Binding DATE_PRODUCTION}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                    <DataGridTextColumn Header="Date purchase" Binding="{Binding DATE_PURCHASE}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                    <DataGridTextColumn Header="Date expiration" Binding="{Binding DATE_EXPIRATION}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!-- *************************************************** End DataGrid *************************************************** -->
+        </Grid>
+        <!--  **************************************** Grid Edit Product ****************************************   -->
+        <Grid x:Name="v_GridEditProduct" Grid.Row="1" Visibility="Collapsed" >
+            <Grid Background="Black" Opacity="0.5"/>
+            <Border
+                Background="#EEEEEE"
+                BorderBrush="Black" 
+                BorderThickness="5" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <local:EditProduct_UC/>
+                    <Button Click="v_btn_OverlayGridCancel" Grid.Row="1" Style="{DynamicResource ButtonNull}">
+                        <materialDesign:PackIcon Kind="CloseCircle" Height="30" Width="30" Foreground="Blue" />
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

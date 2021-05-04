@@ -10,8 +10,6 @@ namespace Stock.Controllers
 {
     public class CTableUsers : ITableUsers
     {
-        int a = 0, b = 999;
-        Random r = new Random();
         List<User> list = new List<User>();
         //-------------------------------------------------------------------------------------
         public int add(User _User)
