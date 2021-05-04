@@ -78,6 +78,16 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <!--  **************************************** Columns ****************************************   -->
+                    <DataGridTemplateColumn Header="Unit">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock  Text="{Binding UNIT,Mode=OneWay}" Margin="0,0,10,0"  VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--  **************************************** Columns ****************************************   -->
                     <DataGridTemplateColumn Header="Code">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -88,10 +98,10 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <!--  **************************************** Columns ****************************************   -->
-                    <DataGridTemplateColumn Header="Money Unit">
+                    <DataGridTemplateColumn Header="Money of One">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="{Binding MONEY_UNIT,Mode=OneWay}" Click="v_btn_EditMoneyUnit" Margin="0,0,10,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
+                                <Button Content="{Binding MONEY_ONE,Mode=OneWay}" Click="v_btn_EditMoneyOFOne" Margin="0,0,10,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -216,7 +226,7 @@
             HorizontalAlignment="Center" 
             VerticalAlignment="Center">
                 <StackPanel Orientation="Vertical">
-                    <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding EditValue}"/>
+                    <TextBox x:Name="v_GridEditText" MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding EditValue}"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button Content="Ok" Click="v_btn_editOk" Margin="5"  Background="{x:Null}"/>
                         <Button Content="Cancel" Click="v_btn_editCancel" Margin="5" Background="{x:Null}"/>

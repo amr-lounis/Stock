@@ -14,53 +14,32 @@ namespace Stock.Controllers
         Random r = new Random();
         List<User> list = new List<User>();
         //-------------------------------------------------------------------------------------
-        public int add(User user)
+        public int add(User _User)
         {
-            User o = new User
-            {
-                ID = string.Format("{0}", r.Next(a, b)),
-                ACTIVITY = string.Format("{0}", r.Next(a, b)),
-                ADDRESS = string.Format("{0}", r.Next(a, b)),
-                ROLE = string.Format("{0}", r.Next(a, b)),
-                CITY = string.Format("{0}", r.Next(a, b)),
-                COUNTRY = string.Format("{0}", r.Next(a, b)),
-                DESCRIPTION = string.Format("{0}", r.Next(a, b)),
-                EMAIL = string.Format("{0}", r.Next(a, b)),
-                FAX = string.Format("{0}", r.Next(a, b)),
-                MONEY_ACCOUNT = string.Format("{0}", r.Next(a, b)),
-                NAME = string.Format("{0}", r.Next(a, b)),
-                NIF = string.Format("{0}", r.Next(a, b)),
-                NRC = string.Format("{0}", r.Next(a, b)),
-                PASSWORD = string.Format("{0}", r.Next(a, b)),
-                PHONE = string.Format("{0}", r.Next(a, b)),
-                WEBSITE = string.Format("{0}", r.Next(a, b)),
-            };
-            list.Add(o);
+            list.Add(_User);
             return 1;
         }
         //-------------------------------------------------------------------------------------
-        public int edit(User user)
+        public int edit(User _User)
         {
-            User o = new User
-            {
-                ID = string.Format("{0}", r.Next(a, b)),
-                ACTIVITY = string.Format("{0}", r.Next(a, b)),
-                ADDRESS = string.Format("{0}", r.Next(a, b)),
-                ROLE = string.Format("{0}", r.Next(a, b)),
-                CITY = string.Format("{0}", r.Next(a, b)),
-                COUNTRY = string.Format("{0}", r.Next(a, b)),
-                DESCRIPTION = string.Format("{0}", r.Next(a, b)),
-                EMAIL = string.Format("{0}", r.Next(a, b)),
-                FAX = string.Format("{0}", r.Next(a, b)),
-                MONEY_ACCOUNT = string.Format("{0}", r.Next(a, b)),
-                NAME = string.Format("{0}", r.Next(a, b)),
-                NIF = string.Format("{0}", r.Next(a, b)),
-                NRC = string.Format("{0}", r.Next(a, b)),
-                PASSWORD = string.Format("{0}", r.Next(a, b)),
-                PHONE = string.Format("{0}", r.Next(a, b)),
-                WEBSITE = string.Format("{0}", r.Next(a, b)),
-            };
-            list[list.FindIndex(x => x.ID == user.ID)] = o;
+            var o = list.Find(x => x.ID == _User.ID);
+            o.ACTIVITY = _User.ACTIVITY;
+            o.ADDRESS = _User.ADDRESS;
+            o.ROLE = _User.ROLE;
+            o.CITY = _User.CITY;
+            o.COUNTRY = _User.COUNTRY;
+            o.DESCRIPTION = _User.DESCRIPTION;
+            o.EMAIL = _User.EMAIL;
+            o.FAX = _User.FAX;
+            o.MONEY_ACCOUNT = _User.MONEY_ACCOUNT;
+            o.NAME = _User.NAME;
+            o.NIF = _User.NIF;
+            o.NRC = _User.NRC;
+            o.PASSWORD = _User.PASSWORD;
+            o.PHONE = _User.PHONE;
+            o.WEBSITE = _User.WEBSITE;
+
+            list[list.FindIndex(x => x.ID == _User.ID)] = o;
             return 1;
         }
         //-------------------------------------------------------------------------------------

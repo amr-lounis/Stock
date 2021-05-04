@@ -20,52 +20,45 @@ namespace Stock.Views
 {
     public partial class TableProduct_UC
     {
-        ITableProduct ointerface = new CTableProducts();
-        public static int page = 0;
         public TableProduct_UC()
         {
             InitializeComponent();
             vPageNumber.Text = "" + page;
-            myDataGrid.ItemsSource = ointerface.getPage(ref page);
+            GridRefresh();
         }
         private void event_forward(object sender, RoutedEventArgs e)
         {
             page++;
             vPageNumber.Text = string.Format("{0}", page);
-            myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = ointerface.getPage(ref page);
+            GridRefresh();
         }
         private void event_backward(object sender, RoutedEventArgs e)
         {
             page--;
             vPageNumber.Text = string.Format("{0}", page);
-            myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = ointerface.getPage(ref page);
+            GridRefresh();
         }
         
         private void event_add(object sender, RoutedEventArgs e)
         {
             if (ointerface.add(new Product()) >= 1)
             {
-                myDataGrid.ItemsSource = null;
-                myDataGrid.ItemsSource = ointerface.getPage(ref page);
+                GridRefresh();
             }
             else
             {
                 MessageBox.Show("can\' add");
             }
-            myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
         private void event_edit(object sender, RoutedEventArgs e)
         {
             if (myDataGrid.SelectedItem != null)
             {
-                Product o = myDataGrid.SelectedItem as Product;
+                var o = myDataGrid.SelectedItem as Product;
+                o.NAME = "XXX";
                 if (ointerface.edit(o) >= 1)
                 {
-                    myDataGrid.ItemsSource = null;
-                    myDataGrid.ItemsSource = ointerface.getPage(ref page);
+                    GridRefresh();
                 }
                 else
                 {
@@ -77,11 +70,10 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                Product o = myDataGrid.SelectedItem as Product;
+                var o = myDataGrid.SelectedItem as Product;
                 if (ointerface.delete(o) >= 1)
                 {
-                    myDataGrid.ItemsSource = null;
-                    myDataGrid.ItemsSource = ointerface.getPage(ref page);
+                    GridRefresh();
                 }
                 else
                 {
@@ -93,12 +85,30 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem;
-                System.Reflection.PropertyInfo pi = o.GetType().GetProperty("ID");
-                var v = (string)(pi.GetValue(o, null));
-                MessageBox.Show(v + "");
+                if (myDataGrid.SelectedItem != null)
+                {
+                    var o = myDataGrid.SelectedItem;
+                    System.Reflection.PropertyInfo pi = o.GetType().GetProperty("ID");
+                    var v = (string)(pi.GetValue(o, null));
+                    MessageBox.Show(v + "");
+                }
             }
         }
+        /**************************************************************/
+        private void v_btn_OverlayGridCancel(object sender, EventArgs e)
+        {
+
+        }
+        /**************************************************************/
+        private void GridRefresh()
+        {
+            myDataGrid.ItemsSource = null;
+            myDataGrid.ItemsSource = ointerface.getPage(ref page);
+        }
+        /**************************************************************/
+        ITableProduct ointerface = new CTableProducts();
+        public static int page = 0;
+        /**************************************************************/
 
     }
 }

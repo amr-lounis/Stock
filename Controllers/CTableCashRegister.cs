@@ -16,39 +16,21 @@ namespace Stock.Controllers
         //-------------------------------------------------------------------------------------
         public int add(CashRegister _CashRegister)
         {
-            CashRegister o = new CashRegister()
-            {
-                ID = string.Format("{0}", r.Next(a, b)),
-                ID_PRODUCTS = string.Format("{0}", r.Next(a, b)),
-                ID_INVOICES = string.Format("{0}", r.Next(a, b)),
-                NAME = string.Format("{0}", r.Next(a, b)),
-                CODE = string.Format("{0}", r.Next(a, b)),
-                MONEY_UNIT = string.Format("{0}", r.Next(a, b)),
-                QUANTITY = string.Format("{0}", r.Next(a, b)),
-                TAX_PERCE = string.Format("{0}", r.Next(a, b)),
-                TAX_VALUE = string.Format("{0}", r.Next(a, b)),
-                STAMP = string.Format("{0}", r.Next(a, b)),
-                MONEY_PAID = string.Format("{0}", r.Next(a, b)),
-            };
-            list.Add(o);
+            list.Add(_CashRegister);
             return 1;
         }
         public int edit(CashRegister _CashRegister)
         {
-            CashRegister o = new CashRegister
-            {
-                ID = string.Format("{0}", r.Next(a, b)),
-                ID_PRODUCTS = string.Format("{0}", r.Next(a, b)),
-                ID_INVOICES = string.Format("{0}", r.Next(a, b)),
-                NAME = string.Format("{0}", r.Next(a, b)),
-                CODE = string.Format("{0}", r.Next(a, b)),
-                MONEY_UNIT = string.Format("{0}", r.Next(a, b)),
-                QUANTITY = string.Format("{0}", r.Next(a, b)),
-                TAX_PERCE = string.Format("{0}", r.Next(a, b)),
-                TAX_VALUE = string.Format("{0}", r.Next(a, b)),
-                STAMP = string.Format("{0}", r.Next(a, b)),
-                MONEY_PAID = string.Format("{0}", r.Next(a, b)),
-            };
+            var o = list.Find(x => x.ID == _CashRegister.ID);
+            o.NAME = _CashRegister.NAME;
+            o.CODE = _CashRegister.CODE;
+            o.MONEY_ONE = _CashRegister.MONEY_ONE;
+            o.QUANTITY = _CashRegister.QUANTITY;
+            o.TAX_PERCE = _CashRegister.TAX_PERCE;
+            o.TAX_VALUE = _CashRegister.TAX_VALUE;
+            o.STAMP = _CashRegister.STAMP;
+            o.MONEY_PAID = _CashRegister.MONEY_PAID;
+
             list[list.FindIndex(x => x.ID == _CashRegister.ID)] = o;
             return 1;
         }

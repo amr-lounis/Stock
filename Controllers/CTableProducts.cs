@@ -14,54 +14,32 @@ namespace Stock.Controllers
         Random r = new Random();
         List<Product> list = new List<Product>();
         //-------------------------------------------------------------------------------------
-        public int add(Product product)
+        public int add(Product _Product)
         {
-            Product o = new Product()
-            {
-                ID = string.Format("{0}", r.Next(a, b)),
-                NAME = string.Format("{0}", r.Next(a, b)),
-                CATEGORY = string.Format("{0}", r.Next(a, b)),
-                UNITE = string.Format("{0}", r.Next(a, b)),
-                DESCRIPTION = string.Format("{0}", r.Next(a, b)),
-                CODE = string.Format("{0}", r.Next(a, b)),
-                IMPORTANCE = string.Format("{0}", r.Next(a, b)),
-                QUANTITY = string.Format("{0}", r.Next(a, b)),
-                QUANTITY_MIN = string.Format("{0}", r.Next(a, b)),
-                TAX_PERCE = string.Format("{0}", r.Next(a, b)),
-                MONEY_PURCHASE = string.Format("{0}", r.Next(a, b)),
-                MONEY_SELLING = string.Format("{0}", r.Next(a, b)),
-                MONEY_SELLING_MIN = string.Format("{0}", r.Next(a, b)),
-                DATE_PRODUCTION = string.Format("{0}", r.Next(a, b)),
-                DATE_PURCHASE = string.Format("{0}", r.Next(a, b)),
-                DATE_EXPIRATION = string.Format("{0}", r.Next(a, b)),
-            };
-            list.Add(o);
+            list.Add(_Product);
             return 1;
         }
         //-------------------------------------------------------------------------------------
-        public int edit(Product product)
+        public int edit(Product _Product)
         {
-            Product o = new Product()
-            {
-                ID = string.Format("{0}", r.Next(a, b)),
-                NAME = string.Format("{0}", r.Next(a, b)),
-                CATEGORY = string.Format("{0}", r.Next(a, b)),
-                UNITE = string.Format("{0}", r.Next(a, b)),
-                DESCRIPTION = string.Format("{0}", r.Next(a, b)),
-                CODE = string.Format("{0}", r.Next(a, b)),
-                IMPORTANCE = string.Format("{0}", r.Next(a, b)),
-                QUANTITY = string.Format("{0}", r.Next(a, b)),
-                QUANTITY_MIN = string.Format("{0}", r.Next(a, b)),
-                TAX_PERCE = string.Format("{0}", r.Next(a, b)),
-                MONEY_PURCHASE = string.Format("{0}", r.Next(a, b)),
-                MONEY_SELLING = string.Format("{0}", r.Next(a, b)),
-                MONEY_SELLING_MIN = string.Format("{0}", r.Next(a, b)),
-                DATE_PRODUCTION = string.Format("{0}", r.Next(a, b)),
-                DATE_PURCHASE = string.Format("{0}", r.Next(a, b)),
-                DATE_EXPIRATION = string.Format("{0}", r.Next(a, b))
+            var o = list.Find(x => x.ID == _Product.ID);
+            o.NAME = _Product.NAME;
+            o.CATEGORY = _Product.CATEGORY;
+            o.UNITE = _Product.UNITE;
+            o.DESCRIPTION = _Product.DESCRIPTION;
+            o.CODE = _Product.CODE;
+            o.IMPORTANCE = _Product.IMPORTANCE;
+            o.QUANTITY = _Product.QUANTITY;
+            o.QUANTITY_MIN = _Product.QUANTITY_MIN;
+            o.TAX_PERCE = _Product.TAX_PERCE;
+            o.MONEY_PURCHASE = _Product.MONEY_PURCHASE;
+            o.MONEY_SELLING = _Product.MONEY_SELLING;
+            o.MONEY_SELLING_MIN = _Product.MONEY_SELLING_MIN;
+            o.DATE_PRODUCTION = _Product.DATE_PRODUCTION;
+            o.DATE_PURCHASE = _Product.DATE_PURCHASE;
+            o.DATE_EXPIRATION = _Product.DATE_EXPIRATION;
 
-            };
-            list[list.FindIndex(x => x.ID == product.ID)] = o;
+            list[list.FindIndex(x => x.ID == _Product.ID)] = o;
             return 1;
         }
         //-------------------------------------------------------------------------------------
