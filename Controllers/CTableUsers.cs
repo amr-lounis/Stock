@@ -12,12 +12,11 @@ namespace Stock.Controllers
     {
         int a = 0, b = 999;
         Random r = new Random();
+        List<User> list = new List<User>();
         //-------------------------------------------------------------------------------------
-        public List<User> page(ref int this_page)
+        public int add(User user)
         {
-            Console.WriteLine("backward_page");
-            List<User> lo = new List<User>();
-            for (int i = 0; i < 10; i++) lo.Add(new User
+            User o = new User
             {
                 ID = string.Format("{0}", r.Next(a, b)),
                 ACTIVITY = string.Format("{0}", r.Next(a, b)),
@@ -35,67 +34,47 @@ namespace Stock.Controllers
                 PASSWORD = string.Format("{0}", r.Next(a, b)),
                 PHONE = string.Format("{0}", r.Next(a, b)),
                 WEBSITE = string.Format("{0}", r.Next(a, b)),
-            });
-            Console.WriteLine(this_page);
+            };
+            list.Add(o);
+            return 1;
+        }
+        //-------------------------------------------------------------------------------------
+        public int edit(User user)
+        {
+            User o = new User
+            {
+                ID = string.Format("{0}", r.Next(a, b)),
+                ACTIVITY = string.Format("{0}", r.Next(a, b)),
+                ADDRESS = string.Format("{0}", r.Next(a, b)),
+                ROLE = string.Format("{0}", r.Next(a, b)),
+                CITY = string.Format("{0}", r.Next(a, b)),
+                COUNTRY = string.Format("{0}", r.Next(a, b)),
+                DESCRIPTION = string.Format("{0}", r.Next(a, b)),
+                EMAIL = string.Format("{0}", r.Next(a, b)),
+                FAX = string.Format("{0}", r.Next(a, b)),
+                MONEY_ACCOUNT = string.Format("{0}", r.Next(a, b)),
+                NAME = string.Format("{0}", r.Next(a, b)),
+                NIF = string.Format("{0}", r.Next(a, b)),
+                NRC = string.Format("{0}", r.Next(a, b)),
+                PASSWORD = string.Format("{0}", r.Next(a, b)),
+                PHONE = string.Format("{0}", r.Next(a, b)),
+                WEBSITE = string.Format("{0}", r.Next(a, b)),
+            };
+            list[list.FindIndex(x => x.ID == user.ID)] = o;
+            return 1;
+        }
+        //-------------------------------------------------------------------------------------
+        public List<User> getPage(ref int this_page)
+        {
             int pageMax = 5;
             if (this_page < 0) this_page = 0;
             if (this_page > pageMax) this_page = pageMax;
-            return lo;
+            return list;
         }
         //-------------------------------------------------------------------------------------
-        public User add(User user)
+        public int delete(User _User)
         {
-            Console.WriteLine("add");
-            User o = new User
-            {
-                ID = string.Format("{0}", r.Next(a, b)),
-                ACTIVITY = string.Format("{0}", r.Next(a, b)),
-                ADDRESS = string.Format("{0}", r.Next(a, b)),
-                ROLE = string.Format("{0}", r.Next(a, b)),
-                CITY = string.Format("{0}", r.Next(a, b)),
-                COUNTRY = string.Format("{0}", r.Next(a, b)),
-                DESCRIPTION = string.Format("{0}", r.Next(a, b)),
-                EMAIL = string.Format("{0}", r.Next(a, b)),
-                FAX = string.Format("{0}", r.Next(a, b)),
-                MONEY_ACCOUNT = string.Format("{0}", r.Next(a, b)),
-                NAME = string.Format("{0}", r.Next(a, b)),
-                NIF = string.Format("{0}", r.Next(a, b)),
-                NRC = string.Format("{0}", r.Next(a, b)),
-                PASSWORD = string.Format("{0}", r.Next(a, b)),
-                PHONE = string.Format("{0}", r.Next(a, b)),
-                WEBSITE = string.Format("{0}", r.Next(a, b)),
-            };
-            return o;
-        }
-        //-------------------------------------------------------------------------------------
-        public User edit(User user)
-        {
-            Console.WriteLine("edit");
-            User o = new User
-            {
-                ID = string.Format("{0}", r.Next(a, b)),
-                ACTIVITY = string.Format("{0}", r.Next(a, b)),
-                ADDRESS = string.Format("{0}", r.Next(a, b)),
-                ROLE = string.Format("{0}", r.Next(a, b)),
-                CITY = string.Format("{0}", r.Next(a, b)),
-                COUNTRY = string.Format("{0}", r.Next(a, b)),
-                DESCRIPTION = string.Format("{0}", r.Next(a, b)),
-                EMAIL = string.Format("{0}", r.Next(a, b)),
-                FAX = string.Format("{0}", r.Next(a, b)),
-                MONEY_ACCOUNT = string.Format("{0}", r.Next(a, b)),
-                NAME = string.Format("{0}", r.Next(a, b)),
-                NIF = string.Format("{0}", r.Next(a, b)),
-                NRC = string.Format("{0}", r.Next(a, b)),
-                PASSWORD = string.Format("{0}", r.Next(a, b)),
-                PHONE = string.Format("{0}", r.Next(a, b)),
-                WEBSITE = string.Format("{0}", r.Next(a, b)),
-            };
-            return o;
-        }
-        //-------------------------------------------------------------------------------------
-        public int delete(String ID)
-        {
-            Console.WriteLine("delete:"+ID);
+            list.RemoveAt(list.FindIndex(o => o.ID == _User.ID));
             return 1;
         }
         //-------------------------------------------------------------------------------------

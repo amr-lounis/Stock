@@ -37,8 +37,8 @@
                   Style="{StaticResource AzureDataGrid}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
-                  Grid.Row="1"
-                  MouseDoubleClick="event_MouseDoubleClick">
+                  MouseDoubleClick="event_MouseDoubleClick"
+                  Grid.Row="1">
 
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Action" IsReadOnly="True">

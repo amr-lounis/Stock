@@ -27,7 +27,9 @@ namespace Stock.Views
             try
             {
                 InitializeComponent();
+                _tabItems = new List<TabItem>();
                 tabDynamic.DataContext = _tabItems;
+
                 loop();
 
                 v_text_user.Text = "user";
@@ -82,7 +84,6 @@ namespace Stock.Views
             tab.Name = tab_name;
             tab.HeaderTemplate = tabDynamic.FindResource("TabHeader") as DataTemplate;
             tab.Content = _content;
-
             _tabItems.Add(tab);
             tabDynamic.DataContext = null;
             tabDynamic.DataContext = _tabItems;
@@ -117,11 +118,12 @@ namespace Stock.Views
 
             if (tab != null)
             {
-                if (MessageBox.Show(string.Format("Are you sure you want to close the tab '{0}'?", tab.Header.ToString()),
-                    "Close Tab", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                //if (MessageBox.Show(string.Format("Are you sure you want to close the tab '{0}'?", tab.Header.ToString()),
+                //    "Close Tab", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     TabItem selectedTab = tabDynamic.SelectedItem as TabItem;
                     tabDynamic.DataContext = null;
+
                     _tabItems.Remove(tab);
                     tabDynamic.DataContext = _tabItems;
                 }
@@ -130,9 +132,11 @@ namespace Stock.Views
             {
                 tabDynamic.SelectedItem = _tabItems[0];
             }
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
         //-------------------------------------------------------------------------------
-        private static List<TabItem> _tabItems = new List<TabItem>();
+        private List<TabItem> _tabItems ;
         static int cpt = 0;
         //-------------------------------------------------------------------------------
     }

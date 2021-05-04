@@ -9,9 +9,9 @@ namespace Stock.Interfaces
 {
     interface ITableUsers
     {
-        List<User> page(ref int this_page);
-        User add(User user);
-        User edit(User user);
-        int delete(string ID);
+        List<User> getPage(ref int this_page);
+        int add(User _User);
+        int edit(User _User);
+        int delete(User _User);
     }
 }

@@ -21,60 +21,71 @@ namespace Stock.Views
     public partial class TableProduct_UC
     {
         ITableProduct ointerface = new CTableProducts();
-        List<Product> lproducts { get; set; }
         public static int page = 0;
         public TableProduct_UC()
         {
             InitializeComponent();
             vPageNumber.Text = "" + page;
-            lproducts = new List<Product>();
-            myDataGrid.ItemsSource = lproducts;
+            myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
         private void event_forward(object sender, RoutedEventArgs e)
         {
             page++;
-            lproducts = ointerface.page(ref page);
             vPageNumber.Text = string.Format("{0}", page);
             myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = lproducts;
+            myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
         private void event_backward(object sender, RoutedEventArgs e)
         {
             page--;
-            lproducts = ointerface.page(ref page);
             vPageNumber.Text = string.Format("{0}", page);
             myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = lproducts;
+            myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
         
         private void event_add(object sender, RoutedEventArgs e)
         {
-            lproducts.Add(ointerface.add(new Product()));
-
+            if (ointerface.add(new Product()) >= 1)
+            {
+                myDataGrid.ItemsSource = null;
+                myDataGrid.ItemsSource = ointerface.getPage(ref page);
+            }
+            else
+            {
+                MessageBox.Show("can\' add");
+            }
             myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = lproducts;
+            myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
         private void event_edit(object sender, RoutedEventArgs e)
         {
             if (myDataGrid.SelectedItem != null)
             {
-                Product m = myDataGrid.SelectedItem as Product;
-                lproducts[lproducts.FindIndex(o => o.ID == m.ID)] = ointerface.edit(m);
-
-                myDataGrid.ItemsSource = null;
-                myDataGrid.ItemsSource = lproducts;
+                Product o = myDataGrid.SelectedItem as Product;
+                if (ointerface.edit(o) >= 1)
+                {
+                    myDataGrid.ItemsSource = null;
+                    myDataGrid.ItemsSource = ointerface.getPage(ref page);
+                }
+                else
+                {
+                    MessageBox.Show("can\' edit");
+                }
             }
         }
         private void event_delete(object sender, RoutedEventArgs e)
         {
             if (myDataGrid.SelectedItem != null)
             {
-                Product m = myDataGrid.SelectedItem as Product;
-                if (ointerface.delete(m.ID) >= 1)
+                Product o = myDataGrid.SelectedItem as Product;
+                if (ointerface.delete(o) >= 1)
                 {
-                    lproducts.RemoveAt(lproducts.FindIndex(o => o.ID == m.ID));
                     myDataGrid.ItemsSource = null;
-                    myDataGrid.ItemsSource = lproducts;
+                    myDataGrid.ItemsSource = ointerface.getPage(ref page);
+                }
+                else
+                {
+                    MessageBox.Show("can\' detete");
                 }
             }
         }
@@ -82,8 +93,10 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                Product dr = myDataGrid.SelectedItem as Product;
-                Console.WriteLine(dr);
+                var o = myDataGrid.SelectedItem;
+                System.Reflection.PropertyInfo pi = o.GetType().GetProperty("ID");
+                var v = (string)(pi.GetValue(o, null));
+                MessageBox.Show(v + "");
             }
         }
 

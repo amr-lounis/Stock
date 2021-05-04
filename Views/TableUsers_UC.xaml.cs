@@ -22,60 +22,71 @@ namespace Stock.Views
     public partial class TableUsers_UC : UserControl
     {
         ITableUsers ointerface = new CTableUsers();
-        List<User> lusers { get; set; }
         public static int page = 0;
         public TableUsers_UC()
         {
             InitializeComponent();
             vPageNumber.Text = "" + page;
-            lusers = new List<User>();
-            myDataGrid.ItemsSource = lusers;
+            myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
         private void event_forward(object sender, RoutedEventArgs e)
         {
             page++;
-            lusers = ointerface.page(ref page);
             vPageNumber.Text = string.Format("{0}", page);
             myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = lusers;
+            myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
         private void event_backward(object sender, RoutedEventArgs e)
         {
             page--;
-            lusers = ointerface.page(ref page);
             vPageNumber.Text = string.Format("{0}", page);
             myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = lusers;
+            myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
        
         private void event_add(object sender, RoutedEventArgs e)
         {
-            lusers.Add(ointerface.add(new User()));
-
+            if (ointerface.add(new User()) >= 1)
+            {
+                myDataGrid.ItemsSource = null;
+                myDataGrid.ItemsSource = ointerface.getPage(ref page);
+            }
+            else
+            {
+                MessageBox.Show("can\' add");
+            }
             myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = lusers;
+            myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
         private void event_edit(object sender, RoutedEventArgs e)
         {
             if (myDataGrid.SelectedItem != null)
             {
-                User u = myDataGrid.SelectedItem as User;
-                lusers[lusers.FindIndex(o => o.ID == u.ID)] = ointerface.edit(u);
-
-                myDataGrid.ItemsSource = null;
-                myDataGrid.ItemsSource = lusers;
+                User o = myDataGrid.SelectedItem as User;
+                if (ointerface.edit(o) >= 1)
+                {
+                    myDataGrid.ItemsSource = null;
+                    myDataGrid.ItemsSource = ointerface.getPage(ref page);
+                }
+                else
+                {
+                    MessageBox.Show("can\' edit");
+                }
             }
         }
         private void event_delete(object sender, RoutedEventArgs e)
         {
             if (myDataGrid.SelectedItem != null)
             {
-                User m = myDataGrid.SelectedItem as User;
-                if (ointerface.delete(m.ID) >= 1)
+                User o = myDataGrid.SelectedItem as User;
+                if (ointerface.delete(o) >= 1)
                 {
-                    lusers.RemoveAt(lusers.FindIndex(o => o.ID == m.ID));
                     myDataGrid.ItemsSource = null;
-                    myDataGrid.ItemsSource = lusers;
+                    myDataGrid.ItemsSource = ointerface.getPage(ref page);
+                }
+                else
+                {
+                    MessageBox.Show("can\' detete");
                 }
             }
         }
@@ -83,8 +94,10 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                User dr = myDataGrid.SelectedItem as User;
-                Console.WriteLine(dr);
+                var o = myDataGrid.SelectedItem;
+                System.Reflection.PropertyInfo pi = o.GetType().GetProperty("ID");
+                var v = (string)(pi.GetValue(o, null));
+                MessageBox.Show(v + "");
             } 
         }
 

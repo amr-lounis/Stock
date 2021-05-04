@@ -97,10 +97,13 @@
     <Compile Include="Classes\F_Window.cs" />
     <Compile Include="Classes\HASH.cs" />
     <Compile Include="Classes\RSA.cs" />
+    <Compile Include="Controllers\CTableCashRegister.cs" />
     <Compile Include="Controllers\CLogine.cs" />
     <Compile Include="Controllers\CTableProducts.cs" />
+    <Compile Include="Interfaces\ITableCashRegister.cs" />
     <Compile Include="Interfaces\ILogin.cs" />
     <Compile Include="Interfaces\ITableProduct.cs" />
+    <Compile Include="Models\CashRegister.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Views\CashRegister_UC.xaml.cs">
       <DependentUpon>CashRegister_UC.xaml</DependentUpon>
