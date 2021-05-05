@@ -9,9 +9,9 @@ namespace Stock.Interfaces
 {
     public interface ITableProduct
     {
-        int add(Product _Product);
-        int edit(Product _Product);
-        List<Product> getPage(ref int this_page);
-        int delete(Product _Product);
+        int add(Product_M _Product);
+        int edit(Product_M _Product);
+        List<Product_M> getPage(ref int this_page);
+        int delete(Product_M _Product);
     }
 }

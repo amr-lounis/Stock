@@ -39,12 +39,7 @@
 
                 <!-- *************************************************** Begin Editable *************************************************** -->
                 <TextBox x:Name="v_text_NAME"  Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center"/>
-
-                <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
-                    <Label Width="100" Margin="10,10,10,10" Content="quantity"  />
-                    <Controls:NumericUpDown x:Name="v_Numeric_QUANTITY" Width="300" Margin="10,10,10,10" Minimum="0" StringFormat="{}{0:N2}"/>
-                </StackPanel>
-
+                
                 <Expander Margin="5" ExpandDirection="Down" IsExpanded="False" Background="{x:Null}">
                     <Expander.Header>
                         <BulletDecorator>
@@ -87,10 +82,8 @@
                             <TextBlock HorizontalAlignment="Left" Width="250" Style="{DynamicResource TextBlocBlackNull}" Text="money account"  />
                             <Controls:NumericUpDown x:Name="v_Numeric_MONEY_ACCOUNT" HorizontalAlignment="Right" Width="250" FontSize="20" FontWeight="Bold" Foreground="Black" StringFormat="{}{0:N2}"/>
                         </StackPanel>
-                        <StackPanel  Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
-                            <TextBlock HorizontalAlignment="Left" Width="250" Style="{DynamicResource TextBlocBlackNull}" Text="birthday" />
-                            <DatePicker x:Name="v_dp_BIRTHDAY" HorizontalAlignment="Right" Width="250" FontSize="20" FontWeight="Bold" Foreground="Black"/>
-                        </StackPanel>
+                        
+                        <Label x:Name="v_text_ID" Content="0" materialDesign:HintAssist.Hint="ID" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalContentAlignment="Center" />
                     </StackPanel>
                 </Expander>
 

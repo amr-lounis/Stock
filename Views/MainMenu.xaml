@@ -57,8 +57,6 @@
                 </Button>
             </Ribbon.HelpPaneContent>
 
-
-            <!-- Ribbon Tab #1: Home -->
             <RibbonTab Header="Home" KeyTip="H" >
                 <RibbonGroup x:Name="Home" Header="Home">
                     <RibbonButton Click="v_btn_cashRegister" LargeImageSource="{StaticResource image_cashRegister}" Label="Cash Register" KeyTip="CR"/>
@@ -73,29 +71,35 @@
 
                 </RibbonGroup>
             </RibbonTab>
-
-            <!-- Ribbon Tab #2: Launch -->
+            <!-- *********************************** Ribbon Tab *********************************** -->
+            <RibbonTab Header="User" KeyTip="U">
+                <!-- Customer  group-->
+                <RibbonGroup Header="User">
+                    <RibbonButton Click="v_btn_user" LargeImageSource="{StaticResource image_customer}" Label="User" KeyTip="U" />
+                </RibbonGroup>
+            </RibbonTab>
+            <!-- *********************************** Ribbon Tab *********************************** -->
             <RibbonTab Header="Customer" KeyTip="C">
                 <!-- Customer  group-->
-                <RibbonGroup x:Name="Customer" Header="Customer">
+                <RibbonGroup Header="Customer">
                     <RibbonButton Click="v_btn_customer" LargeImageSource="{StaticResource image_customer}" Label="Customer" KeyTip="C" />
                 </RibbonGroup>
             </RibbonTab>
-            <!-- Ribbon Tab #3: Launch -->
+            <!-- *********************************** Ribbon Tab *********************************** -->
             <RibbonTab Header="Provider" KeyTip="P">
                 <!-- Provider  group-->
-                <RibbonGroup x:Name="Provider" Header="Provider">
-                    <RibbonButton LargeImageSource="{StaticResource image_supplier}" Label="Provider" KeyTip="P" />
+                <RibbonGroup Header="Provider">
+                    <RibbonButton Click="v_btn_provider" LargeImageSource="{StaticResource image_supplier}" Label="Provider" KeyTip="P" />
                 </RibbonGroup>
             </RibbonTab>
-            <!-- Ribbon Tab #4: Launch -->
+            <!-- *********************************** Ribbon Tab *********************************** -->
             <RibbonTab Header="Stock" KeyTip="S">
                 <!-- Stock  group-->
                 <RibbonGroup x:Name="Stock" Header="Stock">
                     <RibbonButton  Click="v_btn_stock" LargeImageSource="{StaticResource image_cardboard}" Label="Stock" KeyTip="S"/>
                 </RibbonGroup>
             </RibbonTab>
-            <!-- Ribbon Tab #5: Launch -->
+            <!-- *********************************** Ribbon Tab *********************************** -->
             <RibbonTab Header="tools" KeyTip="T">
                 <!-- tools  group-->
                 <RibbonGroup x:Name="tools" Header="tools">

@@ -1,4 +1,5 @@
-﻿using Stock.Interfaces;
+﻿using Stock.Classes;
+using Stock.Interfaces;
 using Stock.Models;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,16 @@ namespace Stock.Controllers
 {
     public class CTableUsers : ITableUsers
     {
-        List<User> list = new List<User>();
+        static List<User_M> list = new List<User_M>();
         //-------------------------------------------------------------------------------------
-        public int add(User _User)
+        public int add(User_M _User)
         {
+            if (_User.ID.Equals("0")) _User.ID = Helper.random();
             list.Add(_User);
             return 1;
         }
         //-------------------------------------------------------------------------------------
-        public int edit(User _User)
+        public int edit(User_M _User)
         {
             var o = list.Find(x => x.ID == _User.ID);
             o.ACTIVITY = _User.ACTIVITY;
@@ -41,7 +43,7 @@ namespace Stock.Controllers
             return 1;
         }
         //-------------------------------------------------------------------------------------
-        public List<User> getPage(ref int this_page)
+        public List<User_M> getPage(ref int this_page)
         {
             int pageMax = 5;
             if (this_page < 0) this_page = 0;
@@ -49,7 +51,7 @@ namespace Stock.Controllers
             return list;
         }
         //-------------------------------------------------------------------------------------
-        public int delete(User _User)
+        public int delete(User_M _User)
         {
             list.RemoveAt(list.FindIndex(o => o.ID == _User.ID));
             return 1;

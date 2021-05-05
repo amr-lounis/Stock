@@ -30,7 +30,7 @@ namespace Stock.Views
                 _tabItems = new List<TabItem>();
                 tabDynamic.DataContext = _tabItems;
 
-                loop();
+                Clock();
 
                 v_text_user.Text = "user";
                 v_image_user.Source = new BitmapImage(new Uri("/assets/images/user.png", UriKind.Relative));
@@ -44,7 +44,7 @@ namespace Stock.Views
         }
         //-------------------------------------------------------------------------------
         DispatcherTimer timer = new DispatcherTimer();
-        void loop()
+        void Clock()
         {
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 1);
@@ -90,17 +90,26 @@ namespace Stock.Views
             tabDynamic.SelectedItem = tab;
         }
         //******************************************************************************* Buttons 
-        //-------------------------------------------------------------------------------
+        #region Buttons
         public void v_btn_cashRegister(object sender, RoutedEventArgs e)
         {
             CashRegister_UC o = new CashRegister_UC();
-            AddTabItem(o, "CashRegister:" + cpt);
+            AddTabItem(o, "CashRegister_M:" + cpt);
         }
-        //-------------------------------------------------------------------------------
+        public void v_btn_user(object sender, RoutedEventArgs e)
+        {
+            TableUsers_UC o = new TableUsers_UC();
+            AddTabItem(o, "User:" + cpt);
+        }
         public void v_btn_customer(object sender, RoutedEventArgs e)
         {
             TableUsers_UC o = new TableUsers_UC();
             AddTabItem(o, "Customer:" + cpt);
+        }
+        public void v_btn_provider(object sender, RoutedEventArgs e)
+        {
+            TableUsers_UC o = new TableUsers_UC();
+            AddTabItem(o, "Provider:" + cpt);
         }
         //-------------------------------------------------------------------------------
         public void v_btn_stock(object sender, RoutedEventArgs e)
@@ -135,8 +144,9 @@ namespace Stock.Views
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }
+        #endregion
         //-------------------------------------------------------------------------------
-        private List<TabItem> _tabItems ;
+        public List<TabItem> _tabItems ;
         static int cpt = 0;
         //-------------------------------------------------------------------------------
     }

@@ -101,6 +101,9 @@
                             <Label Width="100" Margin="10,10,10,10" Content="date expiration"/>
                             <DatePicker x:Name="v_dp_DATE_EXPIRATION" Width="300" Margin="10,0,10,10" />
                         </StackPanel>
+                        
+                        <Label x:Name="v_text_ID" Content="0" materialDesign:HintAssist.Hint="ID" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalContentAlignment="Center" />
+
                     </StackPanel>
                 </Expander>
 

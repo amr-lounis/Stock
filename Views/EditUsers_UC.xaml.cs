@@ -1,4 +1,7 @@
-﻿using Stock.Models;
+﻿using Stock.Classes;
+using Stock.Controllers;
+using Stock.Interfaces;
+using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -22,8 +25,9 @@ namespace Stock.Views
         public EditUsers_UC()
         {
             InitializeComponent();
-            initEventHandler();
+            initMessanger();
         }
+
         private void v_btn_EditImage(object sender, RoutedEventArgs e)
         {
 
@@ -37,113 +41,102 @@ namespace Stock.Views
             var o = getInput();
             if (type.Equals("Add"))
             {
-                o.ID = "0";
+                if (ointerface.add(o) < 1)
+                {
+                    MessageBox.Show("can\'t add");
+                }
             }
-            TableUsers_UC.Send(o);
+            else if (type.Equals("Edit"))
+            {
+                if (ointerface.edit(o) < 1)
+                {
+                    MessageBox.Show("can\'t edit");
+                }
+            }
+            TableUsers_UC.Send("OverlayGridCancel", null);
         }
 
         //************************************************************************************* Messanger
         #region Messanger
-        public void initEventHandler()
+        void initMessanger() { OnSendMessage += Receiver; }
+        public delegate void delegateSend(string _mode, object _message);
+        public static event delegateSend OnSendMessage;
+        public static void Send(string _mode, object _message)
         {
-            mListEventHandlerClass = new List<EventHandlerClass>();
-            mListEventHandlerClass.Insert(0, new EventHandlerClass());
-            mListEventHandlerClass[0].mEventHandler += delegate (object p_message, EventArgs e) { Receiver(p_message); };
+            if (OnSendMessage != null) OnSendMessage(_mode, _message);
         }
-        public static void Send(object p_message)
+        public void Receiver(string _mode, object _message)
         {
-            foreach (var v in mListEventHandlerClass) v.Send(p_message);
-        }
-        public void Receiver(object p_message)
-        {
-            if (p_message != null)
+            if (_mode != null)
             {
-                type = "Edit";
-                var p = (p_message as User);
-                InitInput(p);
-            }
-            else
-            {
-                type = "Add";
-                var p = new User();
-                InitInput(p);
+                if (_mode.Equals("Add"))
+                {
+                    type = "Add";
+                    var o = new User_M();
+                    o.ID = "0";
+                    InitInput(o);
+                }
+                else if (_mode.Equals("Edit") && (_message != null))
+                {
+                    var o = (_message as User_M);
+                    type = "Edit";
+                    InitInput(o);
+                }
             }
         }
-        public class EventHandlerClass
-        {
-            public event EventHandler mEventHandler;
-            public void Send(object p_message) { mEventHandler?.Invoke(p_message, new EventArgs()); }
-        }
-        private static List<EventHandlerClass> mListEventHandlerClass;
         #endregion
-        //*************************************************************************************  in/out
+        //************************************************************************************* variable
+        ITableUsers ointerface = new CTableUsers();
+        string type = "";
         //*************************************************************************************  in/out
         #region in/out
-        void InitInput(User _User)
+        void InitInput(User_M _User)
         {
+            v_text_ID.Content = _User.ID;
             v_text_NAME.Text = _User.NAME;
-            //v_text_CATEGORY.Text = _Product.CATEGORY;
-            //v_text_UNITY.Text = _Product.UNITE;
-            //v_text_DESCRIPTION.Text = _Product.DESCRIPTION;
-            //v_text_CODE.Text = _Product.CODE;
+            v_text_GENDER.Text = _User.GENDER;
+            v_password_1.Password = _User.PASSWORD;
+            v_password_2.Password = _User.PASSWORD;
+            v_text_ROLE.Text = _User.ROLE;
+            v_text_ACTIVITY.Text = _User.ACTIVITY;
+            v_text_DESCRIPTION.Text = _User.DESCRIPTION;
+            v_text_NRC.Text = _User.NRC;
+            v_text_NIF.Text = _User.NIF;
+            v_text_ADDRESS.Text = _User.ADDRESS;
+            v_text_CITY.Text = _User.CITY;
+            v_text_COUNTRY.Text = _User.COUNTRY;
+            v_text_PHONE.Text = _User.PHONE;
+            v_text_FAX.Text = _User.FAX;
+            v_text_WEBSITE.Text = _User.WEBSITE;
+            v_text_EMAIL.Text = _User.EMAIL;
 
-            //v_Numeric_QUANTITY.Value = DoubleFromString(_Product.QUANTITY);
-            //v_Numeric_QUANTITY_MIN.Value = DoubleFromString(_Product.QUANTITY_MIN);
-            //v_Numeric_TAX_PERCE.Value = DoubleFromString(_Product.TAX_PERCE);
-            //v_Numeric_MONEY_PURCHASE.Value = DoubleFromString(_Product.MONEY_PURCHASE);
-            //v_Numeric_MONEY_SELLING.Value = DoubleFromString(_Product.MONEY_SELLING);
-            //v_Numeric_MONEY_SELLING_MIN.Value = DoubleFromString(_Product.MONEY_SELLING_MIN);
-            //v_dp_DATE_PRODUCTION.SelectedDate = DateTimeFromString(_Product.DATE_PRODUCTION);
-            //v_dp_DATE_PURCHASE.SelectedDate = DateTimeFromString(_Product.DATE_PURCHASE);
-            //v_dp_DATE_EXPIRATION.SelectedDate = DateTimeFromString(_Product.DATE_EXPIRATION);
+            v_Numeric_MONEY_ACCOUNT.Value = Helper.DoubleFromString(_User.MONEY_ACCOUNT);
         }
-        //*************************************************************************************  
-        User getInput()
+        User_M getInput()
         {
-            var o = new User();
+            var o = new User_M();
+            o.ID = v_text_ID.Content.ToString();
             o.NAME = v_text_NAME.Text;
-            //o.CATEGORY = v_text_CATEGORY.Text;
-            //o.UNITE = v_text_UNITY.Text;
-            //o.DESCRIPTION = v_text_DESCRIPTION.Text;
-            //o.CODE = v_text_CODE.Text;
-            //o.QUANTITY = string.Format("{0}", v_Numeric_QUANTITY.Value);
-            //o.QUANTITY_MIN = string.Format("{0}", v_Numeric_QUANTITY_MIN.Value);
-            //o.TAX_PERCE = string.Format("{0}", v_Numeric_TAX_PERCE.Value);
-            //o.MONEY_PURCHASE = string.Format("{0}", v_Numeric_MONEY_PURCHASE.Value);
-            //o.MONEY_SELLING = string.Format("{0}", v_Numeric_MONEY_SELLING.Value);
-            //o.MONEY_SELLING_MIN = string.Format("{0}", v_Numeric_MONEY_SELLING_MIN.Value);
-            //o.DATE_PRODUCTION = DateTimeToString(v_dp_DATE_PRODUCTION.SelectedDate.Value);
-            //o.DATE_PURCHASE = DateTimeToString(v_dp_DATE_PRODUCTION.SelectedDate.Value);
-            //o.DATE_EXPIRATION = DateTimeToString(v_dp_DATE_PRODUCTION.SelectedDate.Value);
+            o.GENDER = v_text_GENDER.Text;
+            o.PASSWORD = v_password_1.Password;
+            o.PASSWORD = v_password_2.Password;
+            o.ROLE = v_text_ROLE.Text;
+            o.ACTIVITY = v_text_ACTIVITY.Text;
+            o.DESCRIPTION = v_text_DESCRIPTION.Text;
+            o.NRC = v_text_NRC.Text;
+            o.NIF = v_text_NIF.Text;
+            o.ADDRESS = v_text_ADDRESS.Text;
+            o.CITY = v_text_CITY.Text;
+            o.COUNTRY = v_text_COUNTRY.Text;
+            o.PHONE = v_text_PHONE.Text;
+            o.FAX = v_text_FAX.Text;
+            o.WEBSITE = v_text_WEBSITE.Text;
+            o.EMAIL = v_text_EMAIL.Text;
+
+            o.MONEY_ACCOUNT = string.Format("{0}", v_Numeric_MONEY_ACCOUNT.Value);
             return o;
         }
-        private DateTime DateTimeFromString(string _DateTime)
-        {
-            try
-            {
-                return DateTime.ParseExact(_DateTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
-            }
-            catch (Exception e)
-            {
-                return DateTime.Now;
-            }
-        }
-        private string DateTimeToString(DateTime _DateTime)
-        {
-            return _DateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
-        }
-        private double DoubleFromString(string _Double)
-        {
-            try
-            {
-                return double.Parse(_Double);
-            }
-            catch (Exception e)
-            {
-                return 0f;
-            }
-        }
         #endregion
-        string type = "";
+        //*************************************************************************************  
     }
 }

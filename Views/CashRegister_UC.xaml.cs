@@ -30,8 +30,8 @@ namespace Stock.Views
             v_text_InvoiceID.Text = "19";
             v_image_customer.Source = new BitmapImage(new Uri("/assets/images/user.png", UriKind.Relative));
 
-            var v = ointerface.add(new CashRegister());
-            for (int i = 0; i < 5; i++) ointerface.add( new CashRegister() ) ;
+            var v = ointerface.add(new CashRegister_M());
+            for (int i = 0; i < 5; i++) ointerface.add( new CashRegister_M() ) ;
             GridRefresh();
         }
         /**************************************************************/
@@ -64,7 +64,7 @@ namespace Stock.Views
         {
             if (v_GridCashRegister.SelectedItem != null)
             {
-                var o = v_GridCashRegister.SelectedItem as CashRegister;
+                var o = v_GridCashRegister.SelectedItem as CashRegister_M;
                 if (ointerface.delete(o) >= 1)
                 {
                     GridRefresh();
@@ -108,7 +108,7 @@ namespace Stock.Views
         private void v_btn_editOk(object sender, EventArgs e)
         {
             v_GridEdit.Visibility = Visibility.Collapsed;
-            var o = v_GridCashRegister.SelectedItem as CashRegister;
+            var o = v_GridCashRegister.SelectedItem as CashRegister_M;
             switch (EditWhat)
             {                
                 case ("MONEY_ONE"):

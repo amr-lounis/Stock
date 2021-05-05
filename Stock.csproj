@@ -96,6 +96,7 @@
     <Compile Include="Classes\F_Time.cs" />
     <Compile Include="Classes\F_Window.cs" />
     <Compile Include="Classes\HASH.cs" />
+    <Compile Include="Classes\Helper.cs" />
     <Compile Include="Classes\RSA.cs" />
     <Compile Include="Controllers\CTableCashRegister.cs" />
     <Compile Include="Controllers\CLogine.cs" />
@@ -103,8 +104,8 @@
     <Compile Include="Interfaces\ITableCashRegister.cs" />
     <Compile Include="Interfaces\ILogin.cs" />
     <Compile Include="Interfaces\ITableProduct.cs" />
-    <Compile Include="Models\CashRegister.cs" />
-    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\CashRegister_M.cs" />
+    <Compile Include="Models\Product_M.cs" />
     <Compile Include="Views\CashRegister_UC.xaml.cs">
       <DependentUpon>CashRegister_UC.xaml</DependentUpon>
     </Compile>
@@ -151,7 +152,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\ITableUsers.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\User_M.cs" />
     <Compile Include="Controllers\CTableUsers.cs" />
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>

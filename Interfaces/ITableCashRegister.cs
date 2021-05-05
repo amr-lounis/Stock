@@ -9,9 +9,9 @@ namespace Stock.Interfaces
 {
     interface ITableCashRegister
     {
-        int add(CashRegister _CashRegister);
-        int edit(CashRegister _CashRegister);
-        List<CashRegister> getAll();
-        int delete(CashRegister _CashRegister);
+        int add(CashRegister_M _CashRegister);
+        int edit(CashRegister_M _CashRegister);
+        List<CashRegister_M> getAll();
+        int delete(CashRegister_M _CashRegister);
     }
 }

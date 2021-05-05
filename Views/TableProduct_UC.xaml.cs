@@ -23,7 +23,7 @@ namespace Stock.Views
         public TableProduct_UC()
         {
             InitializeComponent();
-            initEventHandler();
+            initMessanger();
             vPageNumber.Text = "" + page;
             GridRefresh();
         }
@@ -45,22 +45,22 @@ namespace Stock.Views
         private void event_add(object sender, RoutedEventArgs e)
         {
             v_GridEdit.Visibility = Visibility.Visible;
-            EditProduct_UC.Send(null);
+            EditProduct_UC.Send("Add",null);
         }
         private void event_edit(object sender, RoutedEventArgs e)
         {
             v_GridEdit.Visibility = Visibility.Visible;
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as Product;
-                EditProduct_UC.Send(o);
+                var o = myDataGrid.SelectedItem as Product_M;
+                EditProduct_UC.Send("Edit",o);
             }
         }
         private void event_delete(object sender, RoutedEventArgs e)
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as Product;
+                var o = myDataGrid.SelectedItem as Product_M;
                 if (ointerface.delete(o) >= 1)
                 {
                     GridRefresh();
@@ -91,52 +91,17 @@ namespace Stock.Views
         #endregion
         //************************************************************************************* Messanger
         #region Messanger
-        public void initEventHandler()
+        void initMessanger() { OnSendMessage += Receiver; }
+        public delegate void delegateSend(string _string, object _message);
+        public static event delegateSend OnSendMessage;
+        public static void Send(string _string, object _message)
         {
-            mListEventHandlerClass = new List<EventHandlerClass>();
-            mListEventHandlerClass.Insert(0, new EventHandlerClass());
-            mListEventHandlerClass[0].mEventHandler += delegate (object p_message, EventArgs e) { Receiver(p_message); };
+            if (OnSendMessage != null) OnSendMessage(_string, _message);
         }
-        public static void Send(object p_message)
+        public void Receiver(string _string, object _message)
         {
-            foreach (var v in mListEventHandlerClass) v.Send(p_message);
+            GridRefresh();
         }
-        public void Receiver(object p_message)
-        {
-            v_GridEdit.Visibility = Visibility.Collapsed;
-            if (p_message != null)
-            {
-                var o = (p_message as Product);
-                if (o.ID.Equals("0"))
-                {
-                    if (ointerface.add(o) >= 1)
-                    {
-                        GridRefresh();
-                    }
-                    else
-                    {
-                        MessageBox.Show("can\'t add");
-                    }
-                }
-                else
-                {
-                    if (ointerface.edit(o) >= 1)
-                    {
-                        GridRefresh();
-                    }
-                    else
-                    {
-                        MessageBox.Show("can\'t edit");
-                    }
-                }
-            }
-        }
-        public class EventHandlerClass
-        {
-            public event EventHandler mEventHandler;
-            public void Send(object p_message) { mEventHandler?.Invoke(p_message, new EventArgs()); }
-        }
-        private static List<EventHandlerClass> mListEventHandlerClass;
         #endregion
         /**************************************************************/
         private void GridRefresh()

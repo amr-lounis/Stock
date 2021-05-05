@@ -71,7 +71,7 @@
                     <DataGridTextColumn Header="Date production" Binding="{Binding DATE_PRODUCTION}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
                     <DataGridTextColumn Header="Date purchase" Binding="{Binding DATE_PURCHASE}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
                     <DataGridTextColumn Header="Date expiration" Binding="{Binding DATE_EXPIRATION}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
-                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" IsReadOnly="True"  MaxWidth="150" Visibility="Visible"/>
                 </DataGrid.Columns>
             </DataGrid>
             <!-- *************************************************** End DataGrid *************************************************** -->
