@@ -1,21 +1,9 @@
-﻿using Stock.Controllers;
-using Stock.Interfaces;
-using Stock.Models;
+﻿using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Stock.Views
 {
@@ -36,8 +24,12 @@ namespace Stock.Views
         }
         private void v_btn_Save(object sender, RoutedEventArgs e)
         {
-            getInput();
-            TableProduct_UC.Send(product);
+            var o = getInput();
+            if (type.Equals("Add"))
+            {
+                o.ID = "0";
+            }
+            TableProduct_UC.Send(o);
         }
 
         //************************************************************************************* Messanger
@@ -57,14 +49,14 @@ namespace Stock.Views
             if (p_message != null)
             {
                 type = "Edit";
-                product = (p_message as Product);
-                InitInput(product);
+                var p = (p_message as Product);
+                InitInput(p);
             }
             else
             {
                 type = "Add";
-                product = new Product();
-                InitInput(new Product());
+                var p = new Product();
+                InitInput(p);
             }
         }
         public class EventHandlerClass
@@ -95,22 +87,24 @@ namespace Stock.Views
             v_dp_DATE_EXPIRATION.SelectedDate = DateTimeFromString(_Product.DATE_EXPIRATION);
         }
         //*************************************************************************************  
-        void getInput()
+        Product getInput()
         {
-            product.NAME = v_text_NAME.Text;
-            product.CATEGORY = v_text_CATEGORY.Text;
-            product.UNITE = v_text_UNITY.Text;
-            product.DESCRIPTION = v_text_DESCRIPTION.Text;
-            product.CODE = v_text_CODE.Text;
-            product.QUANTITY = string.Format("{0}", v_Numeric_QUANTITY.Value);
-            product.QUANTITY_MIN = string.Format("{0}", v_Numeric_QUANTITY_MIN.Value);
-            product.TAX_PERCE = string.Format("{0}", v_Numeric_TAX_PERCE.Value);
-            product.MONEY_PURCHASE = string.Format("{0}", v_Numeric_MONEY_PURCHASE.Value);
-            product.MONEY_SELLING = string.Format("{0}", v_Numeric_MONEY_SELLING.Value);
-            product.MONEY_SELLING_MIN = string.Format("{0}", v_Numeric_MONEY_SELLING_MIN.Value);
-            product.DATE_PRODUCTION = DateTimeToString(v_dp_DATE_PRODUCTION.SelectedDate.Value);
-            product.DATE_PURCHASE = DateTimeToString(v_dp_DATE_PRODUCTION.SelectedDate.Value);
-            product.DATE_EXPIRATION = DateTimeToString(v_dp_DATE_PRODUCTION.SelectedDate.Value);
+            var o = new Product();
+            o.NAME = v_text_NAME.Text;
+            o.CATEGORY = v_text_CATEGORY.Text;
+            o.UNITE = v_text_UNITY.Text;
+            o.DESCRIPTION = v_text_DESCRIPTION.Text;
+            o.CODE = v_text_CODE.Text;
+            o.QUANTITY = string.Format("{0}", v_Numeric_QUANTITY.Value);
+            o.QUANTITY_MIN = string.Format("{0}", v_Numeric_QUANTITY_MIN.Value);
+            o.TAX_PERCE = string.Format("{0}", v_Numeric_TAX_PERCE.Value);
+            o.MONEY_PURCHASE = string.Format("{0}", v_Numeric_MONEY_PURCHASE.Value);
+            o.MONEY_SELLING = string.Format("{0}", v_Numeric_MONEY_SELLING.Value);
+            o.MONEY_SELLING_MIN = string.Format("{0}", v_Numeric_MONEY_SELLING_MIN.Value);
+            o.DATE_PRODUCTION = DateTimeToString(v_dp_DATE_PRODUCTION.SelectedDate.Value);
+            o.DATE_PURCHASE = DateTimeToString(v_dp_DATE_PRODUCTION.SelectedDate.Value);
+            o.DATE_EXPIRATION = DateTimeToString(v_dp_DATE_PRODUCTION.SelectedDate.Value);
+            return o;
         }
         private DateTime DateTimeFromString(string _DateTime)
         {
@@ -139,8 +133,6 @@ namespace Stock.Views
             }
         }
         #endregion
-        /**************************************************************/
-        private Product product;
-        public static string type = "";
+        string type = "";
     }
 }

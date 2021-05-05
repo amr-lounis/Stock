@@ -29,7 +29,7 @@
                             VerticalAlignment="Center"
                             Margin="10,10,50,10"
                             >
-                        <Image x:Name="v_image_PICTURE_PRODUCT" Margin="5,5,5,5" Width="150" Height="150"/>
+                        <Image x:Name="v_image" Margin="5,5,5,5" Width="150" Height="150"/>
                     </Border>
                     <Button Click="v_btn_Save" Style="{DynamicResource ButtonNull}" Margin="50,10,10,10">
                         <materialDesign:PackIcon Kind="Floppy" Height="150" Width="150" Foreground="Blue"/>
@@ -63,14 +63,14 @@
                         </BulletDecorator>
                     </Expander.Header>
                     <StackPanel Orientation="Vertical">
-                       
-                        <TextBox  x:Name="v_text_CATEGORY" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" materialDesign:HintAssist.Hint="Category" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
-                        <TextBox  x:Name="v_text_UNITY" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" materialDesign:HintAssist.Hint="Unity" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                        
-                        <TextBox  x:Name="v_text_DESCRIPTION" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" materialDesign:HintAssist.Hint="Description" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                        
-                        <TextBox  x:Name="v_text_CODE" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" materialDesign:HintAssist.Hint="Code" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        <TextBox  x:Name="v_text_CATEGORY" materialDesign:HintAssist.Hint="Category" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox  x:Name="v_text_UNITY" materialDesign:HintAssist.Hint="Unity" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox  x:Name="v_text_DESCRIPTION" materialDesign:HintAssist.Hint="Description" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox  x:Name="v_text_CODE" materialDesign:HintAssist.Hint="Code" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                         
                         <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
                             <Label Width="100" Margin="10,10,10,10" Content="quantity min"  />

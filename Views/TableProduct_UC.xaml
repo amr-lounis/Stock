@@ -77,7 +77,7 @@
             <!-- *************************************************** End DataGrid *************************************************** -->
         </Grid>
         <!--  **************************************** Grid Edit Product ****************************************   -->
-        <Grid x:Name="v_GridEditProduct" Grid.Row="1" Visibility="Collapsed" >
+        <Grid x:Name="v_GridEdit" Grid.Row="1" Visibility="Collapsed" >
             <Grid Background="Black" Opacity="0.5"/>
             <Border
                 Background="#EEEEEE"

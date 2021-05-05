@@ -6,8 +6,96 @@
              xmlns:local="clr-namespace:Stock.Views"
              mc:Ignorable="d" 
              
-             d:DesignHeight="450" d:DesignWidth="800">
+
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             >
     <Grid>
-            
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <!-- Image Edit -->
+                        <Button Click="v_btn_EditImage" Style="{DynamicResource ButtonNull}">
+                            <materialDesign:PackIcon Kind="Edit" Height="30" Width="30" Foreground="Blue"/>
+                        </Button>
+                        <!-- Image Delete -->
+                        <Button Click="v_btn_DeleteImage" Style="{DynamicResource ButtonNull}">
+                            <materialDesign:PackIcon Kind="Delete" Height="30" Width="30" Foreground="Blue" />
+                        </Button>
+                    </StackPanel>
+                    <Border BorderThickness="1"
+                            BorderBrush="#FF00FF00"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="10,10,50,10"
+                            >
+                        <Image x:Name="v_image" Margin="5,5,5,5" Width="150" Height="150"/>
+                    </Border>
+                    <Button Click="v_btn_Save" Style="{DynamicResource ButtonNull}" Margin="50,10,10,10">
+                        <materialDesign:PackIcon Kind="Floppy" Height="150" Width="150" Foreground="Blue"/>
+                    </Button>
+                </StackPanel>
+
+                <!-- *************************************************** Begin Editable *************************************************** -->
+                <TextBox x:Name="v_text_NAME"  Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center"/>
+
+                <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
+                    <Label Width="100" Margin="10,10,10,10" Content="quantity"  />
+                    <Controls:NumericUpDown x:Name="v_Numeric_QUANTITY" Width="300" Margin="10,10,10,10" Minimum="0" StringFormat="{}{0:N2}"/>
+                </StackPanel>
+
+                <Expander Margin="5" ExpandDirection="Down" IsExpanded="False" Background="{x:Null}">
+                    <Expander.Header>
+                        <BulletDecorator>
+                            <Border CornerRadius="10,10,10,10"  Background="#BBDDFF">
+                                <TextBlock Margin="100,10,100,10" HorizontalAlignment="Center" VerticalAlignment="Center" Text="optional" Style="{DynamicResource TextBlocBlackNull}"/>
+                            </Border>
+                        </BulletDecorator>
+                    </Expander.Header>
+                    <StackPanel Orientation="Vertical">
+                        <PasswordBox x:Name="v_password_1" materialDesign:HintAssist.Hint="Password"  Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" PasswordChar="*" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                        <PasswordBox x:Name="v_password_2"  materialDesign:HintAssist.Hint="Confirm Password"  Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" PasswordChar="*" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+
+                        <TextBox x:Name="v_text_GENDER" materialDesign:HintAssist.Hint="Gender" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox x:Name="v_text_ROLE" materialDesign:HintAssist.Hint="Role"  Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox x:Name="v_text_ACTIVITY" materialDesign:HintAssist.Hint="Activity" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox x:Name="v_text_DESCRIPTION" materialDesign:HintAssist.Hint="Description" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox x:Name="v_text_NRC" materialDesign:HintAssist.Hint="NRC"  Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox x:Name="v_text_NIF" materialDesign:HintAssist.Hint="v_text_NIF" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox x:Name="v_text_ADDRESS" materialDesign:HintAssist.Hint="Address" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox x:Name="v_text_CITY" materialDesign:HintAssist.Hint="City" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox x:Name="v_text_COUNTRY" materialDesign:HintAssist.Hint="Country" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox x:Name="v_text_PHONE" materialDesign:HintAssist.Hint="Phone" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox x:Name="v_text_FAX" materialDesign:HintAssist.Hint="Fax" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox x:Name="v_text_WEBSITE"  materialDesign:HintAssist.Hint="Web Site" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox x:Name="v_text_EMAIL" materialDesign:HintAssist.Hint="Email" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <StackPanel Margin="50,10,50,10" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock HorizontalAlignment="Left" Width="250" Style="{DynamicResource TextBlocBlackNull}" Text="money account"  />
+                            <Controls:NumericUpDown x:Name="v_Numeric_MONEY_ACCOUNT" HorizontalAlignment="Right" Width="250" FontSize="20" FontWeight="Bold" Foreground="Black" StringFormat="{}{0:N2}"/>
+                        </StackPanel>
+                        <StackPanel  Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
+                            <TextBlock HorizontalAlignment="Left" Width="250" Style="{DynamicResource TextBlocBlackNull}" Text="birthday" />
+                            <DatePicker x:Name="v_dp_BIRTHDAY" HorizontalAlignment="Right" Width="250" FontSize="20" FontWeight="Bold" Foreground="Black"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -44,12 +44,12 @@ namespace Stock.Views
         
         private void event_add(object sender, RoutedEventArgs e)
         {
-            v_GridEditProduct.Visibility = Visibility.Visible;
+            v_GridEdit.Visibility = Visibility.Visible;
             EditProduct_UC.Send(null);
         }
         private void event_edit(object sender, RoutedEventArgs e)
         {
-            v_GridEditProduct.Visibility = Visibility.Visible;
+            v_GridEdit.Visibility = Visibility.Visible;
             if (myDataGrid.SelectedItem != null)
             {
                 var o = myDataGrid.SelectedItem as Product;
@@ -103,13 +103,13 @@ namespace Stock.Views
         }
         public void Receiver(object p_message)
         {
-            v_GridEditProduct.Visibility = Visibility.Collapsed;
+            v_GridEdit.Visibility = Visibility.Collapsed;
             if (p_message != null)
             {
-                var product = (p_message as Product);
-                if (EditProduct_UC.type.Equals("Add"))
+                var o = (p_message as Product);
+                if (o.ID.Equals("0"))
                 {
-                    if (ointerface.add(product) >= 1)
+                    if (ointerface.add(o) >= 1)
                     {
                         GridRefresh();
                     }
@@ -118,9 +118,9 @@ namespace Stock.Views
                         MessageBox.Show("can\'t add");
                     }
                 }
-                else if (EditProduct_UC.type.Equals("Edit"))
+                else
                 {
-                    if (ointerface.edit(product) >= 1)
+                    if (ointerface.edit(o) >= 1)
                     {
                         GridRefresh();
                     }
@@ -141,7 +141,7 @@ namespace Stock.Views
         /**************************************************************/
         private void GridRefresh()
         {
-            v_GridEditProduct.Visibility = Visibility.Collapsed;
+            v_GridEdit.Visibility = Visibility.Collapsed;
             myDataGrid.ItemsSource = null;
             myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
