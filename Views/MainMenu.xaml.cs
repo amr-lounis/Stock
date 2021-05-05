@@ -30,7 +30,7 @@ namespace Stock.Views
                 _tabItems = new List<TabItem>();
                 tabDynamic.DataContext = _tabItems;
 
-                Clock();
+                //Clock();
 
                 v_text_user.Text = "user";
                 v_image_user.Source = new BitmapImage(new Uri("/assets/images/user.png", UriKind.Relative));
@@ -93,7 +93,7 @@ namespace Stock.Views
         #region Buttons
         public void v_btn_cashRegister(object sender, RoutedEventArgs e)
         {
-            CashRegister_UC o = new CashRegister_UC();
+            CashRegisters_UC o = new CashRegisters_UC();
             AddTabItem(o, "CashRegister_M:" + cpt);
         }
         public void v_btn_user(object sender, RoutedEventArgs e)
@@ -114,7 +114,7 @@ namespace Stock.Views
         //-------------------------------------------------------------------------------
         public void v_btn_stock(object sender, RoutedEventArgs e)
         {
-            TableProduct_UC o = new TableProduct_UC();
+            TableProducts_UC o = new TableProducts_UC();
             AddTabItem(o, "Stock:" + cpt);
         }
         //-------------------------------------------------------------------------------

@@ -100,20 +100,26 @@
     <Compile Include="Classes\RSA.cs" />
     <Compile Include="Controllers\CTableCashRegister.cs" />
     <Compile Include="Controllers\CLogine.cs" />
+    <Compile Include="Controllers\CTableInvoices.cs" />
     <Compile Include="Controllers\CTableProducts.cs" />
-    <Compile Include="Interfaces\ITableCashRegister.cs" />
+    <Compile Include="Interfaces\ITableCashRegisters.cs" />
     <Compile Include="Interfaces\ILogin.cs" />
-    <Compile Include="Interfaces\ITableProduct.cs" />
+    <Compile Include="Interfaces\ITableInvoices.cs" />
+    <Compile Include="Interfaces\ITableProducts.cs" />
     <Compile Include="Models\CashRegister_M.cs" />
+    <Compile Include="Models\Invoice_M.cs" />
     <Compile Include="Models\Product_M.cs" />
-    <Compile Include="Views\CashRegister_UC.xaml.cs">
-      <DependentUpon>CashRegister_UC.xaml</DependentUpon>
+    <Compile Include="Views\CashRegisters_UC.xaml.cs">
+      <DependentUpon>CashRegisters_UC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditProduct_UC.xaml.cs">
-      <DependentUpon>EditProduct_UC.xaml</DependentUpon>
+    <Compile Include="Views\EditProducts_UC.xaml.cs">
+      <DependentUpon>EditProducts_UC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditUsers_UC.xaml.cs">
       <DependentUpon>EditUsers_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvoiceValidation.xaml.cs">
+      <DependentUpon>InvoiceValidation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -121,21 +127,28 @@
     <Compile Include="Views\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TableProduct_UC.xaml.cs">
-      <DependentUpon>TableProduct_UC.xaml</DependentUpon>
+    <Compile Include="Views\TableInvoices_UC.xaml.cs">
+      <DependentUpon>TableInvoices_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TableProducts_UC.xaml.cs">
+      <DependentUpon>TableProducts_UC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TableUsers_UC.xaml.cs">
       <DependentUpon>TableUsers_UC.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\CashRegister_UC.xaml">
+    <Page Include="Views\CashRegisters_UC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EditProduct_UC.xaml">
+    <Page Include="Views\EditProducts_UC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditUsers_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvoiceValidation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,7 +175,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\TableProduct_UC.xaml">
+    <Page Include="Views\TableInvoices_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TableProducts_UC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

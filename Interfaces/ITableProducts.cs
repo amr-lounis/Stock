@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Stock.Interfaces
 {
-    public interface ITableProduct
+    public interface ITableProducts
     {
         int add(Product_M _Product);
         int edit(Product_M _Product);

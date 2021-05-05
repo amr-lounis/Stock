@@ -1,9 +1,6 @@
 ﻿using Stock.Controllers;
-using Stock.Interfaces;
-using Stock.Models;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,18 +13,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Stock.Models;
+using Stock.Interfaces;
 
 namespace Stock.Views
 {
-    public partial class TableUsers_UC : UserControl
+    public partial class TableProducts_UC
     {
-        public TableUsers_UC()
+        public TableProducts_UC()
         {
             InitializeComponent();
             vPageNumber.Text = "" + page;
             GridRefresh();
         }
-
         //************************************************************************************* event
         #region event
         private void event_forward(object sender, RoutedEventArgs e)
@@ -50,7 +48,7 @@ namespace Stock.Views
             dynamic data = new System.Dynamic.ExpandoObject();
             data.mode = "Add";
             data.message = null;
-            EditUsers_UC.Send(this, data);
+            EditProducts_UC.Send(this, data);
         }
         private void event_edit(object sender, RoutedEventArgs e)
         {
@@ -60,15 +58,15 @@ namespace Stock.Views
             {
                 dynamic data = new System.Dynamic.ExpandoObject();
                 data.mode = "Edit";
-                data.message = myDataGrid.SelectedItem as User_M;
-                EditUsers_UC.Send(this, data);
+                data.message = myDataGrid.SelectedItem as Product_M;
+                EditProducts_UC.Send(this, data);
             }
         }
         private void event_delete(object sender, RoutedEventArgs e)
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as User_M;
+                var o = myDataGrid.SelectedItem as Product_M;
                 if (ointerface.delete(o) >= 1)
                 {
                     GridRefresh();
@@ -83,10 +81,13 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem;
-                System.Reflection.PropertyInfo pi = o.GetType().GetProperty("ID");
-                var v = (string)(pi.GetValue(o, null));
-                Console.WriteLine(v);
+                if (myDataGrid.SelectedItem != null)
+                {
+                    var o = myDataGrid.SelectedItem;
+                    System.Reflection.PropertyInfo pi = o.GetType().GetProperty("ID");
+                    var v = (string)(pi.GetValue(o, null));
+                    Console.WriteLine(v);
+                }
             }
         }
         private void v_btn_OverlayGridCancel(object sender, EventArgs e)
@@ -109,8 +110,9 @@ namespace Stock.Views
         #endregion
         //************************************************************************************* Variable
         #region Variable
-        ITableUsers ointerface = new CTableUsers();
+        ITableProducts ointerface = new CTableProducts();
         public static int page = 0;
         #endregion
     }
 }
+

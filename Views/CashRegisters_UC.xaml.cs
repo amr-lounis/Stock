@@ -19,9 +19,9 @@ using System.Windows.Shapes;
 
 namespace Stock.Views
 {
-    public partial class CashRegister_UC : UserControl
+    public partial class CashRegisters_UC : UserControl
     {
-        public CashRegister_UC()
+        public CashRegisters_UC()
         {
             InitializeComponent();
             v_text_NumericUpDown.Value = 5.5555;
@@ -30,11 +30,14 @@ namespace Stock.Views
             v_text_InvoiceID.Text = "19";
             v_image_customer.Source = new BitmapImage(new Uri("/assets/images/user.png", UriKind.Relative));
 
-            var v = ointerface.add(new CashRegister_M());
-            for (int i = 0; i < 5; i++) ointerface.add( new CashRegister_M() ) ;
+            var v = oi_CashRegisters.add(new CashRegister_M());
+            for (int i = 0; i < 5; i++) oi_CashRegisters.add( new CashRegister_M() ) ;
             GridRefresh();
         }
-        /**************************************************************/
+
+        //*************************************************************************************  event
+        #region event
+        //========================================
         private void v_text_search_gotFocus(object sender, EventArgs e)
         {
             v_GridSearchProduct.Visibility = Visibility.Visible;
@@ -50,22 +53,25 @@ namespace Stock.Views
         private void v_btn_EditInvoice(object sender, EventArgs e)
         {
             v_GridSearchInvoice.Visibility = Visibility.Visible;
+
         }
         private void v_btn_AddNewInvoice(object sender, EventArgs e)
         {
-            MessageBox.Show("v_btn_AddNewInvoice");
+            if(oi_Invoice.add(new Invoice_M()) < 1)
+            {
+                MessageBox.Show("can\'t add");
+            }
         }
         private void v_btn_ValidateInvoice(object sender, EventArgs e)
         {
-            MessageBox.Show("v_btn_ValidateInvoice");
+            v_GridInvoiceValidation.Visibility = Visibility.Visible;
         }
-        /**************************************************************/
         private void v_btn_delete(object sender, EventArgs e)
         {
             if (v_GridCashRegister.SelectedItem != null)
             {
                 var o = v_GridCashRegister.SelectedItem as CashRegister_M;
-                if (ointerface.delete(o) >= 1)
+                if (oi_CashRegisters.delete(o) >= 1)
                 {
                     GridRefresh();
                 }
@@ -75,16 +81,7 @@ namespace Stock.Views
                 }
             }
         }
-        /**************************************************************/
-        private string EditWhat = "";
-        private void EditInit(string column)
-        {
-            v_GridEdit.Visibility = Visibility.Visible;
-            var o = v_GridCashRegister.SelectedItem;
-            System.Reflection.PropertyInfo pi = o.GetType().GetProperty(EditWhat);
-            var v = (string)(pi.GetValue(o, null));
-            v_GridEditText.Text = v;
-        }
+        //========================================
         private void v_btn_EditMoneyOFOne(object sender, EventArgs e)
         {
             EditWhat = "MONEY_ONE";
@@ -110,31 +107,32 @@ namespace Stock.Views
             v_GridEdit.Visibility = Visibility.Collapsed;
             var o = v_GridCashRegister.SelectedItem as CashRegister_M;
             switch (EditWhat)
-            {                
+            {
                 case ("MONEY_ONE"):
                     {
-                        o.MONEY_ONE = v_GridEditText.Text; 
-                        ointerface.edit(o);
-                    } break;
+                        o.MONEY_ONE = v_GridEditText.Text;
+                        oi_CashRegisters.edit(o);
+                    }
+                    break;
                 case ("QUANTITY"):
                     {
                         o.QUANTITY = v_GridEditText.Text;
-                        ointerface.edit(o);
+                        oi_CashRegisters.edit(o);
                     }
                     break;
                 case ("TAX_PERCE"):
                     {
                         o.TAX_PERCE = v_GridEditText.Text;
-                        ointerface.edit(o);
+                        oi_CashRegisters.edit(o);
                     }
                     break;
                 case ("STAMP"):
                     {
                         o.STAMP = v_GridEditText.Text;
-                        ointerface.edit(o);
+                        oi_CashRegisters.edit(o);
                     }
                     break;
-                default:break;
+                default: break;
             }
             GridRefresh();
         }
@@ -144,7 +142,16 @@ namespace Stock.Views
             EditWhat = "";
             v_GridEditText.Text = "";
         }
-        /**************************************************************/
+        private string EditWhat = "";
+        private void EditInit(string column)
+        {
+            v_GridEdit.Visibility = Visibility.Visible;
+            var o = v_GridCashRegister.SelectedItem;
+            System.Reflection.PropertyInfo pi = o.GetType().GetProperty(EditWhat);
+            var v = (string)(pi.GetValue(o, null));
+            v_GridEditText.Text = v;
+        }
+        //========================================
         private void event_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (v_GridCashRegister.SelectedItem != null)
@@ -155,22 +162,33 @@ namespace Stock.Views
                 MessageBox.Show(v + "");
             }
         }
-        /**************************************************************/
         private void v_btn_OverlayGridCancel(object sender, EventArgs e)
+        {
+            GridRefresh();
+        }
+        #endregion
+        //************************************************************************************* Messanger
+        #region Messanger
+        public void ReturnInvoice(object _sender, dynamic _data)
+        {
+
+        }
+        #endregion
+        /**************************************************************/
+        private void GridRefresh()
         {
             v_GridSearchProduct.Visibility = Visibility.Collapsed;
             v_GridSearchCustomer.Visibility = Visibility.Collapsed;
             v_GridSearchInvoice.Visibility = Visibility.Collapsed;
+            v_GridInvoiceValidation.Visibility = Visibility.Collapsed;
             v_GridEdit.Visibility = Visibility.Collapsed;
-        }
-        /**************************************************************/
-        private void GridRefresh()
-        {
+
             v_GridCashRegister.ItemsSource = null;
-            v_GridCashRegister.ItemsSource = ointerface.getAll();
+            v_GridCashRegister.ItemsSource = oi_CashRegisters.getAll();
         }
         /**************************************************************/
-        ITableCashRegister ointerface = new CTableCashRegister();
+        ITableCashRegisters oi_CashRegisters = new CTableCashRegister();
+        ITableInvoices oi_Invoice = new CTableInvoices();
         /**************************************************************/
     }
 }

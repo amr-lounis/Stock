@@ -28,6 +28,8 @@ namespace Stock.Views
             initMessanger();
         }
 
+        //************************************************************************************* Button
+        #region Button
         private void v_btn_EditImage(object sender, RoutedEventArgs e)
         {
 
@@ -53,41 +55,51 @@ namespace Stock.Views
                     MessageBox.Show("can\'t edit");
                 }
             }
-            TableUsers_UC.Send("OverlayGridCancel", null);
+            OnReturnMessage("OverlayGridCancel", null);
         }
+        #endregion
+
+        //************************************************************************************* variable
+        #region variable
+        ITableUsers ointerface = new CTableUsers();
+        string type = "";
+        #endregion
 
         //************************************************************************************* Messanger
         #region Messanger
-        void initMessanger() { OnSendMessage += Receiver; }
-        public delegate void delegateSend(string _mode, object _message);
+        void initMessanger() { OnSendMessage = Receiver; }
+        public delegate void delegateSend(object _sender, dynamic _data);
         public static event delegateSend OnSendMessage;
-        public static void Send(string _mode, object _message)
+        public static void Send(object _sender, dynamic _data)
         {
-            if (OnSendMessage != null) OnSendMessage(_mode, _message);
+            if (OnSendMessage != null) OnSendMessage(_sender, _data);
         }
-        public void Receiver(string _mode, object _message)
+        public void Receiver(object _sender, dynamic _data)
         {
-            if (_mode != null)
+            Sender = (_sender as TableUsers_UC);
+            OnReturnMessage = Sender.Return;
+            if (_data.mode != null)
             {
-                if (_mode.Equals("Add"))
+                if (_data.mode.Equals("Add"))
                 {
                     type = "Add";
                     var o = new User_M();
                     o.ID = "0";
                     InitInput(o);
                 }
-                else if (_mode.Equals("Edit") && (_message != null))
+                else if (_data.mode.Equals("Edit") && (_data.message != null))
                 {
-                    var o = (_message as User_M);
+                    var o = (_data.message as User_M);
                     type = "Edit";
                     InitInput(o);
                 }
             }
         }
+        //dynamic data = new System.Dynamic.ExpandoObject();
+        public delegate void delegateReturn(object _sender, dynamic _data);
+        public static event delegateReturn OnReturnMessage;
+        TableUsers_UC Sender;
         #endregion
-        //************************************************************************************* variable
-        ITableUsers ointerface = new CTableUsers();
-        string type = "";
         //*************************************************************************************  in/out
         #region in/out
         void InitInput(User_M _User)
@@ -137,6 +149,5 @@ namespace Stock.Views
             return o;
         }
         #endregion
-        //*************************************************************************************  
     }
 }

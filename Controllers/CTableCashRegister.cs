@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Stock.Controllers
 {
-    public class CTableCashRegister : ITableCashRegister
+    public class CTableCashRegister : ITableCashRegisters
     {
         List<CashRegister_M> list = new List<CashRegister_M>();
         //-------------------------------------------------------------------------------------

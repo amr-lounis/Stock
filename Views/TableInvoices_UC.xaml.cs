@@ -1,4 +1,6 @@
 ﻿using Stock.Controllers;
+using Stock.Interfaces;
+using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,22 +15,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Stock.Models;
-using Stock.Interfaces;
 
 namespace Stock.Views
 {
-    public partial class TableProduct_UC
+    public partial class TableInvoices_UC : UserControl
     {
-        public TableProduct_UC()
+        public TableInvoices_UC()
         {
             InitializeComponent();
-            initMessanger();
             vPageNumber.Text = "" + page;
             GridRefresh();
         }
-        //************************************************************************************* event
+
         #region event
+        //************************************************************************************* event
         private void event_forward(object sender, RoutedEventArgs e)
         {
             page++;
@@ -41,26 +41,23 @@ namespace Stock.Views
             vPageNumber.Text = string.Format("{0}", page);
             GridRefresh();
         }
-        
+
         private void event_add(object sender, RoutedEventArgs e)
         {
-            v_GridEdit.Visibility = Visibility.Visible;
-            EditProduct_UC.Send("Add",null);
+            ointerface.add(new Invoice_M());
         }
         private void event_edit(object sender, RoutedEventArgs e)
         {
-            v_GridEdit.Visibility = Visibility.Visible;
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as Product_M;
-                EditProduct_UC.Send("Edit",o);
+                ointerface.edit(new Invoice_M());
             }
         }
         private void event_delete(object sender, RoutedEventArgs e)
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as Product_M;
+                var o = myDataGrid.SelectedItem as Invoice_M;
                 if (ointerface.delete(o) >= 1)
                 {
                     GridRefresh();
@@ -75,45 +72,52 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                if (myDataGrid.SelectedItem != null)
-                {
-                    var o = myDataGrid.SelectedItem;
-                    System.Reflection.PropertyInfo pi = o.GetType().GetProperty("ID");
-                    var v = (string)(pi.GetValue(o, null));
-                    Console.WriteLine(v);
-                }
+                var o = myDataGrid.SelectedItem;
+                System.Reflection.PropertyInfo pi = o.GetType().GetProperty("ID");
+                var v = (string)(pi.GetValue(o, null));
+                Console.WriteLine(v);
             }
         }
         private void v_btn_OverlayGridCancel(object sender, EventArgs e)
         {
             GridRefresh();
         }
-        #endregion
-        //************************************************************************************* Messanger
-        #region Messanger
-        void initMessanger() { OnSendMessage += Receiver; }
-        public delegate void delegateSend(string _string, object _message);
-        public static event delegateSend OnSendMessage;
-        public static void Send(string _string, object _message)
-        {
-            if (OnSendMessage != null) OnSendMessage(_string, _message);
-        }
-        public void Receiver(string _string, object _message)
-        {
-            GridRefresh();
-        }
-        #endregion
-        /**************************************************************/
         private void GridRefresh()
         {
-            v_GridEdit.Visibility = Visibility.Collapsed;
             myDataGrid.ItemsSource = null;
             myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
-        /**************************************************************/
-        ITableProduct ointerface = new CTableProducts();
+        #endregion
+        //************************************************************************************* Messanger
+        #region Messanger
+        void initMessanger() { OnSendMessage = Receiver; }
+        public delegate void delegateSend(object _sender, dynamic _data);
+        public static event delegateSend OnSendMessage;
+        public static void Send(object _sender, dynamic _data)
+        {
+            if (OnSendMessage != null) OnSendMessage(_sender, _data);
+        }
+        public void Receiver(object _sender, dynamic _data)
+        {
+            Sender = (_sender as CashRegisters_UC);
+            OnReturnMessage = Sender.ReturnInvoice;
+            if (_data.mode != null)
+            {
+                if (_data.mode.Equals("Select"))
+                {
+                   
+                }
+            }
+        }
+        //dynamic data = new System.Dynamic.ExpandoObject();
+        public delegate void delegateReturn(object _sender, dynamic _data);
+        public static event delegateReturn OnReturnMessage;
+        CashRegisters_UC Sender;
+        #endregion
+        //************************************************************************************* Variable
+        #region Variable
+        ITableInvoices ointerface = new CTableInvoices();
         public static int page = 0;
-        /**************************************************************/
-
+        #endregion
     }
 }

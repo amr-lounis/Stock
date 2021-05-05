@@ -10,14 +10,16 @@ using System.Windows.Controls;
 
 namespace Stock.Views
 {
-    public partial class EditProduct_UC : UserControl
+    public partial class EditProducts_UC : UserControl
     {
-        public EditProduct_UC()
+        public EditProducts_UC()
         {
             InitializeComponent();
             initMessanger();
         }
 
+        //************************************************************************************* Button
+        #region Button
         private void v_btn_EditImage(object sender, RoutedEventArgs e)
         {
 
@@ -43,42 +45,53 @@ namespace Stock.Views
                     MessageBox.Show("can\'t edit");
                 }
             }
-            TableProduct_UC.Send("OverlayGridCancel", null);
+            OnReturnMessage(this, "OverlayGridCancel");
         }
+        #endregion
+
+        //************************************************************************************* variable
+        #region variable
+        ITableProducts ointerface = new CTableProducts();
+        string type = "";
+        #endregion
 
         //************************************************************************************* Messanger
         #region Messanger
-        void initMessanger() { OnSendMessage += Receiver; }
-        public delegate void delegateSend(string _mode, object _message);
+        void initMessanger() { OnSendMessage = Receiver; }
+        public delegate void delegateSend(object _sender, dynamic _data);
         public static event delegateSend OnSendMessage;
-        public static void Send(string _mode, object _message)
+        public static void Send(object _sender, dynamic _data)
         {
-            if (OnSendMessage != null) OnSendMessage(_mode, _message);
+            if (OnSendMessage != null) OnSendMessage(_sender, _data);
         }
-        public void Receiver(string _mode, object _message)
+        public void Receiver(object _sender, dynamic _data)
         {
-            if (_mode != null)
+            Sender = (_sender as TableProducts_UC);
+            OnReturnMessage = Sender.Return;
+            if (_data.mode != null)
             {
-                if (_mode.Equals("Add"))
+                if (_data.mode.Equals("Add"))
                 {
                     type = "Add";
                     var o = new Product_M();
                     o.ID = "0";
                     InitInput(o);
                 }
-                else if (_mode.Equals("Edit") && (_message != null))
+                else if (_data.mode.Equals("Edit") && (_data.message != null))
                 {
-                    var o = (_message as Product_M);
+                    var o = (_data.message as Product_M);
                     type = "Edit";
                     InitInput(o);
                 }
             }
         }
+        //dynamic data = new System.Dynamic.ExpandoObject();
+        public delegate void delegateReturn(object _sender, dynamic _data);
+        public static event delegateReturn OnReturnMessage;
+        TableProducts_UC Sender;
         #endregion
-        //************************************************************************************* variable
-        ITableProduct ointerface = new CTableProducts();
-        string type = "";
-        //*************************************************************************************  in/out
+
+        //************************************************************************************* in/out
         #region in/out
         void InitInput(Product_M _Product)
         {

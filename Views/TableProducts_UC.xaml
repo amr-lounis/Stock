@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Stock.Views.TableProduct_UC"
+﻿<UserControl x:Class="Stock.Views.TableProducts_UC"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -90,7 +90,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <local:EditProduct_UC/>
+                    <local:EditProducts_UC/>
                     <Button Click="v_btn_OverlayGridCancel" Grid.Row="1" Style="{DynamicResource ButtonNull}">
                         <materialDesign:PackIcon Kind="CloseCircle" Height="30" Width="30" Foreground="Blue" />
                     </Button>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Stock.Interfaces
 {
-    interface ITableCashRegister
+    interface ITableCashRegisters
     {
         int add(CashRegister_M _CashRegister);
         int edit(CashRegister_M _CashRegister);
