@@ -1,4 +1,5 @@
-﻿using Stock.Controllers;
+﻿using Stock.Classes;
+using Stock.Controllers;
 using Stock.Interfaces;
 using Stock.Models;
 using System;
@@ -24,6 +25,7 @@ namespace Stock.Views
         public TableUsers_UC()
         {
             InitializeComponent();
+            initReceiver();
             vPageNumber.Text = "" + page;
             GridRefresh();
         }
@@ -83,10 +85,11 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem;
-                System.Reflection.PropertyInfo pi = o.GetType().GetProperty("ID");
-                var v = (string)(pi.GetValue(o, null));
-                Console.WriteLine(v);
+                var o = myDataGrid.SelectedItem as User_M;
+                dynamic data = new System.Dynamic.ExpandoObject();
+                data.ID = o.ID;
+                data.NAME = o.NAME;
+                ReturnMessage(this, data);
             }
         }
         private void v_btn_OverlayGridCancel(object sender, EventArgs e)
@@ -100,9 +103,22 @@ namespace Stock.Views
             myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
         #endregion
-        //************************************************************************************* Messanger
+        //************************************************************************************* Messanger //dynamic data = new System.Dynamic.ExpandoObject();
         #region Messanger
-        public void Return(object _sender, dynamic _data)
+        void initReceiver() { OnSendMessage = ReceiveMessage; }
+        public static void Send(object _sender, dynamic _data) { if (OnSendMessage != null) OnSendMessage(_sender, _data); }
+        public void ReturnMessage(object _sender, dynamic _data) { if (OnReturnMessage != null) OnReturnMessage(_sender, _data); }
+        public void ReceiveMessage(object _sender, dynamic _data)
+        {
+            OnReturnMessage = (_sender as CashRegisters_UC).ReturnCustome; //change
+        }
+        public delegate void delegateSend(object _sender, dynamic _data);
+        public static event delegateSend OnSendMessage;
+
+        public delegate void delegateReturn(object _sender, dynamic _data);
+        public static event delegateReturn OnReturnMessage;
+        //-----------------
+        public void ReturnAddEdit(object _sender, dynamic _data)
         {
             GridRefresh();
         }

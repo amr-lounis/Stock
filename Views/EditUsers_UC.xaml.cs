@@ -25,7 +25,7 @@ namespace Stock.Views
         public EditUsers_UC()
         {
             InitializeComponent();
-            initMessanger();
+            initReceiver();
         }
 
         //************************************************************************************* Button
@@ -55,7 +55,7 @@ namespace Stock.Views
                     MessageBox.Show("can\'t edit");
                 }
             }
-            OnReturnMessage("OverlayGridCancel", null);
+            ReturnMessage(this, null);
         }
         #endregion
 
@@ -65,40 +65,36 @@ namespace Stock.Views
         string type = "";
         #endregion
 
-        //************************************************************************************* Messanger
+        //************************************************************************************* Messanger //dynamic data = new System.Dynamic.ExpandoObject();
         #region Messanger
-        void initMessanger() { OnSendMessage = Receiver; }
-        public delegate void delegateSend(object _sender, dynamic _data);
-        public static event delegateSend OnSendMessage;
-        public static void Send(object _sender, dynamic _data)
+        void initReceiver() { OnSendMessage = ReceiveMessage; }
+        public static void Send(object _sender, dynamic _data) { if (OnSendMessage != null) OnSendMessage(_sender, _data); }
+        public void ReturnMessage(object _sender, dynamic _data) { if (OnReturnMessage != null) OnReturnMessage(_sender, _data); }
+        public void ReceiveMessage(object _sender, dynamic _data)
         {
-            if (OnSendMessage != null) OnSendMessage(_sender, _data);
-        }
-        public void Receiver(object _sender, dynamic _data)
-        {
-            Sender = (_sender as TableUsers_UC);
-            OnReturnMessage = Sender.Return;
+            OnReturnMessage = (_sender as TableUsers_UC).ReturnAddEdit; //change
             if (_data.mode != null)
             {
                 if (_data.mode.Equals("Add"))
                 {
                     type = "Add";
-                    var o = new User_M();
+                    var o = new User_M();//change
                     o.ID = "0";
                     InitInput(o);
                 }
                 else if (_data.mode.Equals("Edit") && (_data.message != null))
                 {
-                    var o = (_data.message as User_M);
+                    var o = (_data.message as User_M);//change
                     type = "Edit";
                     InitInput(o);
                 }
             }
         }
-        //dynamic data = new System.Dynamic.ExpandoObject();
+        public delegate void delegateSend(object _sender, dynamic _data);
+        public static event delegateSend OnSendMessage;
+
         public delegate void delegateReturn(object _sender, dynamic _data);
         public static event delegateReturn OnReturnMessage;
-        TableUsers_UC Sender;
         #endregion
         //*************************************************************************************  in/out
         #region in/out

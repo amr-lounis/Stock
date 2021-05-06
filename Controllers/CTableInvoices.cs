@@ -13,12 +13,26 @@ namespace Stock.Controllers
     {
         static List<Invoice_M> list = new List<Invoice_M>();
         //-------------------------------------------------------------------------------------
+        public Invoice_M get(string _ID)
+        {
+            return list.Find(o => o.ID == _ID);
+        }
+        //-------------------------------------------------------------------------------------
+        public List<Invoice_M> getPage(ref int this_page)
+        {
+            int pageMax = 5;
+            if (this_page < 0) this_page = 0;
+            if (this_page > pageMax) this_page = pageMax;
+            return list;
+        }
+        //-------------------------------------------------------------------------------------
         public int add(Invoice_M _Invoice)
         {
             if (_Invoice.ID.Equals("0")) _Invoice.ID = Helper.random();
             list.Add(_Invoice);
             return 1;
         }
+        //-------------------------------------------------------------------------------------
         public int edit(Invoice_M _Invoice)
         {
             var o = list.Find(x => x.ID == _Invoice.ID);
@@ -35,20 +49,13 @@ namespace Stock.Controllers
             list[list.FindIndex(x => x.ID == _Invoice.ID)] = o;
             return 1;
         }
-        public List<Invoice_M> getPage(ref int this_page)
-        {
-            int pageMax = 5;
-            if (this_page < 0) this_page = 0;
-            if (this_page > pageMax) this_page = pageMax;
-            return list;
-        }
+        //-------------------------------------------------------------------------------------
         public int delete(Invoice_M _Invoice)
         {
             list.RemoveAt(list.FindIndex(o => o.ID == _Invoice.ID));
             return 1;
         }
-
-
+        //-------------------------------------------------------------------------------------
     }
 }
 

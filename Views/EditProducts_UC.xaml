@@ -16,11 +16,11 @@
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                         <!-- Image Edit -->
                         <Button Click="v_btn_EditImage" Style="{DynamicResource ButtonNull}">
-                            <materialDesign:PackIcon Kind="Edit" Height="30" Width="30" Foreground="Blue"/>
+                            <Image Source="{DynamicResource image_editProperty}" Height="30" Width="30" />
                         </Button>
                         <!-- Image Delete -->
                         <Button Click="v_btn_DeleteImage" Style="{DynamicResource ButtonNull}">
-                            <materialDesign:PackIcon Kind="Delete" Height="30" Width="30" Foreground="Blue" />
+                            <Image Source="{DynamicResource image_delete}" Height="30" Width="30" />
                         </Button>
                     </StackPanel>
                     <Border BorderThickness="1"
@@ -32,7 +32,7 @@
                         <Image x:Name="v_image" Margin="5,5,5,5" Width="150" Height="150"/>
                     </Border>
                     <Button Click="v_btn_Save" Style="{DynamicResource ButtonNull}" Margin="50,10,10,10">
-                        <materialDesign:PackIcon Kind="Floppy" Height="150" Width="150" Foreground="Blue"/>
+                        <Image Source="{DynamicResource image_save}" Height="150" Width="150" />
                     </Button>
                 </StackPanel>
 

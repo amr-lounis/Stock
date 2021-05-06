@@ -13,6 +13,19 @@ namespace Stock.Controllers
     {
         static List<User_M> list = new List<User_M>();
         //-------------------------------------------------------------------------------------
+        public User_M get(string _ID)
+        {
+            return list.Find(o => o.ID == _ID);
+        }
+        //-------------------------------------------------------------------------------------
+        public List<User_M> getPage(ref int this_page)
+        {
+            int pageMax = 5;
+            if (this_page < 0) this_page = 0;
+            if (this_page > pageMax) this_page = pageMax;
+            return list;
+        }
+        //-------------------------------------------------------------------------------------
         public int add(User_M _User)
         {
             if (_User.ID.Equals("0")) _User.ID = Helper.random();
@@ -41,14 +54,6 @@ namespace Stock.Controllers
 
             list[list.FindIndex(x => x.ID == _User.ID)] = o;
             return 1;
-        }
-        //-------------------------------------------------------------------------------------
-        public List<User_M> getPage(ref int this_page)
-        {
-            int pageMax = 5;
-            if (this_page < 0) this_page = 0;
-            if (this_page > pageMax) this_page = pageMax;
-            return list;
         }
         //-------------------------------------------------------------------------------------
         public int delete(User_M _User)

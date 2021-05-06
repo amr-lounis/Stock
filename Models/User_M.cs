@@ -12,22 +12,22 @@ namespace Stock.Models
         public User_M()
         {
             ID = "0";
-            NAME = Helper.random();
-            GENDER = Helper.random();
-            PASSWORD = Helper.random();
-            ROLE = Helper.random();
-            ACTIVITY = Helper.random();
-            MONEY_ACCOUNT = Helper.random();
-            DESCRIPTION = Helper.random();
-            NRC = Helper.random();
-            NIF = Helper.random();
-            ADDRESS = Helper.random();
-            CITY = Helper.random();
-            COUNTRY = Helper.random();
-            PHONE = Helper.random();
-            FAX = Helper.random();
-            WEBSITE = Helper.random();
-            EMAIL = Helper.random();
+            NAME = "NAME";
+            GENDER = "M/F";
+            PASSWORD = "";
+            ROLE = "";
+            ACTIVITY = "";
+            MONEY_ACCOUNT = "0";
+            DESCRIPTION = "";
+            NRC = "";
+            NIF = "";
+            ADDRESS = "";
+            CITY = "";
+            COUNTRY = "";
+            PHONE = "";
+            FAX = "";
+            WEBSITE = "";
+            EMAIL = "";
         }
 
         public string ID { get; set; }

@@ -21,24 +21,30 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
                     <Controls:NumericUpDown x:Name="v_text_NumericUpDown" HideUpDownButtons="True" IsReadOnly="True" FontFamily="{DynamicResource font_digital-7}" Background="Black" FontWeight="Bold"  Foreground="Red" FontSize="40" StringFormat="{}{0:N2}" MinWidth="500"/>
                     <Button Style="{DynamicResource ButtonNull}" Click="v_btn_ValidateInvoice">
-                        <materialDesign:PackIcon Kind="CheckBox" Height="30" Width="30" Foreground="Blue"/>
+                        <Border BorderBrush="BlueViolet" Margin="2,0,2,0"  BorderThickness="1">
+                            <Image Source="{DynamicResource image_invoiceOk}" Height="50" Width="50" />
+                        </Border>
                     </Button>
                     <Button Style="{DynamicResource ButtonNull}" Click="v_btn_AddNewInvoice">
-                        <materialDesign:PackIcon Kind="AddShoppingCart" Height="30" Width="30" Foreground="Blue"/>
+                        <Border BorderBrush="BlueViolet" Margin="2,0,2,0" BorderThickness="1">
+                            <Image Source="{DynamicResource image_invoiceAdd}" Height="50" Width="50" />
+                        </Border>
                     </Button>
                     <Button Style="{DynamicResource ButtonNull}" Click="v_btn_EditInvoice" >
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Table" Height="30" Width="30" Foreground="Blue"/>
-                            <TextBlock x:Name="v_text_InvoiceID" Style="{DynamicResource TextBlocBlackNull}"/>
-                            <TextBlock Text=" / " Style="{DynamicResource TextBlocBlackNull}"/>
-                            <TextBlock x:Name="v_text_InvoiceALL" Style="{DynamicResource TextBlocBlackNull}" />
-                        </StackPanel>
+                        <Border BorderBrush="BlueViolet" Margin="2,0,2,0"  BorderThickness="1">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource image_invoice}" Height="50" Width="50" />
+                                <TextBlock x:Name="v_text_InvoiceID" Text="000" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Style="{DynamicResource TextBlocBlackNull}"/>
+                            </StackPanel>
+                        </Border>
                     </Button>
                     <Button Style="{DynamicResource ButtonNull}" Click="v_btn_EditCustomer">
-                        <StackPanel Orientation="Horizontal">
-                            <Image x:Name="v_image_customer" Width="30" Height="30"/>
-                            <TextBlock x:Name="v_text_customer" Style="{DynamicResource TextBlocBlackNull}"/>
-                        </StackPanel>
+                        <Border BorderBrush="Black" Margin="2,0,2,0" BorderThickness="1">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="v_image_customer" Source="{DynamicResource image_customer}" Height="50" Width="50" />
+                                <TextBlock x:Name="v_text_customer" Text="customer" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Style="{DynamicResource TextBlocBlackNull}"/>
+                            </StackPanel>
+                        </Border>
                     </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
@@ -62,7 +68,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Click="v_btn_delete" Background="{x:Null}" BorderBrush="{x:Null}">
-                                    <materialDesign:PackIcon Kind="Delete" Height="20" Width="20" Foreground="Blue"/>
+                                    <Image Source="{DynamicResource image_delete}" Height="20" Width="20" />
                                 </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -169,7 +175,7 @@
                     </Grid.RowDefinitions>
                     <local:TableProducts_UC/>
                     <Button Click="v_btn_OverlayGridCancel" Grid.Row="1" Style="{DynamicResource ButtonNull}">
-                        <materialDesign:PackIcon Kind="CloseCircle" Height="30" Width="30" Foreground="Blue" />
+                        <Image Source="{DynamicResource image_quit}" Height="30" Width="30" />
                     </Button>
                 </Grid>
             </Border>
@@ -190,7 +196,7 @@
                     </Grid.RowDefinitions>
                     <local:TableUsers_UC/>
                     <Button Click="v_btn_OverlayGridCancel" Grid.Row="1" Style="{DynamicResource ButtonNull}">
-                        <materialDesign:PackIcon Kind="CloseCircle" Height="30" Width="30" Foreground="Blue" />
+                        <Image Source="{DynamicResource image_quit}" Height="30" Width="30" />
                     </Button>
                 </Grid>
             </Border>
@@ -211,7 +217,7 @@
                     </Grid.RowDefinitions>
                     <local:TableInvoices_UC/>
                     <Button Click="v_btn_OverlayGridCancel" Grid.Row="1" Style="{DynamicResource ButtonNull}">
-                        <materialDesign:PackIcon Kind="CloseCircle" Height="30" Width="30" Foreground="Blue" />
+                        <Image Source="{DynamicResource image_quit}" Height="30" Width="30" />
                     </Button>
                 </Grid>
             </Border>
@@ -250,7 +256,7 @@
                     </Grid.RowDefinitions>
                     <local:InvoiceValidation/>
                     <Button Click="v_btn_OverlayGridCancel" Grid.Row="1" Style="{DynamicResource ButtonNull}">
-                        <materialDesign:PackIcon Kind="CloseCircle" Height="30" Width="30" Foreground="Blue" />
+                        <Image Source="{DynamicResource image_quit}" Height="30" Width="30" />
                     </Button>
                 </Grid>
             </Border>

@@ -42,5 +42,11 @@ namespace Stock.Classes
             int a = 0, b = 999;
             return string.Format("{0}", r.Next(a, b));
         }
+        public static string GetPropertyString(object obj, string p_property_name)
+        {
+            System.Reflection.PropertyInfo pi = obj.GetType().GetProperty(p_property_name);
+            return (string)(pi.GetValue(obj, null));
+        }
+
     }
 }

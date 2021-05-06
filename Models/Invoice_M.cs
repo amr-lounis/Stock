@@ -14,15 +14,15 @@ namespace Stock.Models
             ID = "0"; 
             ID_USERS = "0";
             ID_CUSTOMERS = "0";
-            DESCRIPTION = Helper.random();
-            DATE = Helper.random();
-            VALIDATION = Helper.random();
-            MONEY_WITHOUT_ADDEDD = Helper.random();
-            MONEY_TAX = Helper.random();
-            MONEY_STAMP = Helper.random();
-            MONEY_TOTAL = Helper.random();
-            MONEY_PAID = Helper.random();
-            MONEY_UNPAID = Helper.random();
+            DESCRIPTION = "";
+            DATE = "";
+            VALIDATION = "0";
+            MONEY_WITHOUT_ADDEDD = "0";
+            MONEY_TAX = "0";
+            MONEY_STAMP = "0";
+            MONEY_TOTAL = "0";
+            MONEY_PAID = "0";
+            MONEY_UNPAID = "0";
         }
         public string ID { get; set; }
         public string ID_USERS { get; set; }

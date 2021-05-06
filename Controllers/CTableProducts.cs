@@ -13,6 +13,19 @@ namespace Stock.Controllers
     {
         static List<Product_M> list = new List<Product_M>();
         //-------------------------------------------------------------------------------------
+        public Product_M get(string _ID)
+        {
+            return list.Find(o => o.ID == _ID);
+        }
+        //-------------------------------------------------------------------------------------
+        public List<Product_M> getPage(ref int this_page)
+        {
+            int pageMax = 5;
+            if (this_page < 0) this_page = 0;
+            if (this_page > pageMax) this_page = pageMax;
+            return list;
+        }
+        //-------------------------------------------------------------------------------------
         public int add(Product_M _Product)
         {
             if (_Product.ID.Equals("0")) _Product.ID =Helper.random();
@@ -49,14 +62,6 @@ namespace Stock.Controllers
                 return -1;
             }
 
-        }
-        //-------------------------------------------------------------------------------------
-        public List<Product_M> getPage(ref int this_page)
-        {
-            int pageMax = 5;
-            if (this_page < 0) this_page = 0;
-            if (this_page > pageMax) this_page = pageMax;
-            return list;
         }
         //-------------------------------------------------------------------------------------
         public int delete(Product_M _Product)

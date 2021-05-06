@@ -72,7 +72,12 @@
             <BitmapImage  x:Key="image_folder" UriSource="/assets/images/folder.png"></BitmapImage>
             <BitmapImage  x:Key="image_help" UriSource="/assets/images/help.png"></BitmapImage>
             <BitmapImage  x:Key="image_home" UriSource="/assets/images/home.png"></BitmapImage>
+            <BitmapImage  x:Key="image_invoice" UriSource="/assets/images/invoice.png"></BitmapImage>
+            <BitmapImage  x:Key="image_invoiceAdd" UriSource="/assets/images/invoiceAdd.png"></BitmapImage>
+            <BitmapImage  x:Key="image_invoiceOk" UriSource="/assets/images/invoiceOk.png"></BitmapImage>
             <BitmapImage  x:Key="image_openBox" UriSource="/assets/images/openBox.png"></BitmapImage>
+            <BitmapImage  x:Key="image_pdf" UriSource="/assets/images/pdf.png"></BitmapImage>
+            <BitmapImage  x:Key="image_printer" UriSource="/assets/images/printer.png"></BitmapImage>
             <BitmapImage  x:Key="image_quit" UriSource="/assets/images/quit.png"></BitmapImage>
             <BitmapImage  x:Key="image_save" UriSource="/assets/images/save.png"></BitmapImage>
             <BitmapImage  x:Key="image_settings" UriSource="/assets/images/settings.png"></BitmapImage>

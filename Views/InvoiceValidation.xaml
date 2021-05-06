@@ -25,38 +25,45 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock              Grid.Row="0" Grid.Column="0" FontSize="30" FontWeight="Bold" Text="Word"></TextBlock>
-                <TextBox                Grid.Row="0" Grid.Column="1" MinWidth="500" MaxWidth="800" FontSize="30" FontWeight="Bold" IsReadOnly="True" Background="Black" Foreground="Red" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding NumbersToWords}" HorizontalContentAlignment="Right"/>
+                <TextBox                x:Name="v_text_NumbersToWords" HorizontalContentAlignment="Right" Grid.Row="0" Grid.Column="1" MinWidth="500" MaxWidth="800" FontSize="30" FontWeight="Bold" IsReadOnly="True" Background="Black" Foreground="Red" TextWrapping="Wrap" AcceptsReturn="True" />
+                
                 <TextBlock              Grid.Row="1" Grid.Column="0" FontSize="30" FontWeight="Bold" Text="Total"></TextBlock>
-                <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" HideUpDownButtons="True" MinWidth="500" MaxWidth="800" FontSize="30" FontWeight="Bold" IsReadOnly="True" Background="Black" Foreground="Red" Value="{Binding money_total}" Minimum="0"/>
+                <Controls:NumericUpDown x:Name="v_money_numeric_total" Grid.Row="1" Grid.Column="1" HideUpDownButtons="True" MinWidth="500" MaxWidth="800" FontSize="30" FontWeight="Bold" IsReadOnly="True" Background="Black" Foreground="Red" Minimum="0"/>
+                
                 <TextBlock              Grid.Row="2" Grid.Column="0" FontSize="30" FontWeight="Bold" Text="Paid"></TextBlock>
-                <Controls:NumericUpDown Grid.Row="2" Grid.Column="1" HideUpDownButtons="False" MinWidth="500" MaxWidth="800" FontSize="30" FontWeight="Bold"                   Background="#888888" Foreground="Red" Value="{Binding money_paid}"/>
+                <Controls:NumericUpDown x:Name="v_money_numeric_money_paid" Grid.Row="2" Grid.Column="1" HideUpDownButtons="False" MinWidth="500" MaxWidth="800" FontSize="30" FontWeight="Bold" Background="#888888" Foreground="Red" />
+                
                 <TextBlock              Grid.Row="3" Grid.Column="0" FontSize="30" FontWeight="Bold" Text="Unpaid"></TextBlock>
-                <Controls:NumericUpDown Grid.Row="3" Grid.Column="1" HideUpDownButtons="True" MinWidth="500" MaxWidth="800" FontSize="30" FontWeight="Bold" IsReadOnly="True" Background="Black" Foreground="Red" Value="{Binding money_unpaid}"/>
-                <TextBox                Grid.Row="4" Grid.Column="1" MinWidth="500" MaxWidth="800" FontSize="30" Foreground="Blue" FontWeight="Bold" TextWrapping="Wrap" AcceptsReturn="True"  Text="{Binding Description}" materialDesign:HintAssist.Hint="Description" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <Controls:NumericUpDown x:Name="v_money_numeric_money_unpaid" Grid.Row="3" Grid.Column="1" HideUpDownButtons="True" MinWidth="500" MaxWidth="800" FontSize="30" FontWeight="Bold" IsReadOnly="True" Background="Black" Foreground="Red" />
+
+                <TextBox                 x:Name="v_text_Description" Grid.Row="4" Grid.Column="1" MinWidth="500" MaxWidth="800" FontSize="30" Foreground="Blue" FontWeight="Bold" TextWrapping="Wrap" AcceptsReturn="True" materialDesign:HintAssist.Hint="Description" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label  Content="ID:" Width="30"/>
+                    <Label x:Name="v_label_id" Content="" Width="50"/>
+                </StackPanel>
             </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Border Padding="5" Margin="5" BorderBrush="Black" BorderThickness="1">
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{DynamicResource ButtonNull}" Command="{Binding commandExecute}" CommandParameter="ValidateInvoice">
-                            <materialDesign:PackIcon Kind="CheckBox" Height="30" Width="80" Foreground="Blue"/>
-                        </Button>
-                        <StackPanel Orientation="Vertical">
-                            <CheckBox >
-                                <TextBlock Text="PRINT" />
-                            </CheckBox>
-                            <CheckBox >
-                                <TextBlock Text="PDF" />
-                            </CheckBox>
-                        </StackPanel>
-
-                    </StackPanel>
+                    <Button Click="v_btn_InvoiceValidate" Style="{DynamicResource ButtonNull}">
+                        <Border BorderBrush="BlueViolet" Margin="5,0,5,0"  BorderThickness="1">
+                            <Image Source="{DynamicResource image_invoiceOk}" Height="50" Width="50" />
+                        </Border>
+                     </Button>
                 </Border>
-                <Button Style="{DynamicResource ButtonNull}" Command="{Binding commandExecute}" CommandParameter="PrintInvoice">
-                    <materialDesign:PackIcon Kind="Printer" Height="30" Width="30" Foreground="Blue"/>
-                </Button>
-                <Button Style="{DynamicResource ButtonNull}" Command="{Binding commandExecute}" CommandParameter="SaveInvoicePDF">
-                    <materialDesign:PackIcon Kind="FilePdf" Height="30" Width="30" Foreground="Blue"/>
-                </Button>
+                <Border Padding="5" Margin="5" BorderBrush="Black" BorderThickness="1">
+                    <Button Click="v_btn_InvoicePrint" Style="{DynamicResource ButtonNull}">
+                        <Border BorderBrush="BlueViolet" Margin="5,0,5,0"  BorderThickness="1">
+                            <Image Source="{DynamicResource image_printer}" Height="50" Width="50" />
+                        </Border>
+                    </Button>
+                </Border>
+                <Border Padding="5" Margin="5" BorderBrush="Black" BorderThickness="1">
+                    <Button Click="v_btn_InvoicePDF" Style="{DynamicResource ButtonNull}">
+                        <Border BorderBrush="BlueViolet" Margin="5,0,5,0"  BorderThickness="1">
+                            <Image Source="{DynamicResource image_pdf}" Height="50" Width="50" />
+                        </Border>
+                    </Button>
+                </Border>
             </StackPanel>
         </StackPanel>
     </Grid>

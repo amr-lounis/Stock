@@ -9,9 +9,10 @@ namespace Stock.Interfaces
 {
     interface ITableCashRegisters
     {
+        CashRegister_M get(string _ID);
+        List<CashRegister_M> getAll();
         int add(CashRegister_M _CashRegister);
         int edit(CashRegister_M _CashRegister);
-        List<CashRegister_M> getAll();
         int delete(CashRegister_M _CashRegister);
     }
 }

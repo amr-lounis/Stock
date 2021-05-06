@@ -12,16 +12,16 @@ namespace Stock.Models
         public CashRegister_M()
         {
             ID = "0";
-            ID_PRODUCTS = Helper.random();
-            ID_INVOICES = Helper.random();
-            NAME = Helper.random();
-            CODE = Helper.random();
-            MONEY_ONE = Helper.random();
-            QUANTITY = Helper.random();
-            TAX_PERCE = Helper.random();
-            TAX_VALUE = Helper.random();
-            STAMP = Helper.random();
-            MONEY_PAID = Helper.random();
+            ID_PRODUCTS = "0";
+            ID_INVOICES = "0";
+            NAME = "";
+            CODE = "";
+            MONEY_ONE = "0";
+            QUANTITY = "0";
+            TAX_PERCE = "0";
+            TAX_VALUE = "0";
+            STAMP = "0";
+            MONEY_PAID = "0";
         }
         public string ID { get; set; }
         public string ID_PRODUCTS { get; set; }

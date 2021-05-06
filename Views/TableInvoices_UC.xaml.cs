@@ -23,6 +23,7 @@ namespace Stock.Views
         public TableInvoices_UC()
         {
             InitializeComponent();
+            initReceiver();
             vPageNumber.Text = "" + page;
             GridRefresh();
         }
@@ -75,7 +76,7 @@ namespace Stock.Views
                 var o = myDataGrid.SelectedItem;
                 System.Reflection.PropertyInfo pi = o.GetType().GetProperty("ID");
                 var v = (string)(pi.GetValue(o, null));
-                Console.WriteLine(v);
+                if (OnReturnMessage != null) OnReturnMessage(this, v);
             }
         }
         private void v_btn_OverlayGridCancel(object sender, EventArgs e)
@@ -88,31 +89,19 @@ namespace Stock.Views
             myDataGrid.ItemsSource = ointerface.getPage(ref page);
         }
         #endregion
-        //************************************************************************************* Messanger
+        //************************************************************************************* Messanger //dynamic data = new System.Dynamic.ExpandoObject();  //if (OnReturnMessage != null) OnReturnMessage(_sender, _data);
         #region Messanger
-        void initMessanger() { OnSendMessage = Receiver; }
-        public delegate void delegateSend(object _sender, dynamic _data);
-        public static event delegateSend OnSendMessage;
-        public static void Send(object _sender, dynamic _data)
-        {
-            if (OnSendMessage != null) OnSendMessage(_sender, _data);
-        }
+        void initReceiver() {OnSendMessage = Receiver;  }
+        public static void Send(object _sender, dynamic _data){if (OnSendMessage != null) OnSendMessage(_sender, _data);}
         public void Receiver(object _sender, dynamic _data)
         {
-            Sender = (_sender as CashRegisters_UC);
-            OnReturnMessage = Sender.ReturnInvoice;
-            if (_data.mode != null)
-            {
-                if (_data.mode.Equals("Select"))
-                {
-                   
-                }
-            }
+            OnReturnMessage = (_sender as CashRegisters_UC).ReturnInvoice;
         }
-        //dynamic data = new System.Dynamic.ExpandoObject();
+        public delegate void delegateSend(object _sender, dynamic _data);
+        public static event delegateSend OnSendMessage;
+
         public delegate void delegateReturn(object _sender, dynamic _data);
         public static event delegateReturn OnReturnMessage;
-        CashRegisters_UC Sender;
         #endregion
         //************************************************************************************* Variable
         #region Variable

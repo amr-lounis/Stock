@@ -26,12 +26,8 @@ namespace Stock.Views
             InitializeComponent();
             v_text_NumericUpDown.Value = 5.5555;
             v_text_customer.Text = "customer";
-            v_text_InvoiceALL.Text = "100";
-            v_text_InvoiceID.Text = "19";
-            v_image_customer.Source = new BitmapImage(new Uri("/assets/images/user.png", UriKind.Relative));
-
-            var v = oi_CashRegisters.add(new CashRegister_M());
-            for (int i = 0; i < 5; i++) oi_CashRegisters.add( new CashRegister_M() ) ;
+            v_text_InvoiceID.Text = "0";
+            v_image_customer.Source = new BitmapImage(new Uri("/assets/images/customer.png", UriKind.Relative));
             GridRefresh();
         }
 
@@ -41,6 +37,7 @@ namespace Stock.Views
         private void v_text_search_gotFocus(object sender, EventArgs e)
         {
             v_GridSearchProduct.Visibility = Visibility.Visible;
+            TableProducts_UC.Send(this, null);
         }
         private void v_text_search_lostFocus(object sender, EventArgs e)
         {
@@ -49,11 +46,12 @@ namespace Stock.Views
         private void v_btn_EditCustomer(object sender, EventArgs e)
         {
             v_GridSearchCustomer.Visibility = Visibility.Visible;
+            TableUsers_UC.Send(this, null);
         }
         private void v_btn_EditInvoice(object sender, EventArgs e)
         {
             v_GridSearchInvoice.Visibility = Visibility.Visible;
-
+            TableInvoices_UC.Send(this, null);
         }
         private void v_btn_AddNewInvoice(object sender, EventArgs e)
         {
@@ -65,6 +63,7 @@ namespace Stock.Views
         private void v_btn_ValidateInvoice(object sender, EventArgs e)
         {
             v_GridInvoiceValidation.Visibility = Visibility.Visible;
+            InvoiceValidation.Send(this,v_text_InvoiceID.Text);
         }
         private void v_btn_delete(object sender, EventArgs e)
         {
@@ -171,8 +170,35 @@ namespace Stock.Views
         #region Messanger
         public void ReturnInvoice(object _sender, dynamic _data)
         {
-
+            v_text_InvoiceID.Text = _data;
+            GridRefresh();
         }
+        public void ReturnCustome(object _sender, dynamic _data)
+        {
+            v_text_customer.Text = string.Format(" {0}:{1}", _data.ID, _data.NAME);
+            GridRefresh();
+        }
+        public void ReturnProduct(object _sender, dynamic _data)
+        {
+            var o = new CashRegister_M();
+            o.ID = "0";
+            o.ID_PRODUCTS = _data.ID;
+            o.ID_INVOICES = v_text_InvoiceID.Text;
+            o.NAME = _data.NAME;
+            o.CODE = _data.CODE;
+            o.MONEY_ONE = _data.MONEY_SELLING;
+            o.QUANTITY = "1";
+            o.TAX_PERCE = _data.TAX_PERCE;
+            o.STAMP = "0";
+
+            oi_CashRegisters.add(o);
+            GridRefresh();
+        }
+        public void ReturnInvoiceValidation(object _sender, dynamic _data)
+        {
+            MessageBox.Show("ReturnInvoiceValidation");
+            GridRefresh();
+        }        
         #endregion
         /**************************************************************/
         private void GridRefresh()

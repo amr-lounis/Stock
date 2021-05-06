@@ -12,21 +12,21 @@ namespace Stock.Models
         public Product_M()
         {
             ID = "0";
-            NAME = Helper.random();
-            CATEGORY = Helper.random();
-            UNITE = Helper.random();
-            DESCRIPTION = Helper.random();
-            CODE = Helper.random();
-            IMPORTANCE = Helper.random();
-            QUANTITY = Helper.random();
-            QUANTITY_MIN = Helper.random();
-            TAX_PERCE = Helper.random();
-            MONEY_PURCHASE = Helper.random();
-            MONEY_SELLING = Helper.random();
-            MONEY_SELLING_MIN = Helper.random();
-            DATE_PRODUCTION = Helper.random();
-            DATE_PURCHASE = Helper.random();
-            DATE_EXPIRATION = Helper.random();
+            NAME = "NAME";
+            CATEGORY = "CATEGORY";
+            UNITE = "UNITE";
+            DESCRIPTION = "DESCRIPTION";
+            CODE = "CODE";
+            IMPORTANCE = "0";
+            QUANTITY = "0";
+            QUANTITY_MIN = "0";
+            TAX_PERCE = "0";
+            MONEY_PURCHASE = "0";
+            MONEY_SELLING = "0";
+            MONEY_SELLING_MIN = "0";
+            DATE_PRODUCTION = "0";
+            DATE_PURCHASE = "";
+            DATE_EXPIRATION = "";
         }
         public string ID { get; set; }
         public string NAME { get; set; }
