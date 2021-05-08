@@ -12,21 +12,8 @@ namespace Stock.Dataset.Model
     {
         //********************************************************
         #region init
-        private static string getConnectionString()
-        {
-            string _host = "localhost";
-            string _database_name = "stock";
-            string _user_id = "root";
-            string _password = "";
-            string _port = "3306";
-            string _sslM = "none";
-
-            return String.Format("server={0};port={1};user id={2}; password={3}; database={4}; SslMode={5}", _host, _port, _user_id, _password, _database_name, _sslM);
-        }
-
-
         private Entities() // Entities = Constructor of calss model
-               : base(new MySqlConnection(getConnectionString()), true)
+               : base(new MySqlConnection(Stock.Utils.Config.load().db_mysql.getConnectionString()), true)
         { }
         public Entities(string connString)
                 : base(new MySqlConnection(connString), true)

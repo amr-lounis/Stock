@@ -153,7 +153,7 @@
     <Compile Include="Classes\HASH.cs" />
     <Compile Include="Classes\Helper.cs" />
     <Compile Include="Classes\RSA.cs" />
-    <Compile Include="Configs\Config.cs" />
+    <Compile Include="Utils\Config.cs" />
     <Compile Include="Controllers\TableUsers_CD.cs" />
     <Compile Include="Controllers\TableCashRegister_CV.cs" />
     <Compile Include="Controllers\Logine_CV.cs" />
