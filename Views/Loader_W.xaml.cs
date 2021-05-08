@@ -19,40 +19,30 @@ namespace Stock.Views
 {
     public partial class Loader_W : MetroWindow
     {
-        public delegate void delegateSend(object _sender, dynamic _data);
-        public event delegateSend runEvent;
         public Loader_W()
         {
             InitializeComponent();
-            //SplashScreen splashScreen = new SplashScreen("/assets/images/customer.png");
-            //splashScreen.Show(false);
-
-            //splashScreen.Close(TimeSpan.FromSeconds(5));
-
-            //runEvent = runLoader;
-            //Task t = new Task(delegate ()
-            //{
-            //    Thread.Sleep(2000);
-            //    if (runEvent != null) runEvent(this, null);
-            //});
-            //t.Start();
-            //TimeSpan.FromSeconds(5);
+            SplashScreen splashScreen = new SplashScreen("/assets/images/customer.png");
+            splashScreen.Show(false);
+            nextWindow();
+            splashScreen.Close(TimeSpan.FromSeconds(5));
 
 
-            Config_CD o = Config_CD.load();
-            MessageBox.Show(o.software.language);
-            o.software.language = "AR";
-            Config_CD.save(o);
 
-            Config_CD x = Config_CD.load();
-            MessageBox.Show(x.software.language);
+            //Config_CD o = Config_CD.load();
+            //MessageBox.Show(o.software.language);
+            //o.software.language = "AR";
+            //Config_CD.save(o);
+
+            //Config_CD x = Config_CD.load();
+            //MessageBox.Show(x.software.language);
         }
-        private void runLoader(object _sender, dynamic _data)
+        private void nextWindow()
         {
-            MainMenu_W wMainMenu = new MainMenu_W();
-            //wMainMenu.Owner = (Loader_W)_sender;
-            this.Hide(); // not required if using the child events below
-            wMainMenu.Show();
+            Login_W wLogin = new Login_W();
+            this.Hide();
+            wLogin.Show();
+            wLogin.Owner = this.Owner;
             this.Close();
         }
     }

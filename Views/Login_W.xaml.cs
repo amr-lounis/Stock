@@ -36,7 +36,7 @@ namespace Stock.Views
             if(o_ILogin.Login(NAME.Text, PASSWORD.Password))
             {
                 MainMenu_W wMainMenu = new MainMenu_W();
-                wMainMenu.Owner = this;
+                wMainMenu.Owner = this.Owner;
                 this.Hide(); // not required if using the child events below
                 wMainMenu.ShowDialog();
                 this.Show();

@@ -21,6 +21,12 @@ namespace Stock.Controllers
         //-------------------------------------------------------------------------------------
         public List<User_M> search(string _value, ref int _this_page)
         {
+            string data_out = "";
+            List<user> l = TableUsers_CD.search("",ref _this_page,out  data_out).ToList();
+            foreach (user _user in l)
+            {
+                list.Add(adaptor(_user));
+            }
             int pageMax = 5;
             if (_this_page < 0) _this_page = 0;
             if (_this_page > pageMax) _this_page = pageMax;
@@ -41,7 +47,9 @@ namespace Stock.Controllers
                 user t = new user
                 {
                     ID = 1,
-                    NAME = "admin"
+                    ID_ROLE = null,
+                    
+
                 };
                 _db.users.Add(t);
                 _db.SaveChangesAsync();
@@ -95,5 +103,25 @@ namespace Stock.Controllers
             return 1;
         }
         //-------------------------------------------------------------------------------------
+        public User_M adaptor(user _user)
+        {
+            var o = new User_M();
+            o.ACTIVITY = _user.ACTIVITY;
+            o.ADDRESS = _user.ADDRESS;
+            o.ROLE = _user.ID_ROLE+"";
+            o.CITY = _user.CITY;
+            o.COUNTRY = _user.COUNTRY;
+            o.DESCRIPTION = _user.DESCRIPTION;
+            o.EMAIL = _user.EMAIL;
+            o.FAX = _user.FAX;
+            o.MONEY_ACCOUNT = _user.MONEY_ACCOUNT+"";
+            o.NAME = _user.NAME;
+            o.NIF = _user.NIF;
+            o.NRC = _user.NRC;
+            o.PASSWORD = _user.PASSWORD;
+            o.PHONE = _user.PHONE;
+            o.WEBSITE = _user.WEBSITE;
+            return o;
+        }
     }
 }

@@ -2,124 +2,136 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Stock.Controllers
 {
-    public class CD_TableUsers
+    public static class TableUsers_CD
     {
-        static Entities _db = Entities.GetInstance();
-        static int PageCount = 0, PageSize = 0, LineCount = 0;
-        static string LableSearch;
-        //public static IQueryable<user> search(string p_srting, ref int PageThis, string p_orderBy)
-        //{
-        //    IQueryable<user> _Query;
-        //    try
-        //    {
-        //            _Query = null;
-        //            _Query = _db.users.Where(c => c.NAME.ToLower().Contains(p_srting) || c.DESCRIPTION.ToLower().Contains(p_srting));
-        //            LableSearch = SkipTake(ref PageThis, ref _Query);
-        //            return _Query;
-        //    }
-        //    catch (Exception e) { F_File.LogError(e); return null; }
-        //}
-        //public static string SkipTake(ref int PageThis, ref IQueryable<user> p_Query)
-        //{
-        //    GetPageSize();
-        //    if (PageSize <= 0) PageSize = 1;
-        //    if (PageThis <= 0) PageThis = 0;
-        //    if (PageThis > PageCount) PageThis = PageCount;
-        //    LineCount = p_Query.Count();
-        //    p_Query = p_Query.Skip(PageThis * PageSize).Take(PageSize);
-        //    PageCount = (LineCount / PageSize);
-        //    return string.Format("({0} / {1}) |{2}|", PageThis + 1, PageCount + 1, LineCount);
-        //}
-        //public static void GetPageSize()
-        //{
-        //    PageSize = C_Variables.Software_.pageSizeSearch;
-        //}
-        //public static string GetLableSearch()
-        //{
-        //    return LableSearch;
-        //}
-
-        //public static long NewId()
-        //{
-        //    return (_db.users.Count() > 0) ? _db.users.Max(u => u.ID) + 1 : 1;
-        //}
-        //public static user Get(long p_id)
-        //{
-        //    return _db.users.Single(c => c.ID == p_id);
-        //}
-
-        //public static void Delete(long p_id)
-        //{
-        //    _db.users.Remove(_db.users.Single(c => c.ID == p_id));
-        //    _db.SaveChanges();
-        //}
-        ////************************************************************************
-        //public static void Commit()
-        //{
-        //    _db.SaveChanges();
-        //}
-        //public static void EditFromObject(user p)
-        //{
-        //    if (p.NAME.Length == 0) { DialogError.Error(); return; }
-        //    if (p.ID <= 0) if (IsExistName(p.NAME)) { DialogError.Error(); return; }
-        //    if (p.ID > 0) if (!IsCanEditName(p.ID, p.NAME)) { DialogError.Error(); return; }
-
-        //    if (p.ID > 0) // edit
-        //    {
-        //        try
-        //        {
-        //            var r = Get(p.ID);
-        //            r.NAME = p.NAME;
-        //            r.DESCRIPTION = p.DESCRIPTION;
-        //            r.CODE = p.CODE;
-        //            r.FIRSTNAME = p.FIRSTNAME;
-        //            r.LASTNAME = p.LASTNAME;
-        //            r.GENDER = p.GENDER;
-        //            r.BIRTHDAY = p.BIRTHDAY;
-        //            r.ADDRESS = p.ADDRESS;
-        //            r.CITY = p.CITY;
-        //            r.COUNTRY = p.COUNTRY;
-        //            r.PHONE = p.PHONE;
-        //            r.FAX = p.FAX;
-        //            r.WEBSITE = p.WEBSITE;
-        //            r.EMAIL = p.EMAIL;
-        //            r.MONEY_ACCOUNT = p.MONEY_ACCOUNT;
-        //            r.PICTURE = p.PICTURE;
-        //            r.TYPE = p.TYPE;
-        //            _db.SaveChanges();
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            F_File.LogError(e);
-        //        }
-        //    }
-        //    else         // add
-        //    {
-        //        try
-        //        {
-        //            p.ID = NewId();
-        //            _db.users.Add(p);
-        //            _db.SaveChanges();
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            F_File.LogError(e);
-        //        }
-        //    }
-        //}
-        //private static bool IsExistName(string p_string)
-        //{
-        //    return _db.users.Any(o => o.NAME == p_string);
-        //}
-        //private static bool IsCanEditName(long id, string p_string)
-        //{
-        //    return !_db.users.Any(o => o.NAME == p_string && o.ID != id);
-        //}
-        ////*****************************************
+        public static IQueryable<user> search(string p_srting, ref int PageThis)
+        {
+            var _db = Entities.GetInstance();
+            IQueryable<user> query;
+            try
+            {
+                query = null;
+                query = _db.users.Where(c => c.NAME.ToLower().Contains(p_srting) || c.DESCRIPTION.ToLower().Contains(p_srting)).Take(GetPageSize());
+                return query;
+            }
+            catch (Exception e) { return null; }
+        }
+        //----------------------------------------------------------------------------------------------------------------
+        public static user Get(long p_id)
+        {
+            try
+            {
+                var _db = Entities.GetInstance();
+                return _db.users.Single(c => c.ID == p_id);
+            }
+            catch (Exception) { return null; }
+        }
+        //----------------------------------------------------------------------------------------------------------------
+        public static bool Add(user _user)
+        {
+            try
+            {
+                var _db = Entities.GetInstance();
+                _db.users.Add(_user);
+                _db.SaveChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+        //----------------------------------------------------------------------------------------------------------------
+        public static bool Edit(user _user)
+        {
+            try
+            {
+                var _db = Entities.GetInstance();
+                var o = Get(_user.ID);
+                o.ID_ROLE = _user.ID_ROLE;
+                o.NAME = _user.NAME;
+                o.PASSWORD = _user.PASSWORD;
+                o.GENDER = _user.GENDER;
+                o.ACTIVITY = _user.ACTIVITY;
+                o.NRC = _user.NRC;
+                o.NIF = _user.NIF;
+                o.ADDRESS = _user.ADDRESS;
+                o.CITY = _user.CITY;
+                o.COUNTRY = _user.COUNTRY;
+                o.PHONE = _user.PHONE;
+                o.FAX = _user.FAX;
+                o.WEBSITE = _user.WEBSITE;
+                o.EMAIL = _user.EMAIL;
+                _db.SaveChanges();
+                return true;
+            }
+            catch (Exception){ return false; }
+        }
+        //----------------------------------------------------------------------------------------------------------------
+        public static bool Delete(long p_id)
+        {
+            try
+            {
+                var _db = Entities.GetInstance();
+                _db.users.Remove(_db.users.Single(c => c.ID == p_id));
+                _db.SaveChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+        //----------------------------------------------------------------------------------------------------------------
+        private static bool IsExistName(string p_string)
+        {
+            try
+            {
+                var _db = Entities.GetInstance();
+                return _db.users.Any(o => o.NAME == p_string);
+            }
+            catch (Exception) { return false; }
+        }
+        //----------------------------------------------------------------------------------------------------------------
+        private static int GetPageSize()
+        {
+            return Config_CD.load().software.pageSizeSearch;
+        }
+        private static IOrderedQueryable<TSource> OrderBy<TSource>(this IQueryable<TSource> query, string propertyName)
+        {
+            var entityType = typeof(TSource);
+            var propertyInfo = entityType.GetProperty(propertyName);
+            ParameterExpression arg = Expression.Parameter(entityType, "x");
+            MemberExpression property = Expression.Property(arg, propertyName);
+            var selector = Expression.Lambda(property, new ParameterExpression[] { arg });
+            var enumarableType = typeof(System.Linq.Queryable);
+            var method = enumarableType.GetMethods().Where(m => m.Name == "OrderBy" && m.IsGenericMethodDefinition).Where(m =>
+            {
+                var parameters = m.GetParameters().ToList();
+                return parameters.Count == 2;
+            }).Single();
+            MethodInfo genericMethod = method.MakeGenericMethod(entityType, propertyInfo.PropertyType);
+            var newQuery = (IOrderedQueryable<TSource>)genericMethod.Invoke(genericMethod, new object[] { query, selector });
+            return newQuery;
+        }
+        private static IOrderedQueryable<TSource> OrderByDescending<TSource>(this IQueryable<TSource> query, string propertyName)
+        {
+            var entityType = typeof(TSource);
+            var propertyInfo = entityType.GetProperty(propertyName);
+            ParameterExpression arg = Expression.Parameter(entityType, "x");
+            MemberExpression property = Expression.Property(arg, propertyName);
+            var selector = Expression.Lambda(property, new ParameterExpression[] { arg });
+            var enumarableType = typeof(System.Linq.Queryable);
+            var method = enumarableType.GetMethods().Where(m => m.Name == "OrderByDescending" && m.IsGenericMethodDefinition).Where(m =>
+            {
+                var parameters = m.GetParameters().ToList();
+                return parameters.Count == 2;
+            }).Single();
+            MethodInfo genericMethod = method.MakeGenericMethod(entityType, propertyInfo.PropertyType);
+            var newQuery = (IOrderedQueryable<TSource>)genericMethod.Invoke(genericMethod, new object[] { query, selector });
+            return newQuery;
+        }
+        //----------------------------------------------------------------------------------------------------------------
     }
 }
