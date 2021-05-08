@@ -213,8 +213,8 @@ namespace Stock.Views
             v_GridCashRegister.ItemsSource = oi_CashRegisters.getAll();
         }
         /**************************************************************/
-        ITableCashRegisters oi_CashRegisters = new CTableCashRegister();
-        ITableInvoices oi_Invoice = new CTableInvoices();
+        ITableCashRegisters oi_CashRegisters = new TableCashRegister_CV();
+        ITableInvoices oi_Invoice = new TableInvoices_CV();
         /**************************************************************/
     }
 }

@@ -125,7 +125,7 @@ namespace Stock.Views
         #endregion
         //************************************************************************************* Variable
         #region Variable
-        ITableProducts ointerface = new CTableProducts();
+        ITableProducts ointerface = new TableProducts_CV();
         public static int page = 0;
         #endregion
     }

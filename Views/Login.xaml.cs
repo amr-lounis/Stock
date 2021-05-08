@@ -41,7 +41,7 @@ namespace Stock.Views
                 wMainMenu.ShowDialog();
                 this.Show();
             }
-            //System.Environment.Exit(1);
+            System.Environment.Exit(1);
         }
     }
 }

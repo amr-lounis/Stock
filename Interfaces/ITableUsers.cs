@@ -10,7 +10,7 @@ namespace Stock.Interfaces
     interface ITableUsers
     {
         User_M get(string _ID);
-        List<User_M> getPage(ref int this_page);
+        List<User_M> search(string _value, ref int _this_page);
         int add(User_M _User);
         int edit(User_M _User);
         int delete(User_M _User);

@@ -105,7 +105,7 @@ namespace Stock.Views
         #endregion
         //************************************************************************************* Variable
         #region Variable
-        ITableInvoices ointerface = new CTableInvoices();
+        ITableInvoices ointerface = new TableInvoices_CV();
         public static int page = 0;
         #endregion
     }

@@ -51,7 +51,7 @@ namespace Stock.Views
 
         //************************************************************************************* variable
         #region variable
-        ITableProducts ointerface = new CTableProducts();
+        ITableProducts ointerface = new TableProducts_CV();
         string type = "";
         #endregion
 

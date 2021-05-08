@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Stock.Controllers
 {
-    public class CTableInvoices : ITableInvoices
+    public class TableInvoices_CV : ITableInvoices
     {
         static List<Invoice_M> list = new List<Invoice_M>();
         //-------------------------------------------------------------------------------------

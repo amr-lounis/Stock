@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Stock.Controllers
 {
-    public class CTableProducts : ITableProducts
+    public class TableProducts_CV : ITableProducts
     {
         static List<Product_M> list = new List<Product_M>();
         //-------------------------------------------------------------------------------------

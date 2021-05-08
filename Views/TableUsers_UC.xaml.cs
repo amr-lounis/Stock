@@ -26,7 +26,7 @@ namespace Stock.Views
         {
             InitializeComponent();
             initReceiver();
-            vPageNumber.Text = "" + page;
+            v_text_pageNumber.Text = "" + page;
             GridRefresh();
         }
 
@@ -35,13 +35,13 @@ namespace Stock.Views
         private void event_forward(object sender, RoutedEventArgs e)
         {
             page++;
-            vPageNumber.Text = string.Format("{0}", page);
+            v_text_pageNumber.Text = string.Format("{0}", page);
             GridRefresh();
         }
         private void event_backward(object sender, RoutedEventArgs e)
         {
             page--;
-            vPageNumber.Text = string.Format("{0}", page);
+            v_text_pageNumber.Text = string.Format("{0}", page);
             GridRefresh();
         }
 
@@ -100,7 +100,7 @@ namespace Stock.Views
         {
             v_GridEdit.Visibility = Visibility.Collapsed;
             myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = ointerface.getPage(ref page);
+            myDataGrid.ItemsSource = ointerface.search(v_text_search.Text, ref  page);
         }
         #endregion
         //************************************************************************************* Messanger //dynamic data = new System.Dynamic.ExpandoObject();
@@ -125,7 +125,7 @@ namespace Stock.Views
         #endregion
         //************************************************************************************* Variable
         #region Variable
-        ITableUsers ointerface = new CTableUsers();
+        ITableUsers ointerface = new TableUsers_CV();
         public static int page = 0;
         #endregion
     }

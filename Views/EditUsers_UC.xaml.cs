@@ -61,7 +61,7 @@ namespace Stock.Views
 
         //************************************************************************************* variable
         #region variable
-        ITableUsers ointerface = new CTableUsers();
+        ITableUsers ointerface = new TableUsers_CV();
         string type = "";
         #endregion
 
