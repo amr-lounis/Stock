@@ -1,5 +1,5 @@
 ﻿using MahApps.Metro.Controls;
-using Stock.Utils;
+using Stock.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,17 +39,17 @@ namespace Stock.Views
             //TimeSpan.FromSeconds(5);
 
 
-            Config o = Config.load();
+            Config_CD o = Config_CD.load();
             MessageBox.Show(o.software.language);
             o.software.language = "AR";
-            Config.save(o);
+            Config_CD.save(o);
 
-            Config x = Config.load();
+            Config_CD x = Config_CD.load();
             MessageBox.Show(x.software.language);
         }
         private void runLoader(object _sender, dynamic _data)
         {
-            MainMenu wMainMenu = new MainMenu();
+            MainMenu_W wMainMenu = new MainMenu_W();
             //wMainMenu.Owner = (Loader_W)_sender;
             this.Hide(); // not required if using the child events below
             wMainMenu.Show();

@@ -18,9 +18,9 @@ using System.Windows.Threading;
 
 namespace Stock.Views
 {
-    public partial class MainMenu : RibbonWindow
+    public partial class MainMenu_W : RibbonWindow
     {
-        public MainMenu()
+        public MainMenu_W()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;

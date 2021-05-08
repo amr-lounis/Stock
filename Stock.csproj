@@ -141,19 +141,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\ActivationSoftware.cs" />
-    <Compile Include="Classes\DialogAlert.cs" />
-    <Compile Include="Classes\DialogError.cs" />
-    <Compile Include="Classes\DialogInformation.cs" />
-    <Compile Include="Classes\F_File.cs" />
-    <Compile Include="Classes\F_NumberToWord.cs" />
-    <Compile Include="Classes\F_Run.cs" />
-    <Compile Include="Classes\F_Time.cs" />
-    <Compile Include="Classes\F_Window.cs" />
-    <Compile Include="Classes\HASH.cs" />
-    <Compile Include="Classes\Helper.cs" />
-    <Compile Include="Classes\RSA.cs" />
-    <Compile Include="Utils\Config.cs" />
+    <Compile Include="Controllers\Helper.cs" />
+    <Compile Include="Controllers\Config_CD.cs" />
     <Compile Include="Controllers\TableUsers_CD.cs" />
     <Compile Include="Controllers\TableCashRegister_CV.cs" />
     <Compile Include="Controllers\Logine_CV.cs" />
@@ -188,17 +177,17 @@
     <Compile Include="Views\EditUsers_UC.xaml.cs">
       <DependentUpon>EditUsers_UC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InvoiceValidation.xaml.cs">
-      <DependentUpon>InvoiceValidation.xaml</DependentUpon>
+    <Compile Include="Views\InvoiceValidation_UC.xaml.cs">
+      <DependentUpon>InvoiceValidation_UC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Loader_W.xaml.cs">
       <DependentUpon>Loader_W.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="Views\Login_W.xaml.cs">
+      <DependentUpon>Login_W.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainMenu.xaml.cs">
-      <DependentUpon>MainMenu.xaml</DependentUpon>
+    <Compile Include="Views\MainMenu_W.xaml.cs">
+      <DependentUpon>MainMenu_W.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TableInvoices_UC.xaml.cs">
       <DependentUpon>TableInvoices_UC.xaml</DependentUpon>
@@ -221,7 +210,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InvoiceValidation.xaml">
+    <Page Include="Views\InvoiceValidation_UC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,11 +218,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Login.xaml">
+    <Page Include="Views\Login_W.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\MainMenu.xaml">
+    <Page Include="Views\MainMenu_W.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -328,6 +317,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Reports\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\images\company.png" />

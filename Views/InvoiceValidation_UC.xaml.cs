@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 
 namespace Stock.Views
 {
-    public partial class InvoiceValidation : UserControl
+    public partial class InvoiceValidation_UC : UserControl
     {
-        public InvoiceValidation()
+        public InvoiceValidation_UC()
         {
             InitializeComponent();
             initReceiver();

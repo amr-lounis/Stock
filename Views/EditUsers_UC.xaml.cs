@@ -1,5 +1,4 @@
-﻿using Stock.Classes;
-using Stock.Controllers;
+﻿using Stock.Controllers;
 using Stock.Interfaces;
 using Stock.Models;
 using System;

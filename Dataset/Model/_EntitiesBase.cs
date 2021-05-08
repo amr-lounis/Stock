@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Stock.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,7 +14,7 @@ namespace Stock.Dataset.Model
         //********************************************************
         #region init
         private Entities() // Entities = Constructor of calss model
-               : base(new MySqlConnection(Stock.Utils.Config.load().db_mysql.getConnectionString()), true)
+               : base(new MySqlConnection(Config_CD.load().db_mysql.getConnectionString()), true)
         { }
         public Entities(string connString)
                 : base(new MySqlConnection(connString), true)

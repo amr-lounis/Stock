@@ -1,5 +1,4 @@
-﻿using Stock.Classes;
-using Stock.Interfaces;
+﻿using Stock.Interfaces;
 using Stock.Models;
 using System;
 using System.Collections.Generic;

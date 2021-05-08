@@ -19,10 +19,10 @@ using System.Windows.Shapes;
 
 namespace Stock.Views
 { 
-    public partial class Login : MetroWindow
+    public partial class Login_W : MetroWindow
     {
         ILogin o_ILogin = new CLogin();
-        public Login()
+        public Login_W()
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -35,7 +35,7 @@ namespace Stock.Views
         {
             if(o_ILogin.Login(NAME.Text, PASSWORD.Password))
             {
-                MainMenu wMainMenu = new MainMenu();
+                MainMenu_W wMainMenu = new MainMenu_W();
                 wMainMenu.Owner = this;
                 this.Hide(); // not required if using the child events below
                 wMainMenu.ShowDialog();

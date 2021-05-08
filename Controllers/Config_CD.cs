@@ -1,5 +1,4 @@
-﻿using Stock.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,12 +8,12 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
-namespace Stock.Utils
+namespace Stock.Controllers
 {
-    public class Config
+    public class Config_CD
     {
         //-----------------------------------------------------------------------------------------------
-        public Config()
+        public Config_CD()
         {
             db_mysql = new Config_mysql();
             company = new Config_company();
@@ -25,32 +24,32 @@ namespace Stock.Utils
         public Config_company company;
         public Config_software software;
         //-----------------------------------------------------------------------------------------------
-        public static void save(Config _Config)
+        public static void save(Config_CD _Config)
         {
             CreateDirectories();
             try
             {
-                WriteToBinaryFile(dir_home() + "Config_mysql.bin", _Config.db_mysql);
-                WriteToBinaryFile(dir_home() + "Config_company.bin", _Config.company);
-                WriteToBinaryFile(dir_home() + "Config_software.bin", _Config.software);
+                Helper.WriteToBinaryFile(dir_home() + "Config_mysql.bin", _Config.db_mysql);
+                Helper.WriteToBinaryFile(dir_home() + "Config_company.bin", _Config.company);
+                Helper.WriteToBinaryFile(dir_home() + "Config_software.bin", _Config.software);
             }
             catch (Exception){}
         }
         //-----------------------------------------------------------------------------------------------
-        public static Config load()
+        public static Config_CD load()
         {
             CreateDirectories();
             try
             {
-                Config o = new Config();
-                o.db_mysql = ReadFromBinaryFile<Config_mysql>(dir_home() + "Config_mysql.bin");
-                o.company = ReadFromBinaryFile<Config_company>(dir_home() + "Config_company.bin");
-                o.software = ReadFromBinaryFile<Config_software>(dir_home() + "Config_software.bin");
+                Config_CD o = new Config_CD();
+                o.db_mysql = Helper.ReadFromBinaryFile<Config_mysql>(dir_home() + "Config_mysql.bin");
+                o.company = Helper.ReadFromBinaryFile<Config_company>(dir_home() + "Config_company.bin");
+                o.software = Helper.ReadFromBinaryFile<Config_software>(dir_home() + "Config_software.bin");
                 return o;
             }
             catch (Exception)
             {
-                var o = new Config();
+                var o = new Config_CD();
                 save(o);
                 return o;
             }
@@ -67,24 +66,6 @@ namespace Stock.Utils
                 foreach (string dir in array_dir) if (!System.IO.Directory.Exists(dir)) System.IO.Directory.CreateDirectory(dir);
             }
             catch (Exception){}
-        }
-        //----------------------------------------------------------------------------------------------- 
-        private static void WriteToBinaryFile<T>(string filePath, T objectToWrite, bool append = false)
-        {
-            using (Stream stream = File.Open(filePath, append ? FileMode.Append : FileMode.Create))
-            {
-                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                binaryFormatter.Serialize(stream, objectToWrite);
-            }
-        }
-        //----------------------------------------------------------------------------------------------- 
-        private static T ReadFromBinaryFile<T>(string filePath)
-        {
-            using (Stream stream = File.Open(filePath, FileMode.Open))
-            {
-                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                return (T)binaryFormatter.Deserialize(stream);
-            }
         }
         //-----------------------------------------------------------------------------------------------
     }

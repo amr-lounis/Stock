@@ -1,5 +1,4 @@
-﻿using Stock.Classes;
-using Stock.Controllers;
+﻿using Stock.Controllers;
 using Stock.Interfaces;
 using Stock.Models;
 using System;
@@ -63,7 +62,7 @@ namespace Stock.Views
         private void v_btn_ValidateInvoice(object sender, EventArgs e)
         {
             v_GridInvoiceValidation.Visibility = Visibility.Visible;
-            InvoiceValidation.Send(this,v_text_InvoiceID.Text);
+            InvoiceValidation_UC.Send(this,v_text_InvoiceID.Text);
         }
         private void v_btn_delete(object sender, EventArgs e)
         {

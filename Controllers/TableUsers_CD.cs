@@ -1,5 +1,4 @@
-﻿using Stock.Classes;
-using Stock.Dataset.Model;
+﻿using Stock.Dataset.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

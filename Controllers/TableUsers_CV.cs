@@ -1,5 +1,4 @@
-﻿using Stock.Classes;
-using Stock.Dataset.Model;
+﻿using Stock.Dataset.Model;
 using Stock.Interfaces;
 using Stock.Models;
 using System;
