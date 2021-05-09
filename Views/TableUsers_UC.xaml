@@ -8,7 +8,13 @@
              
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:iconverter="clr-namespace:Stock.Converter"
              >
+    <!-- Converter begin -->
+    <UserControl.Resources>
+        <iconverter:IConverterImage x:Key="IConverterImage" />
+    </UserControl.Resources>
+    <!-- Converter End -->
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -47,6 +53,15 @@
                   Grid.Row="1">
 
                 <DataGrid.Columns>
+                    <!-- Image Converter begin -->
+                    <DataGridTemplateColumn Header="Image" IsReadOnly="True" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ID, Converter={StaticResource IConverterImage}}" Width="30" Height="30"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!-- Image Converter end -->
                     <DataGridTemplateColumn Header="Action" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -63,7 +78,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Name" Binding="{Binding NAME}" IsReadOnly="True" MaxWidth="150"/>
                     <DataGridTextColumn Header="Password" Binding="{Binding PASSWORD}" IsReadOnly="True" MaxWidth="150"  Visibility="Collapsed"/>
-                    <DataGridTextColumn Header="Role" Binding="{Binding ROLE}" IsReadOnly="True" MaxWidth="150" />
+                    <DataGridTextColumn Header="Role" Binding="{Binding ID_ROLE}" IsReadOnly="True" MaxWidth="150" />
                     <DataGridTextColumn Header="Activity" Binding="{Binding ACTIVITY}" IsReadOnly="True"  MaxWidth="150"  Visibility="Collapsed"/>
                     <DataGridTextColumn Header="Account" Binding="{Binding MONEY_ACCOUNT}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
                     <DataGridTextColumn Header="Description" Binding="{Binding DESCRIPTION}" IsReadOnly="True"  MaxWidth="150" />

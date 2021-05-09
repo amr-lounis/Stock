@@ -17,7 +17,7 @@ namespace Stock.Controllers
             try
             {
                 var _db = Entities.GetInstance();
-                query = _db.users.Where(c => c.NAME.ToLower().Contains(_value) ).OrderBy("NAME"); ;
+                query = _db.users.Where(c => (c.NAME.ToLower().Contains(_value)) ||(c.DESCRIPTION.ToLower().Contains(_value)) ).OrderBy("NAME"); ;
                 _data_out = SkipTake(ref _this_page,ref query);
                 return query;
             }
@@ -100,16 +100,16 @@ namespace Stock.Controllers
         {
             return Config_CD.load().software.pageSizeSearch;
         }
-        private static string SkipTake(ref int page_this, ref IQueryable<user> _query)
+        private static string SkipTake<T>(ref int page_this, ref IQueryable<T> _query)
         {
             int page_max_size = GetPageSize();
-            int _rows_all = _query.Count();
+            int _rows_all = _query.Count()-1;
             int _page_count = (_rows_all / page_max_size);
             if (page_this < 0)page_this = 0;
             if (page_this > _page_count-1) page_this = _page_count;
              _query = _query.Skip(page_this * page_max_size).Take(page_max_size);
   
-            return string.Format("({0} / {1}) |{2}|", page_this , _page_count + 1, _rows_all);
+            return string.Format("({0} / {1}) |{2}|", page_this +1 , _page_count + 1, _rows_all +1);
         }
         private static IOrderedQueryable<TSource> OrderBy<TSource>(this IQueryable<TSource> query, string propertyName)
         {

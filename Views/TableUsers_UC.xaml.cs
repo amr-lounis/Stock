@@ -105,8 +105,9 @@ namespace Stock.Views
         {
             v_GridEdit.Visibility = Visibility.Collapsed;
             myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = ointerface.search(v_text_search.Text, ref  page);
-            v_text_pageNumber.Text = string.Format("{0}", page);
+            string s;
+            myDataGrid.ItemsSource = ointerface.search(v_text_search.Text, ref  page ,out s);
+            v_text_pageNumber.Text = s;
         }
         #endregion
         //************************************************************************************* Messanger //dynamic data = new System.Dynamic.ExpandoObject();

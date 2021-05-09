@@ -11,7 +11,7 @@ namespace Stock.Interfaces
     interface ITableUsers
     {
         user get(long _id);
-        List<user> search(string _value, ref int _this_page);
+        List<user> search(string _value, ref int _this_page, out string _data_out);
         int add(user _user);
         int edit(user _user);
         int delete(user _user);

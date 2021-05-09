@@ -18,15 +18,16 @@ namespace Stock.Controllers
             return TableUsers_CD.Get(_id);
         }
         //-------------------------------------------------------------------------------------
-        public List<user> search(string _value, ref int _this_page)
+        public List<user> search(string _value, ref int _this_page, out string _data_out)
         {
             try
             {
                 string s = "";
                 var query = TableUsers_CD.search(_value, ref _this_page, out s);
+                _data_out = s;
                 return query.ToList();
             }
-            catch (Exception){ return null; }
+            catch (Exception){ _data_out = ""; return null; }
         }
         //-------------------------------------------------------------------------------------
         public int add(user _user)

@@ -148,6 +148,7 @@
     <Compile Include="Controllers\TableInvoices_CV.cs" />
     <Compile Include="Controllers\TableProducts_CV.cs" />
     <Compile Include="Controllers\TableUsers_CD.cs" />
+    <Compile Include="Converter\IConverterImage.cs" />
     <Compile Include="Dataset\Model\category.cs" />
     <Compile Include="Dataset\Model\Entities.cs" />
     <Compile Include="Dataset\Model\invoice.cs" />
