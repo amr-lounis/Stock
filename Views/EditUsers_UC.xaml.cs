@@ -1,4 +1,5 @@
 ﻿using Stock.Controllers;
+using Stock.Dataset.Model;
 using Stock.Interfaces;
 using Stock.Models;
 using System;
@@ -77,13 +78,13 @@ namespace Stock.Views
                 if (_data.mode.Equals("Add"))
                 {
                     type = "Add";
-                    var o = new User_M();//change
-                    o.ID = "0";
+                    var o = new user();//change
+                    o.ID = 0;
                     InitInput(o);
                 }
                 else if (_data.mode.Equals("Edit") && (_data.message != null))
                 {
-                    var o = (_data.message as User_M);//change
+                    var o = (_data.message as user);//change
                     type = "Edit";
                     InitInput(o);
                 }
@@ -97,14 +98,14 @@ namespace Stock.Views
         #endregion
         //*************************************************************************************  in/out
         #region in/out
-        void InitInput(User_M _User)
+        void InitInput(user _User)
         {
             v_text_ID.Content = _User.ID;
             v_text_NAME.Text = _User.NAME;
             v_text_GENDER.Text = _User.GENDER;
             v_password_1.Password = _User.PASSWORD;
             v_password_2.Password = _User.PASSWORD;
-            v_text_ROLE.Text = _User.ROLE;
+            v_text_ROLE.Text = _User.ID_ROLE+"";
             v_text_ACTIVITY.Text = _User.ACTIVITY;
             v_text_DESCRIPTION.Text = _User.DESCRIPTION;
             v_text_NRC.Text = _User.NRC;
@@ -117,17 +118,17 @@ namespace Stock.Views
             v_text_WEBSITE.Text = _User.WEBSITE;
             v_text_EMAIL.Text = _User.EMAIL;
 
-            v_Numeric_MONEY_ACCOUNT.Value = Helper.DoubleFromString(_User.MONEY_ACCOUNT);
+            v_Numeric_MONEY_ACCOUNT.Value = _User.MONEY_ACCOUNT;
         }
-        User_M getInput()
+        user getInput()
         {
-            var o = new User_M();
-            o.ID = v_text_ID.Content.ToString();
+            var o = new user();
+            o.ID = Helper.LongFromString(v_text_ID.Content.ToString());
             o.NAME = v_text_NAME.Text;
             o.GENDER = v_text_GENDER.Text;
             o.PASSWORD = v_password_1.Password;
             o.PASSWORD = v_password_2.Password;
-            o.ROLE = v_text_ROLE.Text;
+            o.ID_ROLE = Helper.LongFromString(v_text_ROLE.Text);
             o.ACTIVITY = v_text_ACTIVITY.Text;
             o.DESCRIPTION = v_text_DESCRIPTION.Text;
             o.NRC = v_text_NRC.Text;
@@ -139,8 +140,7 @@ namespace Stock.Views
             o.FAX = v_text_FAX.Text;
             o.WEBSITE = v_text_WEBSITE.Text;
             o.EMAIL = v_text_EMAIL.Text;
-
-            o.MONEY_ACCOUNT = string.Format("{0}", v_Numeric_MONEY_ACCOUNT.Value);
+            o.MONEY_ACCOUNT = v_Numeric_MONEY_ACCOUNT.Value ?? 0;
             return o;
         }
         #endregion

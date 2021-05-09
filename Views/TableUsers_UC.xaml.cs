@@ -1,4 +1,5 @@
 ﻿using Stock.Controllers;
+using Stock.Dataset.Model;
 using Stock.Interfaces;
 using Stock.Models;
 using System;
@@ -26,21 +27,26 @@ namespace Stock.Views
             InitializeComponent();
             initReceiver();
             v_text_pageNumber.Text = "" + page;
+            v_text_search.Text = "";
             GridRefresh();
         }
 
         //************************************************************************************* event
         #region event
+        
+        private void v_text_search_changed(object sender, RoutedEventArgs e)
+        {
+            page = 0;
+            GridRefresh();
+        }
         private void event_forward(object sender, RoutedEventArgs e)
         {
             page++;
-            v_text_pageNumber.Text = string.Format("{0}", page);
             GridRefresh();
         }
         private void event_backward(object sender, RoutedEventArgs e)
         {
             page--;
-            v_text_pageNumber.Text = string.Format("{0}", page);
             GridRefresh();
         }
 
@@ -61,7 +67,7 @@ namespace Stock.Views
             {
                 dynamic data = new System.Dynamic.ExpandoObject();
                 data.mode = "Edit";
-                data.message = myDataGrid.SelectedItem as User_M;
+                data.message = myDataGrid.SelectedItem as user;
                 EditUsers_UC.Send(this, data);
             }
         }
@@ -69,7 +75,7 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as User_M;
+                var o = myDataGrid.SelectedItem as user;
                 if (ointerface.delete(o) >= 1)
                 {
                     GridRefresh();
@@ -84,7 +90,7 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as User_M;
+                var o = myDataGrid.SelectedItem as user;
                 dynamic data = new System.Dynamic.ExpandoObject();
                 data.ID = o.ID;
                 data.NAME = o.NAME;
@@ -100,6 +106,7 @@ namespace Stock.Views
             v_GridEdit.Visibility = Visibility.Collapsed;
             myDataGrid.ItemsSource = null;
             myDataGrid.ItemsSource = ointerface.search(v_text_search.Text, ref  page);
+            v_text_pageNumber.Text = string.Format("{0}", page);
         }
         #endregion
         //************************************************************************************* Messanger //dynamic data = new System.Dynamic.ExpandoObject();

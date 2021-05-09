@@ -13,9 +13,9 @@ namespace Stock.Dataset.Model
         public long ID { get; set; }
 
         [Column(TypeName = "uint")]
-        public long? ID_ROLE { get; set; }
+        public long ID_ROLE { get; set; }
 
         [Column(TypeName = "uint")]
-        public long? ID_PERMISSION { get; set; }
+        public long ID_PERMISSION { get; set; }
     }
 }

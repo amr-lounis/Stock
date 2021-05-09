@@ -25,18 +25,39 @@ namespace Stock.Controllers
         {
             return _DateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
         }
-        public static double DoubleFromString(string _Double)
+        public static double DoubleFromString(string _value)
         {
             try
             {
-                return double.Parse(_Double);
+                return double.Parse(_value);
             }
             catch (Exception)
             {
                 return 0f;
             }
         }
-
+        public static long LongFromString(string _value)
+        {
+            try
+            {
+                return long.Parse(_value);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+        public static int intFromString(string _value)
+        {
+            try
+            {
+                return int.Parse(_value);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
         static Random r = new Random();
         public static string random()
         {

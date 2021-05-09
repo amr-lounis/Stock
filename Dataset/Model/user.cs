@@ -28,11 +28,12 @@ namespace Stock.Dataset.Model
             WEBSITE = "";
             EMAIL = "";
         }
+
         [Column(TypeName = "uint")]
         public long ID { get; set; }
 
         [Column(TypeName = "uint")]
-        public long? ID_ROLE { get; set; }
+        public long ID_ROLE { get; set; }
 
         [StringLength(25)]
         public string NAME { get; set; }

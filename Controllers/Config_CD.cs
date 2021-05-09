@@ -109,7 +109,7 @@ namespace Stock.Controllers
         public String activation_hash_add = "lounis_amar_inventory_management_system";
         public String language = "EN";
         public String currency = "DA";
-        public int pageSizeSearch = 10;
+        public int pageSizeSearch = 5;
     }
     #endregion
 }

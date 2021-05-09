@@ -1,4 +1,5 @@
-﻿using Stock.Models;
+﻿using Stock.Dataset.Model;
+using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Stock.Interfaces
 {
     interface ITableUsers
     {
-        User_M get(string _ID);
-        List<User_M> search(string _value, ref int _this_page);
-        int add(User_M _User);
-        int edit(User_M _User);
-        int delete(User_M _User);
+        user get(long _id);
+        List<user> search(string _value, ref int _this_page);
+        int add(user _user);
+        int edit(user _user);
+        int delete(user _user);
     }
 }

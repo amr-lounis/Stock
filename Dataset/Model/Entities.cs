@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 
 namespace Stock.Dataset.Model
@@ -19,6 +20,18 @@ namespace Stock.Dataset.Model
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Entity<user>().ToTable("users");
+            modelBuilder.Entity<unit>().ToTable("units");
+            modelBuilder.Entity<sold_products>().ToTable("sold_products");
+            modelBuilder.Entity<roles_permissions>().ToTable("roles_permissions");
+            modelBuilder.Entity<product>().ToTable("products");
+            modelBuilder.Entity<permission>().ToTable("permissions");
+            modelBuilder.Entity<invoice>().ToTable("invoices");
+            modelBuilder.Entity<category>().ToTable("categorys");
+
             modelBuilder.Entity<category>()
                 .Property(e => e.NAME)
                 .IsUnicode(false);

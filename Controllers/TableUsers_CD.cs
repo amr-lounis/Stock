@@ -11,17 +11,17 @@ namespace Stock.Controllers
 {
     public static class TableUsers_CD
     {
-        public static IQueryable<user> search(string p_srting, ref int PageThis)
+        public static IQueryable<user> search(string _value, ref int _this_page,out string _data_out)
         {
-            var _db = Entities.GetInstance();
-            IQueryable<user> query;
+            IQueryable<user> query = null;
             try
             {
-                query = null;
-                query = _db.users.Where(c => c.NAME.ToLower().Contains(p_srting) || c.DESCRIPTION.ToLower().Contains(p_srting)).Take(GetPageSize());
+                var _db = Entities.GetInstance();
+                query = _db.users.Where(c => c.NAME.ToLower().Contains(_value) ).OrderBy("NAME"); ;
+                _data_out = SkipTake(ref _this_page,ref query);
                 return query;
             }
-            catch (Exception e) { return null; }
+            catch (Exception e) { _data_out = ""; return null; }
         }
         //----------------------------------------------------------------------------------------------------------------
         public static user Get(long p_id)
@@ -66,6 +66,8 @@ namespace Stock.Controllers
                 o.FAX = _user.FAX;
                 o.WEBSITE = _user.WEBSITE;
                 o.EMAIL = _user.EMAIL;
+                o.DESCRIPTION = _user.DESCRIPTION;
+                o.MONEY_ACCOUNT = _user.MONEY_ACCOUNT;
                 _db.SaveChanges();
                 return true;
             }
@@ -97,6 +99,17 @@ namespace Stock.Controllers
         private static int GetPageSize()
         {
             return Config_CD.load().software.pageSizeSearch;
+        }
+        private static string SkipTake(ref int page_this, ref IQueryable<user> _query)
+        {
+            int page_max_size = GetPageSize();
+            int _rows_all = _query.Count();
+            int _page_count = (_rows_all / page_max_size);
+            if (page_this < 0)page_this = 0;
+            if (page_this > _page_count-1) page_this = _page_count;
+             _query = _query.Skip(page_this * page_max_size).Take(page_max_size);
+  
+            return string.Format("({0} / {1}) |{2}|", page_this , _page_count + 1, _rows_all);
         }
         private static IOrderedQueryable<TSource> OrderBy<TSource>(this IQueryable<TSource> query, string propertyName)
         {

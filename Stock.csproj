@@ -143,11 +143,11 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\Helper.cs" />
     <Compile Include="Controllers\Config_CD.cs" />
-    <Compile Include="Controllers\TableUsers_CD.cs" />
     <Compile Include="Controllers\TableCashRegister_CV.cs" />
     <Compile Include="Controllers\Logine_CV.cs" />
     <Compile Include="Controllers\TableInvoices_CV.cs" />
     <Compile Include="Controllers\TableProducts_CV.cs" />
+    <Compile Include="Controllers\TableUsers_CD.cs" />
     <Compile Include="Dataset\Model\category.cs" />
     <Compile Include="Dataset\Model\Entities.cs" />
     <Compile Include="Dataset\Model\invoice.cs" />
@@ -231,7 +231,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\ITableUsers.cs" />
-    <Compile Include="Models\User_M.cs" />
     <Compile Include="Controllers\TableUsers_CV.cs" />
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>

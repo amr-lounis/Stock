@@ -61,7 +61,7 @@
 
                         <TextBox x:Name="v_text_NRC" materialDesign:HintAssist.Hint="NRC"  Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
-                        <TextBox x:Name="v_text_NIF" materialDesign:HintAssist.Hint="v_text_NIF" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        <TextBox x:Name="v_text_NIF" materialDesign:HintAssist.Hint="NIF" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
                         <TextBox x:Name="v_text_ADDRESS" materialDesign:HintAssist.Hint="Address" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 

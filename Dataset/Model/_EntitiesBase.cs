@@ -3,6 +3,7 @@ using Stock.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,5 +46,19 @@ namespace Stock.Dataset.Model
 
         #endregion
         //********************************************************
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
+
+        //    modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        //    modelBuilder.Entity<user>().ToTable("users");
+        //    modelBuilder.Entity<unit>().ToTable("units");
+        //    modelBuilder.Entity<sold_products>().ToTable("sold_products");
+        //    modelBuilder.Entity<roles_permissions>().ToTable("roles_permissions");
+        //    modelBuilder.Entity<product>().ToTable("products");
+        //    modelBuilder.Entity<permission>().ToTable("permissions");
+        //    modelBuilder.Entity<invoice>().ToTable("invoices");
+        //    modelBuilder.Entity<category>().ToTable("categorys");
+        //}
     }
 }
