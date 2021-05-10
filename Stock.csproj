@@ -148,15 +148,17 @@
     <Compile Include="Controllers\TableInvoices_CV.cs" />
     <Compile Include="Controllers\TableProducts_CV.cs" />
     <Compile Include="Controllers\TableUsers_CD.cs" />
-    <Compile Include="Converter\IConverterImage.cs" />
+    <Compile Include="Converter\IConverterImageProduct.cs" />
+    <Compile Include="Converter\IConverterImageUser.cs" />
     <Compile Include="Dataset\Model\category.cs" />
     <Compile Include="Dataset\Model\Entities.cs" />
-    <Compile Include="Dataset\Model\invoice.cs" />
     <Compile Include="Dataset\Model\permission.cs" />
     <Compile Include="Dataset\Model\product.cs" />
+    <Compile Include="Dataset\Model\productsold.cs" />
     <Compile Include="Dataset\Model\role.cs" />
-    <Compile Include="Dataset\Model\roles_permissions.cs" />
-    <Compile Include="Dataset\Model\sold_products.cs" />
+    <Compile Include="Dataset\Model\rolepermission.cs" />
+    <Compile Include="Dataset\Model\soldinvoice.cs" />
+    <Compile Include="Dataset\Model\stock.cs" />
     <Compile Include="Dataset\Model\unit.cs" />
     <Compile Include="Dataset\Model\user.cs" />
     <Compile Include="Dataset\Model\_EntitiesBase.cs" />
@@ -168,7 +170,6 @@
     <Compile Include="Interfaces\ITableProducts.cs" />
     <Compile Include="Models\CashRegister_M.cs" />
     <Compile Include="Models\Invoice_M.cs" />
-    <Compile Include="Models\Product_M.cs" />
     <Compile Include="Views\CashRegisters_UC.xaml.cs">
       <DependentUpon>CashRegisters_UC.xaml</DependentUpon>
     </Compile>

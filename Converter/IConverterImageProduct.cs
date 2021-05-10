@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace Stock.Converter
 {
-    public class IConverterImage : IValueConverter
+    public class IConverterImageProduct : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -18,8 +18,7 @@ namespace Stock.Converter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var v =(BitmapImage)value;
-            return "";
+            return (BitmapImage)value;
         }
     }
 }

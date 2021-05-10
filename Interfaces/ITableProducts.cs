@@ -1,18 +1,22 @@
-﻿using Stock.Models;
+﻿using Stock.Dataset.Model;
+using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Stock.Interfaces
 {
     public interface ITableProducts
     {
-        Product_M get(string _ID);
-        List<Product_M> getPage(ref int this_page);
-        int add(Product_M _Product);
-        int edit(Product_M _Product);
-        int delete(Product_M _Product);
+        product get(int _id);
+        List<product> getPage(ref int this_page);
+        int add(product _product);
+        int edit(product _product);
+        int delete(product _product);
+        BitmapImage getImage(long _id);
+        void setImage(BitmapImage _image, long _id);
     }
 }

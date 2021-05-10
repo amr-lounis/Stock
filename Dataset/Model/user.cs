@@ -9,26 +9,6 @@ namespace Stock.Dataset.Model
     [Table("stock.users")]
     public partial class user
     {
-        public user()
-        {
-            NAME = "NAME";
-            GENDER = "M/F";
-            PASSWORD = "";
-            ID_ROLE = 0;
-            ACTIVITY = "";
-            MONEY_ACCOUNT = 0;
-            DESCRIPTION = "";
-            NRC = "";
-            NIF = "";
-            ADDRESS = "";
-            CITY = "";
-            COUNTRY = "";
-            PHONE = "";
-            FAX = "";
-            WEBSITE = "";
-            EMAIL = "";
-        }
-
         [Column(TypeName = "uint")]
         public long ID { get; set; }
 
@@ -37,6 +17,9 @@ namespace Stock.Dataset.Model
 
         [StringLength(25)]
         public string NAME { get; set; }
+
+        [StringLength(250)]
+        public string DESCRIPTION { get; set; }
 
         [StringLength(25)]
         public string PASSWORD { get; set; }
@@ -73,9 +56,6 @@ namespace Stock.Dataset.Model
 
         [StringLength(25)]
         public string EMAIL { get; set; }
-
-        [StringLength(250)]
-        public string DESCRIPTION { get; set; }
 
         public double? MONEY_ACCOUNT { get; set; }
     }

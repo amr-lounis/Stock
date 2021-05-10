@@ -38,12 +38,9 @@
 
                 <!-- *************************************************** Begin Editable *************************************************** -->
                 <TextBox x:Name="v_text_NAME"  Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center"/>
-                
-                <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
-                    <Label Width="100" Margin="10,10,10,10" Content="quantity"  />
-                    <Controls:NumericUpDown x:Name="v_Numeric_QUANTITY" Width="300" Margin="10,10,10,10" Minimum="0" StringFormat="{}{0:N2}"/>
-                </StackPanel>
-                
+
+                <TextBox  x:Name="v_text_DESCRIPTION" materialDesign:HintAssist.Hint="Description" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
                 <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
                     <Label Width="100" Margin="10,10,10,10" Content="money purchasing"  />
                     <Controls:NumericUpDown x:Name="v_Numeric_MONEY_PURCHASE" Width="300" Margin="10,10,10,10" Minimum="0" StringFormat="{}{0:N2}"/>
@@ -53,7 +50,7 @@
                     <Label Width="100" Margin="10,10,10,10" Content="money selling"  />
                     <Controls:NumericUpDown x:Name="v_Numeric_MONEY_SELLING" Width="300" Margin="10,10,10,10" Minimum="0" StringFormat="{}{0:N2}"/>
                 </StackPanel>
-                
+
                 <Expander Margin="5" ExpandDirection="Down" IsExpanded="False" Background="{x:Null}">
                     <Expander.Header>
                         <BulletDecorator>
@@ -68,46 +65,23 @@
 
                         <TextBox  x:Name="v_text_UNITY" materialDesign:HintAssist.Hint="Unity" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
-                        <TextBox  x:Name="v_text_DESCRIPTION" materialDesign:HintAssist.Hint="Description" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-
                         <TextBox  x:Name="v_text_CODE" materialDesign:HintAssist.Hint="Code" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                        
-                        <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
-                            <Label Width="100" Margin="10,10,10,10" Content="quantity min"  />
-                            <Controls:NumericUpDown x:Name="v_Numeric_QUANTITY_MIN" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding QUANTITY_MIN}"  StringFormat="{}{0:N2}"/>
-                        </StackPanel>
-                        
+
                         <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
                             <Label Width="100" Margin="10,10,10,10" Content="money percentage tax"  />
                             <Controls:NumericUpDown x:Name="v_Numeric_TAX_PERCE" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding TAX_PERCE}"  StringFormat="{}{0:N2}"/>
                         </StackPanel>
-                        
+
                         <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
                             <Label Width="100" Margin="10,10,10,10" Content="money selling min"  />
                             <Controls:NumericUpDown x:Name="v_Numeric_MONEY_SELLING_MIN" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding MONEY_SELLING_MIN}"  StringFormat="{}{0:N2}"/>
                         </StackPanel>
-                        
-                        <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
-                            <Label Width="100" Margin="10,10,10,10" Content="date production"/>
-                            <DatePicker x:Name="v_dp_DATE_PRODUCTION" Width="300" Margin="10,0,10,10"/>
-                        </StackPanel>
-                        
-                        <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
-                            <Label Width="100" Margin="10,10,10,10" Content="date purchase"/>
-                            <DatePicker x:Name="v_dp_DATE_PURCHASE" Width="300" Margin="10,0,10,10"/>
-                        </StackPanel>
-                        
-                        <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
-                            <Label Width="100" Margin="10,10,10,10" Content="date expiration"/>
-                            <DatePicker x:Name="v_dp_DATE_EXPIRATION" Width="300" Margin="10,0,10,10" />
-                        </StackPanel>
-                        
+
                         <Label x:Name="v_text_ID" Content="0" materialDesign:HintAssist.Hint="ID" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalContentAlignment="Center" />
 
                     </StackPanel>
                 </Expander>
-
-
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>

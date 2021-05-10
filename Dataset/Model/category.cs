@@ -15,12 +15,10 @@ namespace Stock.Dataset.Model
         [Column(TypeName = "uint")]
         public long ID_CATEGORY { get; set; }
 
-        [Required]
         [StringLength(25)]
         public string NAME { get; set; }
 
-        [Required]
-        [StringLength(25)]
+        [StringLength(250)]
         public string DESCRIPTION { get; set; }
     }
 }

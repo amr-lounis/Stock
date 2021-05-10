@@ -8,7 +8,13 @@
              
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:iconverter="clr-namespace:Stock.Converter"
              >
+    <!-- Converter begin -->
+    <UserControl.Resources>
+        <iconverter:IConverterImageProduct x:Key="IConverterImage" />
+    </UserControl.Resources>
+    <!-- Converter End -->
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -42,6 +48,15 @@
                   MouseDoubleClick="event_MouseDoubleClick">
 
                 <DataGrid.Columns>
+                    <!-- Image Converter begin -->
+                    <DataGridTemplateColumn Header="Image" IsReadOnly="True" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ID, Converter={StaticResource IConverterImage}}" Width="30" Height="30"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!-- Image Converter end -->
                     <DataGridTemplateColumn Header="Action" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

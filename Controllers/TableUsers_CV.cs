@@ -7,6 +7,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Stock.Controllers
 {
@@ -46,6 +47,16 @@ namespace Stock.Controllers
         {
             TableUsers_CD.Delete(_user.ID);
             return 1;
+        }
+        //-------------------------------------------------------------------------------------
+        public BitmapImage getImage(long _id)
+        {
+            throw new NotImplementedException();
+        }
+        //-------------------------------------------------------------------------------------
+        public void setImage(BitmapImage _image, long _id)
+        {
+            throw new NotImplementedException();
         }
         //-------------------------------------------------------------------------------------
     }

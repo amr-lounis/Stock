@@ -1,23 +1,25 @@
-﻿using Stock.Interfaces;
+﻿using Stock.Dataset.Model;
+using Stock.Interfaces;
 using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Stock.Controllers
 {
     public class TableProducts_CV : ITableProducts
     {
-        static List<Product_M> list = new List<Product_M>();
+        static List<product> list = new List<product>();
         //-------------------------------------------------------------------------------------
-        public Product_M get(string _ID)
+        public product get(int _id)
         {
-            return list.Find(o => o.ID == _ID);
+            return list.Find(o => o.ID == _id);
         }
         //-------------------------------------------------------------------------------------
-        public List<Product_M> getPage(ref int this_page)
+        public List<product> getPage(ref int this_page)
         {
             int pageMax = 5;
             if (this_page < 0) this_page = 0;
@@ -25,35 +27,29 @@ namespace Stock.Controllers
             return list;
         }
         //-------------------------------------------------------------------------------------
-        public int add(Product_M _Product)
+        public int add(product _product)
         {
-            if (_Product.ID.Equals("0")) _Product.ID =Helper.random();
-            list.Add(_Product);
+            list.Add(_product);
             return 1;
         }
         //-------------------------------------------------------------------------------------
-        public int edit(Product_M _Product)
+        public int edit(product _product)
         {
             try
             {
-                var o = list.Find(x => x.ID == _Product.ID);
-                o.NAME = _Product.NAME;
-                o.CATEGORY = _Product.CATEGORY;
-                o.UNITE = _Product.UNITE;
-                o.DESCRIPTION = _Product.DESCRIPTION;
-                o.CODE = _Product.CODE;
-                o.IMPORTANCE = _Product.IMPORTANCE;
-                o.QUANTITY = _Product.QUANTITY;
-                o.QUANTITY_MIN = _Product.QUANTITY_MIN;
-                o.TAX_PERCE = _Product.TAX_PERCE;
-                o.MONEY_PURCHASE = _Product.MONEY_PURCHASE;
-                o.MONEY_SELLING = _Product.MONEY_SELLING;
-                o.MONEY_SELLING_MIN = _Product.MONEY_SELLING_MIN;
-                o.DATE_PRODUCTION = _Product.DATE_PRODUCTION;
-                o.DATE_PURCHASE = _Product.DATE_PURCHASE;
-                o.DATE_EXPIRATION = _Product.DATE_EXPIRATION;
+                var o = list.Find(x => x.ID == _product.ID);
+                o.NAME = _product.NAME;
+                o.DESCRIPTION = _product.DESCRIPTION;
+                o.ID_CATEGORY = _product.ID_CATEGORY;
+                o.ID_UNITE = _product.ID_UNITE;
+                o.CODE = _product.CODE;
 
-                list[list.FindIndex(x => x.ID == _Product.ID)] = o;
+                o.TAX_PERCE = _product.TAX_PERCE;
+                o.MONEY_PURCHASE = _product.MONEY_PURCHASE;
+                o.MONEY_SELLING = _product.MONEY_SELLING;
+                o.MONEY_SELLING_MIN = _product.MONEY_SELLING_MIN;
+
+                list[list.FindIndex(x => x.ID == _product.ID)] = o;
                 return 1;
             }
             catch (Exception)
@@ -63,10 +59,20 @@ namespace Stock.Controllers
 
         }
         //-------------------------------------------------------------------------------------
-        public int delete(Product_M _Product)
+        public int delete(product _product)
         {
-            list.RemoveAt(list.FindIndex(o => o.ID == _Product.ID));
+            list.RemoveAt(list.FindIndex(o => o.ID == _product.ID));
             return 1;
+        }
+        //-------------------------------------------------------------------------------------
+        public BitmapImage getImage(long _id)
+        {
+            throw new NotImplementedException();
+        }
+        //-------------------------------------------------------------------------------------
+        public void setImage(BitmapImage _image, long _id)
+        {
+            throw new NotImplementedException();
         }
         //-------------------------------------------------------------------------------------
     }

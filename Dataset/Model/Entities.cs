@@ -9,12 +9,13 @@ namespace Stock.Dataset.Model
     public partial class Entities : DbContext
     {
         public virtual DbSet<category> categorys { get; set; }
-        public virtual DbSet<invoice> invoices { get; set; }
         public virtual DbSet<permission> permissions { get; set; }
         public virtual DbSet<product> products { get; set; }
+        public virtual DbSet<productsold> productsolds { get; set; }
+        public virtual DbSet<rolepermission> rolepermissions { get; set; }
         public virtual DbSet<role> roles { get; set; }
-        public virtual DbSet<roles_permissions> roles_permissions { get; set; }
-        public virtual DbSet<sold_products> sold_products { get; set; }
+        public virtual DbSet<soldinvoice> soldinvoices { get; set; }
+        public virtual DbSet<stock> stocks { get; set; }
         public virtual DbSet<unit> units { get; set; }
         public virtual DbSet<user> users { get; set; }
 
@@ -24,23 +25,20 @@ namespace Stock.Dataset.Model
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Entity<user>().ToTable("users");
-            modelBuilder.Entity<unit>().ToTable("units");
-            modelBuilder.Entity<sold_products>().ToTable("sold_products");
-            modelBuilder.Entity<roles_permissions>().ToTable("roles_permissions");
-            modelBuilder.Entity<product>().ToTable("products");
             modelBuilder.Entity<permission>().ToTable("permissions");
-            modelBuilder.Entity<invoice>().ToTable("invoices");
+            modelBuilder.Entity<role>().ToTable("roles");
+            modelBuilder.Entity<rolepermission>().ToTable("rolepermissions");
+            modelBuilder.Entity<product>().ToTable("products");
             modelBuilder.Entity<category>().ToTable("categorys");
+            modelBuilder.Entity<productsold>().ToTable("productsolds");
+            modelBuilder.Entity<soldinvoice>().ToTable("soldinvoices");
+            modelBuilder.Entity<stock>().ToTable("stocks");
 
             modelBuilder.Entity<category>()
                 .Property(e => e.NAME)
                 .IsUnicode(false);
 
             modelBuilder.Entity<category>()
-                .Property(e => e.DESCRIPTION)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<invoice>()
                 .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
 
@@ -51,24 +49,46 @@ namespace Stock.Dataset.Model
             modelBuilder.Entity<permission>()
                 .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<permission>()
+                .HasMany(e => e.rolepermissions)
+                .WithRequired(e => e.permission)
+                .HasForeignKey(e => e.ID_PERMISSION);
 
             modelBuilder.Entity<product>()
                 .Property(e => e.NAME)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<product>()
+                .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
 
             modelBuilder.Entity<product>()
                 .Property(e => e.CODE)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<product>()
-                .Property(e => e.DESCRIPTION)
-                .IsUnicode(false);
-
             modelBuilder.Entity<role>()
                 .Property(e => e.NAME)
                 .IsUnicode(false);
 
             modelBuilder.Entity<role>()
+                .Property(e => e.DESCRIPTION)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<role>()
+                .HasMany(e => e.rolepermissions)
+                .WithRequired(e => e.role)
+                .HasForeignKey(e => e.ID_ROLE);
+
+            modelBuilder.Entity<soldinvoice>()
+                .Property(e => e.DESCRIPTION)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<stock>()
+                .Property(e => e.NAME)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<stock>()
                 .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
 
@@ -82,6 +102,10 @@ namespace Stock.Dataset.Model
 
             modelBuilder.Entity<user>()
                 .Property(e => e.NAME)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<user>()
+                .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
 
             modelBuilder.Entity<user>()
@@ -130,10 +154,6 @@ namespace Stock.Dataset.Model
 
             modelBuilder.Entity<user>()
                 .Property(e => e.EMAIL)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<user>()
-                .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
         }
     }

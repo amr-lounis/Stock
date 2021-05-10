@@ -13,8 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Stock.Models;
 using Stock.Interfaces;
+using Stock.Dataset.Model;
 
 namespace Stock.Views
 {
@@ -59,7 +59,7 @@ namespace Stock.Views
             {
                 dynamic data = new System.Dynamic.ExpandoObject();
                 data.mode = "Edit";
-                data.message = myDataGrid.SelectedItem as Product_M;
+                data.message = myDataGrid.SelectedItem as product;
                 EditProducts_UC.Send(this, data);
             }
         }
@@ -67,7 +67,7 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as Product_M;
+                var o = myDataGrid.SelectedItem as product;
                 if (ointerface.delete(o) >= 1)
                 {
                     GridRefresh();
@@ -82,7 +82,7 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as Product_M;
+                var o = myDataGrid.SelectedItem as product;
                 dynamic data = new System.Dynamic.ExpandoObject();
                 data.ID = o.ID;
                 data.NAME = o.NAME;

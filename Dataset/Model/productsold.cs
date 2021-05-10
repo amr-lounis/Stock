@@ -6,8 +6,8 @@ namespace Stock.Dataset.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("stock.sold_products")]
-    public partial class sold_products
+    [Table("stock.productsolds")]
+    public partial class productsold
     {
         [Column(TypeName = "uint")]
         public long ID { get; set; }
@@ -18,12 +18,12 @@ namespace Stock.Dataset.Model
         [Column(TypeName = "uint")]
         public long ID_INVOICE { get; set; }
 
-        public double MONEY_ONE { get; set; }
+        public double? MONEY_ONE { get; set; }
 
-        public double QUANTITY { get; set; }
+        public double? QUANTITY { get; set; }
 
-        public double TAX_PERCE { get; set; }
+        public double? TAX_PERCE { get; set; }
 
-        public double STAMP { get; set; }
+        public double? STAMP { get; set; }
     }
 }

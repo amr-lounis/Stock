@@ -52,13 +52,14 @@ namespace Stock.Dataset.Model
 
         //    modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         //    modelBuilder.Entity<user>().ToTable("users");
-        //    modelBuilder.Entity<unit>().ToTable("units");
-        //    modelBuilder.Entity<sold_products>().ToTable("sold_products");
-        //    modelBuilder.Entity<roles_permissions>().ToTable("roles_permissions");
-        //    modelBuilder.Entity<product>().ToTable("products");
         //    modelBuilder.Entity<permission>().ToTable("permissions");
-        //    modelBuilder.Entity<invoice>().ToTable("invoices");
+        //    modelBuilder.Entity<role>().ToTable("roles");
+        //    modelBuilder.Entity<rolepermission>().ToTable("rolepermissions");
+        //    modelBuilder.Entity<product>().ToTable("products");
         //    modelBuilder.Entity<category>().ToTable("categorys");
+        //    modelBuilder.Entity<productsold>().ToTable("productsolds");
+        //    modelBuilder.Entity<soldinvoice>().ToTable("soldinvoices");
+        //    modelBuilder.Entity<stock>().ToTable("stocks");
         //}
     }
 }
