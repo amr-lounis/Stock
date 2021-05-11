@@ -13,7 +13,7 @@ namespace Stock.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return new BitmapImage(new Uri("/assets/images/user.png", UriKind.Relative));
+            return new BitmapImage(new Uri("/assets/images/openBox.png", UriKind.Relative));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

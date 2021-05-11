@@ -1,6 +1,6 @@
 ﻿using Stock.Controllers;
+using Stock.Dataset.Model;
 using Stock.Interfaces;
-using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,51 +24,30 @@ namespace Stock.Views
         {
             InitializeComponent();
             initReceiver();
-            vPageNumber.Text = "" + page;
+            v_text_pageNumber.Text = "" + page;
+            v_text_search.Text = "";
             GridRefresh();
         }
 
-        #region event
         //************************************************************************************* event
+        #region event
+
+        private void v_text_search_changed(object sender, RoutedEventArgs e)
+        {
+            page = 0;
+            GridRefresh();
+        }
         private void event_forward(object sender, RoutedEventArgs e)
         {
             page++;
-            vPageNumber.Text = string.Format("{0}", page);
             GridRefresh();
         }
         private void event_backward(object sender, RoutedEventArgs e)
         {
             page--;
-            vPageNumber.Text = string.Format("{0}", page);
             GridRefresh();
         }
 
-        private void event_add(object sender, RoutedEventArgs e)
-        {
-            ointerface.add(new Invoice_M());
-        }
-        private void event_edit(object sender, RoutedEventArgs e)
-        {
-            if (myDataGrid.SelectedItem != null)
-            {
-                ointerface.edit(new Invoice_M());
-            }
-        }
-        private void event_delete(object sender, RoutedEventArgs e)
-        {
-            if (myDataGrid.SelectedItem != null)
-            {
-                var o = myDataGrid.SelectedItem as Invoice_M;
-                if (ointerface.delete(o) >= 1)
-                {
-                    GridRefresh();
-                }
-                else
-                {
-                    MessageBox.Show("can\'t detete");
-                }
-            }
-        }
         private void event_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (myDataGrid.SelectedItem != null)
@@ -83,10 +62,21 @@ namespace Stock.Views
         {
             GridRefresh();
         }
+        private DateTime getBegin()
+        {
+            return v_dp_DateBegin.SelectedDate ?? DateTime.MinValue;
+        }
+        private DateTime getEnd()
+        {
+            return v_dp_DateBegin.SelectedDate ?? DateTime.MaxValue;
+        }
         private void GridRefresh()
         {
             myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = ointerface.getPage(ref page);
+            string s;
+            myDataGrid.ItemsSource = ointerface.search(v_text_search.Text, getBegin(), getEnd(), ref page, out s);
+            v_text_pageNumber.Text = s;
+            myDataGrid.ItemsSource = null;
         }
         #endregion
         //************************************************************************************* Messanger //dynamic data = new System.Dynamic.ExpandoObject();  //if (OnReturnMessage != null) OnReturnMessage(_sender, _data);

@@ -94,7 +94,7 @@ namespace Stock.Views
         public void v_btn_cashRegister(object sender, RoutedEventArgs e)
         {
             CashRegisters_UC o = new CashRegisters_UC();
-            AddTabItem(o, "CashRegister_M:" + cpt);
+            AddTabItem(o, "productsold:" + cpt);
         }
         public void v_btn_user(object sender, RoutedEventArgs e)
         {

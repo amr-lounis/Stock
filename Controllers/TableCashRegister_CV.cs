@@ -1,5 +1,5 @@
-﻿using Stock.Interfaces;
-using Stock.Models;
+﻿using Stock.Dataset.Model;
+using Stock.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,56 +10,54 @@ namespace Stock.Controllers
 {
     public class TableCashRegister_CV : ITableCashRegisters
     {
-        List<CashRegister_M> list = new List<CashRegister_M>();
+        List<productsold> list = new List<productsold>();
         //-------------------------------------------------------------------------------------
-        public CashRegister_M get(string _ID)
+        public productsold get(int _id)
         {
-            return list.Find(o => o.ID == _ID);
+            return list.Find(o => o.ID == _id);
         }
         //-------------------------------------------------------------------------------------
-        public List<CashRegister_M> getAll()
+        public List<productsold> getAll()
         {
             return list;
         }
         //-------------------------------------------------------------------------------------
-        public int add(CashRegister_M _CashRegister)
+        public int add(productsold _productsold)
         {
-            if(_CashRegister.ID.Equals("0")) _CashRegister.ID = Helper.random();
-            list.Add(_CashRegister);
-            calcule(ref _CashRegister);
+            if(_productsold.ID.Equals("0")) _productsold.ID = 23132;
+            list.Add(_productsold);
+            calcule(ref _productsold);
             return 1;
         }
         //-------------------------------------------------------------------------------------
-        public int edit(CashRegister_M _CashRegister)
+        public int edit(productsold _productsold)
         {
-            var o = list.Find(x => x.ID == _CashRegister.ID);
-            o.NAME = _CashRegister.NAME;
-            o.CODE = _CashRegister.CODE;
-            o.MONEY_ONE = _CashRegister.MONEY_ONE;
-            o.QUANTITY = _CashRegister.QUANTITY;
-            o.TAX_PERCE = _CashRegister.TAX_PERCE;
-            o.STAMP = _CashRegister.STAMP;
+            var o = list.Find(x => x.ID == _productsold.ID);
+            o.MONEY_ONE = _productsold.MONEY_ONE;
+            o.QUANTITY = _productsold.QUANTITY;
+            o.TAX_PERCE = _productsold.TAX_PERCE;
+            o.STAMP = _productsold.STAMP;
 
-            calcule(ref _CashRegister);
+            calcule(ref _productsold);
 
-            list[list.FindIndex(x => x.ID == _CashRegister.ID)] = o;
+            list[list.FindIndex(x => x.ID == _productsold.ID)] = o;
             return 1;
         }
         //-------------------------------------------------------------------------------------
-        public int delete(CashRegister_M _CashRegister)
+        public int delete(productsold _productsold)
         {
-            list.RemoveAt(list.FindIndex(o => o.ID == _CashRegister.ID));
+            list.RemoveAt(list.FindIndex(o => o.ID == _productsold.ID));
             return 1;
         }
         //-------------------------------------------------------------------------------------
-        void calcule(ref CashRegister_M _CashRegister)
+        void calcule(ref productsold _productsold)
         {
-            var MONEY_ONE = Helper.DoubleFromString(_CashRegister.MONEY_ONE);
-            var QUANTITY = Helper.DoubleFromString(_CashRegister.QUANTITY);
-            var TAX_PERCE = Helper.DoubleFromString(_CashRegister.TAX_PERCE);
-            var STAMP = Helper.DoubleFromString(_CashRegister.STAMP);
-            _CashRegister.TAX_VALUE = string.Format("{0}", MONEY_ONE / 100 * TAX_PERCE);
-            _CashRegister.MONEY_PAID = string.Format("{0}", (MONEY_ONE + STAMP + (MONEY_ONE / 100 * TAX_PERCE)) * QUANTITY);
+            var MONEY_ONE = _productsold.MONEY_ONE;
+            var QUANTITY = _productsold.QUANTITY;
+            var TAX_PERCE = _productsold.TAX_PERCE;
+            var STAMP = _productsold.STAMP;
+            var TAX_VALUE = string.Format("{0}", MONEY_ONE / 100 * TAX_PERCE);
+            var MONEY_PAID = string.Format("{0}", (MONEY_ONE + STAMP + (MONEY_ONE / 100 * TAX_PERCE)) * QUANTITY);
         }
     }
 }

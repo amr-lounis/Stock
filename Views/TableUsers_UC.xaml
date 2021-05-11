@@ -27,17 +27,17 @@
                     <TextBox x:Name="v_text_search"  materialDesign:HintAssist.Hint="search..." TextChanged="v_text_search_changed" FontSize="25" Width="200" Height="40" Margin="5" />
                     
                     <Button Style="{DynamicResource ButtonNull}" Click="event_backward"  Width="30" Height="30" Margin="10,0,10,0">
-                        <Image Source="../assets/images/buttonLeft.png"/>
+                        <Image Source="{DynamicResource image_buttonLeft}"/>
                     </Button>
                     
                     <TextBlock x:Name="v_text_pageNumber" Foreground="Red" VerticalAlignment="Center" FontSize="20"/>
 
                     <Button Style="{DynamicResource ButtonNull}" Click="event_forward"  Width="30" Height="30" Margin="10,0,10,0">
-                        <Image Source="../assets/images/buttonRight.png"/>
+                        <Image Source="{DynamicResource image_buttonRight}"/>
                     </Button>
                     
                     <Button Style="{DynamicResource ButtonNull}" Click="event_add" Width="30" Height="30" Margin="10,0,10,0">
-                        <Image Source="../assets/images/Add.png"/>
+                        <Image Source="{DynamicResource image_add}"/>
                     </Button>
                     
                 </StackPanel>

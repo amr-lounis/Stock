@@ -1,4 +1,4 @@
-﻿using Stock.Models;
+﻿using Stock.Dataset.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,10 @@ namespace Stock.Interfaces
 {
     interface ITableCashRegisters
     {
-        CashRegister_M get(string _ID);
-        List<CashRegister_M> getAll();
-        int add(CashRegister_M _CashRegister);
-        int edit(CashRegister_M _CashRegister);
-        int delete(CashRegister_M _CashRegister);
+        productsold get(int _id);
+        List<productsold> getAll();
+        int add(productsold _CashRegister);
+        int edit(productsold _CashRegister);
+        int delete(productsold _CashRegister);
     }
 }

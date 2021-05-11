@@ -1,5 +1,5 @@
-﻿using Stock.Interfaces;
-using Stock.Models;
+﻿using Stock.Dataset.Model;
+using Stock.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +10,27 @@ namespace Stock.Controllers
 {
     public class TableInvoices_CV : ITableInvoices
     {
-        static List<Invoice_M> list = new List<Invoice_M>();
+        static List<soldinvoice> list = new List<soldinvoice>();
         //-------------------------------------------------------------------------------------
-        public Invoice_M get(string _ID)
+        public soldinvoice get(long _id)
         {
-            return list.Find(o => o.ID == _ID);
+            return list.Find(o => o.ID == _id);
         }
         //-------------------------------------------------------------------------------------
-        public List<Invoice_M> getPage(ref int this_page)
+        public List<soldinvoice> search(string _value, DateTime _begin, DateTime _end, ref int _this_page, out string _data_out)
         {
-            int pageMax = 5;
-            if (this_page < 0) this_page = 0;
-            if (this_page > pageMax) this_page = pageMax;
+            _data_out = "";
             return list;
         }
         //-------------------------------------------------------------------------------------
-        public int add(Invoice_M _Invoice)
+        public int add(soldinvoice _Invoice)
         {
-            if (_Invoice.ID.Equals("0")) _Invoice.ID = Helper.random();
+            if (_Invoice.ID.Equals(0)) _Invoice.ID = 1613132;
             list.Add(_Invoice);
             return 1;
         }
         //-------------------------------------------------------------------------------------
-        public int edit(Invoice_M _Invoice)
+        public int edit(soldinvoice _Invoice)
         {
             var o = list.Find(x => x.ID == _Invoice.ID);
             o.DESCRIPTION = _Invoice.DESCRIPTION;
@@ -49,7 +47,7 @@ namespace Stock.Controllers
             return 1;
         }
         //-------------------------------------------------------------------------------------
-        public int delete(Invoice_M _Invoice)
+        public int delete(soldinvoice _Invoice)
         {
             list.RemoveAt(list.FindIndex(o => o.ID == _Invoice.ID));
             return 1;
@@ -58,7 +56,7 @@ namespace Stock.Controllers
     }
 }
 
-//var v = new Invoice_M
+//var v = new soldinvoice
 //{
 //    ID = "",
 //    ID_USERS = "",

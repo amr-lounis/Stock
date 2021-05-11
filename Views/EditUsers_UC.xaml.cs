@@ -1,7 +1,6 @@
 ﻿using Stock.Controllers;
 using Stock.Dataset.Model;
 using Stock.Interfaces;
-using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

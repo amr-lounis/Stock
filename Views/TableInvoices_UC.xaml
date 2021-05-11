@@ -16,17 +16,19 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0"  Margin="50,10,50,10" Orientation="Horizontal">
             <StackPanel Orientation="Horizontal">
-                <TextBox materialDesign:HintAssist.Hint="search..."  Width="200" Margin="5" />
-                <!-- BeforePage -->
-                <Button Click="event_backward" Style="{DynamicResource ButtonNull}">
-                    <materialDesign:PackIcon Kind="NavigateBefore" Height="30" Width="30" Foreground="Blue"/>
+                
+                <TextBox x:Name="v_text_search"  materialDesign:HintAssist.Hint="search..." TextChanged="v_text_search_changed" FontSize="25" Width="200" Height="40" Margin="5" />
+
+                <Button Style="{DynamicResource ButtonNull}" Click="event_backward"  Width="30" Height="30" Margin="10,0,10,0">
+                    <Image Source="{DynamicResource image_buttonLeft}"/>
                 </Button>
-                <!-- Page -->
-                <TextBlock x:Name="vPageNumber" Style="{DynamicResource TextBlocRedkNull}" Text="{Binding Label_Page}"/>
-                <!-- NextPage -->
-                <Button Click="event_forward" Style="{DynamicResource ButtonNull}" >
-                    <materialDesign:PackIcon Kind="NavigateNext" Height="30" Width="30" Foreground="Blue"/>
+
+                <TextBlock x:Name="v_text_pageNumber" Foreground="Red" VerticalAlignment="Center" FontSize="20"/>
+
+                <Button Style="{DynamicResource ButtonNull}" Click="event_forward"  Width="30" Height="30" Margin="10,0,10,0">
+                    <Image Source="{DynamicResource image_buttonRight}"/>
                 </Button>
+                
             </StackPanel>
             <StackPanel  Margin="10,10,10,10" Orientation="Horizontal">
                 <TextBlock Text="begin" Style="{DynamicResource TextBlocBlackNull}"/>

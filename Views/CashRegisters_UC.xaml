@@ -232,6 +232,7 @@
             HorizontalAlignment="Center" 
             VerticalAlignment="Center">
                 <StackPanel Orientation="Vertical">
+                    <Controls:NumericUpDown x:Name="v_GridEdit_value" HideUpDownButtons="False" IsReadOnly="False" FontFamily="{DynamicResource font_digital-7}" Background="Black" FontWeight="Bold"  Foreground="Red" FontSize="20" StringFormat="{}{0:N2}" MinWidth="500"/>
                     <TextBox x:Name="v_GridEditText" MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding EditValue}"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button Content="Ok" Click="v_btn_editOk" Margin="5"  Background="{x:Null}"/>

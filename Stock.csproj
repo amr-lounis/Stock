@@ -143,9 +143,12 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\Helper.cs" />
     <Compile Include="Controllers\Config_CD.cs" />
+    <Compile Include="Controllers\TableCashRegister_CD.cs" />
     <Compile Include="Controllers\TableCashRegister_CV.cs" />
     <Compile Include="Controllers\Logine_CV.cs" />
+    <Compile Include="Controllers\TableInvoices_CD.cs" />
     <Compile Include="Controllers\TableInvoices_CV.cs" />
+    <Compile Include="Controllers\TableProducts_CD.cs" />
     <Compile Include="Controllers\TableProducts_CV.cs" />
     <Compile Include="Controllers\TableUsers_CD.cs" />
     <Compile Include="Converter\IConverterImageProduct.cs" />
@@ -168,8 +171,6 @@
     <Compile Include="Interfaces\ILogin.cs" />
     <Compile Include="Interfaces\ITableInvoices.cs" />
     <Compile Include="Interfaces\ITableProducts.cs" />
-    <Compile Include="Models\CashRegister_M.cs" />
-    <Compile Include="Models\Invoice_M.cs" />
     <Compile Include="Views\CashRegisters_UC.xaml.cs">
       <DependentUpon>CashRegisters_UC.xaml</DependentUpon>
     </Compile>
@@ -317,6 +318,7 @@
     <Resource Include="assets\images\enterKey.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="Reports\" />
     <Folder Include="Utils\" />
   </ItemGroup>

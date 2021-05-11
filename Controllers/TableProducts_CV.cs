@@ -1,6 +1,5 @@
 ﻿using Stock.Dataset.Model;
 using Stock.Interfaces;
-using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,68 +11,52 @@ namespace Stock.Controllers
 {
     public class TableProducts_CV : ITableProducts
     {
-        static List<product> list = new List<product>();
         //-------------------------------------------------------------------------------------
-        public product get(int _id)
+        public product get(long _id)
         {
-            return list.Find(o => o.ID == _id);
+            return TableProducts_CD.Get(_id);
         }
         //-------------------------------------------------------------------------------------
-        public List<product> getPage(ref int this_page)
+        public List<product> search(string _value, ref int _this_page, out string _data_out)
         {
-            int pageMax = 5;
-            if (this_page < 0) this_page = 0;
-            if (this_page > pageMax) this_page = pageMax;
-            return list;
+            try
+            {
+                string s = "";
+                var query = TableProducts_CD.search(_value, ref _this_page, out s);
+                _data_out = s;
+                return query.ToList();
+            }
+            catch (Exception) { _data_out = ""; return null; }
         }
         //-------------------------------------------------------------------------------------
         public int add(product _product)
         {
-            list.Add(_product);
+            TableProducts_CD.Add(_product);
             return 1;
         }
         //-------------------------------------------------------------------------------------
         public int edit(product _product)
         {
-            try
-            {
-                var o = list.Find(x => x.ID == _product.ID);
-                o.NAME = _product.NAME;
-                o.DESCRIPTION = _product.DESCRIPTION;
-                o.ID_CATEGORY = _product.ID_CATEGORY;
-                o.ID_UNITE = _product.ID_UNITE;
-                o.CODE = _product.CODE;
-
-                o.TAX_PERCE = _product.TAX_PERCE;
-                o.MONEY_PURCHASE = _product.MONEY_PURCHASE;
-                o.MONEY_SELLING = _product.MONEY_SELLING;
-                o.MONEY_SELLING_MIN = _product.MONEY_SELLING_MIN;
-
-                list[list.FindIndex(x => x.ID == _product.ID)] = o;
-                return 1;
-            }
-            catch (Exception)
-            {
-                return -1;
-            }
-
+            TableProducts_CD.Edit(_product);
+            return 1;
         }
         //-------------------------------------------------------------------------------------
         public int delete(product _product)
         {
-            list.RemoveAt(list.FindIndex(o => o.ID == _product.ID));
+            TableProducts_CD.Delete(_product.ID);
             return 1;
         }
         //-------------------------------------------------------------------------------------
         public BitmapImage getImage(long _id)
         {
-            throw new NotImplementedException();
+            return new BitmapImage();
         }
         //-------------------------------------------------------------------------------------
         public void setImage(BitmapImage _image, long _id)
         {
-            throw new NotImplementedException();
+
         }
         //-------------------------------------------------------------------------------------
     }
 }
+

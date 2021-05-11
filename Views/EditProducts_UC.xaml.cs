@@ -117,6 +117,8 @@ namespace Stock.Views
             o.MONEY_PURCHASE = v_Numeric_MONEY_PURCHASE.Value ;
             o.MONEY_SELLING = v_Numeric_MONEY_SELLING.Value ;
             o.MONEY_SELLING_MIN = v_Numeric_MONEY_SELLING_MIN.Value;
+
+            o.IMPORTANCE = 0;
             return o;
         }
         #endregion

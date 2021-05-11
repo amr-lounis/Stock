@@ -1,6 +1,6 @@
 ﻿using Stock.Controllers;
+using Stock.Dataset.Model;
 using Stock.Interfaces;
-using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +54,7 @@ namespace Stock.Views
         }
         private void v_btn_AddNewInvoice(object sender, EventArgs e)
         {
-            if(oi_Invoice.add(new Invoice_M()) < 1)
+            if(oi_Invoice.add(new soldinvoice()) < 1)
             {
                 MessageBox.Show("can\'t add");
             }
@@ -68,7 +68,7 @@ namespace Stock.Views
         {
             if (v_GridCashRegister.SelectedItem != null)
             {
-                var o = v_GridCashRegister.SelectedItem as CashRegister_M;
+                var o = v_GridCashRegister.SelectedItem as productsold;
                 if (oi_CashRegisters.delete(o) >= 1)
                 {
                     GridRefresh();
@@ -103,30 +103,30 @@ namespace Stock.Views
         private void v_btn_editOk(object sender, EventArgs e)
         {
             v_GridEdit.Visibility = Visibility.Collapsed;
-            var o = v_GridCashRegister.SelectedItem as CashRegister_M;
+            var o = v_GridCashRegister.SelectedItem as productsold;
             switch (EditWhat)
             {
                 case ("MONEY_ONE"):
                     {
-                        o.MONEY_ONE = v_GridEditText.Text;
+                        o.MONEY_ONE = v_GridEdit_value.Value ?? 0;
                         oi_CashRegisters.edit(o);
                     }
                     break;
                 case ("QUANTITY"):
                     {
-                        o.QUANTITY = v_GridEditText.Text;
+                        o.QUANTITY = v_GridEdit_value.Value ?? 0;
                         oi_CashRegisters.edit(o);
                     }
                     break;
                 case ("TAX_PERCE"):
                     {
-                        o.TAX_PERCE = v_GridEditText.Text;
+                        o.TAX_PERCE = v_GridEdit_value.Value ?? 0;
                         oi_CashRegisters.edit(o);
                     }
                     break;
                 case ("STAMP"):
                     {
-                        o.STAMP = v_GridEditText.Text;
+                        o.STAMP = v_GridEdit_value.Value ?? 0;
                         oi_CashRegisters.edit(o);
                     }
                     break;
@@ -179,16 +179,14 @@ namespace Stock.Views
         }
         public void ReturnProduct(object _sender, dynamic _data)
         {
-            var o = new CashRegister_M();
-            o.ID = "0";
-            o.ID_PRODUCTS = _data.ID;
-            o.ID_INVOICES = v_text_InvoiceID.Text;
-            o.NAME = _data.NAME;
-            o.CODE = _data.CODE;
+            var o = new productsold();
+            o.ID = 0;
+            o.ID_PRODUCT = _data.ID;
+            o.ID_INVOICE =Helper.LongFromString(v_text_InvoiceID.Text);
             o.MONEY_ONE = _data.MONEY_SELLING;
-            o.QUANTITY = "1";
+            o.QUANTITY = 1;
             o.TAX_PERCE = _data.TAX_PERCE;
-            o.STAMP = "0";
+            o.STAMP = 0;
 
             oi_CashRegisters.add(o);
             GridRefresh();

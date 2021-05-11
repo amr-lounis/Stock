@@ -24,21 +24,27 @@ namespace Stock.Views
         {
             InitializeComponent();
             initReceiver();
-            vPageNumber.Text = "" + page;
+            v_text_pageNumber.Text = "" + page;
+            v_text_search.Text = "";
             GridRefresh();
         }
+
         //************************************************************************************* event
         #region event
+
+        private void v_text_search_changed(object sender, RoutedEventArgs e)
+        {
+            page = 0;
+            GridRefresh();
+        }
         private void event_forward(object sender, RoutedEventArgs e)
         {
             page++;
-            vPageNumber.Text = string.Format("{0}", page);
             GridRefresh();
         }
         private void event_backward(object sender, RoutedEventArgs e)
         {
             page--;
-            vPageNumber.Text = string.Format("{0}", page);
             GridRefresh();
         }
 
@@ -49,7 +55,7 @@ namespace Stock.Views
             dynamic data = new System.Dynamic.ExpandoObject();
             data.mode = "Add";
             data.message = null;
-            EditProducts_UC.Send(this, data);
+            EditProducts_UC.Send(this, data); // changed
         }
         private void event_edit(object sender, RoutedEventArgs e)
         {
@@ -59,15 +65,15 @@ namespace Stock.Views
             {
                 dynamic data = new System.Dynamic.ExpandoObject();
                 data.mode = "Edit";
-                data.message = myDataGrid.SelectedItem as product;
-                EditProducts_UC.Send(this, data);
+                data.message = myDataGrid.SelectedItem as user;
+                EditProducts_UC.Send(this, data); // changed
             }
         }
         private void event_delete(object sender, RoutedEventArgs e)
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as product;
+                var o = myDataGrid.SelectedItem as product; // changed
                 if (ointerface.delete(o) >= 1)
                 {
                     GridRefresh();
@@ -100,7 +106,9 @@ namespace Stock.Views
         {
             v_GridEdit.Visibility = Visibility.Collapsed;
             myDataGrid.ItemsSource = null;
-            myDataGrid.ItemsSource = ointerface.getPage(ref page);
+            string s;
+            myDataGrid.ItemsSource = ointerface.search(v_text_search.Text, ref page, out s);
+            v_text_pageNumber.Text = s;
         }
         #endregion
         //************************************************************************************* Messanger //dynamic data = new System.Dynamic.ExpandoObject();

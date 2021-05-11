@@ -1,4 +1,4 @@
-﻿using Stock.Models;
+﻿using Stock.Dataset.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,10 @@ namespace Stock.Interfaces
 {
     interface ITableInvoices
     {
-        Invoice_M get(string _ID);
-        List<Invoice_M> getPage(ref int this_page);
-        int add(Invoice_M _Invoice);
-        int edit(Invoice_M _Invoice);
-        int delete(Invoice_M _Invoice);
+        soldinvoice get(long _id);
+        List<soldinvoice> search(string _value,DateTime _begin,DateTime _end, ref int _this_page, out string _data_out);
+        int add(soldinvoice _Invoice);
+        int edit(soldinvoice _Invoice);
+        int delete(soldinvoice _Invoice);
     }
 }

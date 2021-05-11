@@ -1,6 +1,5 @@
 ﻿using Stock.Dataset.Model;
 using Stock.Interfaces;
-using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -51,12 +50,12 @@ namespace Stock.Controllers
         //-------------------------------------------------------------------------------------
         public BitmapImage getImage(long _id)
         {
-            throw new NotImplementedException();
+            return new BitmapImage();
         }
         //-------------------------------------------------------------------------------------
         public void setImage(BitmapImage _image, long _id)
         {
-            throw new NotImplementedException();
+
         }
         //-------------------------------------------------------------------------------------
     }

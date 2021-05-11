@@ -1,5 +1,4 @@
 ﻿using Stock.Dataset.Model;
-using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +10,8 @@ namespace Stock.Interfaces
 {
     public interface ITableProducts
     {
-        product get(int _id);
-        List<product> getPage(ref int this_page);
+        product get(long _id);
+        List<product> search(string _value, ref int _this_page, out string _data_out);
         int add(product _product);
         int edit(product _product);
         int delete(product _product);

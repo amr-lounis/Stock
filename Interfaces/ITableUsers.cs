@@ -1,5 +1,4 @@
 ﻿using Stock.Dataset.Model;
-using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

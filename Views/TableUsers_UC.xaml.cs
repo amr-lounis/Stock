@@ -1,7 +1,6 @@
 ﻿using Stock.Controllers;
 using Stock.Dataset.Model;
 using Stock.Interfaces;
-using Stock.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -57,7 +56,7 @@ namespace Stock.Views
             dynamic data = new System.Dynamic.ExpandoObject();
             data.mode = "Add";
             data.message = null;
-            EditUsers_UC.Send(this, data);
+            EditUsers_UC.Send(this, data);// changed
         }
         private void event_edit(object sender, RoutedEventArgs e)
         {
@@ -68,14 +67,14 @@ namespace Stock.Views
                 dynamic data = new System.Dynamic.ExpandoObject();
                 data.mode = "Edit";
                 data.message = myDataGrid.SelectedItem as user;
-                EditUsers_UC.Send(this, data);
+                EditUsers_UC.Send(this, data);// changed
             }
         }
         private void event_delete(object sender, RoutedEventArgs e)
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as user;
+                var o = myDataGrid.SelectedItem as user; // changed
                 if (ointerface.delete(o) >= 1)
                 {
                     GridRefresh();
