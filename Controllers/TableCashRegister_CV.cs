@@ -23,11 +23,7 @@ namespace Stock.Controllers
                 var query = TableCashRegister_CD.search(_id_invoice, out _sum);
                 return query.ToList();
             }
-<<<<<<< HEAD
             catch (Exception) { _sum = 0 ; return new List<productsold>(); }
-=======
-            catch (Exception) { _sum = 0 ; return null; }
->>>>>>> 56794b865720454a67a5f629147411f52097afcc
         }
         //-------------------------------------------------------------------------------------
         public string add(productsold _productsold)

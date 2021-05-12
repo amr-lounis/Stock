@@ -19,15 +19,12 @@ namespace Stock.Dataset.Model
 
         [Column(TypeName = "uint")]
         public long? ID_INVOICE { get; set; }
-<<<<<<< HEAD
 
         [StringLength(25)]
         public string NAME { get; set; }
 
         [StringLength(255)]
         public string DESCRIPTION { get; set; }
-=======
->>>>>>> 56794b865720454a67a5f629147411f52097afcc
 
         public double? MONEY_ONE { get; set; }
 
@@ -37,22 +34,6 @@ namespace Stock.Dataset.Model
 
         public double? STAMP { get; set; }
 
-<<<<<<< HEAD
         public double? MONEY_PAID { get; set; }
-=======
-        //private double? _MONEY_PAID;
-        //public double? MONEY_PAID
-        //{
-        //    get { _MONEY_PAID = (this.MONEY_ONE * this.QUANTITY) + TAX_VALUE + STAMP; return _MONEY_PAID; }
-        //    set { _MONEY_PAID = value; }
-        //}
-        //private double? _TAX_VALUE;
-        //public double? TAX_VALUE
-        //{
-        //    get { _TAX_VALUE = this.MONEY_ONE * this.TAX_PERCE / 100; return _TAX_VALUE;  }
-        //    set { _MONEY_PAID = value; }
-        //}
-
->>>>>>> 56794b865720454a67a5f629147411f52097afcc
     }
 }

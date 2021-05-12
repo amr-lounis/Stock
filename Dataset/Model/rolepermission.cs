@@ -17,12 +17,5 @@ namespace Stock.Dataset.Model
 
         [Column(TypeName = "uint")]
         public long? ID_PERMISSION { get; set; }
-<<<<<<< HEAD
-=======
-
-        public virtual permission permission { get; set; }
-
-        public virtual role role { get; set; }
->>>>>>> 56794b865720454a67a5f629147411f52097afcc
     }
 }
