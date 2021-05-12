@@ -12,7 +12,7 @@
              >
     <!-- Converter begin -->
     <UserControl.Resources>
-        <iconverter:IConverterImageUser x:Key="IConverterImage" />
+        <iconverter:IConverterUserImage x:Key="IConverterImage" />
     </UserControl.Resources>
     <!-- Converter End -->
     <Grid>

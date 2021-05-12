@@ -22,30 +22,25 @@ namespace Stock.Controllers
         {
             try
             {
-                string s = "";
-                var query = TableUsers_CD.search(_value, ref _this_page, out s);
-                _data_out = s;
+                var query = TableUsers_CD.search(_value, ref _this_page, out _data_out);
                 return query.ToList();
             }
             catch (Exception){ _data_out = ""; return null; }
         }
         //-------------------------------------------------------------------------------------
-        public int add(user _user)
+        public string add(user _user)
         {
-            TableUsers_CD.Add(_user);
-            return 1;
+             return TableUsers_CD.Add(_user) ? "ok add" : "Can not add";
         }
         //-------------------------------------------------------------------------------------
-        public int edit(user _user)
+        public string edit(user _user)
         {
-            TableUsers_CD.Edit(_user);
-            return 1;
+            return TableUsers_CD.Edit(_user) ? "ok edit" : "Can not edit";
         }
         //-------------------------------------------------------------------------------------
-        public int delete(user _user)
+        public string delete(long _id)
         {
-            TableUsers_CD.Delete(_user.ID);
-            return 1;
+            return TableUsers_CD.Delete(_id) ? "ok delete" : "Can not delete";
         }
         //-------------------------------------------------------------------------------------
         public BitmapImage getImage(long _id)

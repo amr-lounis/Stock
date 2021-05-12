@@ -13,7 +13,7 @@ namespace Stock.Dataset.Model
         public long ID { get; set; }
 
         [Column(TypeName = "uint")]
-        public long ID_PRODUCT { get; set; }
+        public long? ID_PRODUCT { get; set; }
 
         [StringLength(25)]
         public string NAME { get; set; }

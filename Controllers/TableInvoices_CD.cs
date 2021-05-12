@@ -1,6 +1,7 @@
 ﻿using Stock.Dataset.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -11,42 +12,75 @@ namespace Stock.Controllers
 {
     public static class TableInvoices_CD
     {
-        public static IQueryable<soldinvoice> search(string _value, ref int _this_page, out string _data_out)
+        public static IQueryable<invoicesold> search(string _value, ref int _this_page, out string _data_out)
         {
-            IQueryable<soldinvoice> query = null;
+            IQueryable<invoicesold> query = null;
             try
             {
-                var _db = Entities.GetInstance();
-                query = _db.soldinvoices.Where(c =>  (c.DESCRIPTION.ToLower().Contains(_value))).OrderBy("NAME"); ;
+                _value = "";
+                   var _db = Entities.GetInstance();
+                query = _db.invoicesolds.Where(c =>  (c.DESCRIPTION.ToLower().Contains(_value))).OrderBy("ID"); ;
                 _data_out = SkipTake(ref _this_page, ref query);
                 return query;
             }
-            catch (Exception e) { _data_out = ""; return null; }
+            catch (Exception e) { log(e.Message); _data_out = "ERROR"; return null; }
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static soldinvoice Get(long p_id)
+        public static invoicesold Get(long p_id)
         {
             try
             {
                 var _db = Entities.GetInstance();
-                return _db.soldinvoices.Single(c => c.ID == p_id);
+                return _db.invoicesolds.Single(c => c.ID == p_id);
             }
-            catch (Exception) { return null; }
+
+            catch (Exception e){log(e.Message);return null;}
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static bool Add(soldinvoice _soldinvoice)
+        public static long GetLastNonValid()
+        {
+            var _db = Entities.GetInstance();
+            try
+            {
+                return _db.invoicesolds.Where(c => c.VALIDATION == 0).OrderByDescending(x => x.ID).FirstOrDefault().ID;
+            }
+            catch (Exception) 
+            {
+                try
+                {
+                    Add(new invoicesold());
+                    return _db.invoicesolds.Where(c => c.VALIDATION == 0).OrderByDescending(x => x.ID).FirstOrDefault().ID;
+                }
+                catch (Exception e)
+                {
+                    log(e.Message);
+                    return -1;
+                }
+            }
+        }
+        public static invoicesold GetLastNonValid(long _id_user)
         {
             try
             {
                 var _db = Entities.GetInstance();
-                _db.soldinvoices.Add(_soldinvoice);
+                return _db.invoicesolds.Where(c => c.VALIDATION.Equals(0) && c.ID_USERS.Equals(_id_user)).First();
+            }
+            catch (Exception e) { log(e.Message); return null; }
+        }
+        //----------------------------------------------------------------------------------------------------------------
+        public static bool Add(invoicesold _soldinvoice)
+        {
+            try
+            {
+                var _db = Entities.GetInstance();
+                _db.invoicesolds.Add(_soldinvoice);
                 _db.SaveChanges();
                 return true;
             }
-            catch (Exception) { return false; }
+            catch (Exception e) { Console.WriteLine(e.Message); Console.Beep();return (false); }
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static bool Edit(soldinvoice _soldinvoice)
+        public static bool Edit(invoicesold _soldinvoice)
         {
             try
             {
@@ -67,7 +101,7 @@ namespace Stock.Controllers
                 _db.SaveChanges();
                 return true;
             }
-            catch (Exception) { return false; }
+            catch (Exception e) { log(e.Message); return false; }
         }
         //----------------------------------------------------------------------------------------------------------------
         public static bool Delete(long p_id)
@@ -75,18 +109,21 @@ namespace Stock.Controllers
             try
             {
                 var _db = Entities.GetInstance();
-                _db.soldinvoices.Remove(_db.soldinvoices.Single(c => c.ID == p_id));
+                _db.invoicesolds.Remove(_db.invoicesolds.Single(c => c.ID == p_id));
                 _db.SaveChanges();
                 return true;
             }
-            catch (Exception) { return false; }
+            catch (Exception e) { log(e.Message); return false; }
         }
         //----------------------------------------------------------------------------------------------------------------
+        static void log(string _data, string _type = "error")
+        {
+            Console.WriteLine("\n----------------------------------\n" + _type+":"+_data + "\n----------------------------------\n");
+        }
         private static int GetPageSize()
         {
             return Config_CD.load().software.pageSizeSearch;
         }
-        //----------------------------------------------------------------------------------------------------------------
         private static string SkipTake<T>(ref int page_this, ref IQueryable<T> _query)
         {
             int page_max_size = GetPageSize();

@@ -9,10 +9,10 @@ namespace Stock.Interfaces
 {
     interface ITableCashRegisters
     {
-        productsold get(int _id);
-        List<productsold> getAll();
-        int add(productsold _CashRegister);
-        int edit(productsold _CashRegister);
-        int delete(productsold _CashRegister);
+        productsold get(long _id);
+        List<productsold> search(long _id_invoice, out double _sum);
+        string add(productsold _productsold);
+        string edit(productsold _productsold);
+        string delete(long _id);
     }
 }

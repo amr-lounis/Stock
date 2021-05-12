@@ -32,17 +32,11 @@ namespace Stock.Views
             var o = getInput();
             if (type.Equals("Add"))
             {
-                if (ointerface.add(o) < 1)
-                {
-                    MessageBox.Show("can\'t add");
-                }
+                MessageBox.Show(ointerface.add(o));
             }
             else if (type.Equals("Edit"))
             {
-                if (ointerface.edit(o) < 1)
-                {
-                    MessageBox.Show("can\'t edit");
-                }
+                MessageBox.Show(ointerface.edit(o));
             }
             ReturnMessage(this, null);
         }

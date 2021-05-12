@@ -21,7 +21,7 @@ namespace Stock.Controllers
                 _data_out = SkipTake(ref _this_page, ref query);
                 return query;
             }
-            catch (Exception e) { _data_out = ""; return null; }
+            catch (Exception e) { _data_out = "ERROR"; return null; }
         }
         //----------------------------------------------------------------------------------------------------------------
         public static product Get(long p_id)

@@ -52,10 +52,10 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem;
-                System.Reflection.PropertyInfo pi = o.GetType().GetProperty("ID");
-                var v = (string)(pi.GetValue(o, null));
-                if (OnReturnMessage != null) OnReturnMessage(this, v);
+                var o = myDataGrid.SelectedItem as invoicesold;
+                dynamic data = new System.Dynamic.ExpandoObject();
+                data.ID = o.ID;
+                OnReturnMessage(this, data);
             }
         }
         private void v_btn_OverlayGridCancel(object sender, EventArgs e)
@@ -76,7 +76,6 @@ namespace Stock.Views
             string s;
             myDataGrid.ItemsSource = ointerface.search(v_text_search.Text, getBegin(), getEnd(), ref page, out s);
             v_text_pageNumber.Text = s;
-            myDataGrid.ItemsSource = null;
         }
         #endregion
         //************************************************************************************* Messanger //dynamic data = new System.Dynamic.ExpandoObject();  //if (OnReturnMessage != null) OnReturnMessage(_sender, _data);
@@ -86,6 +85,7 @@ namespace Stock.Views
         public void Receiver(object _sender, dynamic _data)
         {
             OnReturnMessage = (_sender as CashRegisters_UC).ReturnInvoice;
+            GridRefresh();
         }
         public delegate void delegateSend(object _sender, dynamic _data);
         public static event delegateSend OnSendMessage;

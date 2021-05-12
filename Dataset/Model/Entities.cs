@@ -9,12 +9,12 @@ namespace Stock.Dataset.Model
     public partial class Entities : DbContext
     {
         public virtual DbSet<category> categorys { get; set; }
+        public virtual DbSet<invoicesold> invoicesolds { get; set; }
         public virtual DbSet<permission> permissions { get; set; }
         public virtual DbSet<product> products { get; set; }
         public virtual DbSet<productsold> productsolds { get; set; }
         public virtual DbSet<rolepermission> rolepermissions { get; set; }
         public virtual DbSet<role> roles { get; set; }
-        public virtual DbSet<soldinvoice> soldinvoices { get; set; }
         public virtual DbSet<stock> stocks { get; set; }
         public virtual DbSet<unit> units { get; set; }
         public virtual DbSet<user> users { get; set; }
@@ -31,7 +31,7 @@ namespace Stock.Dataset.Model
             modelBuilder.Entity<product>().ToTable("products");
             modelBuilder.Entity<category>().ToTable("categorys");
             modelBuilder.Entity<productsold>().ToTable("productsolds");
-            modelBuilder.Entity<soldinvoice>().ToTable("soldinvoices");
+            modelBuilder.Entity<invoicesold>().ToTable("invoicesolds");
             modelBuilder.Entity<stock>().ToTable("stocks");
 
             modelBuilder.Entity<category>()
@@ -39,6 +39,10 @@ namespace Stock.Dataset.Model
                 .IsUnicode(false);
 
             modelBuilder.Entity<category>()
+                .Property(e => e.DESCRIPTION)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<invoicesold>()
                 .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
 
@@ -52,8 +56,9 @@ namespace Stock.Dataset.Model
 
             modelBuilder.Entity<permission>()
                 .HasMany(e => e.rolepermissions)
-                .WithRequired(e => e.permission)
-                .HasForeignKey(e => e.ID_PERMISSION);
+                .WithOptional(e => e.permission)
+                .HasForeignKey(e => e.ID_PERMISSION)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<product>()
                 .Property(e => e.NAME)
@@ -77,12 +82,9 @@ namespace Stock.Dataset.Model
 
             modelBuilder.Entity<role>()
                 .HasMany(e => e.rolepermissions)
-                .WithRequired(e => e.role)
-                .HasForeignKey(e => e.ID_ROLE);
-
-            modelBuilder.Entity<soldinvoice>()
-                .Property(e => e.DESCRIPTION)
-                .IsUnicode(false);
+                .WithOptional(e => e.role)
+                .HasForeignKey(e => e.ID_ROLE)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<stock>()
                 .Property(e => e.NAME)

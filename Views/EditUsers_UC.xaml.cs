@@ -40,20 +40,8 @@ namespace Stock.Views
         private void v_btn_Save(object sender, RoutedEventArgs e)
         {
             var o = getInput();
-            if (type.Equals("Add"))
-            {
-                if (ointerface.add(o) < 1)
-                {
-                    MessageBox.Show("can\'t add");
-                }
-            }
-            else if (type.Equals("Edit"))
-            {
-                if (ointerface.edit(o) < 1)
-                {
-                    MessageBox.Show("can\'t edit");
-                }
-            }
+            if (type.Equals("Add")) MessageBox.Show(ointerface.add(o));
+            else if (type.Equals("Edit")) MessageBox.Show(ointerface.edit(o));
             ReturnMessage(this, null);
         }
         #endregion

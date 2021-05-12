@@ -65,7 +65,7 @@ namespace Stock.Views
             {
                 dynamic data = new System.Dynamic.ExpandoObject();
                 data.mode = "Edit";
-                data.message = myDataGrid.SelectedItem as user;
+                data.message = myDataGrid.SelectedItem as product; // changed
                 EditProducts_UC.Send(this, data); // changed
             }
         }
@@ -74,21 +74,15 @@ namespace Stock.Views
             if (myDataGrid.SelectedItem != null)
             {
                 var o = myDataGrid.SelectedItem as product; // changed
-                if (ointerface.delete(o) >= 1)
-                {
-                    GridRefresh();
-                }
-                else
-                {
-                    MessageBox.Show("can\'t detete");
-                }
+                MessageBox.Show(ointerface.delete(o.ID));
+                GridRefresh();
             }
         }
         private void event_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as product;
+                var o = myDataGrid.SelectedItem as product;// changed
                 dynamic data = new System.Dynamic.ExpandoObject();
                 data.ID = o.ID;
                 data.NAME = o.NAME;
@@ -133,7 +127,7 @@ namespace Stock.Views
         #endregion
         //************************************************************************************* Variable
         #region Variable
-        ITableProducts ointerface = new TableProducts_CV();
+        ITableProducts ointerface = new TableProducts_CV();// changed
         public static int page = 0;
         #endregion
     }

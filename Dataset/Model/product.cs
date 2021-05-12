@@ -13,10 +13,10 @@ namespace Stock.Dataset.Model
         public long ID { get; set; }
 
         [Column(TypeName = "uint")]
-        public long ID_CATEGORY { get; set; }
+        public long? ID_CATEGORY { get; set; }
 
         [Column(TypeName = "uint")]
-        public long ID_UNITE { get; set; }
+        public long? ID_UNITE { get; set; }
 
         [StringLength(25)]
         public string NAME { get; set; }
@@ -34,6 +34,7 @@ namespace Stock.Dataset.Model
         public double? MONEY_PURCHASE { get; set; }
 
         public double? MONEY_SELLING { get; set; }
+
         public double? MONEY_SELLING_MIN { get; set; }
     }
 }

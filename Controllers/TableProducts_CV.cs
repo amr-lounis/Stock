@@ -21,30 +21,27 @@ namespace Stock.Controllers
         {
             try
             {
-                string s = "";
-                var query = TableProducts_CD.search(_value, ref _this_page, out s);
-                _data_out = s;
+                var query = TableProducts_CD.search(_value, ref _this_page, out _data_out);
                 return query.ToList();
             }
             catch (Exception) { _data_out = ""; return null; }
         }
         //-------------------------------------------------------------------------------------
-        public int add(product _product)
+        public string add(product _product)
         {
-            TableProducts_CD.Add(_product);
-            return 1;
+            _product.ID = 0;
+
+            return TableProducts_CD.Add(_product) ? "ok add" : "Can not add";
         }
         //-------------------------------------------------------------------------------------
-        public int edit(product _product)
+        public string edit(product _product)
         {
-            TableProducts_CD.Edit(_product);
-            return 1;
+            return TableProducts_CD.Edit(_product) ? "ok edit" : "Can not edit";
         }
         //-------------------------------------------------------------------------------------
-        public int delete(product _product)
+        public string delete(long _id)
         {
-            TableProducts_CD.Delete(_product.ID);
-            return 1;
+            return TableProducts_CD.Delete(_id) ? "ok delete" : "Can not delete";
         }
         //-------------------------------------------------------------------------------------
         public BitmapImage getImage(long _id)

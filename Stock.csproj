@@ -151,20 +151,23 @@
     <Compile Include="Controllers\TableProducts_CD.cs" />
     <Compile Include="Controllers\TableProducts_CV.cs" />
     <Compile Include="Controllers\TableUsers_CD.cs" />
-    <Compile Include="Converter\IConverterImageProduct.cs" />
-    <Compile Include="Converter\IConverterImageUser.cs" />
+    <Compile Include="Converter\IConverterProductDescription.cs" />
+    <Compile Include="Converter\IConverterProductImage.cs" />
+    <Compile Include="Converter\IConverterUserImage.cs" />
+    <Compile Include="Converter\IConverterProductName.cs" />
     <Compile Include="Dataset\Model\category.cs" />
     <Compile Include="Dataset\Model\Entities.cs" />
+    <Compile Include="Dataset\Model\invoicesold.cs" />
     <Compile Include="Dataset\Model\permission.cs" />
     <Compile Include="Dataset\Model\product.cs" />
     <Compile Include="Dataset\Model\productsold.cs" />
     <Compile Include="Dataset\Model\role.cs" />
     <Compile Include="Dataset\Model\rolepermission.cs" />
-    <Compile Include="Dataset\Model\soldinvoice.cs" />
     <Compile Include="Dataset\Model\stock.cs" />
     <Compile Include="Dataset\Model\unit.cs" />
     <Compile Include="Dataset\Model\user.cs" />
     <Compile Include="Dataset\Model\_EntitiesBase.cs" />
+    <Compile Include="Dataset\Model\_invoicesold.cs" />
     <Compile Include="Interfaces\ILoader.cs" />
     <Compile Include="Interfaces\IMain.cs" />
     <Compile Include="Interfaces\ITableCashRegisters.cs" />
@@ -318,7 +321,6 @@
     <Resource Include="assets\images\enterKey.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Reports\" />
     <Folder Include="Utils\" />
   </ItemGroup>

@@ -5,20 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Media.Imaging;
 
 namespace Stock.Converter
 {
-    public class IConverterImageUser : IValueConverter
+    public class IConverterProductDescription : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return new BitmapImage(new Uri("/assets/images/user.png", UriKind.Relative));
+            return "Description";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return "";
+            return "ID";
         }
     }
 }

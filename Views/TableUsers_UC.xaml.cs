@@ -75,14 +75,7 @@ namespace Stock.Views
             if (myDataGrid.SelectedItem != null)
             {
                 var o = myDataGrid.SelectedItem as user; // changed
-                if (ointerface.delete(o) >= 1)
-                {
-                    GridRefresh();
-                }
-                else
-                {
-                    MessageBox.Show("can\'t detete");
-                }
+                MessageBox.Show(ointerface.delete(o.ID));
             }
         }
         private void event_MouseDoubleClick(object sender, MouseButtonEventArgs e)

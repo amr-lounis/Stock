@@ -32,8 +32,10 @@ namespace Stock.Dataset.Model
                     if (!Instance.Database.Exists())
                     {
                         Console.WriteLine("creatre database");
+                        Console.Beep();
                         Instance = new Entities();
                     }
+                    Console.Beep();
                 }
                 return Instance;
             }
@@ -58,7 +60,7 @@ namespace Stock.Dataset.Model
         //    modelBuilder.Entity<product>().ToTable("products");
         //    modelBuilder.Entity<category>().ToTable("categorys");
         //    modelBuilder.Entity<productsold>().ToTable("productsolds");
-        //    modelBuilder.Entity<soldinvoice>().ToTable("soldinvoices");
+        //    modelBuilder.Entity<invoicesold>().ToTable("invoicesolds");
         //    modelBuilder.Entity<stock>().ToTable("stocks");
         //}
     }

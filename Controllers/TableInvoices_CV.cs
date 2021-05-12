@@ -10,64 +10,41 @@ namespace Stock.Controllers
 {
     public class TableInvoices_CV : ITableInvoices
     {
-        static List<soldinvoice> list = new List<soldinvoice>();
         //-------------------------------------------------------------------------------------
-        public soldinvoice get(long _id)
+        public invoicesold get(long _id)
         {
-            return list.Find(o => o.ID == _id);
+            return TableInvoices_CD.Get(_id);
         }
         //-------------------------------------------------------------------------------------
-        public List<soldinvoice> search(string _value, DateTime _begin, DateTime _end, ref int _this_page, out string _data_out)
+        public long GetID_NonValid()
         {
-            _data_out = "";
-            return list;
+            return TableInvoices_CD.GetLastNonValid();
         }
         //-------------------------------------------------------------------------------------
-        public int add(soldinvoice _Invoice)
+        public List<invoicesold> search(string _value, DateTime _begin, DateTime _end, ref int _this_page, out string _data_out)
         {
-            if (_Invoice.ID.Equals(0)) _Invoice.ID = 1613132;
-            list.Add(_Invoice);
-            return 1;
+            try
+            {
+                var query = TableInvoices_CD.search(_value, ref _this_page, out _data_out);
+                return query.ToList();
+            }
+            catch (Exception) { _data_out = "ERROR"; return null; }
         }
         //-------------------------------------------------------------------------------------
-        public int edit(soldinvoice _Invoice)
+        public string add(invoicesold _soldinvoice)
         {
-            var o = list.Find(x => x.ID == _Invoice.ID);
-            o.DESCRIPTION = _Invoice.DESCRIPTION;
-            o.DATE = _Invoice.DATE;
-            o.VALIDATION = _Invoice.VALIDATION;
-            o.MONEY_WITHOUT_ADDEDD = _Invoice.MONEY_WITHOUT_ADDEDD;
-            o.MONEY_TAX = _Invoice.MONEY_TAX;
-            o.MONEY_STAMP = _Invoice.MONEY_STAMP;
-            o.MONEY_TOTAL = _Invoice.MONEY_TOTAL;
-            o.MONEY_PAID = _Invoice.MONEY_PAID;
-            o.MONEY_UNPAID = _Invoice.MONEY_UNPAID;
-           
-            list[list.FindIndex(x => x.ID == _Invoice.ID)] = o;
-            return 1;
+            return TableInvoices_CD.Add(_soldinvoice) ? "ok add" : "Can not add";
         }
         //-------------------------------------------------------------------------------------
-        public int delete(soldinvoice _Invoice)
+        public string edit(invoicesold _Invoice)
         {
-            list.RemoveAt(list.FindIndex(o => o.ID == _Invoice.ID));
-            return 1;
+            return TableInvoices_CD.Edit(_Invoice) ? "ok edit" : "Can not edit";
+        }
+        //-------------------------------------------------------------------------------------
+        public string delete(long _id)
+        {
+            return TableInvoices_CD.Delete(_id) ? "ok delete" : "Can not delete";
         }
         //-------------------------------------------------------------------------------------
     }
 }
-
-//var v = new soldinvoice
-//{
-//    ID = "",
-//    ID_USERS = "",
-//    ID_CUSTOMERS = "",
-//    DESCRIPTION = "",
-//    DATE = "",
-//    VALIDATION = "",
-//    MONEY_WITHOUT_ADDEDD = "",
-//    MONEY_TAX = "",
-//    MONEY_STAMP = "",
-//    MONEY_TOTAL = "",
-//    MONEY_PAID = "",
-//    MONEY_UNPAID = ""
-//};

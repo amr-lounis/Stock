@@ -78,7 +78,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <TextBlock  Text="{Binding NAME,Mode=OneWay}" Margin="0,0,10,0"  VerticalAlignment="Center"/>
+                                    <TextBlock  Text="{Binding ID,Mode=OneWay}" Margin="0,0,10,0"  VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -88,7 +88,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <TextBlock  Text="{Binding UNIT,Mode=OneWay}" Margin="0,0,10,0"  VerticalAlignment="Center"/>
+                                    <TextBlock  Text="{Binding ID,Mode=OneWay}" Margin="0,0,10,0"  VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -98,7 +98,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <TextBlock  Text="{Binding CODE,Mode=OneWay}" Margin="0,0,10,0"  VerticalAlignment="Center"/>
+                                    <TextBlock  Text="{Binding ID,Mode=OneWay}" Margin="0,0,10,0"  VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -139,7 +139,7 @@
                     <DataGridTemplateColumn Header="tax value">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock  Text="{Binding TAX_VALUE,Mode=OneWay}" Margin="0,0,10,0"  HorizontalAlignment="Right"  VerticalAlignment="Center"/>
+                                <TextBlock  Text="{Binding ID,Mode=OneWay}" Margin="0,0,10,0"  HorizontalAlignment="Right"  VerticalAlignment="Center"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -147,7 +147,7 @@
                     <DataGridTemplateColumn Header="Paid">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock  Text="{Binding MONEY_PAID,Mode=OneWay}" Margin="0,0,10,0"   VerticalAlignment="Center" />
+                                <TextBlock  Text="{Binding ID,Mode=OneWay}" Margin="0,0,10,0"   VerticalAlignment="Center" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -232,8 +232,7 @@
             HorizontalAlignment="Center" 
             VerticalAlignment="Center">
                 <StackPanel Orientation="Vertical">
-                    <Controls:NumericUpDown x:Name="v_GridEdit_value" HideUpDownButtons="False" IsReadOnly="False" FontFamily="{DynamicResource font_digital-7}" Background="Black" FontWeight="Bold"  Foreground="Red" FontSize="20" StringFormat="{}{0:N2}" MinWidth="500"/>
-                    <TextBox x:Name="v_GridEditText" MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding EditValue}"/>
+                    <Controls:NumericUpDown x:Name="v_GridEdit_value" HideUpDownButtons="False" IsReadOnly="False" FontFamily="{DynamicResource font_digital-7}" Background="Black" FontWeight="Bold"  Foreground="Red" FontSize="20" StringFormat="{}{0:N2}" MinWidth="200"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button Content="Ok" Click="v_btn_editOk" Margin="5"  Background="{x:Null}"/>
                         <Button Content="Cancel" Click="v_btn_editCancel" Margin="5" Background="{x:Null}"/>

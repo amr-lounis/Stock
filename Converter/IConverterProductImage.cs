@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace Stock.Converter
 {
-    public class IConverterImageProduct : IValueConverter
+    public class IConverterProductImage : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

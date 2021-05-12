@@ -21,7 +21,7 @@ namespace Stock.Controllers
                 _data_out = SkipTake(ref _this_page,ref query);
                 return query;
             }
-            catch (Exception e) { _data_out = ""; return null; }
+            catch (Exception e) { log(e.Message); _data_out = "ERROR"; return null; }
         }
         //----------------------------------------------------------------------------------------------------------------
         public static user Get(long p_id)
@@ -43,7 +43,7 @@ namespace Stock.Controllers
                 _db.SaveChanges();
                 return true;
             }
-            catch (Exception) { return false; }
+            catch (Exception e) { log(e.Message); return false; }
         }
         //----------------------------------------------------------------------------------------------------------------
         public static bool Edit(user _user)
@@ -71,7 +71,7 @@ namespace Stock.Controllers
                 _db.SaveChanges();
                 return true;
             }
-            catch (Exception){ return false; }
+            catch (Exception e) { log(e.Message); return false; }
         }
         //----------------------------------------------------------------------------------------------------------------
         public static bool Delete(long p_id)
@@ -83,7 +83,7 @@ namespace Stock.Controllers
                 _db.SaveChanges();
                 return true;
             }
-            catch (Exception) { return false; }
+            catch (Exception e) { log(e.Message); return false; }
         }
         //----------------------------------------------------------------------------------------------------------------
         private static bool IsExistName(string p_string)
@@ -96,6 +96,10 @@ namespace Stock.Controllers
             catch (Exception) { return false; }
         }
         //----------------------------------------------------------------------------------------------------------------
+        static void log(string _data, string _type = "error")
+        {
+            Console.WriteLine("\n----------------------------------\n" + _type + ":" + _data + "\n----------------------------------\n");
+        }
         private static int GetPageSize()
         {
             return Config_CD.load().software.pageSizeSearch;
@@ -103,13 +107,13 @@ namespace Stock.Controllers
         private static string SkipTake<T>(ref int page_this, ref IQueryable<T> _query)
         {
             int page_max_size = GetPageSize();
-            int _rows_all = _query.Count()-1;
+            int _rows_all = _query.Count() - 1;
             int _page_count = (_rows_all / page_max_size);
-            if (page_this < 0)page_this = 0;
-            if (page_this > _page_count-1) page_this = _page_count;
-             _query = _query.Skip(page_this * page_max_size).Take(page_max_size);
-  
-            return string.Format("({0} / {1}) |{2}|", page_this +1 , _page_count + 1, _rows_all +1);
+            if (page_this < 0) page_this = 0;
+            if (page_this > _page_count - 1) page_this = _page_count;
+            _query = _query.Skip(page_this * page_max_size).Take(page_max_size);
+
+            return string.Format("({0} / {1}) |{2}|", page_this + 1, _page_count + 1, _rows_all + 1);
         }
         private static IOrderedQueryable<TSource> OrderBy<TSource>(this IQueryable<TSource> query, string propertyName)
         {
