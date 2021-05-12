@@ -25,7 +25,7 @@ namespace Stock.Controllers
                 var query = TableUsers_CD.search(_value, ref _this_page, out _data_out);
                 return query.ToList();
             }
-            catch (Exception){ _data_out = ""; return null; }
+            catch (Exception){ _data_out = ""; return new List<user>(); }
         }
         //-------------------------------------------------------------------------------------
         public string add(user _user)

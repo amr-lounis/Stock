@@ -28,7 +28,11 @@ namespace Stock.Controllers
                 var query = TableInvoices_CD.search(_value, ref _this_page, out _data_out);
                 return query.ToList();
             }
+<<<<<<< HEAD
+            catch (Exception) { _data_out = "ERROR"; return new List<invoicesold>(); }
+=======
             catch (Exception) { _data_out = "ERROR"; return null; }
+>>>>>>> 56794b865720454a67a5f629147411f52097afcc
         }
         //-------------------------------------------------------------------------------------
         public string add(invoicesold _soldinvoice)

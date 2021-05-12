@@ -19,6 +19,15 @@ namespace Stock.Dataset.Model
 
         [Column(TypeName = "uint")]
         public long? ID_INVOICE { get; set; }
+<<<<<<< HEAD
+
+        [StringLength(25)]
+        public string NAME { get; set; }
+
+        [StringLength(255)]
+        public string DESCRIPTION { get; set; }
+=======
+>>>>>>> 56794b865720454a67a5f629147411f52097afcc
 
         public double? MONEY_ONE { get; set; }
 
@@ -28,6 +37,9 @@ namespace Stock.Dataset.Model
 
         public double? STAMP { get; set; }
 
+<<<<<<< HEAD
+        public double? MONEY_PAID { get; set; }
+=======
         //private double? _MONEY_PAID;
         //public double? MONEY_PAID
         //{
@@ -41,5 +53,6 @@ namespace Stock.Dataset.Model
         //    set { _MONEY_PAID = value; }
         //}
 
+>>>>>>> 56794b865720454a67a5f629147411f52097afcc
     }
 }

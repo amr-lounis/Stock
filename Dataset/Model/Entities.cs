@@ -46,6 +46,13 @@ namespace Stock.Dataset.Model
                 .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
 
+<<<<<<< HEAD
+            modelBuilder.Entity<invoicesold>()
+                .Property(e => e.DATE)
+                .IsUnicode(false);
+
+=======
+>>>>>>> 56794b865720454a67a5f629147411f52097afcc
             modelBuilder.Entity<permission>()
                 .Property(e => e.NAME)
                 .IsUnicode(false);
@@ -54,12 +61,15 @@ namespace Stock.Dataset.Model
                 .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
 
+<<<<<<< HEAD
+=======
             modelBuilder.Entity<permission>()
                 .HasMany(e => e.rolepermissions)
                 .WithOptional(e => e.permission)
                 .HasForeignKey(e => e.ID_PERMISSION)
                 .WillCascadeOnDelete();
 
+>>>>>>> 56794b865720454a67a5f629147411f52097afcc
             modelBuilder.Entity<product>()
                 .Property(e => e.NAME)
                 .IsUnicode(false);
@@ -72,19 +82,28 @@ namespace Stock.Dataset.Model
                 .Property(e => e.CODE)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<productsold>()
+                .Property(e => e.NAME)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<productsold>()
+                .Property(e => e.DESCRIPTION)
+                .IsUnicode(false);
+
             modelBuilder.Entity<role>()
+<<<<<<< HEAD
                 .Property(e => e.NAME)
                 .IsUnicode(false);
 
             modelBuilder.Entity<role>()
                 .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<role>()
+=======
                 .HasMany(e => e.rolepermissions)
                 .WithOptional(e => e.role)
                 .HasForeignKey(e => e.ID_ROLE)
                 .WillCascadeOnDelete();
+>>>>>>> 56794b865720454a67a5f629147411f52097afcc
 
             modelBuilder.Entity<stock>()
                 .Property(e => e.NAME)

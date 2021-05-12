@@ -151,10 +151,15 @@
     <Compile Include="Controllers\TableProducts_CD.cs" />
     <Compile Include="Controllers\TableProducts_CV.cs" />
     <Compile Include="Controllers\TableUsers_CD.cs" />
+<<<<<<< HEAD
+    <Compile Include="Converter\IConverterProductImage.cs" />
+    <Compile Include="Converter\IConverterUserImage.cs" />
+=======
     <Compile Include="Converter\IConverterProductDescription.cs" />
     <Compile Include="Converter\IConverterProductImage.cs" />
     <Compile Include="Converter\IConverterUserImage.cs" />
     <Compile Include="Converter\IConverterProductName.cs" />
+>>>>>>> 56794b865720454a67a5f629147411f52097afcc
     <Compile Include="Dataset\Model\category.cs" />
     <Compile Include="Dataset\Model\Entities.cs" />
     <Compile Include="Dataset\Model\invoicesold.cs" />

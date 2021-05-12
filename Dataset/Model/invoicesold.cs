@@ -23,11 +23,19 @@ namespace Stock.Dataset.Model
         [StringLength(25)]
         public string DESCRIPTION { get; set; }
 
+<<<<<<< HEAD:Dataset/Model/invoicesold.cs
+        [Column(TypeName = "uint")]
+        public long? VALIDATION { get; set; }
+
+        [StringLength(25)]
+        public string DATE { get; set; }
+=======
         [StringLength(25)]
         public string DATE { get; set; }
 
         [Column(TypeName = "uint")]
         public long? VALIDATION { get; set; }
+>>>>>>> 56794b865720454a67a5f629147411f52097afcc:Dataset/Model/soldinvoice.cs
 
         public double? MONEY_WITHOUT_ADDEDD { get; set; }
 

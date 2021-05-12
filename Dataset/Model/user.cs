@@ -18,7 +18,7 @@ namespace Stock.Dataset.Model
         [StringLength(25)]
         public string NAME { get; set; }
 
-        [StringLength(250)]
+        [StringLength(255)]
         public string DESCRIPTION { get; set; }
 
         [StringLength(25)]

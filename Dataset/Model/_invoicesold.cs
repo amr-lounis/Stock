@@ -14,7 +14,11 @@ namespace Stock.Dataset.Model
             ID_USERS = 1L;
             ID_CUSTOMERS = 1L;
             DESCRIPTION = "";
+<<<<<<< HEAD
+            DATE = null;
+=======
             DATE = "";
+>>>>>>> 56794b865720454a67a5f629147411f52097afcc
             VALIDATION = 0L;
             MONEY_WITHOUT_ADDEDD = 0;
             MONEY_TAX = 0;
