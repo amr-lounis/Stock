@@ -58,7 +58,8 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding DATE}" IsReadOnly="True" MaxWidth="150"/>
                 <DataGridTextColumn Header="Description" Binding="{Binding DESCRIPTION}" IsReadOnly="True" MaxWidth="150"/>
 
-                <DataGridTextColumn Header="ID_USERS" Binding="{Binding ID_USERS}" IsReadOnly="True" MaxWidth="150"/>
+                <DataGridTextColumn Header="ID USERS" Binding="{Binding ID_USERS}" IsReadOnly="True" MaxWidth="150"/>
+                <DataGridTextColumn Header="ID Customer" Binding="{Binding ID_CUSTOMERS}" IsReadOnly="True" MaxWidth="150"/>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}" IsReadOnly="True"  MaxWidth="150"/>
             </DataGrid.Columns>
 

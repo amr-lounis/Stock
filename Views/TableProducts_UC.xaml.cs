@@ -86,9 +86,10 @@ namespace Stock.Views
                 dynamic data = new System.Dynamic.ExpandoObject();
                 data.ID = o.ID;
                 data.NAME = o.NAME;
-                data.CODE = o.CODE;
+                data.DESCRIPTION = o.DESCRIPTION;
                 data.MONEY_SELLING = o.MONEY_SELLING;
                 data.TAX_PERCE = o.TAX_PERCE;
+                data.STAMP = o.STAMP;
                 ReturnMessage(this, data);
             }
         }

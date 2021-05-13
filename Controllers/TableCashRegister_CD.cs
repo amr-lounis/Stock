@@ -16,7 +16,7 @@ namespace Stock.Controllers
             {
                 var _db = Entities.GetInstance();
                 query = _db.productsolds.Where(c => c.ID_INVOICE == _id_invoice ) ;
-                _sum = _db.productsolds.Where(c => c.ID_INVOICE == _id_invoice ).Sum(i => i.MONEY_ONE).Value;
+                _sum = _db.productsolds.Where(c => c.ID_INVOICE == _id_invoice ).Sum(i => i.MONEY_PAID).Value;
                 return query;
             }
             catch (Exception e) { log(e.Message); _sum = 0 ; return null; }
@@ -38,6 +38,7 @@ namespace Stock.Controllers
             try
             {
                 var _db = Entities.GetInstance();
+                calcule(ref _productsold);
                 _db.productsolds.Add(_productsold);
                 _db.SaveChanges();
                 return true;
@@ -57,14 +58,33 @@ namespace Stock.Controllers
                 o.QUANTITY = _productsold.QUANTITY;
                 o.TAX_PERCE = _productsold.TAX_PERCE;
                 o.STAMP = _productsold.STAMP;
-                //o.TAX_VALUE auto calcul
-                //o.MONEY_PAID auto calcul
-
+                calcule(ref _productsold);
                 _db.SaveChanges();
                 return true;
             }
             catch (Exception e) { log(e.Message); return false; }
         }
+        public static bool Edit(long _id, string _column, object _value)
+        {
+            try
+            {
+                var _db = Entities.GetInstance();
+                var o = Get(_id);
+                if (_column.Equals("ID_INVOICE")) o.ID_INVOICE = (long)_value;
+                if (_column.Equals("ID_INVOICE")) o.ID_INVOICE = (long)_value;
+                if (_column.Equals("NAME")) o.NAME = (string) _value;
+                if (_column.Equals("DESCRIPTION")) o.DESCRIPTION = (string)_value;
+                if (_column.Equals("MONEY_ONE")) o.MONEY_ONE = rnd(_value);
+                if (_column.Equals("QUANTITY")) o.QUANTITY = rnd(_value);
+                if (_column.Equals("TAX_PERCE")) o.TAX_PERCE = rnd(_value);
+                if (_column.Equals("STAMP")) o.STAMP = rnd(_value);
+                calcule(ref o);
+                _db.SaveChanges();
+                return true;
+            }
+            catch (Exception e) { log(e.Message); return false; }
+        }
+      
         //----------------------------------------------------------------------------------------------------------------
         public static bool Delete(long p_id)
         {
@@ -76,6 +96,20 @@ namespace Stock.Controllers
                 return true;
             }
             catch (Exception e) { log(e.Message); return false; }
+        }
+        //----------------------------------------------------------------------------------------------------------------
+        public static void calcule(ref productsold _productsold)
+        {
+            try
+            {
+                var v = ((_productsold.MONEY_ONE) * _productsold.QUANTITY + (_productsold.MONEY_ONE * _productsold.TAX_PERCE / 100) + _productsold.STAMP);
+                _productsold.MONEY_PAID = rnd(v);
+            }
+            catch (Exception e) { log(e.Message);}
+        }
+        public static double rnd(object _value)
+        {
+            return Math.Round((double)_value, 2);
         }
         //----------------------------------------------------------------------------------------------------------------
         static void log(string _data, string _type = "error")

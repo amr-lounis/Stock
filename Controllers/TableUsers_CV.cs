@@ -15,7 +15,7 @@ namespace Stock.Controllers
         //-------------------------------------------------------------------------------------
         public user get(long _id)
         {
-            return TableUsers_CD.Get(_id);
+            return TableUsers_CD.Get(_id) ?? new user {ID = 0,NAME = "default",DESCRIPTION="" };
         }
         //-------------------------------------------------------------------------------------
         public List<user> search(string _value, ref int _this_page, out string _data_out)

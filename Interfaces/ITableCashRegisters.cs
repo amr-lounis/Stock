@@ -13,6 +13,7 @@ namespace Stock.Interfaces
         List<productsold> search(long _id_invoice, out double _sum);
         string add(productsold _productsold);
         string edit(productsold _productsold);
+        string edit(long _id, string _column, object _value);
         string delete(long _id);
     }
 }

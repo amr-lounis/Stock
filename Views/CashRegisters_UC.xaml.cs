@@ -20,19 +20,17 @@ namespace Stock.Views
 {
     public partial class CashRegisters_UC : UserControl
     {
-        invoicesold thisInvoicesold;
+        long IdInvoice;
+        long IdUser;
+        long IdCustomer;
         public CashRegisters_UC()
         {
             InitializeComponent();
             v_text_NumericUpDown.Value = 0;
-            v_text_customer.Text = "customer";
 
             v_image_customer.Source = new BitmapImage(new Uri("/assets/images/customer.png", UriKind.Relative));
-            thisInvoicesold = new invoicesold 
-            {
-                ID = oi_Invoice.GetID_NonValid(),
-            };
-            v_text_InvoiceID.Text = thisInvoicesold.ID +"";
+            IdInvoice = oi_Invoice.GetID_NonValid();
+            invoiceInit();
             GridRefresh();
         }
 
@@ -61,11 +59,12 @@ namespace Stock.Views
         private void v_btn_AddNewInvoice(object sender, EventArgs e)
         {
             oi_Invoice.GetID_NonValid();
+            TableInvoices_UC.Send(this, null);
         }
         private void v_btn_ValidateInvoice(object sender, EventArgs e)
         {
             v_GridInvoiceValidation.Visibility = Visibility.Visible;
-            InvoiceValidation_UC.Send(this,v_text_InvoiceID.Text);
+            InvoiceValidation_UC.Send(this, string.Format("{0}", IdInvoice));
         }
         private void v_btn_delete(object sender, EventArgs e)
         {
@@ -77,78 +76,49 @@ namespace Stock.Views
             }
         }
         //========================================
+        #region edit
+        private void v_btn_EditDescription(object sender, EventArgs e)
+        {
+            EditWhat = "DESCRIPTION";
+            EditValue(EditWhat);
+        }
         private void v_btn_EditMoneyOFOne(object sender, EventArgs e)
         {
             EditWhat = "MONEY_ONE";
-            EditInit(EditWhat);
+            EditValue(EditWhat);
         }
         private void v_btn_EditQuantity(object sender, EventArgs e)
         {
             EditWhat = "QUANTITY";
-            EditInit(EditWhat);
+            EditValue(EditWhat);
         }
         private void v_btn_EditTaxPerce(object sender, EventArgs e)
         {
             EditWhat = "TAX_PERCE";
-            EditInit(EditWhat);
+            EditValue(EditWhat);
         }
         private void v_btn_EditStamp(object sender, EventArgs e)
         {
-            EditWhat = "STAMP";
-            EditInit(EditWhat);
-        }
-        private void v_btn_editOk(object sender, EventArgs e)
-        {
-            v_GridEdit.Visibility = Visibility.Collapsed;
-            var o = v_GridCashRegister.SelectedItem as productsold;
-            switch (EditWhat)
-            {
-                case ("MONEY_ONE"):
-                    {
-                        o.MONEY_ONE = v_GridEdit_value.Value ?? 0;
-                        oi_CashRegisters.edit(o);
-                    }
-                    break;
-                case ("QUANTITY"):
-                    {
-                        o.QUANTITY = v_GridEdit_value.Value ?? 0;
-                        oi_CashRegisters.edit(o);
-                    }
-                    break;
-                case ("TAX_PERCE"):
-                    {
-                        o.TAX_PERCE = v_GridEdit_value.Value ?? 0;
-                        oi_CashRegisters.edit(o);
-                    }
-                    break;
-                case ("STAMP"):
-                    {
-                        o.STAMP = v_GridEdit_value.Value ?? 0;
-                        oi_CashRegisters.edit(o);
-                    }
-                    break;
-                default: break;
-            }
-            GridRefresh();
-        }
-        private void v_btn_editCancel(object sender, EventArgs e)
-        {
-            v_GridEdit.Visibility = Visibility.Collapsed;
-            EditWhat = "";
-            v_GridEdit_value.Value = 0;
+            var EditWhat = "STAMP";
+            EditValue(EditWhat);
         }
         private string EditWhat = "";
-        private void EditInit(string column)
+        private void EditValue(string _column)
         {
             if (v_GridCashRegister.SelectedItem != null)
             {
                 v_GridEdit.Visibility = Visibility.Visible;
                 var o = v_GridCashRegister.SelectedItem;
-                System.Reflection.PropertyInfo pi = o.GetType().GetProperty(EditWhat);
-                var v = (double)(pi.GetValue(o, null));
-                v_GridEdit_value.Value = v;
+
+                dynamic data = new System.Dynamic.ExpandoObject();
+                data.table = "productsolds";
+                data.id = (long)o.GetType().GetProperty("ID").GetValue(o, null);
+                data.column = _column;
+                data.data = o.GetType().GetProperty(_column).GetValue(o, null);
+                EditCashRegisters_UC.Send(this, data);
             }
         }
+        #endregion
         //========================================
         private void event_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -166,25 +136,30 @@ namespace Stock.Views
         #region Messanger
         public void ReturnInvoice(object _sender, dynamic _data)
         {
-            v_text_InvoiceID.Text = string.Format("{0}", _data.ID);
-            thisInvoicesold.ID = _data.ID;
+            IdInvoice = _data.ID;
+            invoiceInit();
             GridRefresh();
         }
         public void ReturnCustome(object _sender, dynamic _data)
         {
-            v_text_customer.Text = string.Format(" {0}:{1}", _data.ID, _data.NAME);
-            thisInvoicesold.ID_CUSTOMERS = _data.ID;
+            var o = oi_Invoice.get(IdInvoice);
+            o.ID_CUSTOMERS = _data.ID;
+            oi_Invoice.edit(o);
+            invoiceInit();
             GridRefresh();
         }
         public void ReturnProduct(object _sender, dynamic _data)
         {
             var o = new productsold();
+
+            o.ID_INVOICE = IdInvoice;
             o.ID_PRODUCT = _data.ID;
-            o.ID_INVOICE = thisInvoicesold.ID;
+            o.NAME = _data.NAME;
+            o.DESCRIPTION = _data.DESCRIPTION;
             o.MONEY_ONE = _data.MONEY_SELLING;
             o.QUANTITY = 1;
             o.TAX_PERCE = _data.TAX_PERCE;
-            o.STAMP = 0;
+            o.STAMP = _data.STAMP;
 
             oi_CashRegisters.add(o);
             GridRefresh();
@@ -193,9 +168,23 @@ namespace Stock.Views
         {
             MessageBox.Show("ReturnInvoiceValidation");
             GridRefresh();
-        }        
+        }
+        public void ReturnEditValue(object _sender, dynamic _data)
+        {
+            GridRefresh();
+        }
         #endregion
         /**************************************************************/
+        void invoiceInit()
+        {
+            var invoice = oi_Invoice.get(IdInvoice);
+            IdUser = invoice.ID_USERS ?? 0;
+            IdCustomer = invoice.ID_CUSTOMERS ?? 0;
+
+            v_text_InvoiceID.Text = string.Format("{0}", IdInvoice);
+            v_text_customer_id.Text = string.Format("{0}", invoice.ID_CUSTOMERS);
+            v_text_customer_name.Text = oi_User.get(invoice.ID_CUSTOMERS ?? 0).NAME;
+        }
         private void GridRefresh()
         {
             v_GridSearchProduct.Visibility = Visibility.Collapsed;
@@ -206,12 +195,15 @@ namespace Stock.Views
 
             v_GridCashRegister.ItemsSource = null;
             double _sum;
-            v_GridCashRegister.ItemsSource = oi_CashRegisters.search(thisInvoicesold.ID,out _sum);
+            v_GridCashRegister.ItemsSource = oi_CashRegisters.search(IdInvoice,out _sum);
             v_text_NumericUpDown.Value = _sum;
+
+            EditWhat = "";
         }
         /**************************************************************/
         ITableCashRegisters oi_CashRegisters = new TableCashRegister_CV();
         ITableInvoices oi_Invoice = new TableInvoices_CV();
+        ITableUsers oi_User = new TableUsers_CV();
         /**************************************************************/
     }
 }

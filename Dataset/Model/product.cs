@@ -28,13 +28,10 @@ namespace Stock.Dataset.Model
         public string CODE { get; set; }
 
         public double? IMPORTANCE { get; set; }
-
         public double? TAX_PERCE { get; set; }
-
+        public double? STAMP { get; set; }
         public double? MONEY_PURCHASE { get; set; }
-
         public double? MONEY_SELLING { get; set; }
-
         public double? MONEY_SELLING_MIN { get; set; }
     }
 }

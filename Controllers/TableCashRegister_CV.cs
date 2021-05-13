@@ -35,6 +35,10 @@ namespace Stock.Controllers
         {
             return TableCashRegister_CD.Edit(_productsold) ? "ok edit" : "Can not edit";
         }
+        public string edit(long _id, string _column, object _value)
+        {
+            return TableCashRegister_CD.Edit(_id, _column, _value) ? "ok edit" : "Can not edit";
+        }
         //-------------------------------------------------------------------------------------
         public string delete(long _id)
         {
