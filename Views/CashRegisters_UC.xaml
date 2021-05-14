@@ -8,7 +8,6 @@
              
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              >
     <Grid>
         <Grid.RowDefinitions>
@@ -50,7 +49,7 @@
                     </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                    <TextBox x:Name="v_text_search" GotFocus="v_text_search_gotFocus" LostFocus="v_text_search_lostFocus" FontSize="20" FontWeight="Bold" Foreground="Blue" Width="200"  materialDesign:HintAssist.Hint="search..." />
+                    <TextBox x:Name="v_text_search" TextChanged="v_text_search_changed" GotFocus="v_text_search_gotFocus" LostFocus="v_text_search_lostFocus" FontSize="20" FontWeight="Bold" Foreground="Blue" Width="200"  materialDesign:HintAssist.Hint="search..." />
                     <TextBox  FontSize="20" FontWeight="Bold" Foreground="Blue" Width="200"  materialDesign:HintAssist.Hint="code..."   Text="{Binding ValueCodeSearchProduct,UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
             </StackPanel>
@@ -79,10 +78,8 @@
                     <DataGridTemplateColumn Header="Name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Border  BorderBrush="Black"  BorderThickness="1">
-                                        <TextBlock  Text="{Binding NAME,Mode=OneWay}" MinWidth="50" Margin="0,0,10,0"  VerticalAlignment="Center"/>
-                                    </Border>
+                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+                                    <TextBlock  Text="{Binding NAME,Mode=OneWay}" MinWidth="50" FontSize="20" Foreground="Black"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -90,10 +87,10 @@
                     <!--  **************************************** Columns ****************************************   -->
                     <DataGridTemplateColumn Header="Description">
                         <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <DataTemplate >
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Border BorderBrush="Black"  BorderThickness="1">
-                                        <Button Content="{Binding DESCRIPTION,Mode=OneWay}" Click="v_btn_EditDescription" MinWidth="50" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
+                                        <Button Content="{Binding DESCRIPTION,Mode=OneWay}" Click="v_btn_EditDescription" MinWidth="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
                                     </Border>
                                 </StackPanel>
                             </DataTemplate>
@@ -103,8 +100,8 @@
                     <DataGridTemplateColumn Header="Money of One">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Border  BorderBrush="Black"  BorderThickness="1">
-                                    <Button Content="{Binding MONEY_ONE,Mode=OneWay}" Click="v_btn_EditMoneyOFOne" MinWidth="50" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
+                                <Border  BorderBrush="Black"  BorderThickness="1" HorizontalAlignment="Center">
+                                    <Button Content="{Binding MONEY_ONE,Mode=OneWay}" Click="v_btn_EditMoneyOFOne" MinWidth="50" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
                                 </Border>
                                  </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -113,8 +110,8 @@
                     <DataGridTemplateColumn Header="Quantity">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Border  BorderBrush="Black"  BorderThickness="1">
-                                    <Button Content="{Binding QUANTITY,Mode=OneWay}" Click="v_btn_EditQuantity"  MinWidth="50" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
+                                <Border  BorderBrush="Black"  BorderThickness="1" HorizontalAlignment="Center">
+                                    <Button Content="{Binding QUANTITY,Mode=OneWay}" Click="v_btn_EditQuantity"  MinWidth="50" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -123,8 +120,8 @@
                     <DataGridTemplateColumn Header="tax %">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Border  BorderBrush="Black"  BorderThickness="1">
-                                    <Button Content="{Binding TAX_PERCE,Mode=OneWay}" Click="v_btn_EditTaxPerce"  MinWidth="50" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
+                                <Border  BorderBrush="Black"  BorderThickness="1" HorizontalAlignment="Center">
+                                    <Button Content="{Binding TAX_PERCE,Mode=OneWay}" Click="v_btn_EditTaxPerce"  MinWidth="50" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -133,8 +130,8 @@
                     <DataGridTemplateColumn Header="Stamp">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Border  BorderBrush="Black"  BorderThickness="1">
-                                    <Button Content="{Binding STAMP,Mode=OneWay}" Click="v_btn_EditStamp"  MinWidth="50" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
+                                <Border  BorderBrush="Black"  BorderThickness="1" HorizontalAlignment="Center">
+                                    <Button Content="{Binding STAMP,Mode=OneWay}" Click="v_btn_EditStamp"  MinWidth="50" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
                                 </Border>
                              </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -143,14 +140,16 @@
                     <DataGridTemplateColumn Header="Paid">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock  Text="{Binding MONEY_PAID,Mode=OneWay}" Margin="0,0,10,0"   VerticalAlignment="Center" />
+                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+                                    <TextBlock  Text="{Binding MONEY_PAID,Mode=OneWay}"  MinWidth="50" FontSize="20" Foreground="Red" />
+                                </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <!--  **************************************** Columns ****************************************   -->
-                    <DataGridTextColumn IsReadOnly="True" MaxWidth="150" Visibility="Hidden" Header="ID" Binding="{Binding ID}"/>
+                    <DataGridTextColumn IsReadOnly="True" MaxWidth="150" Visibility="Visible" Header="ID" Binding="{Binding ID}"/>
                     <!--  **************************************** Columns ****************************************   -->
-                    <DataGridTextColumn IsReadOnly="True" MaxWidth="150" Visibility="Hidden" Header="ID Product" Binding="{Binding ID_PRODUCT}"/>
+                    <DataGridTextColumn IsReadOnly="True" MaxWidth="150" Visibility="Visible" Header="ID Product" Binding="{Binding ID_PRODUCT}"/>
                     <!--  **************************************** Columns ****************************************   -->
                 </DataGrid.Columns>
             </DataGrid>

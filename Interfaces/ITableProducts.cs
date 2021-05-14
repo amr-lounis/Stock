@@ -16,6 +16,6 @@ namespace Stock.Interfaces
         string edit(product _product);
         string delete(long _id);
         BitmapImage getImage(long _id);
-        void setImage(BitmapImage _image, long _id);
+        string setImage(BitmapImage _image, long _id);
     }
 }

@@ -46,6 +46,13 @@ namespace Stock.Views
         {
             //v_GridSearchProduct.Visibility = Visibility.Collapsed;
         }
+        private void v_text_search_changed(object sender, EventArgs e)
+        {
+            if(v_GridSearchProduct.Visibility == Visibility.Visible)
+            {
+                TableProducts_UC.Send(this, v_text_search.Text);
+            }
+        }
         private void v_btn_EditCustomer(object sender, EventArgs e)
         {
             v_GridSearchCustomer.Visibility = Visibility.Visible;

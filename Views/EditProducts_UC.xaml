@@ -68,13 +68,18 @@
                         <TextBox  x:Name="v_text_CODE" materialDesign:HintAssist.Hint="Code" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
                         <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
-                            <Label Width="100" Margin="10,10,10,10" Content="money percentage tax"  />
+                            <Label Width="100" Margin="10,10,10,10" Content="selling min"  />
+                            <Controls:NumericUpDown x:Name="v_Numeric_MONEY_SELLING_MIN" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding MONEY_SELLING_MIN}"  StringFormat="{}{0:N2}"/>
+                        </StackPanel>
+                        
+                        <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
+                            <Label Width="100" Margin="10,10,10,10" Content="% tax"  />
                             <Controls:NumericUpDown x:Name="v_Numeric_TAX_PERCE" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding TAX_PERCE}"  StringFormat="{}{0:N2}"/>
                         </StackPanel>
-
+                        
                         <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
-                            <Label Width="100" Margin="10,10,10,10" Content="money selling min"  />
-                            <Controls:NumericUpDown x:Name="v_Numeric_MONEY_SELLING_MIN" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding MONEY_SELLING_MIN}"  StringFormat="{}{0:N2}"/>
+                            <Label Width="100" Margin="10,10,10,10" Content="Stamp"  />
+                            <Controls:NumericUpDown x:Name="v_Numeric_STAMP" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding STAMP}"  StringFormat="{}{0:N2}"/>
                         </StackPanel>
 
                         <Label x:Name="v_text_ID" Content="0" materialDesign:HintAssist.Hint="ID" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalContentAlignment="Center" />

@@ -37,13 +37,13 @@ namespace Stock.Views
             {
                 case ("Text"):
                     {
-                        oi_CashRegisters.edit(id, column, v_GridEdit_text.Text);
+                        MessageBox.Show(oi_CashRegisters.edit(id, column, v_GridEdit_text.Text));
                         ReturnMessage(this, null);
                     }
                     break;
                 case ("Value"):
                     {
-                        oi_CashRegisters.edit(id,column,v_GridEdit_value.Value); 
+                        MessageBox.Show(oi_CashRegisters.edit(id, column, v_GridEdit_value.Value)); 
                         ReturnMessage(this, null);
                     }
                     break;

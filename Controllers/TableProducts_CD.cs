@@ -52,13 +52,15 @@ namespace Stock.Controllers
             {
                 var _db = Entities.GetInstance();
                 var o = Get(_product.ID);
-                o.NAME = _product.NAME;
-                o.DESCRIPTION = _product.DESCRIPTION;
                 o.ID_CATEGORY = _product.ID_CATEGORY;
                 o.ID_UNITE = _product.ID_UNITE;
+
+                o.NAME = _product.NAME;
+                o.DESCRIPTION = _product.DESCRIPTION;
                 o.CODE = _product.CODE;
 
                 o.TAX_PERCE = _product.TAX_PERCE;
+                o.STAMP = _product.STAMP;
                 o.MONEY_PURCHASE = _product.MONEY_PURCHASE;
                 o.MONEY_SELLING = _product.MONEY_SELLING;
                 o.MONEY_SELLING_MIN = _product.MONEY_SELLING_MIN;

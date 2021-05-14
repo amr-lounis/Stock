@@ -58,11 +58,12 @@ namespace Stock.Controllers
         public static string dir_home() { return Path.Combine(Directory.GetCurrentDirectory(), @"config\"); }
         public static string dir_backups() { return Path.Combine(dir_home(), @"backups\"); }
         public static string dir_Invoices() { return Path.Combine(dir_home(), @"invoices\"); }
-        public static string dir_images() { return Path.Combine(dir_home(), @"images\"); }
+        public static string dir_images_users() { return Path.Combine(dir_home(), @"images\users\"); }
+        public static string dir_images_products() { return Path.Combine(dir_home(), @"images\products\"); }
         //----------------------------------------------------------------------------------------------- 
         private static void CreateDirectories(){
             try{
-                string[] array_dir = { dir_home(), dir_backups(), dir_Invoices(), dir_images() };
+                string[] array_dir = { dir_home(), dir_backups(), dir_Invoices(), dir_images_users() , dir_images_products() };
                 foreach (string dir in array_dir) if (!System.IO.Directory.Exists(dir)) System.IO.Directory.CreateDirectory(dir);
             }
             catch (Exception){}

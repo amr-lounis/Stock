@@ -1,11 +1,16 @@
-﻿using Stock.Controllers;
+﻿using Microsoft.Win32;
+using Stock.Controllers;
 using Stock.Dataset.Model;
 using Stock.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using Image = System.Windows.Controls.Image;
 
 namespace Stock.Views
 {
@@ -15,17 +20,22 @@ namespace Stock.Views
         {
             InitializeComponent();
             initReceiver();
+            v_image.Source = ointerface.getImage(0);
         }
 
         //************************************************************************************* Button
         #region Button
         private void v_btn_EditImage(object sender, RoutedEventArgs e)
         {
-
+            var path = Helper.browserFile("image | *.png;*.jpg;");
+            var bitMap = Helper.BitmapImageReadFile(path, 300, 300);
+            v_image.Source = bitMap;
+            ointerface.setImage(bitMap, Helper.LongFromString(v_text_ID.Content.ToString()));
         }
         private void v_btn_DeleteImage(object sender, RoutedEventArgs e)
         {
-
+            ointerface.setImage(null, Helper.LongFromString(v_text_ID.Content.ToString()));
+            v_image.Source = ointerface.getImage(0);
         }
         private void v_btn_Save(object sender, RoutedEventArgs e)
         {
@@ -92,9 +102,12 @@ namespace Stock.Views
             v_text_CODE.Text = _product.CODE ?? "";
 
             v_Numeric_TAX_PERCE.Value = _product.TAX_PERCE ?? 0;
+            v_Numeric_STAMP.Value = _product.STAMP ?? 0;
             v_Numeric_MONEY_PURCHASE.Value = _product.MONEY_PURCHASE ?? 0;
             v_Numeric_MONEY_SELLING.Value = _product.MONEY_SELLING_MIN ?? 0;
             v_Numeric_MONEY_SELLING_MIN.Value = _product.MONEY_SELLING_MIN ?? 0;
+
+            v_image.Source = ointerface.getImage(_product.ID);
         }
         //*************************************************************************************  
         product getInput()
@@ -108,6 +121,7 @@ namespace Stock.Views
             o.CODE = v_text_CODE.Text;
 
             o.TAX_PERCE =  v_Numeric_TAX_PERCE.Value ;
+            o.STAMP = v_Numeric_STAMP.Value;
             o.MONEY_PURCHASE = v_Numeric_MONEY_PURCHASE.Value ;
             o.MONEY_SELLING = v_Numeric_MONEY_SELLING.Value ;
             o.MONEY_SELLING_MIN = v_Numeric_MONEY_SELLING_MIN.Value;
@@ -116,5 +130,6 @@ namespace Stock.Views
             return o;
         }
         #endregion
+        //****************************************************************************************************************
     }
 }

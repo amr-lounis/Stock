@@ -114,6 +114,10 @@ namespace Stock.Views
         public void ReceiveMessage(object _sender, dynamic _data)
         {
             OnReturnMessage = (_sender as CashRegisters_UC).ReturnProduct; //change
+            if(_data != null)
+            {
+                v_text_search.Text = _data;
+            }
         }
         public delegate void delegateSend(object _sender, dynamic _data);
         public static event delegateSend OnSendMessage;

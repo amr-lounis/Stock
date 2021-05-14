@@ -27,13 +27,13 @@ namespace Stock.Views
             splashScreen.Show(false);
             loadDatabase();
             nextWindow();
-            splashScreen.Close(TimeSpan.FromSeconds(5));
+            splashScreen.Close(TimeSpan.FromSeconds(3));
 
 
             //var v = TableInvoices_CD.Get(1);
             //var v2 = TableInvoices_CD.GetLastNonValid();
 
-            //Config_CD o = Config_CD.load();
+            Config_CD o = Config_CD.load();
             //MessageBox.Show(o.software.language);
             //o.software.language = "AR";
             //Config_CD.save(o);

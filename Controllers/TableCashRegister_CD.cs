@@ -38,9 +38,17 @@ namespace Stock.Controllers
             try
             {
                 var _db = Entities.GetInstance();
-                calcule(ref _productsold);
-                _db.productsolds.Add(_productsold);
-                _db.SaveChanges();
+                bool _isExist = _db.productsolds.Any(o => (o.ID_PRODUCT == _productsold.ID_PRODUCT)&& (o.ID_INVOICE== _productsold.ID_INVOICE) );
+                if (!_isExist)
+                {
+                    calcule(ref _productsold);
+                    _db.productsolds.Add(_productsold);
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    log("isExist", "info"); return false;
+                }
                 return true;
             }
             catch (Exception e) { log(e.Message); return false; }

@@ -2,6 +2,7 @@
 using Stock.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,14 +47,33 @@ namespace Stock.Controllers
         //-------------------------------------------------------------------------------------
         public BitmapImage getImage(long _id)
         {
-            return new BitmapImage();
+            try
+            {
+                var path = Path.Combine(Config_CD.dir_images_products(), string.Format("{0}.png", _id));
+                return Helper.BitmapImageReadFile(path, 300, 300);
+            }
+            catch ( Exception e) {log(e.Message); return new BitmapImage(new Uri("/assets/images/openBox.png", UriKind.Relative));}
         }
         //-------------------------------------------------------------------------------------
-        public void setImage(BitmapImage _image, long _id)
+        public string setImage(BitmapImage _image, long _id)
         {
-
+            bool status = false;
+            try
+            {
+                var path = Path.Combine(Config_CD.dir_images_products(), string.Format("{0}.png", _id));
+                if (_image == null) { if (File.Exists(path)) { File.Delete(path); } }
+                else { Helper.BitmapImageWriteFile(_image, path); }
+                status = true;
+            }
+            catch (Exception e) { log(e.Message); status = false; }
+            return status ? "ok set image" : "Can not set image";
         }
-        //-------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------
+        static void log(string _data, string _type = "error")
+        {
+            Console.WriteLine("\n----------------------------------\n" + _type + ":" + _data + "\n----------------------------------\n");
+        }
+        //----------------------------------------------------------------------------------------------------------------
     }
 }
 
