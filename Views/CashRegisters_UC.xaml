@@ -74,12 +74,13 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+                    
                     <!--  **************************************** Columns ****************************************   -->
                     <DataGridTemplateColumn Header="Name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
-                                    <TextBlock  Text="{Binding NAME,Mode=OneWay}" MinWidth="50" FontSize="20" Foreground="Black"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Label Content="{Binding NAME,Mode=OneWay}" MinWidth="50" HorizontalContentAlignment="Center" FontSize="20" Foreground="Black"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -133,15 +134,15 @@
                                 <Border  BorderBrush="Black"  BorderThickness="1" HorizontalAlignment="Center">
                                     <Button Content="{Binding STAMP,Mode=OneWay}" Click="v_btn_EditStamp"  MinWidth="50" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Blue"/>
                                 </Border>
-                             </DataTemplate>
+                            </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <!--  **************************************** Columns ****************************************   -->
                     <DataGridTemplateColumn Header="Paid">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
-                                    <TextBlock  Text="{Binding MONEY_PAID,Mode=OneWay}"  MinWidth="50" FontSize="20" Foreground="Red" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Label Content="{Binding MONEY_PAID,Mode=OneWay}" MinWidth="50" HorizontalContentAlignment="Center" FontSize="20" Foreground="Red"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

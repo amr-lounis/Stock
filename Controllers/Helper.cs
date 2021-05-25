@@ -80,6 +80,10 @@ namespace Stock.Controllers
                 return (T)binaryFormatter.Deserialize(stream);
             }
         }
+        public static double rnd(object _value)
+        {
+            return Math.Round((double)_value, 2);
+        }
         //-------------------------------------------------------------------------------------------------------------- File
         #region browser file
         public static string browserFile(string p_filter)//"image | *.png;*.jpg;"

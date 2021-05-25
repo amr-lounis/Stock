@@ -8,31 +8,32 @@ namespace Stock.Dataset.Model
 {
     public partial class Entities : DbContext
     {
-        public virtual DbSet<category> categorys { get; set; }
-        public virtual DbSet<invoicesold> invoicesolds { get; set; }
-        public virtual DbSet<permission> permissions { get; set; }
-        public virtual DbSet<product> products { get; set; }
-        public virtual DbSet<productsold> productsolds { get; set; }
-        public virtual DbSet<rolepermission> rolepermissions { get; set; }
-        public virtual DbSet<role> roles { get; set; }
-        public virtual DbSet<stock> stocks { get; set; }
-        public virtual DbSet<unit> units { get; set; }
-        public virtual DbSet<user> users { get; set; }
+
+        public virtual DbSet<category> category { get; set; }
+        public virtual DbSet<permission> permission { get; set; }
+        public virtual DbSet<product> product { get; set; }
+        public virtual DbSet<role> role { get; set; }
+        public virtual DbSet<role_permission> role_permission { get; set; }
+        public virtual DbSet<sold_invoice> sold_invoice { get; set; }
+        public virtual DbSet<sold_product> sold_product { get; set; }
+        public virtual DbSet<stock> stock { get; set; }
+        public virtual DbSet<unit> unit { get; set; }
+        public virtual DbSet<user> user { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Entity<user>().ToTable("users");
-            modelBuilder.Entity<permission>().ToTable("permissions");
-            modelBuilder.Entity<role>().ToTable("roles");
-            modelBuilder.Entity<rolepermission>().ToTable("rolepermissions");
-            modelBuilder.Entity<product>().ToTable("products");
-            modelBuilder.Entity<category>().ToTable("categorys");
-            modelBuilder.Entity<productsold>().ToTable("productsolds");
-            modelBuilder.Entity<invoicesold>().ToTable("invoicesolds");
-            modelBuilder.Entity<stock>().ToTable("stocks");
+            modelBuilder.Entity<user>().ToTable("user");
+            modelBuilder.Entity<permission>().ToTable("permission");
+            modelBuilder.Entity<role>().ToTable("role");
+            modelBuilder.Entity<role_permission>().ToTable("role_permission");
+            modelBuilder.Entity<product>().ToTable("product");
+            modelBuilder.Entity<category>().ToTable("category");
+            modelBuilder.Entity<sold_product>().ToTable("sold_product");
+            modelBuilder.Entity<sold_invoice>().ToTable("sold_invoice");
+            modelBuilder.Entity<stock>().ToTable("stock");
 
             modelBuilder.Entity<category>()
                 .Property(e => e.NAME)
@@ -40,14 +41,6 @@ namespace Stock.Dataset.Model
 
             modelBuilder.Entity<category>()
                 .Property(e => e.DESCRIPTION)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<invoicesold>()
-                .Property(e => e.DESCRIPTION)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<invoicesold>()
-                .Property(e => e.DATE)
                 .IsUnicode(false);
 
             modelBuilder.Entity<permission>()
@@ -70,19 +63,23 @@ namespace Stock.Dataset.Model
                 .Property(e => e.CODE)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<productsold>()
+            modelBuilder.Entity<role>()
                 .Property(e => e.NAME)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<productsold>()
+            modelBuilder.Entity<role>()
                 .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<role>()
+            modelBuilder.Entity<sold_invoice>()
+                .Property(e => e.DESCRIPTION)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<sold_product>()
                 .Property(e => e.NAME)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<role>()
+            modelBuilder.Entity<sold_product>()
                 .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
 

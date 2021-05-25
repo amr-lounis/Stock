@@ -17,7 +17,7 @@ namespace Stock.Controllers
             try
             {
                 var _db = Entities.GetInstance();
-                query = _db.users.Where(c => (c.NAME.ToLower().Contains(_value)) ||(c.DESCRIPTION.ToLower().Contains(_value)) ).OrderBy("NAME"); ;
+                query = _db.user.Where(c => (c.NAME.ToLower().Contains(_value)) ||(c.DESCRIPTION.ToLower().Contains(_value)) ).OrderBy("NAME"); ;
                 _data_out = SkipTake(ref _this_page,ref query);
                 return query;
             }
@@ -29,7 +29,7 @@ namespace Stock.Controllers
             try
             {
                 var _db = Entities.GetInstance();
-                return _db.users.Single(c => c.ID == p_id);
+                return _db.user.Single(c => c.ID == p_id);
             }
             catch (Exception) { return null; }
         }
@@ -39,7 +39,7 @@ namespace Stock.Controllers
             try
             {
                 var _db = Entities.GetInstance();
-                _db.users.Add(_user);
+                _db.user.Add(_user);
                 _db.SaveChanges();
                 return true;
             }
@@ -79,7 +79,7 @@ namespace Stock.Controllers
             try
             {
                 var _db = Entities.GetInstance();
-                _db.users.Remove(_db.users.Single(c => c.ID == p_id));
+                _db.user.Remove(_db.user.Single(c => c.ID == p_id));
                 _db.SaveChanges();
                 return true;
             }
@@ -91,7 +91,7 @@ namespace Stock.Controllers
             try
             {
                 var _db = Entities.GetInstance();
-                return _db.users.Any(o => o.NAME == p_string);
+                return _db.user.Any(o => o.NAME == p_string);
             }
             catch (Exception) { return false; }
         }

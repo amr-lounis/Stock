@@ -9,11 +9,12 @@ namespace Stock.Interfaces
 {
     interface ITableInvoices
     {
-        invoicesold get(long _id);
+        sold_invoice get(long _id);
         long GetID_NonValid();
-        List<invoicesold> search(string _value,DateTime _begin,DateTime _end, ref int _this_page, out string _data_out);
-        string add(invoicesold _Invoice);
-        string edit(invoicesold _Invoice);
+        List<sold_invoice> search(string _value,DateTime _begin,DateTime _end, ref int _this_page, out string _data_out);
+        string add(sold_invoice _Invoice);
+        string edit(sold_invoice _Invoice);
+        string edit(long _id, string _column, object _value);
         string delete(long _id);
     }
 }

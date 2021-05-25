@@ -6,8 +6,8 @@ namespace Stock.Dataset.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("stock.rolepermissions")]
-    public partial class rolepermission
+    [Table("stock.role_permission")]
+    public partial class role_permission
     {
         [Column(TypeName = "uint")]
         public long ID { get; set; }

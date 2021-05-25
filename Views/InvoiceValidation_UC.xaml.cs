@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Stock.Controllers;
+using Stock.Dataset.Model;
+using Stock.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +25,9 @@ namespace Stock.Views
             InitializeComponent();
             initReceiver();
         }
+        long idInvoice;
+        ITableInvoices ointerface = new TableInvoices_CV();
+
         private void v_btn_InvoiceValidate(object sender, RoutedEventArgs e)
         {
             ReturnMessage(this, null);
@@ -34,6 +40,10 @@ namespace Stock.Views
         {
 
         }
+        private void v_money_numeric_money_paid_changed(object sender, RoutedEventArgs e)
+        {
+            v_money_numeric_money_unpaid.Value = v_money_numeric_total.Value - v_money_numeric_money_paid.Value;
+        }
         //************************************************************************************* Messanger //dynamic data = new System.Dynamic.ExpandoObject();
         #region Messanger
         void initReceiver() { OnSendMessage = ReceiveMessage; }
@@ -44,7 +54,10 @@ namespace Stock.Views
             OnReturnMessage = (_sender as CashRegisters_UC).ReturnInvoiceValidation; //change
             if (_data != null)
             {
-                v_label_id.Content = _data;
+                var data= (string)_data;
+                idInvoice = Helper.LongFromString((string)data);
+                var o = ointerface.get(idInvoice);
+                initInput(o);
             }
         }
         public delegate void delegateSend(object _sender, dynamic _data);
@@ -53,5 +66,13 @@ namespace Stock.Views
         public delegate void delegateReturn(object _sender, dynamic _data);
         public static event delegateReturn OnReturnMessage;
         #endregion
+        void initInput(sold_invoice _data)
+        {
+            v_label_id.Content = _data.ID;
+            v_text_NumbersToWords.Text = "text";
+            Console.WriteLine(_data.MONEY_WITHOUT_ADDEDD);
+            v_money_numeric_total.Value = _data.MONEY_TOTAL;
+            v_money_numeric_money_paid.Value = _data.MONEY_TOTAL;
+        }
     }
 }

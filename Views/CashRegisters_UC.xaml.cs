@@ -77,7 +77,7 @@ namespace Stock.Views
         {
             if (v_GridCashRegister.SelectedItem != null)
             {
-                var o = v_GridCashRegister.SelectedItem as productsold;
+                var o = v_GridCashRegister.SelectedItem as sold_product;
                 MessageBox.Show(oi_CashRegisters.delete(o.ID));
                 GridRefresh();
             }
@@ -149,15 +149,13 @@ namespace Stock.Views
         }
         public void ReturnCustome(object _sender, dynamic _data)
         {
-            var o = oi_Invoice.get(IdInvoice);
-            o.ID_CUSTOMERS = _data.ID;
-            oi_Invoice.edit(o);
+            oi_Invoice.edit(IdInvoice, "ID_CUSTOMERS", _data.ID);
             invoiceInit();
             GridRefresh();
         }
         public void ReturnProduct(object _sender, dynamic _data)
         {
-            var o = new productsold();
+            var o = new sold_product();
 
             o.ID_INVOICE = IdInvoice;
             o.ID_PRODUCT = _data.ID;
@@ -201,9 +199,9 @@ namespace Stock.Views
             v_GridEdit.Visibility = Visibility.Collapsed;
 
             v_GridCashRegister.ItemsSource = null;
-            double _sum;
-            v_GridCashRegister.ItemsSource = oi_CashRegisters.search(IdInvoice,out _sum);
-            v_text_NumericUpDown.Value = _sum;
+            v_GridCashRegister.ItemsSource = oi_CashRegisters.searchByInvoice(IdInvoice);
+
+            v_text_NumericUpDown.Value = (double)oi_Invoice.get(IdInvoice).MONEY_TOTAL;
 
             EditWhat = "";
         }

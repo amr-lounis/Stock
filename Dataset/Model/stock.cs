@@ -6,7 +6,7 @@ namespace Stock.Dataset.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("stock.stocks")]
+    [Table("stock.stock")]
     public partial class stock
     {
         [Column(TypeName = "uint")]

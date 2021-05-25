@@ -52,7 +52,7 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as invoicesold;
+                var o = myDataGrid.SelectedItem as sold_invoice;
                 dynamic data = new System.Dynamic.ExpandoObject();
                 data.ID = o.ID;
                 OnReturnMessage(this, data);

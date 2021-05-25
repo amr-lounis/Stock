@@ -2,14 +2,12 @@ namespace Stock.Dataset.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using System.Runtime.CompilerServices;
 
-    [Table("stock.invoicesolds")]
-    public partial class invoicesold
+    [Table("stock.sold_invoice")]
+    public partial class sold_invoice
     {
         [Column(TypeName = "uint")]
         public long ID { get; set; }
@@ -26,8 +24,13 @@ namespace Stock.Dataset.Model
         [Column(TypeName = "uint")]
         public long? VALIDATION { get; set; }
 
-        [StringLength(25)]
-        public string DATE { get; set; }
+        [Column(TypeName = "timestamp")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime? DATE_CREATED { get; set; }
+
+        [Column(TypeName = "timestamp")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime? DATE_UPDATED { get; set; }
 
         public double? MONEY_WITHOUT_ADDEDD { get; set; }
 

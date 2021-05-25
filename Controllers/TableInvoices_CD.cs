@@ -12,26 +12,28 @@ namespace Stock.Controllers
 {
     public static class TableInvoices_CD
     {
-        public static IQueryable<invoicesold> search(string _value, ref int _this_page, out string _data_out)
+        //----------------------------------------------------------------------------------------------------------------
+        public static IQueryable<sold_invoice> search(string _value, ref int _this_page, out string _data_out)
         {
-            IQueryable<invoicesold> query = null;
+            IQueryable<sold_invoice> query = null;
             try
             {
                 _value = "";
                    var _db = Entities.GetInstance();
-                query = _db.invoicesolds.Where(c =>  (c.DESCRIPTION.ToLower().Contains(_value))).OrderBy("ID"); ;
+                query = _db.sold_invoice.Where(c =>  (c.DESCRIPTION.ToLower().Contains(_value))).OrderBy("ID"); ;
                 _data_out = SkipTake(ref _this_page, ref query);
                 return query;
             }
             catch (Exception e) { log(e.Message); _data_out = "ERROR"; return null; }
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static invoicesold Get(long p_id)
+        public static sold_invoice Get(long _id)
         {
             try
             {
                 var _db = Entities.GetInstance();
-                return _db.invoicesolds.Single(c => c.ID == p_id);
+
+                return _db.sold_invoice.Single(c => c.ID == _id);
             }
 
             catch (Exception e){log(e.Message);return null;}
@@ -42,14 +44,14 @@ namespace Stock.Controllers
             var _db = Entities.GetInstance();
             try
             {
-                return _db.invoicesolds.Where(c => c.VALIDATION == 0).OrderByDescending(x => x.ID).FirstOrDefault().ID;
+                return _db.sold_invoice.Where(c => c.VALIDATION == 0).OrderByDescending(x => x.ID).FirstOrDefault().ID;
             }
             catch (Exception) 
             {
                 try
                 {
-                    Add(new invoicesold());
-                    return _db.invoicesolds.Where(c => c.VALIDATION == 0).OrderByDescending(x => x.ID).FirstOrDefault().ID;
+                    Add(new sold_invoice());
+                    return _db.sold_invoice.Where(c => c.VALIDATION == 0).OrderByDescending(x => x.ID).FirstOrDefault().ID;
                 }
                 catch (Exception e)
                 {
@@ -58,30 +60,32 @@ namespace Stock.Controllers
                 }
             }
         }
-        public static invoicesold GetLastNonValid(long _id_user)
+        //----------------------------------------------------------------------------------------------------------------
+        public static sold_invoice GetLastNonValid(long _id_user)
         {
             try
             {
                 var _db = Entities.GetInstance();
-                return _db.invoicesolds.Where(c => c.VALIDATION.Equals(0) && c.ID_USERS.Equals(_id_user)).First();
+                return _db.sold_invoice.Where(c => c.VALIDATION.Equals(0) && c.ID_USERS.Equals(_id_user)).First();
             }
             catch (Exception e) { log(e.Message); return null; }
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static bool Add(invoicesold _soldinvoice)
+        public static bool Add(sold_invoice _soldinvoice)
         {
             try
             {
                 var _db = Entities.GetInstance();
-                _db.invoicesolds.Add(_soldinvoice);
+                _db.sold_invoice.Add(_soldinvoice);
                 _db.SaveChanges();
                 return true;
             }
             catch (Exception e) { Console.WriteLine(e.Message); Console.Beep();return (false); }
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static bool Edit(invoicesold _soldinvoice)
+        public static bool Edit(sold_invoice _soldinvoice)
         {
+
             try
             {
                 var _db = Entities.GetInstance();
@@ -89,7 +93,7 @@ namespace Stock.Controllers
                 o.ID_USERS = _soldinvoice.ID_USERS;
                 o.ID_CUSTOMERS = _soldinvoice.ID_CUSTOMERS;
                 o.DESCRIPTION = _soldinvoice.DESCRIPTION;
-                o.DATE = _soldinvoice.DATE;
+                o.DATE_UPDATED = DateTime.Now;
                 o.VALIDATION = _soldinvoice.VALIDATION;
                 o.MONEY_WITHOUT_ADDEDD = _soldinvoice.MONEY_WITHOUT_ADDEDD;
                 o.MONEY_TAX = _soldinvoice.MONEY_TAX;
@@ -103,17 +107,67 @@ namespace Stock.Controllers
             }
             catch (Exception e) { log(e.Message); return false; }
         }
+        public static bool Edit(long _id, string _column, object _value)
+        {
+            try
+            {
+                var _db = Entities.GetInstance();
+                var o = Get(_id);
+                o.DATE_UPDATED = DateTime.Now;
+                switch (_column)
+                {
+                    case "ID_USERS": o.ID_USERS = (long)_value; break;
+                    case "ID_CUSTOMERS": o.ID_CUSTOMERS = (long)_value; break;
+                    case "DESCRIPTION": o.DESCRIPTION = (string)_value; break;
+                    case "VALIDATION": o.VALIDATION = (long)_value; break;
+                    case "MONEY_WITHOUT_ADDEDD": o.MONEY_WITHOUT_ADDEDD = (double)_value; break;
+                    case "MONEY_PAID": o.MONEY_PAID = (double)_value; break;
+                    case "MONEY_UNPAID": o.MONEY_UNPAID = (double)_value; break;
+                    default: break;
+                }
+
+                _db.SaveChanges();
+                return true;
+            }
+            catch (Exception e) { log(e.Message); return false; }
+        }
+
         //----------------------------------------------------------------------------------------------------------------
         public static bool Delete(long p_id)
         {
             try
             {
                 var _db = Entities.GetInstance();
-                _db.invoicesolds.Remove(_db.invoicesolds.Single(c => c.ID == p_id));
+                _db.sold_invoice.Remove(_db.sold_invoice.Single(c => c.ID == p_id));
                 _db.SaveChanges();
                 return true;
             }
             catch (Exception e) { log(e.Message); return false; }
+        }
+        //----------------------------------------------------------------------------------------------------------------
+        public static void calcule(long _id)
+        {
+            double MONEY_WITHOUT_ADDEDD = 0, MONEY_TAX = 0, MONEY_STAMP = 0, MONEY_TOTAL = 0;
+            try
+            {
+                var _db = Entities.GetInstance();
+                MONEY_WITHOUT_ADDEDD = _db.sold_product.Where(c => c.ID_INVOICE == _id).Sum(i => i.MONEY_ONE * i.QUANTITY).Value;
+                MONEY_TAX = _db.sold_product.Where(c => c.ID_INVOICE == _id).Sum(i => i.MONEY_PAID * i.TAX_PERCE / 100).Value;
+                MONEY_STAMP = _db.sold_product.Where(c => c.ID_INVOICE == _id).Sum(i => i.STAMP).Value;
+                MONEY_TOTAL = _db.sold_product.Where(c => c.ID_INVOICE == _id).Sum(i => i.MONEY_PAID).Value;
+            }
+            catch (Exception e) { log(e.Message); }
+            try
+            {
+                var _db = Entities.GetInstance();
+                sold_invoice data = Get(_id);
+                data.MONEY_WITHOUT_ADDEDD = MONEY_WITHOUT_ADDEDD;
+                data.MONEY_TAX = MONEY_TAX;
+                data.MONEY_STAMP = MONEY_STAMP;
+                data.MONEY_TOTAL = MONEY_TOTAL;
+                _db.SaveChanges();
+            }
+            catch (Exception e) { log(e.Message); }
         }
         //----------------------------------------------------------------------------------------------------------------
         static void log(string _data, string _type = "error")

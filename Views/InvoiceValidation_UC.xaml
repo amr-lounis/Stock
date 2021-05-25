@@ -31,15 +31,19 @@
                 <Controls:NumericUpDown x:Name="v_money_numeric_total" Grid.Row="1" Grid.Column="1" HideUpDownButtons="True" MinWidth="500" MaxWidth="800" FontSize="30" FontWeight="Bold" IsReadOnly="True" Background="Black" Foreground="Red" Minimum="0"/>
                 
                 <TextBlock              Grid.Row="2" Grid.Column="0" FontSize="30" FontWeight="Bold" Text="Paid"></TextBlock>
-                <Controls:NumericUpDown x:Name="v_money_numeric_money_paid" Grid.Row="2" Grid.Column="1" HideUpDownButtons="False" MinWidth="500" MaxWidth="800" FontSize="30" FontWeight="Bold" Background="#888888" Foreground="Red" />
+                <Controls:NumericUpDown x:Name="v_money_numeric_money_paid" ValueChanged="v_money_numeric_money_paid_changed" Grid.Row="2" Grid.Column="1" HideUpDownButtons="False" MinWidth="500" MaxWidth="800" FontSize="30" FontWeight="Bold" Background="#888888" Foreground="Red" />
                 
                 <TextBlock              Grid.Row="3" Grid.Column="0" FontSize="30" FontWeight="Bold" Text="Unpaid"></TextBlock>
                 <Controls:NumericUpDown x:Name="v_money_numeric_money_unpaid" Grid.Row="3" Grid.Column="1" HideUpDownButtons="True" MinWidth="500" MaxWidth="800" FontSize="30" FontWeight="Bold" IsReadOnly="True" Background="Black" Foreground="Red" />
 
                 <TextBox                 x:Name="v_text_Description" Grid.Row="4" Grid.Column="1" MinWidth="500" MaxWidth="800" FontSize="30" Foreground="Blue" FontWeight="Bold" TextWrapping="Wrap" AcceptsReturn="True" materialDesign:HintAssist.Hint="Description" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Label  Content="ID:" Width="30"/>
-                    <Label x:Name="v_label_id" Content="" Width="50"/>
+                    <Label  Content="ID:"/>
+                    <Label x:Name="v_label_id" Content="*****" Width="50"/>
+                    <Label  Content="ID_USER" />
+                    <Label x:Name="v_label_id_user" Content="*****" />
+                    <Label  Content="ID_CUSTOMER" />
+                    <Label x:Name="v_label_id_customer" Content ="*****"/>
                 </StackPanel>
             </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

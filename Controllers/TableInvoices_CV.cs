@@ -11,7 +11,7 @@ namespace Stock.Controllers
     public class TableInvoices_CV : ITableInvoices
     {
         //-------------------------------------------------------------------------------------
-        public invoicesold get(long _id)
+        public sold_invoice get(long _id)
         {
             return TableInvoices_CD.Get(_id);
         }
@@ -21,24 +21,28 @@ namespace Stock.Controllers
             return TableInvoices_CD.GetLastNonValid();
         }
         //-------------------------------------------------------------------------------------
-        public List<invoicesold> search(string _value, DateTime _begin, DateTime _end, ref int _this_page, out string _data_out)
+        public List<sold_invoice> search(string _value, DateTime _begin, DateTime _end, ref int _this_page, out string _data_out)
         {
             try
             {
                 var query = TableInvoices_CD.search(_value, ref _this_page, out _data_out);
                 return query.ToList();
             }
-            catch (Exception) { _data_out = "ERROR"; return new List<invoicesold>(); }
+            catch (Exception) { _data_out = "ERROR"; return new List<sold_invoice>(); }
         }
         //-------------------------------------------------------------------------------------
-        public string add(invoicesold _soldinvoice)
+        public string add(sold_invoice _soldinvoice)
         {
             return TableInvoices_CD.Add(_soldinvoice) ? "ok add" : "Can not add";
         }
         //-------------------------------------------------------------------------------------
-        public string edit(invoicesold _Invoice)
+        public string edit(sold_invoice _Invoice)
         {
             return TableInvoices_CD.Edit(_Invoice) ? "ok edit" : "Can not edit";
+        }
+        public string edit(long _id, string _column, object _value)
+        {
+            return TableInvoices_CD.Edit(_id, _column, _value) ? "ok edit" : "Can not edit";
         }
         //-------------------------------------------------------------------------------------
         public string delete(long _id)

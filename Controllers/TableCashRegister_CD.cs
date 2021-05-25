@@ -9,41 +9,40 @@ namespace Stock.Controllers
 {
     public static class TableCashRegister_CD
     {
-        public static IQueryable<productsold> search(long _id_invoice, out double _sum)
+        public static IQueryable<sold_product> search(long _id_invoice)
         {
-            IQueryable<productsold> query = null;
             try
             {
                 var _db = Entities.GetInstance();
-                query = _db.productsolds.Where(c => c.ID_INVOICE == _id_invoice ) ;
-                _sum = _db.productsolds.Where(c => c.ID_INVOICE == _id_invoice ).Sum(i => i.MONEY_PAID).Value;
-                return query;
+                return  _db.sold_product.Where(c => c.ID_INVOICE == _id_invoice ) ;
             }
-            catch (Exception e) { log(e.Message); _sum = 0 ; return null; }
+            catch (Exception e) { log(e.Message); return null; }
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static productsold Get(long p_id)
+        public static sold_product Get(long p_id)
         {
             try
             {
                 var _db = Entities.GetInstance();
-                return _db.productsolds.Single(c => c.ID == p_id);
+                return _db.sold_product.Single(c => c.ID == p_id);
             }
 
             catch (Exception e) { log(e.Message); return null; }
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static bool Add(productsold _productsold)
+        public static bool Add(sold_product _productsold)
         {
             try
             {
                 var _db = Entities.GetInstance();
-                bool _isExist = _db.productsolds.Any(o => (o.ID_PRODUCT == _productsold.ID_PRODUCT)&& (o.ID_INVOICE== _productsold.ID_INVOICE) );
+                bool _isExist = _db.sold_product.Any(o => (o.ID_PRODUCT == _productsold.ID_PRODUCT)&& (o.ID_INVOICE== _productsold.ID_INVOICE) );
                 if (!_isExist)
                 {
                     calcule(ref _productsold);
-                    _db.productsolds.Add(_productsold);
+                    _db.sold_product.Add(_productsold);
+
                     _db.SaveChanges();
+                    TableInvoices_CD.calcule(_productsold.ID_INVOICE ?? 0);
                 }
                 else
                 {
@@ -54,7 +53,7 @@ namespace Stock.Controllers
             catch (Exception e) { log(e.Message); return false; }
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static bool Edit(productsold _productsold)
+        public static bool Edit(sold_product _productsold)
         {
             try
             {
@@ -66,8 +65,11 @@ namespace Stock.Controllers
                 o.QUANTITY = _productsold.QUANTITY;
                 o.TAX_PERCE = _productsold.TAX_PERCE;
                 o.STAMP = _productsold.STAMP;
+
                 calcule(ref _productsold);
                 _db.SaveChanges();
+
+                TableInvoices_CD.calcule(_productsold.ID_INVOICE ?? 0);
                 return true;
             }
             catch (Exception e) { log(e.Message); return false; }
@@ -78,16 +80,22 @@ namespace Stock.Controllers
             {
                 var _db = Entities.GetInstance();
                 var o = Get(_id);
-                if (_column.Equals("ID_INVOICE")) o.ID_INVOICE = (long)_value;
-                if (_column.Equals("ID_INVOICE")) o.ID_INVOICE = (long)_value;
-                if (_column.Equals("NAME")) o.NAME = (string) _value;
-                if (_column.Equals("DESCRIPTION")) o.DESCRIPTION = (string)_value;
-                if (_column.Equals("MONEY_ONE")) o.MONEY_ONE = rnd(_value);
-                if (_column.Equals("QUANTITY")) o.QUANTITY = rnd(_value);
-                if (_column.Equals("TAX_PERCE")) o.TAX_PERCE = rnd(_value);
-                if (_column.Equals("STAMP")) o.STAMP = rnd(_value);
+                switch (_column)
+                {
+                    case "ID_INVOICE": o.ID_INVOICE = (long)_value; break;
+                    case "NAME": o.NAME = (string)_value; break;
+                    case "DESCRIPTION": o.DESCRIPTION = (string)_value; break;
+                    case "MONEY_ONE": o.MONEY_ONE = (double)_value; break;
+                    case "QUANTITY": o.QUANTITY = (double)_value; break;
+                    case "TAX_PERCE": o.TAX_PERCE = (double)_value; break;
+                    case "STAMP": o.STAMP = (double)_value; break;
+                    default:break;
+                }
+
                 calcule(ref o);
                 _db.SaveChanges();
+
+                TableInvoices_CD.calcule(o.ID_INVOICE ?? 0);
                 return true;
             }
             catch (Exception e) { log(e.Message); return false; }
@@ -99,25 +107,24 @@ namespace Stock.Controllers
             try
             {
                 var _db = Entities.GetInstance();
-                _db.productsolds.Remove(_db.productsolds.Single(c => c.ID == p_id));
+                var o = _db.sold_product.Single(c => c.ID == p_id);
+                _db.sold_product.Remove(o);
+
                 _db.SaveChanges();
+                TableInvoices_CD.calcule(o.ID_INVOICE ?? 0);
                 return true;
             }
             catch (Exception e) { log(e.Message); return false; }
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static void calcule(ref productsold _productsold)
+        public static void calcule(ref sold_product _productsold)
         {
             try
             {
                 var v = ((_productsold.MONEY_ONE) * _productsold.QUANTITY + (_productsold.MONEY_ONE * _productsold.TAX_PERCE / 100) + _productsold.STAMP);
-                _productsold.MONEY_PAID = rnd(v);
+                _productsold.MONEY_PAID = Helper.rnd(v);
             }
-            catch (Exception e) { log(e.Message);}
-        }
-        public static double rnd(object _value)
-        {
-            return Math.Round((double)_value, 2);
+            catch (Exception e) { log(e.Message); }
         }
         //----------------------------------------------------------------------------------------------------------------
         static void log(string _data, string _type = "error")

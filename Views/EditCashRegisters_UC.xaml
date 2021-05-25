@@ -12,7 +12,7 @@
              >
     <Grid>
         <StackPanel Orientation="Vertical">
-            <TextBox x:Name="v_GridEdit_text"  Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="v_GridEdit_text"  Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" materialDesign:HintAssist.Hint="" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center"/>
             <Controls:NumericUpDown x:Name="v_GridEdit_value" HideUpDownButtons="False" IsReadOnly="False" FontFamily="{DynamicResource font_digital-7}" Background="Black" FontWeight="Bold"  Foreground="Red" FontSize="20" StringFormat="{}{0:N2}" MinWidth="200"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content="Ok" Click="v_btn_editOk" Margin="5"  Background="{x:Null}"/>

@@ -175,17 +175,16 @@
     <Compile Include="Converter\IConverterUserImage.cs" />
     <Compile Include="Dataset\Model\category.cs" />
     <Compile Include="Dataset\Model\Entities.cs" />
-    <Compile Include="Dataset\Model\invoicesold.cs" />
     <Compile Include="Dataset\Model\permission.cs" />
     <Compile Include="Dataset\Model\product.cs" />
-    <Compile Include="Dataset\Model\productsold.cs" />
     <Compile Include="Dataset\Model\role.cs" />
-    <Compile Include="Dataset\Model\rolepermission.cs" />
+    <Compile Include="Dataset\Model\role_permission.cs" />
+    <Compile Include="Dataset\Model\sold_invoice.cs" />
+    <Compile Include="Dataset\Model\sold_product.cs" />
     <Compile Include="Dataset\Model\stock.cs" />
     <Compile Include="Dataset\Model\unit.cs" />
     <Compile Include="Dataset\Model\user.cs" />
     <Compile Include="Dataset\Model\_EntitiesBase.cs" />
-    <Compile Include="Dataset\Model\_invoicesold.cs" />
     <Compile Include="Interfaces\ILoader.cs" />
     <Compile Include="Interfaces\IMain.cs" />
     <Compile Include="Interfaces\ITableCashRegisters.cs" />
@@ -263,14 +262,6 @@
     </Compile>
     <Compile Include="Interfaces\ITableUsers.cs" />
     <Compile Include="Controllers\TableUsers_CV.cs" />
-    <Page Include="Resources\Icons.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Resources\IconsNonShared.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\TableInvoices_UC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -309,16 +300,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\WindowsIcons-license.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\images\add.png" />

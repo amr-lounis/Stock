@@ -73,6 +73,21 @@ namespace Stock.Controllers
     //----------------------------------------------------------------------------------------------- class Serializable
     #region class Serializable
     [Serializable]
+    public class Config_db
+    {
+        public String Charset = "UTF8";
+        public String Host = "localhost";
+        public string db_name = "stock";
+        public String UserID = "root";
+        public String Password = "";
+        public string sslM = "none";
+        public int Port = 3306;
+        public string getConnectionString()
+        {
+            return String.Format("server={0};port={1};user id={2}; password={3}; database={4}; SslMode={5}", Host, Port, UserID, Password, db_name, sslM);
+        }
+    }
+    [Serializable]
     public class Config_mysql
     {
         public String Charset = "UTF8";

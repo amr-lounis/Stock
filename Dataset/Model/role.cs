@@ -6,7 +6,7 @@ namespace Stock.Dataset.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("stock.roles")]
+    [Table("stock.role")]
     public partial class role
     {
         [Column(TypeName = "uint")]

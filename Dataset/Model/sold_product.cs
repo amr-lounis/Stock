@@ -2,14 +2,12 @@ namespace Stock.Dataset.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using System.Runtime.CompilerServices;
 
-    [Table("stock.productsolds")]
-    public partial class productsold
+    [Table("stock.sold_product")]
+    public partial class sold_product
     {
         [Column(TypeName = "uint")]
         public long ID { get; set; }

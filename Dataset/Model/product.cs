@@ -6,7 +6,7 @@ namespace Stock.Dataset.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("stock.products")]
+    [Table("stock.product")]
     public partial class product
     {
         [Column(TypeName = "uint")]
@@ -28,10 +28,15 @@ namespace Stock.Dataset.Model
         public string CODE { get; set; }
 
         public double? IMPORTANCE { get; set; }
+
         public double? TAX_PERCE { get; set; }
+
         public double? STAMP { get; set; }
+
         public double? MONEY_PURCHASE { get; set; }
+
         public double? MONEY_SELLING { get; set; }
+
         public double? MONEY_SELLING_MIN { get; set; }
     }
 }
