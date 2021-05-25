@@ -56,7 +56,5 @@ namespace Stock.Dataset.Model
 
         [StringLength(25)]
         public string EMAIL { get; set; }
-
-        public double? MONEY_ACCOUNT { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Stock.Dataset.Model;
+﻿using Stock.ControllerSQL;
+using Stock.Dataset.Model;
 using Stock.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -25,23 +26,23 @@ namespace Stock.Controllers
             catch (Exception) { return new List<sold_product>(); }
         }
         //-------------------------------------------------------------------------------------
-        public string add(sold_product _productsold)
+        public void add(sold_product _productsold)
         {
-            return TableCashRegister_CD.Add(_productsold) ? "ok add" : "Can not add";
+            TableCashRegister_CD.Add(_productsold);
         }
         //-------------------------------------------------------------------------------------
-        public string edit(sold_product _productsold)
+        public void edit(sold_product _productsold)
         {
-            return TableCashRegister_CD.Edit(_productsold) ? "ok edit" : "Can not edit";
+            TableCashRegister_CD.Edit(_productsold);
         }
-        public string edit(long _id, string _column, object _value)
+        public void edit(long _id, string _column, object _value)
         {
-            return TableCashRegister_CD.Edit(_id, _column, _value) ? "ok edit" : "Can not edit";
+            TableCashRegister_CD.Edit(_id, _column, _value);
         }
         //-------------------------------------------------------------------------------------
-        public string delete(long _id)
+        public void delete(long _id)
         {
-            return TableCashRegister_CD.Delete(_id) ? "ok delete" : "Can not delete";
+            TableCashRegister_CD.Delete(_id);
         }
         //-------------------------------------------------------------------------------------
     }

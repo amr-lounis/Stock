@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Stock.Utils;
 
 namespace Stock.Controllers
 {
@@ -15,12 +16,15 @@ namespace Stock.Controllers
         //-----------------------------------------------------------------------------------------------
         public Config_CD()
         {
-            db_mysql = new Config_mysql();
+            config_db = new Config_db();
+            config_db.db_type = "mysql";
+            config_db.config_mysql = new Config_mysql();
+
             company = new Config_company();
             software = new Config_software();
         }
         //-----------------------------------------------------------------------------------------------
-        public Config_mysql db_mysql;
+        public Config_db config_db;
         public Config_company company;
         public Config_software software;
         //-----------------------------------------------------------------------------------------------
@@ -29,7 +33,7 @@ namespace Stock.Controllers
             CreateDirectories();
             try
             {
-                Helper.WriteToBinaryFile(dir_home() + "Config_mysql.bin", _Config.db_mysql);
+                Helper.WriteToBinaryFile(dir_home() + "Config_db.bin", _Config.config_db);
                 Helper.WriteToBinaryFile(dir_home() + "Config_company.bin", _Config.company);
                 Helper.WriteToBinaryFile(dir_home() + "Config_software.bin", _Config.software);
             }
@@ -42,7 +46,7 @@ namespace Stock.Controllers
             try
             {
                 Config_CD o = new Config_CD();
-                o.db_mysql = Helper.ReadFromBinaryFile<Config_mysql>(dir_home() + "Config_mysql.bin");
+                o.config_db = Helper.ReadFromBinaryFile<Config_db>(dir_home() + "Config_db.bin");
                 o.company = Helper.ReadFromBinaryFile<Config_company>(dir_home() + "Config_company.bin");
                 o.software = Helper.ReadFromBinaryFile<Config_software>(dir_home() + "Config_software.bin");
                 return o;
@@ -75,16 +79,17 @@ namespace Stock.Controllers
     [Serializable]
     public class Config_db
     {
-        public String Charset = "UTF8";
-        public String Host = "localhost";
-        public string db_name = "stock";
-        public String UserID = "root";
-        public String Password = "";
-        public string sslM = "none";
-        public int Port = 3306;
+        public string db_type;
+        public Config_mysql config_mysql;
         public string getConnectionString()
         {
-            return String.Format("server={0};port={1};user id={2}; password={3}; database={4}; SslMode={5}", Host, Port, UserID, Password, db_name, sslM);
+            string ConnectionString = "";
+            switch (this.db_type)
+            {
+                case "mysql": ConnectionString = String.Format("server={0};port={1};user id={2}; password={3}; database={4}; SslMode={5}", config_mysql.Host, config_mysql.Port, config_mysql.UserID, config_mysql.Password, config_mysql.db_name, config_mysql.sslM);break;
+                default:break;
+            }
+            return ConnectionString;
         }
     }
     [Serializable]

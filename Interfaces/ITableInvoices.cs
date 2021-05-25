@@ -12,9 +12,9 @@ namespace Stock.Interfaces
         sold_invoice get(long _id);
         long GetID_NonValid();
         List<sold_invoice> search(string _value,DateTime _begin,DateTime _end, ref int _this_page, out string _data_out);
-        string add(sold_invoice _Invoice);
-        string edit(sold_invoice _Invoice);
-        string edit(long _id, string _column, object _value);
-        string delete(long _id);
+        void add(sold_invoice _Invoice);
+        void edit(sold_invoice _Invoice);
+        void edit(long _id, string _column, object _value);
+        void delete(long _id);
     }
 }

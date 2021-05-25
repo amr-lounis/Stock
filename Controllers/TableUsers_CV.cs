@@ -1,12 +1,16 @@
-﻿using Stock.Dataset.Model;
+﻿using Stock.ControllerSQL;
+using Stock.Dataset.Model;
 using Stock.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Windows.Media.Imaging;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
+using System.IO;
+using Stock.Utils;
 
 namespace Stock.Controllers
 {
@@ -25,33 +29,39 @@ namespace Stock.Controllers
                 var query = TableUsers_CD.search(_value, ref _this_page, out _data_out);
                 return query.ToList();
             }
-            catch (Exception){ _data_out = ""; return new List<user>(); }
+            catch (Exception){ _data_out = "ERROR"; return new List<user>(); }
         }
         //-------------------------------------------------------------------------------------
-        public string add(user _user)
+        public void add(user _user)
         {
-             return TableUsers_CD.Add(_user) ? "ok add" : "Can not add";
+             TableUsers_CD.Add(_user);
         }
         //-------------------------------------------------------------------------------------
-        public string edit(user _user)
+        public void edit(user _user)
         {
-            return TableUsers_CD.Edit(_user) ? "ok edit" : "Can not edit";
+            TableUsers_CD.Edit(_user);
         }
         //-------------------------------------------------------------------------------------
-        public string delete(long _id)
+        public void delete(long _id)
         {
-            return TableUsers_CD.Delete(_id) ? "ok delete" : "Can not delete";
+            TableUsers_CD.Delete(_id);
         }
         //-------------------------------------------------------------------------------------
         public BitmapImage getImage(long _id)
         {
-            return new BitmapImage();
+            try
+            {
+                var path = Path.Combine(Config_CD.dir_images_products(), string.Format("{0}.png", _id));
+                return Helper.BitmapImageReadFile(path, 300, 300);
+            }
+            catch (Exception) { return new BitmapImage(new Uri("/assets/images/user.png", UriKind.Relative)); }
         }
-        //-------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------
         public void setImage(BitmapImage _image, long _id)
         {
-
+            var path = Path.Combine(Config_CD.dir_images_products(), string.Format("{0}.png", _id));
+            if (_image == null) { if (File.Exists(path)) { File.Delete(path); } }
+            else { Helper.BitmapImageWriteFile(_image, path); }
         }
-        //-------------------------------------------------------------------------------------
     }
 }

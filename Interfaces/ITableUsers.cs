@@ -12,9 +12,9 @@ namespace Stock.Interfaces
     {
         user get(long _id);
         List<user> search(string _value, ref int _this_page, out string _data_out);
-        string add(user _user);
-        string edit(user _user);
-        string delete(long _id);
+        void add(user _user);
+        void edit(user _user);
+        void delete(long _id);
         BitmapImage getImage(long _id);
         void setImage(BitmapImage _image, long _id);
     }

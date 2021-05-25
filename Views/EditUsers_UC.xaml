@@ -77,11 +77,6 @@
 
                         <TextBox x:Name="v_text_EMAIL" materialDesign:HintAssist.Hint="Email" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" MaxLength="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
-                        <StackPanel Margin="50,10,50,10" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock HorizontalAlignment="Left" Width="250" Style="{DynamicResource TextBlocBlackNull}" Text="money account"  />
-                            <Controls:NumericUpDown x:Name="v_Numeric_MONEY_ACCOUNT" HorizontalAlignment="Right" Width="250" FontSize="20" FontWeight="Bold" Foreground="Black" StringFormat="{}{0:N2}"/>
-                        </StackPanel>
-                        
                         <Label x:Name="v_text_ID" Content="0" materialDesign:HintAssist.Hint="ID" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalContentAlignment="Center" />
                     </StackPanel>
                 </Expander>

@@ -12,10 +12,10 @@ namespace Stock.Interfaces
     {
         product get(long _id);
         List<product> search(string _value, ref int _this_page, out string _data_out);
-        string add(product _product);
-        string edit(product _product);
-        string delete(long _id);
+        void add(product _product);
+        void edit(product _product);
+        void delete(long _id);
         BitmapImage getImage(long _id);
-        string setImage(BitmapImage _image, long _id);
+        void setImage(BitmapImage _image, long _id);
     }
 }

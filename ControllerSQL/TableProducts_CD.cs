@@ -7,99 +7,58 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stock.Controllers
+namespace Stock.ControllerSQL
 {
-    public static class TableUsers_CD
+    public static class TableProducts_CD
     {
-        public static IQueryable<user> search(string _value, ref int _this_page,out string _data_out)
+        public static IQueryable<product> search(string _value, ref int _this_page, out string _data_out)
         {
-            IQueryable<user> query = null;
-            try
-            {
-                var _db = Entities.GetInstance();
-                query = _db.user.Where(c => (c.NAME.ToLower().Contains(_value)) ||(c.DESCRIPTION.ToLower().Contains(_value)) ).OrderBy("NAME"); ;
-                _data_out = SkipTake(ref _this_page,ref query);
-                return query;
-            }
-            catch (Exception e) { log(e.Message); _data_out = "ERROR"; return null; }
+            IQueryable<product> query = null;
+            var _db = Entities.GetInstance();
+            query = _db.product.Where(c => (c.NAME.ToLower().Contains(_value)) || (c.DESCRIPTION.ToLower().Contains(_value))).OrderBy("NAME"); ;
+            _data_out = SkipTake(ref _this_page, ref query);
+            return query;
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static user Get(long p_id)
+        public static product Get(long p_id)
         {
-            try
-            {
-                var _db = Entities.GetInstance();
-                return _db.user.Single(c => c.ID == p_id);
-            }
-            catch (Exception) { return null; }
+            var _db = Entities.GetInstance();
+            return _db.product.Single(c => c.ID == p_id);
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static bool Add(user _user)
+        public static void Add(product _product)
         {
-            try
-            {
-                var _db = Entities.GetInstance();
-                _db.user.Add(_user);
-                _db.SaveChanges();
-                return true;
-            }
-            catch (Exception e) { log(e.Message); return false; }
+            var _db = Entities.GetInstance();
+            _db.product.Add(_product);
+            _db.SaveChanges();
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static bool Edit(user _user)
+        public static void Edit(product _product)
         {
-            try
-            {
-                var _db = Entities.GetInstance();
-                var o = Get(_user.ID);
-                o.ID_ROLE = _user.ID_ROLE;
-                o.NAME = _user.NAME;
-                o.PASSWORD = _user.PASSWORD;
-                o.GENDER = _user.GENDER;
-                o.ACTIVITY = _user.ACTIVITY;
-                o.NRC = _user.NRC;
-                o.NIF = _user.NIF;
-                o.ADDRESS = _user.ADDRESS;
-                o.CITY = _user.CITY;
-                o.COUNTRY = _user.COUNTRY;
-                o.PHONE = _user.PHONE;
-                o.FAX = _user.FAX;
-                o.WEBSITE = _user.WEBSITE;
-                o.EMAIL = _user.EMAIL;
-                o.DESCRIPTION = _user.DESCRIPTION;
-                o.MONEY_ACCOUNT = _user.MONEY_ACCOUNT;
-                _db.SaveChanges();
-                return true;
-            }
-            catch (Exception e) { log(e.Message); return false; }
+            var _db = Entities.GetInstance();
+            var o = Get(_product.ID);
+            o.ID_CATEGORY = _product.ID_CATEGORY;
+            o.ID_UNITE = _product.ID_UNITE;
+
+            o.NAME = _product.NAME;
+            o.DESCRIPTION = _product.DESCRIPTION;
+            o.CODE = _product.CODE;
+
+            o.TAX_PERCE = _product.TAX_PERCE;
+            o.STAMP = _product.STAMP;
+            o.MONEY_PURCHASE = _product.MONEY_PURCHASE;
+            o.MONEY_SELLING = _product.MONEY_SELLING;
+            o.MONEY_SELLING_MIN = _product.MONEY_SELLING_MIN;
+            _db.SaveChanges();
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static bool Delete(long p_id)
+        public static void Delete(long p_id)
         {
-            try
-            {
-                var _db = Entities.GetInstance();
-                _db.user.Remove(_db.user.Single(c => c.ID == p_id));
-                _db.SaveChanges();
-                return true;
-            }
-            catch (Exception e) { log(e.Message); return false; }
+            var _db = Entities.GetInstance();
+            _db.product.Remove(_db.product.Single(c => c.ID == p_id));
+            _db.SaveChanges();
         }
         //----------------------------------------------------------------------------------------------------------------
-        private static bool IsExistName(string p_string)
-        {
-            try
-            {
-                var _db = Entities.GetInstance();
-                return _db.user.Any(o => o.NAME == p_string);
-            }
-            catch (Exception) { return false; }
-        }
-        //----------------------------------------------------------------------------------------------------------------
-        static void log(string _data, string _type = "error")
-        {
-            Console.WriteLine("\n----------------------------------\n" + _type + ":" + _data + "\n----------------------------------\n");
-        }
         private static int GetPageSize()
         {
             return Config_CD.load().software.pageSizeSearch;

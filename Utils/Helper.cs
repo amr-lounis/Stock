@@ -5,16 +5,20 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Stock.Controllers
+namespace Stock.Utils
 {
     public class Helper
     {
+        //-------------------------------------------------------------------------------------------------------------- date and time
+        #region date and time
         public static DateTime DateTimeFromString(string _DateTime)
         {
             try
@@ -29,6 +33,13 @@ namespace Stock.Controllers
         public static string DateTimeToString(DateTime _DateTime)
         {
             return _DateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+        }
+        #endregion
+        //-------------------------------------------------------------------------------------------------------------- Math
+        #region math
+        public static double rnd(object _value)
+        {
+            return Math.Round((double)_value, 2);
         }
         public static double DoubleFromString(string _value)
         {
@@ -63,27 +74,7 @@ namespace Stock.Controllers
                 return 0;
             }
         }
-        
-        public static void WriteToBinaryFile<T>(string filePath, T objectToWrite, bool append = false)
-        {
-            using (Stream stream = File.Open(filePath, append ? FileMode.Append : FileMode.Create))
-            {
-                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                binaryFormatter.Serialize(stream, objectToWrite);
-            }
-        }
-        public static T ReadFromBinaryFile<T>(string filePath)
-        {
-            using (Stream stream = File.Open(filePath, FileMode.Open))
-            {
-                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                return (T)binaryFormatter.Deserialize(stream);
-            }
-        }
-        public static double rnd(object _value)
-        {
-            return Math.Round((double)_value, 2);
-        }
+        #endregion
         //-------------------------------------------------------------------------------------------------------------- File
         #region browser file
         public static string browserFile(string p_filter)//"image | *.png;*.jpg;"
@@ -156,6 +147,25 @@ namespace Stock.Controllers
                 ms.Close();
             }
             return data;
+        }
+        #endregion
+        //-------------------------------------------------------------------------------------------------------------- object I/O
+        #region object I/O
+        public static void WriteToBinaryFile<T>(string filePath, T objectToWrite, bool append = false)
+        {
+            using (Stream stream = File.Open(filePath, append ? FileMode.Append : FileMode.Create))
+            {
+                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                binaryFormatter.Serialize(stream, objectToWrite);
+            }
+        }
+        public static T ReadFromBinaryFile<T>(string filePath)
+        {
+            using (Stream stream = File.Open(filePath, FileMode.Open))
+            {
+                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                return (T)binaryFormatter.Deserialize(stream);
+            }
         }
         #endregion
     }

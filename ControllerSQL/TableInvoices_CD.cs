@@ -1,4 +1,5 @@
-﻿using Stock.Dataset.Model;
+﻿using Stock.Controllers;
+using Stock.Dataset.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -8,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stock.Controllers
+namespace Stock.ControllerSQL
 {
     public static class TableInvoices_CD
     {
@@ -29,14 +30,8 @@ namespace Stock.Controllers
         //----------------------------------------------------------------------------------------------------------------
         public static sold_invoice Get(long _id)
         {
-            try
-            {
-                var _db = Entities.GetInstance();
-
-                return _db.sold_invoice.Single(c => c.ID == _id);
-            }
-
-            catch (Exception e){log(e.Message);return null;}
+            var _db = Entities.GetInstance();
+            return _db.sold_invoice.Single(c => c.ID == _id);
         }
         //----------------------------------------------------------------------------------------------------------------
         public static long GetLastNonValid()
@@ -63,86 +58,61 @@ namespace Stock.Controllers
         //----------------------------------------------------------------------------------------------------------------
         public static sold_invoice GetLastNonValid(long _id_user)
         {
-            try
-            {
-                var _db = Entities.GetInstance();
-                return _db.sold_invoice.Where(c => c.VALIDATION.Equals(0) && c.ID_USERS.Equals(_id_user)).First();
-            }
-            catch (Exception e) { log(e.Message); return null; }
+            var _db = Entities.GetInstance();
+            return _db.sold_invoice.Where(c => c.VALIDATION.Equals(0) && c.ID_USERS.Equals(_id_user)).First();
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static bool Add(sold_invoice _soldinvoice)
+        public static void Add(sold_invoice _soldinvoice)
         {
-            try
-            {
-                var _db = Entities.GetInstance();
-                _db.sold_invoice.Add(_soldinvoice);
-                _db.SaveChanges();
-                return true;
-            }
-            catch (Exception e) { Console.WriteLine(e.Message); Console.Beep();return (false); }
+            var _db = Entities.GetInstance();
+            _db.sold_invoice.Add(_soldinvoice);
+            _db.SaveChanges();
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static bool Edit(sold_invoice _soldinvoice)
+        public static void Edit(sold_invoice _soldinvoice)
         {
+            var _db = Entities.GetInstance();
+            var o = Get(_soldinvoice.ID);
+            o.ID_USERS = _soldinvoice.ID_USERS;
+            o.ID_CUSTOMERS = _soldinvoice.ID_CUSTOMERS;
+            o.DESCRIPTION = _soldinvoice.DESCRIPTION;
+            o.DATE_UPDATED = DateTime.Now;
+            o.VALIDATION = _soldinvoice.VALIDATION;
+            o.MONEY_WITHOUT_ADDEDD = _soldinvoice.MONEY_WITHOUT_ADDEDD;
+            o.MONEY_TAX = _soldinvoice.MONEY_TAX;
+            o.MONEY_STAMP = _soldinvoice.MONEY_STAMP;
+            o.MONEY_TOTAL = _soldinvoice.MONEY_TOTAL;
+            o.MONEY_PAID = _soldinvoice.MONEY_PAID;
+            o.MONEY_UNPAID = _soldinvoice.MONEY_UNPAID;
 
-            try
-            {
-                var _db = Entities.GetInstance();
-                var o = Get(_soldinvoice.ID);
-                o.ID_USERS = _soldinvoice.ID_USERS;
-                o.ID_CUSTOMERS = _soldinvoice.ID_CUSTOMERS;
-                o.DESCRIPTION = _soldinvoice.DESCRIPTION;
-                o.DATE_UPDATED = DateTime.Now;
-                o.VALIDATION = _soldinvoice.VALIDATION;
-                o.MONEY_WITHOUT_ADDEDD = _soldinvoice.MONEY_WITHOUT_ADDEDD;
-                o.MONEY_TAX = _soldinvoice.MONEY_TAX;
-                o.MONEY_STAMP = _soldinvoice.MONEY_STAMP;
-                o.MONEY_TOTAL = _soldinvoice.MONEY_TOTAL;
-                o.MONEY_PAID = _soldinvoice.MONEY_PAID;
-                o.MONEY_UNPAID = _soldinvoice.MONEY_UNPAID;
-
-                _db.SaveChanges();
-                return true;
-            }
-            catch (Exception e) { log(e.Message); return false; }
+            _db.SaveChanges();
         }
-        public static bool Edit(long _id, string _column, object _value)
+        public static void Edit(long _id, string _column, object _value)
         {
-            try
+            var _db = Entities.GetInstance();
+            var o = Get(_id);
+            o.DATE_UPDATED = DateTime.Now;
+            switch (_column)
             {
-                var _db = Entities.GetInstance();
-                var o = Get(_id);
-                o.DATE_UPDATED = DateTime.Now;
-                switch (_column)
-                {
-                    case "ID_USERS": o.ID_USERS = (long)_value; break;
-                    case "ID_CUSTOMERS": o.ID_CUSTOMERS = (long)_value; break;
-                    case "DESCRIPTION": o.DESCRIPTION = (string)_value; break;
-                    case "VALIDATION": o.VALIDATION = (long)_value; break;
-                    case "MONEY_WITHOUT_ADDEDD": o.MONEY_WITHOUT_ADDEDD = (double)_value; break;
-                    case "MONEY_PAID": o.MONEY_PAID = (double)_value; break;
-                    case "MONEY_UNPAID": o.MONEY_UNPAID = (double)_value; break;
-                    default: break;
-                }
-
-                _db.SaveChanges();
-                return true;
+                case "ID_USERS": o.ID_USERS = (long)_value; break;
+                case "ID_CUSTOMERS": o.ID_CUSTOMERS = (long)_value; break;
+                case "DESCRIPTION": o.DESCRIPTION = (string)_value; break;
+                case "VALIDATION": o.VALIDATION = (long)_value; break;
+                case "MONEY_WITHOUT_ADDEDD": o.MONEY_WITHOUT_ADDEDD = (double)_value; break;
+                case "MONEY_PAID": o.MONEY_PAID = (double)_value; break;
+                case "MONEY_UNPAID": o.MONEY_UNPAID = (double)_value; break;
+                default: break;
             }
-            catch (Exception e) { log(e.Message); return false; }
+
+            _db.SaveChanges();
         }
 
         //----------------------------------------------------------------------------------------------------------------
-        public static bool Delete(long p_id)
+        public static void Delete(long p_id)
         {
-            try
-            {
-                var _db = Entities.GetInstance();
-                _db.sold_invoice.Remove(_db.sold_invoice.Single(c => c.ID == p_id));
-                _db.SaveChanges();
-                return true;
-            }
-            catch (Exception e) { log(e.Message); return false; }
+            var _db = Entities.GetInstance();
+            _db.sold_invoice.Remove(_db.sold_invoice.Single(c => c.ID == p_id));
+            _db.SaveChanges();
         }
         //----------------------------------------------------------------------------------------------------------------
         public static void calcule(long _id)

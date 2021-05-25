@@ -80,7 +80,6 @@
                     <DataGridTextColumn Header="Password" Binding="{Binding PASSWORD}" IsReadOnly="True" MaxWidth="150"  Visibility="Collapsed"/>
                     <DataGridTextColumn Header="Role" Binding="{Binding ID_ROLE}" IsReadOnly="True" MaxWidth="150" />
                     <DataGridTextColumn Header="Activity" Binding="{Binding ACTIVITY}" IsReadOnly="True"  MaxWidth="150"  Visibility="Collapsed"/>
-                    <DataGridTextColumn Header="Account" Binding="{Binding MONEY_ACCOUNT}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
                     <DataGridTextColumn Header="Description" Binding="{Binding DESCRIPTION}" IsReadOnly="True"  MaxWidth="150" />
                     <DataGridTextColumn Header="NRC" Binding="{Binding NRC}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>
                     <DataGridTextColumn Header="NIF" Binding="{Binding NIF}" IsReadOnly="True"  MaxWidth="150" Visibility="Collapsed"/>

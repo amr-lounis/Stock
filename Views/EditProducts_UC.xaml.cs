@@ -2,6 +2,7 @@
 using Stock.Controllers;
 using Stock.Dataset.Model;
 using Stock.Interfaces;
+using Stock.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,7 +21,6 @@ namespace Stock.Views
         {
             InitializeComponent();
             initReceiver();
-            v_image.Source = ointerface.getImage(0);
         }
 
         //************************************************************************************* Button
@@ -30,23 +30,25 @@ namespace Stock.Views
             var path = Helper.browserFile("image | *.png;*.jpg;");
             var bitMap = Helper.BitmapImageReadFile(path, 300, 300);
             v_image.Source = bitMap;
-            ointerface.setImage(bitMap, Helper.LongFromString(v_text_ID.Content.ToString()));
         }
         private void v_btn_DeleteImage(object sender, RoutedEventArgs e)
         {
-            ointerface.setImage(null, Helper.LongFromString(v_text_ID.Content.ToString()));
-            v_image.Source = ointerface.getImage(0);
+            var o = getInput();
+            v_image.Source = ointerface.getImage(o.ID);
         }
         private void v_btn_Save(object sender, RoutedEventArgs e)
         {
             var o = getInput();
+            var bitMap = v_image.Source as BitmapImage;
             if (type.Equals("Add"))
             {
                 MessageBox.Show(ointerface.add(o));
+                ointerface.setImage(bitMap, o.ID);
             }
             else if (type.Equals("Edit"))
             {
                 MessageBox.Show(ointerface.edit(o));
+                ointerface.setImage(bitMap, o.ID);
             }
             ReturnMessage(this, null);
         }

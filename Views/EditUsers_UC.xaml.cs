@@ -31,18 +31,31 @@ namespace Stock.Views
         #region Button
         private void v_btn_EditImage(object sender, RoutedEventArgs e)
         {
-
+            var path = Helper.browserFile("image | *.png;*.jpg;");
+            var bitMap = Helper.BitmapImageReadFile(path, 300, 300);
+            v_image.Source = bitMap;
         }
         private void v_btn_DeleteImage(object sender, RoutedEventArgs e)
         {
-
+            var o = getInput();
+            v_image.Source = ointerface.getImage(o.ID);
         }
         private void v_btn_Save(object sender, RoutedEventArgs e)
         {
             var o = getInput();
-            if (type.Equals("Add")) MessageBox.Show(ointerface.add(o));
-            else if (type.Equals("Edit")) MessageBox.Show(ointerface.edit(o));
+            var bitMap = v_image.Source as BitmapImage;
+            if (type.Equals("Add"))
+            {
+                MessageBox.Show(ointerface.add(o));
+                ointerface.setImage(bitMap, o.ID);
+            }
+            else if (type.Equals("Edit"))
+            {
+                MessageBox.Show(ointerface.edit(o));
+                ointerface.setImage(bitMap, o.ID);
+            }
             ReturnMessage(this, null);
+
         }
         #endregion
 
@@ -105,7 +118,7 @@ namespace Stock.Views
             v_text_WEBSITE.Text = _User.WEBSITE ?? "";
             v_text_EMAIL.Text = _User.EMAIL ?? "";
 
-            v_Numeric_MONEY_ACCOUNT.Value = _User.MONEY_ACCOUNT;
+            v_image.Source = ointerface.getImage(_User.ID);
         }
         user getInput()
         {
@@ -127,7 +140,7 @@ namespace Stock.Views
             o.FAX = v_text_FAX.Text ?? "";
             o.WEBSITE = v_text_WEBSITE.Text ?? "";
             o.EMAIL = v_text_EMAIL.Text ?? "";
-            o.MONEY_ACCOUNT = v_Numeric_MONEY_ACCOUNT.Value ?? 0;
+
             return o;
         }
         #endregion

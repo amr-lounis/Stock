@@ -11,9 +11,9 @@ namespace Stock.Interfaces
     {
         sold_product get(long _id);
         List<sold_product> searchByInvoice(long _id_invoice);
-        string add(sold_product _productsold);
-        string edit(sold_product _productsold);
-        string edit(long _id, string _column, object _value);
-        string delete(long _id);
+        void add(sold_product _productsold);
+        void edit(sold_product _productsold);
+        void edit(long _id, string _column, object _value);
+        void delete(long _id);
     }
 }
