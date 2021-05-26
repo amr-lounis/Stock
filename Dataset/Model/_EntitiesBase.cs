@@ -15,7 +15,7 @@ namespace Stock.Dataset.Model
         //********************************************************
         #region init
         private Entities() // Entities = Constructor of calss model
-               : base(new MySqlConnection(Config_CD.load().db_mysql.getConnectionString()), true)
+               : base(new MySqlConnection(Config_CV.load().config_db.getConnectionString()), true)
         { }
         public Entities(string connString)
                 : base(new MySqlConnection(connString), true)
@@ -33,7 +33,7 @@ namespace Stock.Dataset.Model
                     {
                         Console.WriteLine("creatre database");
                         Console.Beep();
-                        Instance = new Entities();
+                        throw new Exception("Error new Entities ");
                     }
                     Console.Beep();
                 }

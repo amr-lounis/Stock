@@ -74,8 +74,18 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as user; // changed
-                MessageBox.Show(ointerface.delete(o.ID));
+                MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    var o = myDataGrid.SelectedItem as user; // changed
+                    try
+                    {
+                        ointerface.delete(o.ID);
+                        MessageBox.Show("Ok delete");
+                    }
+                    catch (Exception) { MessageBox.Show("Can not delete"); }
+                }
+                GridRefresh();
             }
         }
         private void event_MouseDoubleClick(object sender, MouseButtonEventArgs e)

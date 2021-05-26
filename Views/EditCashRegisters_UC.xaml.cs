@@ -1,5 +1,6 @@
 ﻿using Stock.Controllers;
 using Stock.Interfaces;
+using Stock.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,13 +38,24 @@ namespace Stock.Views
             {
                 case ("Text"):
                     {
-                        MessageBox.Show(oi_CashRegisters.edit(id, column, v_GridEdit_text.Text));
+                        try
+                        {
+                            oi_CashRegisters.edit(id, column, v_GridEdit_text.Text);
+                            MessageBox.Show("Ok edit text");
+                        }
+                        catch (Exception) { MessageBox.Show("Can not edit"); }
                         ReturnMessage(this, null);
                     }
                     break;
                 case ("Value"):
                     {
-                        MessageBox.Show(oi_CashRegisters.edit(id, column, v_GridEdit_value.Value)); 
+                        try
+                        {
+                            var value = Helper.rnd(v_GridEdit_value.Value);
+                            oi_CashRegisters.edit(id, column, value );
+                            MessageBox.Show("Ok edit value");
+                        }
+                        catch (Exception) { MessageBox.Show("Can not edit"); }
                         ReturnMessage(this, null);
                     }
                     break;
@@ -90,7 +102,7 @@ namespace Stock.Views
         {
             v_GridEdit_value.Visibility = Visibility.Visible;
             v_GridEdit_text.Visibility = Visibility.Collapsed;
-            v_GridEdit_value.Value = _value;
+            v_GridEdit_value.Value = Helper.rnd( _value);
         }
         ITableCashRegisters oi_CashRegisters = new TableCashRegister_CV();
     }

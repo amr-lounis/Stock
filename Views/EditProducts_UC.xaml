@@ -43,12 +43,12 @@
 
                 <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
                     <Label Width="100" Margin="10,10,10,10" Content="money purchasing"  />
-                    <Controls:NumericUpDown x:Name="v_Numeric_MONEY_PURCHASE" Width="300" Margin="10,10,10,10" Minimum="0" StringFormat="{}{0:N2}"/>
+                    <Controls:NumericUpDown x:Name="v_Numeric_MONEY_PURCHASE" Width="300" Margin="10,10,10,10" Minimum="0"/>
                 </StackPanel>
                 
                 <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
                     <Label Width="100" Margin="10,10,10,10" Content="money selling"  />
-                    <Controls:NumericUpDown x:Name="v_Numeric_MONEY_SELLING" Width="300" Margin="10,10,10,10" Minimum="0" StringFormat="{}{0:N2}"/>
+                    <Controls:NumericUpDown x:Name="v_Numeric_MONEY_SELLING" Width="300" Margin="10,10,10,10" Minimum="0"/>
                 </StackPanel>
 
                 <Expander Margin="5" ExpandDirection="Down" IsExpanded="False" Background="{x:Null}">
@@ -69,17 +69,17 @@
 
                         <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
                             <Label Width="100" Margin="10,10,10,10" Content="selling min"  />
-                            <Controls:NumericUpDown x:Name="v_Numeric_MONEY_SELLING_MIN" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding MONEY_SELLING_MIN}"  StringFormat="{}{0:N2}"/>
+                            <Controls:NumericUpDown x:Name="v_Numeric_MONEY_SELLING_MIN" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding MONEY_SELLING_MIN}"/>
                         </StackPanel>
                         
                         <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
                             <Label Width="100" Margin="10,10,10,10" Content="% tax"  />
-                            <Controls:NumericUpDown x:Name="v_Numeric_TAX_PERCE" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding TAX_PERCE}"  StringFormat="{}{0:N2}"/>
+                            <Controls:NumericUpDown x:Name="v_Numeric_TAX_PERCE" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding TAX_PERCE}"/>
                         </StackPanel>
                         
                         <StackPanel  Width="500" Margin="50,10,50,10" Orientation="Horizontal"  HorizontalAlignment="Center">
                             <Label Width="100" Margin="10,10,10,10" Content="Stamp"  />
-                            <Controls:NumericUpDown x:Name="v_Numeric_STAMP" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding STAMP}"  StringFormat="{}{0:N2}"/>
+                            <Controls:NumericUpDown x:Name="v_Numeric_STAMP" Width="300" Margin="10,10,10,10" Minimum="0" Value="{Binding STAMP}"/>
                         </StackPanel>
 
                         <Label x:Name="v_text_ID" Content="0" materialDesign:HintAssist.Hint="ID" Width="500" Margin="50,10,50,10" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalContentAlignment="Center" />

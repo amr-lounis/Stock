@@ -161,16 +161,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controllers\Helper.cs" />
-    <Compile Include="Controllers\Config_CD.cs" />
-    <Compile Include="Controllers\TableCashRegister_CD.cs" />
+    <Compile Include="Utils\Helper.cs" />
+    <Compile Include="Controllers\Config_CV.cs" />
+    <Compile Include="ControllerSQL\TableCashRegister_CD.cs" />
     <Compile Include="Controllers\TableCashRegister_CV.cs" />
     <Compile Include="Controllers\Logine_CV.cs" />
-    <Compile Include="Controllers\TableInvoices_CD.cs" />
+    <Compile Include="ControllerSQL\TableInvoices_CD.cs" />
     <Compile Include="Controllers\TableInvoices_CV.cs" />
-    <Compile Include="Controllers\TableProducts_CD.cs" />
+    <Compile Include="ControllerSQL\TableProducts_CD.cs" />
     <Compile Include="Controllers\TableProducts_CV.cs" />
-    <Compile Include="Controllers\TableUsers_CD.cs" />
+    <Compile Include="ControllerSQL\TableUsers_CD.cs" />
     <Compile Include="Converter\IConverterProductImage.cs" />
     <Compile Include="Converter\IConverterUserImage.cs" />
     <Compile Include="Dataset\Model\category.cs" />
@@ -331,7 +331,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Reports\" />
-    <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\images\company.png" />

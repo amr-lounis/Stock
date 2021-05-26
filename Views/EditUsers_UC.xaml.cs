@@ -1,6 +1,7 @@
 ﻿using Stock.Controllers;
 using Stock.Dataset.Model;
 using Stock.Interfaces;
+using Stock.Utils;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -31,29 +32,47 @@ namespace Stock.Views
         #region Button
         private void v_btn_EditImage(object sender, RoutedEventArgs e)
         {
-            var path = Helper.browserFile("image | *.png;*.jpg;");
-            var bitMap = Helper.BitmapImageReadFile(path, 300, 300);
-            v_image.Source = bitMap;
+            try
+            {
+                var path = Helper.browserFile("image | *.png;*.jpg;");
+                var bitMap = Helper.BitmapImageReadFile(path, 300, 300);
+                v_image.Source = bitMap;
+            }
+            catch (Exception)
+            {
+                ointerface.getImage(0);
+            }
         }
         private void v_btn_DeleteImage(object sender, RoutedEventArgs e)
         {
-            var o = getInput();
-            v_image.Source = ointerface.getImage(o.ID);
+            v_image.Source = ointerface.getImage(0);
         }
         private void v_btn_Save(object sender, RoutedEventArgs e)
         {
-            var o = getInput();
-            var bitMap = v_image.Source as BitmapImage;
-            if (type.Equals("Add"))
+            try
             {
-                MessageBox.Show(ointerface.add(o));
-                ointerface.setImage(bitMap, o.ID);
+                var o = getInput();
+                var bitMap = v_image.Source as BitmapImage;
+                if (type.Equals("Add"))
+                {
+                    ointerface.add(o);
+                    ointerface.setImage(bitMap, o.ID);
+                    MessageBox.Show("Ok add");
+                }
             }
-            else if (type.Equals("Edit"))
+            catch (Exception) { MessageBox.Show("Can not add"); }
+            try
             {
-                MessageBox.Show(ointerface.edit(o));
-                ointerface.setImage(bitMap, o.ID);
+                var o = getInput();
+                var bitMap = v_image.Source as BitmapImage;
+                if (type.Equals("Edit"))
+                {
+                    ointerface.edit(o);
+                    ointerface.setImage(bitMap, o.ID);
+                    MessageBox.Show("Ok edit");
+                }
             }
+            catch (Exception) { MessageBox.Show("Can not edit"); }
             ReturnMessage(this, null);
 
         }

@@ -30,8 +30,7 @@ namespace Stock.Views
 
             v_image_customer.Source = new BitmapImage(new Uri("/assets/images/customer.png", UriKind.Relative));
             IdInvoice = oi_Invoice.GetID_NonValid();
-            invoiceInit();
-            GridRefresh();
+            ViewRefresh();
         }
 
         //*************************************************************************************  event
@@ -77,9 +76,18 @@ namespace Stock.Views
         {
             if (v_GridCashRegister.SelectedItem != null)
             {
-                var o = v_GridCashRegister.SelectedItem as sold_product;
-                MessageBox.Show(oi_CashRegisters.delete(o.ID));
-                GridRefresh();
+                MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        var o = v_GridCashRegister.SelectedItem as sold_product; // changed
+                        oi_CashRegisters.delete(o.ID);
+                        MessageBox.Show("Ok delete");
+                    }
+                    catch (Exception) { MessageBox.Show("Can not delete"); }
+                }
+                ViewRefresh();
             }
         }
         //========================================
@@ -136,7 +144,7 @@ namespace Stock.Views
         }
         private void v_btn_OverlayGridCancel(object sender, EventArgs e)
         {
-            GridRefresh();
+            ViewRefresh();
         }
         #endregion
         //************************************************************************************* Messanger
@@ -144,14 +152,12 @@ namespace Stock.Views
         public void ReturnInvoice(object _sender, dynamic _data)
         {
             IdInvoice = _data.ID;
-            invoiceInit();
-            GridRefresh();
+            ViewRefresh();
         }
         public void ReturnCustome(object _sender, dynamic _data)
         {
             oi_Invoice.edit(IdInvoice, "ID_CUSTOMERS", _data.ID);
-            invoiceInit();
-            GridRefresh();
+            ViewRefresh();
         }
         public void ReturnProduct(object _sender, dynamic _data)
         {
@@ -167,21 +173,27 @@ namespace Stock.Views
             o.STAMP = _data.STAMP;
 
             oi_CashRegisters.add(o);
-            GridRefresh();
+            ViewRefresh();
         }
         public void ReturnInvoiceValidation(object _sender, dynamic _data)
         {
             MessageBox.Show("ReturnInvoiceValidation");
-            GridRefresh();
+            ViewRefresh();
         }
         public void ReturnEditValue(object _sender, dynamic _data)
         {
-            GridRefresh();
+            ViewRefresh();
         }
         #endregion
         /**************************************************************/
-        void invoiceInit()
+        private void ViewRefresh()
         {
+            v_GridSearchProduct.Visibility = Visibility.Collapsed;
+            v_GridSearchCustomer.Visibility = Visibility.Collapsed;
+            v_GridSearchInvoice.Visibility = Visibility.Collapsed;
+            v_GridInvoiceValidation.Visibility = Visibility.Collapsed;
+            v_GridEdit.Visibility = Visibility.Collapsed;
+
             var invoice = oi_Invoice.get(IdInvoice);
             IdUser = invoice.ID_USERS ?? 0;
             IdCustomer = invoice.ID_CUSTOMERS ?? 0;
@@ -189,14 +201,6 @@ namespace Stock.Views
             v_text_InvoiceID.Text = string.Format("{0}", IdInvoice);
             v_text_customer_id.Text = string.Format("{0}", invoice.ID_CUSTOMERS);
             v_text_customer_name.Text = oi_User.get(invoice.ID_CUSTOMERS ?? 0).NAME;
-        }
-        private void GridRefresh()
-        {
-            v_GridSearchProduct.Visibility = Visibility.Collapsed;
-            v_GridSearchCustomer.Visibility = Visibility.Collapsed;
-            v_GridSearchInvoice.Visibility = Visibility.Collapsed;
-            v_GridInvoiceValidation.Visibility = Visibility.Collapsed;
-            v_GridEdit.Visibility = Visibility.Collapsed;
 
             v_GridCashRegister.ItemsSource = null;
             v_GridCashRegister.ItemsSource = oi_CashRegisters.searchByInvoice(IdInvoice);

@@ -50,8 +50,15 @@ namespace Stock.ControllerSQL
                 }
                 catch (Exception e)
                 {
-                    log(e.Message);
-                    return -1;
+                    try
+                    {
+                        return _db.sold_invoice.OrderByDescending(x => x.ID).FirstOrDefault().ID;
+                    }
+                    catch (Exception)
+                    {
+                        log(e.Message);
+                        throw new Exception("Error GetLastNonValid");
+                    }
                 }
             }
         }
@@ -65,7 +72,7 @@ namespace Stock.ControllerSQL
         public static void Add(sold_invoice _soldinvoice)
         {
             var _db = Entities.GetInstance();
-            _db.sold_invoice.Add(_soldinvoice);
+            _db.sold_invoice.Add(new sold_invoice());
             _db.SaveChanges();
         }
         //----------------------------------------------------------------------------------------------------------------
@@ -76,7 +83,7 @@ namespace Stock.ControllerSQL
             o.ID_USERS = _soldinvoice.ID_USERS;
             o.ID_CUSTOMERS = _soldinvoice.ID_CUSTOMERS;
             o.DESCRIPTION = _soldinvoice.DESCRIPTION;
-            o.DATE_UPDATED = DateTime.Now;
+            //o.DATE_UPDATED = DateTime.Now;
             o.VALIDATION = _soldinvoice.VALIDATION;
             o.MONEY_WITHOUT_ADDEDD = _soldinvoice.MONEY_WITHOUT_ADDEDD;
             o.MONEY_TAX = _soldinvoice.MONEY_TAX;
@@ -91,7 +98,6 @@ namespace Stock.ControllerSQL
         {
             var _db = Entities.GetInstance();
             var o = Get(_id);
-            o.DATE_UPDATED = DateTime.Now;
             switch (_column)
             {
                 case "ID_USERS": o.ID_USERS = (long)_value; break;
@@ -103,7 +109,7 @@ namespace Stock.ControllerSQL
                 case "MONEY_UNPAID": o.MONEY_UNPAID = (double)_value; break;
                 default: break;
             }
-
+            //o.DATE_UPDATED = DateTime.Now;
             _db.SaveChanges();
         }
 
@@ -146,7 +152,7 @@ namespace Stock.ControllerSQL
         }
         private static int GetPageSize()
         {
-            return Config_CD.load().software.pageSizeSearch;
+            return Config_CV.load().software.pageSizeSearch;
         }
         private static string SkipTake<T>(ref int page_this, ref IQueryable<T> _query)
         {

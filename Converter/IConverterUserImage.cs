@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Stock.Controllers;
+using Stock.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -13,12 +15,13 @@ namespace Stock.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return new BitmapImage(new Uri("/assets/images/user.png", UriKind.Relative));
+            return ointerface.getImage((long)value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return "";
+            return (BitmapImage)value;
         }
+        ITableUsers ointerface = new TableUsers_CV();
     }
 }

@@ -102,7 +102,7 @@ namespace Stock.ControllerSQL
         }
         private static int GetPageSize()
         {
-            return Config_CD.load().software.pageSizeSearch;
+            return Config_CV.load().software.pageSizeSearch;
         }
         private static string SkipTake<T>(ref int page_this, ref IQueryable<T> _query)
         {

@@ -24,6 +24,7 @@ namespace Stock.Views
         }
 
         //************************************************************************************* Button
+
         #region Button
         private void v_btn_EditImage(object sender, RoutedEventArgs e)
         {
@@ -33,23 +34,34 @@ namespace Stock.Views
         }
         private void v_btn_DeleteImage(object sender, RoutedEventArgs e)
         {
-            var o = getInput();
-            v_image.Source = ointerface.getImage(o.ID);
+            v_image.Source = ointerface.getImage(0);
         }
         private void v_btn_Save(object sender, RoutedEventArgs e)
         {
-            var o = getInput();
-            var bitMap = v_image.Source as BitmapImage;
-            if (type.Equals("Add"))
+            try
             {
-                MessageBox.Show(ointerface.add(o));
-                ointerface.setImage(bitMap, o.ID);
+                var o = getInput();
+                var bitMap = v_image.Source as BitmapImage;
+                if (type.Equals("Add"))
+                {
+                    ointerface.add(o);
+                    ointerface.setImage(bitMap, o.ID);
+                    MessageBox.Show("Ok add");
+                }
             }
-            else if (type.Equals("Edit"))
+            catch (Exception) { MessageBox.Show("Can not add"); }
+            try
             {
-                MessageBox.Show(ointerface.edit(o));
-                ointerface.setImage(bitMap, o.ID);
+                var o = getInput();
+                var bitMap = v_image.Source as BitmapImage;
+                if (type.Equals("Edit"))
+                {
+                    ointerface.edit(o);
+                    ointerface.setImage(bitMap, o.ID);
+                    MessageBox.Show("Ok edit");
+                }
             }
+            catch (Exception) { MessageBox.Show("Can not edit"); }
             ReturnMessage(this, null);
         }
         #endregion
@@ -73,15 +85,13 @@ namespace Stock.Views
                 if (_data.mode.Equals("Add"))
                 {
                     type = "Add";
-                    var o = new product();//change
-                    o.ID = 0;
-                    InitInput(o);
+                    InitInput(0);
                 }
                 else if (_data.mode.Equals("Edit") && (_data.message != null))
                 {
-                    var o = (_data.message as product);//change
+                    var id = (long)_data.message;
                     type = "Edit";
-                    InitInput(o);
+                    InitInput(id);
                 }
             }
         }
@@ -94,8 +104,12 @@ namespace Stock.Views
 
         //************************************************************************************* in/out
         #region in/out
-        void InitInput(product _product)
+        void InitInput(long _id)
         {
+            product _product;
+            if (_id <= 0) { _product = new product(); }
+            else { _product = ointerface.get(_id); }
+
             v_text_ID.Content = _product.ID;
             v_text_NAME.Text = _product.NAME ?? "";
             v_text_DESCRIPTION.Text = _product.DESCRIPTION ?? "";
@@ -103,11 +117,11 @@ namespace Stock.Views
             v_text_UNITY.Text = _product.ID_UNITE + "";
             v_text_CODE.Text = _product.CODE ?? "";
 
-            v_Numeric_TAX_PERCE.Value = _product.TAX_PERCE ?? 0;
-            v_Numeric_STAMP.Value = _product.STAMP ?? 0;
-            v_Numeric_MONEY_PURCHASE.Value = _product.MONEY_PURCHASE ?? 0;
-            v_Numeric_MONEY_SELLING.Value = _product.MONEY_SELLING_MIN ?? 0;
-            v_Numeric_MONEY_SELLING_MIN.Value = _product.MONEY_SELLING_MIN ?? 0;
+            v_Numeric_TAX_PERCE.Value = Helper.rnd( _product.TAX_PERCE ?? 0 );
+            v_Numeric_STAMP.Value = Helper.rnd( _product.STAMP ?? 0 );
+            v_Numeric_MONEY_PURCHASE.Value = Helper.rnd(_product.MONEY_PURCHASE ?? 0 );
+            v_Numeric_MONEY_SELLING.Value = Helper.rnd(_product.MONEY_SELLING ?? 0);
+            v_Numeric_MONEY_SELLING_MIN.Value = Helper.rnd( _product.MONEY_SELLING_MIN ?? 0 );
 
             v_image.Source = ointerface.getImage(_product.ID);
         }
@@ -122,11 +136,11 @@ namespace Stock.Views
             o.ID_UNITE = Helper.LongFromString(v_text_UNITY.Text);
             o.CODE = v_text_CODE.Text;
 
-            o.TAX_PERCE =  v_Numeric_TAX_PERCE.Value ;
-            o.STAMP = v_Numeric_STAMP.Value;
-            o.MONEY_PURCHASE = v_Numeric_MONEY_PURCHASE.Value ;
-            o.MONEY_SELLING = v_Numeric_MONEY_SELLING.Value ;
-            o.MONEY_SELLING_MIN = v_Numeric_MONEY_SELLING_MIN.Value;
+            o.TAX_PERCE = Helper.rnd( v_Numeric_TAX_PERCE.Value );
+            o.STAMP = Helper.rnd( v_Numeric_STAMP.Value );
+            o.MONEY_PURCHASE = Helper.rnd( v_Numeric_MONEY_PURCHASE.Value) ;
+            o.MONEY_SELLING = Helper.rnd(v_Numeric_MONEY_SELLING.Value );
+            o.MONEY_SELLING_MIN = Helper.rnd( v_Numeric_MONEY_SELLING_MIN.Value );
 
             o.IMPORTANCE = 0;
             return o;

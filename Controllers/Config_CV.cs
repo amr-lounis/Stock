@@ -11,10 +11,10 @@ using Stock.Utils;
 
 namespace Stock.Controllers
 {
-    public class Config_CD
+    public class Config_CV
     {
         //-----------------------------------------------------------------------------------------------
-        public Config_CD()
+        public Config_CV()
         {
             config_db = new Config_db();
             config_db.db_type = "mysql";
@@ -28,7 +28,7 @@ namespace Stock.Controllers
         public Config_company company;
         public Config_software software;
         //-----------------------------------------------------------------------------------------------
-        public static void save(Config_CD _Config)
+        public static void save(Config_CV _Config)
         {
             CreateDirectories();
             try
@@ -40,12 +40,12 @@ namespace Stock.Controllers
             catch (Exception){}
         }
         //-----------------------------------------------------------------------------------------------
-        public static Config_CD load()
+        public static Config_CV load()
         {
             CreateDirectories();
             try
             {
-                Config_CD o = new Config_CD();
+                Config_CV o = new Config_CV();
                 o.config_db = Helper.ReadFromBinaryFile<Config_db>(dir_home() + "Config_db.bin");
                 o.company = Helper.ReadFromBinaryFile<Config_company>(dir_home() + "Config_company.bin");
                 o.software = Helper.ReadFromBinaryFile<Config_software>(dir_home() + "Config_software.bin");
@@ -53,7 +53,7 @@ namespace Stock.Controllers
             }
             catch (Exception)
             {
-                var o = new Config_CD();
+                var o = new Config_CV();
                 save(o);
                 return o;
             }

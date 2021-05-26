@@ -65,7 +65,7 @@ namespace Stock.Views
             {
                 dynamic data = new System.Dynamic.ExpandoObject();
                 data.mode = "Edit";
-                data.message = myDataGrid.SelectedItem as product; // changed
+                data.message = (long) (myDataGrid.SelectedItem as dynamic).ID;
                 EditProducts_UC.Send(this, data); // changed
             }
         }
@@ -73,8 +73,17 @@ namespace Stock.Views
         {
             if (myDataGrid.SelectedItem != null)
             {
-                var o = myDataGrid.SelectedItem as product; // changed
-                MessageBox.Show(ointerface.delete(o.ID));
+                MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    var o = myDataGrid.SelectedItem as product; // changed
+                    try
+                    {
+                        ointerface.delete(o.ID);
+                        MessageBox.Show("Ok delete");
+                    }
+                    catch (Exception) { MessageBox.Show("Can not delete"); }
+                }
                 GridRefresh();
             }
         }

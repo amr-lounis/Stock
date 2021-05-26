@@ -33,10 +33,10 @@ namespace Stock.Views
             //var v = TableInvoices_CD.Get(1);
             //var v2 = TableInvoices_CD.GetLastNonValid();
 
-            Config_CD o = Config_CD.load();
+            //Config_CV o = Config_CV.load();
             //MessageBox.Show(o.software.language);
             //o.software.language = "AR";
-            //Config_CD.save(o);
+            //Config_CV.save(o);
 
             //Config_CD x = Config_CD.load();
             //MessageBox.Show(x.software.language);
