@@ -47,21 +47,27 @@ namespace Stock.Dataset.Model
         }
 
         #endregion
-        //********************************************************
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-
-        //    modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        //    modelBuilder.Entity<user>().ToTable("users");
-        //    modelBuilder.Entity<permission>().ToTable("permissions");
-        //    modelBuilder.Entity<role>().ToTable("roles");
-        //    modelBuilder.Entity<rolepermission>().ToTable("rolepermissions");
-        //    modelBuilder.Entity<product>().ToTable("products");
-        //    modelBuilder.Entity<category>().ToTable("categorys");
-        //    modelBuilder.Entity<productsold>().ToTable("productsolds");
-        //    modelBuilder.Entity<invoicesold>().ToTable("invoicesolds");
-        //    modelBuilder.Entity<stock>().ToTable("stocks");
-        //}
     }
 }
+
+// in model contain date time or date stamp
+// [Column(TypeName = "timestamp")]
+// //[DatabaseGenerated(DatabaseGeneratedOption.Identity)] <<  delete this do error update delete insert
+// public DateTime? DATE_CREATED { get; set; }
+
+//********************************************************
+//protected override void OnModelCreating(DbModelBuilder modelBuilder)
+//{
+//    base.OnModelCreating(modelBuilder);
+
+//    modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+//    modelBuilder.Entity<user>().ToTable("users");
+//    modelBuilder.Entity<permission>().ToTable("permissions");
+//    modelBuilder.Entity<role>().ToTable("roles");
+//    modelBuilder.Entity<rolepermission>().ToTable("rolepermissions");
+//    modelBuilder.Entity<product>().ToTable("products");
+//    modelBuilder.Entity<category>().ToTable("categorys");
+//    modelBuilder.Entity<productsold>().ToTable("productsolds");
+//    modelBuilder.Entity<invoicesold>().ToTable("invoicesolds");
+//    modelBuilder.Entity<stock>().ToTable("stocks");
+//}

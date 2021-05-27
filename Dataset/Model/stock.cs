@@ -9,6 +9,17 @@ namespace Stock.Dataset.Model
     [Table("stock.stock")]
     public partial class stock
     {
+        public stock()
+        {
+            ID_PRODUCT = 0;
+            NAME = "";
+            DESCRIPTION = "";
+            QUANTITY = 0;
+            QUANTITY_MIN = 0;
+            DATE_PRODUCTION = DateTime.Now;
+            DATE_PURCHASE = DateTime.Now;
+            DATE_EXPIRATION = DateTime.Now;
+        }
         [Column(TypeName = "uint")]
         public long ID { get; set; }
 
@@ -26,15 +37,15 @@ namespace Stock.Dataset.Model
         public double? QUANTITY_MIN { get; set; }
 
         [Column(TypeName = "timestamp")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime? DATE_PRODUCTION { get; set; }
 
         [Column(TypeName = "timestamp")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime? DATE_PURCHASE { get; set; }
 
         [Column(TypeName = "timestamp")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime? DATE_EXPIRATION { get; set; }
     }
 }

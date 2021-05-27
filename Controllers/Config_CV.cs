@@ -23,11 +23,11 @@ namespace Stock.Controllers
             company = new Config_company();
             software = new Config_software();
         }
-        //-----------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------- I/O object
         public Config_db config_db;
         public Config_company company;
         public Config_software software;
-        //-----------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------- save object
         public static void save(Config_CV _Config)
         {
             CreateDirectories();
@@ -39,7 +39,7 @@ namespace Stock.Controllers
             }
             catch (Exception){}
         }
-        //-----------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------- load object
         public static Config_CV load()
         {
             CreateDirectories();
@@ -64,6 +64,7 @@ namespace Stock.Controllers
         public static string dir_Invoices() { return Path.Combine(dir_home(), @"invoices\"); }
         public static string dir_images_users() { return Path.Combine(dir_home(), @"images\users\"); }
         public static string dir_images_products() { return Path.Combine(dir_home(), @"images\products\"); }
+        public static long thisUser_ID = 0;
         //----------------------------------------------------------------------------------------------- 
         private static void CreateDirectories(){
             try{

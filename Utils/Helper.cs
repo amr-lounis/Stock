@@ -23,7 +23,7 @@ namespace Stock.Utils
         {
             try
             {
-                return DateTime.ParseExact(_DateTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+                return DateTime.ParseExact(_DateTime, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
             }
             catch (Exception)
             {
@@ -32,7 +32,7 @@ namespace Stock.Utils
         }
         public static string DateTimeToString(DateTime _DateTime)
         {
-            return _DateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+            return _DateTime.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
         }
         #endregion
         //-------------------------------------------------------------------------------------------------------------- Math

@@ -1,5 +1,6 @@
 ﻿using Stock.Controllers;
 using Stock.Dataset.Model;
+using Stock.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -72,7 +73,9 @@ namespace Stock.ControllerSQL
         public static void Add(sold_invoice _soldinvoice)
         {
             var _db = Entities.GetInstance();
-            _db.sold_invoice.Add(new sold_invoice());
+            _soldinvoice.DATE_CREATED = DateTime.Now;
+            _soldinvoice.DATE_UPDATED = DateTime.Now;
+            _db.sold_invoice.Add(_soldinvoice);
             _db.SaveChanges();
         }
         //----------------------------------------------------------------------------------------------------------------
@@ -83,7 +86,6 @@ namespace Stock.ControllerSQL
             o.ID_USERS = _soldinvoice.ID_USERS;
             o.ID_CUSTOMERS = _soldinvoice.ID_CUSTOMERS;
             o.DESCRIPTION = _soldinvoice.DESCRIPTION;
-            //o.DATE_UPDATED = DateTime.Now;
             o.VALIDATION = _soldinvoice.VALIDATION;
             o.MONEY_WITHOUT_ADDEDD = _soldinvoice.MONEY_WITHOUT_ADDEDD;
             o.MONEY_TAX = _soldinvoice.MONEY_TAX;
@@ -92,6 +94,7 @@ namespace Stock.ControllerSQL
             o.MONEY_PAID = _soldinvoice.MONEY_PAID;
             o.MONEY_UNPAID = _soldinvoice.MONEY_UNPAID;
 
+            o.DATE_UPDATED = DateTime.Now;
             _db.SaveChanges();
         }
         public static void Edit(long _id, string _column, object _value)
@@ -109,7 +112,7 @@ namespace Stock.ControllerSQL
                 case "MONEY_UNPAID": o.MONEY_UNPAID = (double)_value; break;
                 default: break;
             }
-            //o.DATE_UPDATED = DateTime.Now;
+            o.DATE_UPDATED = DateTime.Now;
             _db.SaveChanges();
         }
 

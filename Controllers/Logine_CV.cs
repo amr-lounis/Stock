@@ -11,7 +11,15 @@ namespace Stock.Controllers
     {
         public bool Login(string p_user, string p_password)
         {
-            return ((p_user == "admin") && (p_password == "admin")) ? true : false;  
+           if( (p_user == "admin") && (p_password == "admin"))
+            {
+                Config_CV.thisUser_ID = 0;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

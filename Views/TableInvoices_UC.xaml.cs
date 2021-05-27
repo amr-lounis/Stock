@@ -26,7 +26,7 @@ namespace Stock.Views
             initReceiver();
             v_text_pageNumber.Text = "" + page;
             v_text_search.Text = "";
-            GridRefresh();
+            ViewRefresh();
         }
 
         //************************************************************************************* event
@@ -35,17 +35,17 @@ namespace Stock.Views
         private void v_text_search_changed(object sender, RoutedEventArgs e)
         {
             page = 0;
-            GridRefresh();
+            ViewRefresh();
         }
         private void event_forward(object sender, RoutedEventArgs e)
         {
             page++;
-            GridRefresh();
+            ViewRefresh();
         }
         private void event_backward(object sender, RoutedEventArgs e)
         {
             page--;
-            GridRefresh();
+            ViewRefresh();
         }
 
         private void event_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -60,7 +60,7 @@ namespace Stock.Views
         }
         private void v_btn_OverlayGridCancel(object sender, EventArgs e)
         {
-            GridRefresh();
+            ViewRefresh();
         }
         private DateTime getBegin()
         {
@@ -70,7 +70,7 @@ namespace Stock.Views
         {
             return v_dp_DateBegin.SelectedDate ?? DateTime.MaxValue;
         }
-        private void GridRefresh()
+        private void ViewRefresh()
         {
             myDataGrid.ItemsSource = null;
             string s;
@@ -85,7 +85,7 @@ namespace Stock.Views
         public void Receiver(object _sender, dynamic _data)
         {
             OnReturnMessage = (_sender as CashRegisters_UC).ReturnInvoice;
-            GridRefresh();
+            ViewRefresh();
         }
         public delegate void delegateSend(object _sender, dynamic _data);
         public static event delegateSend OnSendMessage;

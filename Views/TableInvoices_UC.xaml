@@ -47,16 +47,17 @@
                   Grid.Row="1"
                   >
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Description" Binding="{Binding DESCRIPTION}" IsReadOnly="True" MaxWidth="150"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding DATE_CREATED}" IsReadOnly="True" MaxWidth="150"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding DATE_UPDATED}" IsReadOnly="True" MaxWidth="150"/>
+                <DataGridTextColumn Header="VALIDATION" Binding="{Binding VALIDATION}" IsReadOnly="True" MaxWidth="150"/>
+                
                 <DataGridTextColumn Header="MONEY_WITHOUT_ADDEDD" Binding="{Binding MONEY_WITHOUT_ADDEDD}" IsReadOnly="True" MaxWidth="150"/>
                 <DataGridTextColumn Header="MONEY_TAX" Binding="{Binding MONEY_TAX}" IsReadOnly="True" MaxWidth="150"/>
                 <DataGridTextColumn Header="MONEY_STAMP" Binding="{Binding MONEY_STAMP}" IsReadOnly="True" MaxWidth="150"/>
                 <DataGridTextColumn Header="MONEY_TOTAL" Binding="{Binding MONEY_TOTAL}" IsReadOnly="True" MaxWidth="150"/>
                 <DataGridTextColumn Header="MONEY_PAID" Binding="{Binding MONEY_PAID}" IsReadOnly="True" MaxWidth="150"/>
                 <DataGridTextColumn Header="MONEY_UNPAID" Binding="{Binding MONEY_UNPAID}" IsReadOnly="True" MaxWidth="150"/>
-                <DataGridTextColumn Header="VALIDATION" Binding="{Binding VALIDATION}" IsReadOnly="True" MaxWidth="150"/>
-
-                <DataGridTextColumn Header="Date" Binding="{Binding DATE}" IsReadOnly="True" MaxWidth="150"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding DESCRIPTION}" IsReadOnly="True" MaxWidth="150"/>
 
                 <DataGridTextColumn Header="ID USERS" Binding="{Binding ID_USERS}" IsReadOnly="True" MaxWidth="150"/>
                 <DataGridTextColumn Header="ID Customer" Binding="{Binding ID_CUSTOMERS}" IsReadOnly="True" MaxWidth="150"/>

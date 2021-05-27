@@ -11,6 +11,7 @@ namespace Stock.Dataset.Model
     {
         public sold_invoice()
         {
+            ID = 0;
             ID_USERS = 0;
             ID_CUSTOMERS = 0;
             DESCRIPTION = "";
@@ -18,7 +19,7 @@ namespace Stock.Dataset.Model
             MONEY_WITHOUT_ADDEDD = 0;
             MONEY_TAX = 0;
             MONEY_STAMP = 0;
-            MONEY_TOTAL =0;
+            MONEY_TOTAL = 0;
             MONEY_PAID = 0;
             MONEY_UNPAID = 0;
 
@@ -41,11 +42,11 @@ namespace Stock.Dataset.Model
         public long? VALIDATION { get; set; }
 
         [Column(TypeName = "timestamp")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime? DATE_CREATED { get; set; }
 
         [Column(TypeName = "timestamp")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime? DATE_UPDATED { get; set; }
 
         public double? MONEY_WITHOUT_ADDEDD { get; set; }
