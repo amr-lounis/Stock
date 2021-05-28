@@ -17,9 +17,9 @@ namespace Stock.Controllers
             return TableInvoices_CD.Get(_id);
         }
         //-------------------------------------------------------------------------------------
-        public long GetID_NonValid()
+        public long GetID_NonUsed()
         {
-            return TableInvoices_CD.GetLastNonValid();
+            return TableInvoices_CD.GetLastNonUsed();
         }
         //-------------------------------------------------------------------------------------
         public List<sold_invoice> search(string _value, DateTime _begin, DateTime _end, ref int _this_page, out string _data_out)

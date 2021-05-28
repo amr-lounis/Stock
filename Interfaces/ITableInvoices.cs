@@ -10,7 +10,7 @@ namespace Stock.Interfaces
     interface ITableInvoices
     {
         sold_invoice get(long _id);
-        long GetID_NonValid();
+        long GetID_NonUsed();
         List<sold_invoice> search(string _value,DateTime _begin,DateTime _end, ref int _this_page, out string _data_out);
         void add(sold_invoice _Invoice);
         void edit(sold_invoice _Invoice);

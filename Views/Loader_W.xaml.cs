@@ -21,7 +21,6 @@ namespace Stock.Views
 {
     public partial class Loader_W : MetroWindow
     {
-        ITableInvoices oi_Invoice = new TableInvoices_CV();
         public Loader_W()
         {
             InitializeComponent();
@@ -30,7 +29,6 @@ namespace Stock.Views
             loadDatabase();
             nextWindow();
             splashScreen.Close(TimeSpan.FromSeconds(3));
-            oi_Invoice.add(new sold_invoice());
 
             //var v = TableInvoices_CD.Get(1);
             //var v2 = TableInvoices_CD.GetLastNonValid();
@@ -57,9 +55,7 @@ namespace Stock.Views
             {
                 try
                 {
-                    var db = Entities.GetInstance();
-                    db.stock.Add(new stock());
-                    db.SaveChanges();
+                    var _ = Entities.GetInstance();
                 }
                 catch (Exception e) { Console.WriteLine(e.Message); Console.Beep(); Console.Beep(); }
             }

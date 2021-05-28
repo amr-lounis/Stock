@@ -29,7 +29,7 @@ namespace Stock.Views
             v_text_NumericUpDown.Value = 0;
 
             v_image_customer.Source = new BitmapImage(new Uri("/assets/images/customer.png", UriKind.Relative));
-            IdInvoice = oi_Invoice.GetID_NonValid();
+            IdInvoice = oi_Invoice.GetID_NonUsed();
             ViewRefresh();
         }
 
@@ -64,8 +64,8 @@ namespace Stock.Views
         }
         private void v_btn_AddNewInvoice(object sender, EventArgs e)
         {
-            oi_Invoice.GetID_NonValid();
-            TableInvoices_UC.Send(this, null);
+            IdInvoice = oi_Invoice.GetID_NonUsed();
+            ViewRefresh();
         }
         private void v_btn_ValidateInvoice(object sender, EventArgs e)
         {

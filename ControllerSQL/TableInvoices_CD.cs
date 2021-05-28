@@ -35,32 +35,26 @@ namespace Stock.ControllerSQL
             return _db.sold_invoice.Single(c => c.ID == _id);
         }
         //----------------------------------------------------------------------------------------------------------------
-        public static long GetLastNonValid()
+        public static long GetLastNonUsed()
         {
             var _db = Entities.GetInstance();
             try
             {
-                return _db.sold_invoice.Where(c => c.VALIDATION == 0).OrderByDescending(x => x.ID).FirstOrDefault().ID;
+                if (_db.sold_invoice.Where(c => c.MONEY_TOTAL == 0).Count() > 0)
+                {
+                    return _db.sold_invoice.Where(c => c.MONEY_TOTAL == 0).OrderByDescending(x => x.ID).FirstOrDefault().ID;
+                }
+                else
+                {
+                    var o = new sold_invoice();
+                    Add(o);
+                    return o.ID;
+                }
             }
-            catch (Exception) 
+            catch (Exception e) 
             {
-                try
-                {
-                    Add(new sold_invoice());
-                    return _db.sold_invoice.Where(c => c.VALIDATION == 0).OrderByDescending(x => x.ID).FirstOrDefault().ID;
-                }
-                catch (Exception e)
-                {
-                    try
-                    {
-                        return _db.sold_invoice.OrderByDescending(x => x.ID).FirstOrDefault().ID;
-                    }
-                    catch (Exception)
-                    {
-                        log(e.Message);
-                        throw new Exception("Error GetLastNonValid");
-                    }
-                }
+                log(e.Message);
+                throw new Exception("Error GetLastNonValid");
             }
         }
         //----------------------------------------------------------------------------------------------------------------
